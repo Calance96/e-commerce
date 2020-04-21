@@ -1,6 +1,5 @@
 ﻿using ECommerce.Models;
 using Microsoft.Extensions.Configuration;
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,8 +26,11 @@ namespace ECommerce.Ui.Services
             var response = await _httpClient.GetAsync(_route);
             response.EnsureSuccessStatusCode();
 
-            var json = await response.Content.ReadAsStringAsync();
-            var categories = JsonConvert.DeserializeObject<IEnumerable<Category>>(json);
+            var json = await response.Content.ReadAsStreamAsync();
+            var categories = await JsonSerializer.DeserializeAsync<IEnumerable<Category>>(json, new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true
+            });
             return categories;
         } 
 
@@ -37,20 +39,23 @@ namespace ECommerce.Ui.Services
             var response = await _httpClient.GetAsync($"{_route}/{id}");
             response.EnsureSuccessStatusCode();
 
-            var json = await response.Content.ReadAsStringAsync();
-            var category = JsonConvert.DeserializeObject<Category>(json);
+            var json = await response.Content.ReadAsStreamAsync();
+            var category = await JsonSerializer.DeserializeAsync<Category>(json, new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true
+            });
             return category;
         }
 
         public async Task Update(Category category)
         {
-            var data = new StringContent(JsonConvert.SerializeObject(category), Encoding.UTF8, "application/json");
+            var data = new StringContent(JsonSerializer.Serialize<Category>(category), Encoding.UTF8, "application/json");
             await _httpClient.PutAsync($"{_route}/{category.Id}", data);
         }
 
         public async Task Add(Category category)
         {
-            var data = new StringContent(JsonConvert.SerializeObject(category), Encoding.UTF8, "application/json");
+            var data = new StringContent(JsonSerializer.Serialize<Category>(category), Encoding.UTF8, "application/json");
             await _httpClient.PostAsync(_route, data);
         }
 
