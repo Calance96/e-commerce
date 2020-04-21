@@ -15,6 +15,7 @@ namespace ECommerce.Models
         [Display(Name = "Product Name")]
         public string Name { get; set; }
 
+        [Display(Name = "Product Description")]
         public string Description { get; set; }
         
         [Required]

@@ -10,52 +10,52 @@ using System.Threading.Tasks;
 
 namespace ECommerce.Ui.Services
 {
-    public class CategoryService
+    public class ProductService
     {
         private readonly string _route;
         private readonly HttpClient _httpClient;
 
-        public CategoryService(HttpClient httpClient, IConfiguration configuration)
+        public ProductService(HttpClient httpClient, IConfiguration configuration)
         {
             _httpClient = httpClient;
-            _route = configuration["APIRoutes:Category"];
+            _route = configuration["APIRoutes:Product"];
         }
 
-        public async Task<IEnumerable<Category>> GetAll()
+        public async Task<IEnumerable<Product>> GetAll()
         {
             var response = await _httpClient.GetAsync(_route);
             response.EnsureSuccessStatusCode();
 
             var json = await response.Content.ReadAsStreamAsync();
-            var categories = await JsonSerializer.DeserializeAsync<IEnumerable<Category>>(json, new JsonSerializerOptions
+            var products = await JsonSerializer.DeserializeAsync<IEnumerable<Product>>(json, new JsonSerializerOptions
             {
                 PropertyNameCaseInsensitive = true
             });
-            return categories;
-        } 
+            return products;
+        }
 
-        public async Task<Category> GetById(long id)
+        public async Task<Product> GetById(long id)
         {
             var response = await _httpClient.GetAsync($"{_route}/{id}");
             response.EnsureSuccessStatusCode();
 
             var json = await response.Content.ReadAsStreamAsync();
-            var category = await JsonSerializer.DeserializeAsync<Category>(json, new JsonSerializerOptions
+            var product = await JsonSerializer.DeserializeAsync<Product>(json, new JsonSerializerOptions
             {
                 PropertyNameCaseInsensitive = true
             });
-            return category;
+            return product;
         }
 
-        public async Task Update(Category category)
+        public async Task Update(Product product)
         {
-            var data = new StringContent(JsonSerializer.Serialize<Category>(category), Encoding.UTF8, "application/json");
-            await _httpClient.PutAsync($"{_route}/{category.Id}", data);
+            var data = new StringContent(JsonSerializer.Serialize<Product>(product), Encoding.UTF8, "application/json");
+            await _httpClient.PutAsync($"{_route}/{product.Id}", data);
         }
 
-        public async Task Add(Category category)
+        public async Task Add(Product product)
         {
-            var data = new StringContent(JsonSerializer.Serialize<Category>(category), Encoding.UTF8, "application/json");
+            var data = new StringContent(JsonSerializer.Serialize<Product>(product), Encoding.UTF8, "application/json");
             await _httpClient.PostAsync(_route, data);
         }
 

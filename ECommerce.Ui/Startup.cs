@@ -21,18 +21,12 @@ namespace ECommerce.Ui
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddHttpClient<CategoryService>(configs =>
-            {
-                configs.BaseAddress = new Uri(Configuration["ProductionService:BaseAddress"]);
-                configs.DefaultRequestHeaders.Add("Accept", "application/json");
-            });
+            AddApiAcessServices(services);
             services.AddRazorPages().AddRazorRuntimeCompilation();
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
@@ -56,6 +50,20 @@ namespace ECommerce.Ui
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapRazorPages();
+            });
+        }
+
+        private void AddApiAcessServices(IServiceCollection services)
+        {
+            services.AddHttpClient<CategoryService>(configs =>
+            {
+                configs.BaseAddress = new Uri(Configuration["APIServer:BaseAddress"]);
+                configs.DefaultRequestHeaders.Add("Accept", "application/json");
+            });
+            services.AddHttpClient<ProductService>(configs =>
+            {
+                configs.BaseAddress = new Uri(Configuration["APIServer:BaseAddress"]);
+                configs.DefaultRequestHeaders.Add("Accept", "application/json");
             });
         }
     }

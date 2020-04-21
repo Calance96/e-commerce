@@ -23,7 +23,8 @@ namespace ECommerce.Api.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Product>>> GetAll()
         {
-            return await _context.Products.ToListAsync();
+            // Eager loading with Include
+            return await _context.Products.Include(product => product.Category).ToListAsync();
         }
 
         [HttpGet("{id}")]
