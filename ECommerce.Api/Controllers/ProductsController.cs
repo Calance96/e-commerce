@@ -30,7 +30,7 @@ namespace ECommerce.Api.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Product>> Get(long id)
         {
-            Product product = await _context.Products.FindAsync(id);
+            Product product = await _context.Products.Include(product => product.Category).FirstOrDefaultAsync(x => x.Id == id);
 
             if (product == null)
             {
