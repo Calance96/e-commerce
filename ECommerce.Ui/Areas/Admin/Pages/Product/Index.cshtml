@@ -10,7 +10,9 @@
         <h2 class="text-primary">Product List</h2>
     </div>
     <div class="col-6 text-right">
-        <a asp-page="./Add" class="btn btn-primary text-white">Add New Product</a>
+        <a asp-page="./Add" class="btn btn-primary text-white">
+            <i class="fas fa-plus"></i>&nbsp; Add New Product
+        </a>
     </div>
 </div>
 
@@ -46,10 +48,10 @@
                         <td>
                             <div class="text-center">
                                 <a class="btn btn-success text-white" asp-page="Edit" asp-route-id="@product.Id" style="cursor:pointer">
-                                    Edit
+                                    <i class="far fa-edit"></i>&nbsp; Edit
                                 </a>
                                 <button onclick="return confirm('Are you certain to delete?')" asp-page-handler="Delete" asp-route-id="@product.Id" class="btn btn-danger text-white" style="cursor:pointer">
-                                    Delete
+                                    <i class="fas fa-trash"></i>&nbsp; Delete
                                 </button>
                             </div>
                         </td>
