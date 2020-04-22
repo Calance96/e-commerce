@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using ECommerce.Utility
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -18,24 +20,27 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                    <partial name="_LoginPartial" />
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
                             <a class="nav-link" asp-area="" asp-page="/Index">Home</a>
                         </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Content Management
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" asp-area="Category" asp-page="/Index">Categories</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" asp-area="Product" asp-page="/Index">Products</a>
-                            </div>
-                        </li>
-                        <li class="nav-item">
-                            
-                        </li>
-                    </ul>
+                        @if (User.IsInRole(AppConstant.ROLE_ADMIN))
+                        {
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Content Management
+                                </a>
+
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" asp-area="Admin" asp-page="/Category/Index">Categories</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" asp-area="Admin" asp-page="/Product/Index">Products</a>
+                                </div>
+                                
+                            </li>
+                        }
+                        </ul>
                 </div>
             </div>
         </nav>

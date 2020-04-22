@@ -1,0 +1,52 @@
+﻿@page
+@model ECommerce.Ui.Areas.Account.Pages.LoginModel
+@{
+}
+
+@{
+    ViewData["Title"] = "Log in";
+}
+
+<div class="container">
+    <div style="margin: 30px auto;" class="border w-50">
+        <h1 class="text-center mt-3 font-weight-bold">@ViewData["Title"]</h1>
+        <div class="col">
+            <section>
+                <form id="account" method="post">
+                    <hr />
+                    <div asp-validation-summary="All" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="Input.Email"></label>
+                        <input asp-for="Input.Email" class="form-control" />
+                        <span asp-validation-for="Input.Email" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Input.Password"></label>
+                        <input type="password" asp-for="Input.Password" class="form-control" />
+                        <span asp-validation-for="Input.Password" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <div class="checkbox">
+                            <label asp-for="Input.RememberMe">
+                                <input asp-for="Input.RememberMe" />
+                                @Html.DisplayNameFor(m => m.Input.RememberMe)
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group text-center">
+                        <button type="submit" class="btn btn-primary">Log in</button>
+                    </div>
+                    <div class="form-group text-center">
+                        <p>
+                            <a asp-page="./Register">Register as a new user</a>
+                        </p>
+                    </div>
+                </form>
+                @if (!string.IsNullOrEmpty(Model.Message))
+                {
+                    <div class="text-danger text-center mb-3">@Model.Message</div>
+                }
+            </section>
+        </div>
+    </div>
+</div>

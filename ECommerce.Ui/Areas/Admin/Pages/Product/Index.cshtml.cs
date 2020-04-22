@@ -6,7 +6,7 @@ using ECommerce.Ui.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace ECommerce.Ui.Areas.Product.Pages
+namespace ECommerce.Ui.Areas.Admin.Pages.Product
 {
     public class IndexModel : PageModel
     {

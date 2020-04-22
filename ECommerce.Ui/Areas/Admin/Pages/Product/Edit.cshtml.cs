@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
-namespace ECommerce.Ui.Areas.Product.Pages
+namespace ECommerce.Ui.Areas.Admin.Pages.Product
 {
     public class EditModel : PageModel
     {

@@ -2,10 +2,15 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ECommerce.DataAccess;
+using ECommerce.Models;
 using ECommerce.Ui.Services;
+using ECommerce.Utility;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -23,8 +28,43 @@ namespace ECommerce.Ui
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<ApplicationDbContext>(configs => {
+                configs.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
+            });
+
+            services.AddIdentity<ApplicationUser, IdentityRole>(configs =>
+            {
+                configs.Password.RequiredLength = 6;
+                configs.Password.RequireDigit = false;
+                configs.Password.RequireNonAlphanumeric = false;
+                configs.Password.RequireUppercase = false;
+                configs.Password.RequireLowercase = false;
+            })
+                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddDefaultTokenProviders();
+
+            services.ConfigureApplicationCookie(configs =>
+            {
+                configs.Cookie.Name = "EMall.Cookie";
+                configs.LoginPath = "/Account/Login";
+                configs.LogoutPath = "/Account/Logout";
+                configs.AccessDeniedPath = "/AccessDenied";
+            });
+
             AddApiAcessServices(services);
-            services.AddRazorPages().AddRazorRuntimeCompilation();
+
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("AdminOnly", policy => policy.RequireRole(AppConstant.ROLE_ADMIN));
+            });
+
+            services.AddRazorPages()
+                .AddRazorRuntimeCompilation()
+                .AddRazorPagesOptions(options => 
+                {
+                    options.Conventions.AuthorizeAreaFolder("Admin", "/Category", "AdminOnly");
+                    options.Conventions.AuthorizeAreaFolder("Admin", "/Product", "AdminOnly");
+                });
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -45,6 +85,7 @@ namespace ECommerce.Ui
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

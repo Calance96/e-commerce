@@ -1,5 +1,5 @@
 ﻿@page "{id:int}"
-@model Category.Pages.EditModel
+@model Admin.Pages.Category.EditModel
 @{
     ViewData["Title"] = "Edit Category";
 }
@@ -28,7 +28,7 @@
                             <button type="submit" class="btn btn-success form-control">Save</button>
                         </div>
                         <div class="col">
-                            <a asp-area="Category" asp-page="/Index" class="btn btn-danger form-control">Cancel</a>
+                            <a asp-page="./Index" class="btn btn-danger form-control">Cancel</a>
                         </div>
                     </div>
                 </div>

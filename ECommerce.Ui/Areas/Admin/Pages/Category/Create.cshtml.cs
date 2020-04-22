@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using ECommerce.Models;
 
-namespace ECommerce.Ui.Areas.Category.Pages
+namespace ECommerce.Ui.Areas.Admin.Pages.Category
 {
     public class CreateModel : PageModel
     {
