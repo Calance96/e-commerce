@@ -64,7 +64,15 @@ namespace ECommerce.Ui
                 {
                     options.Conventions.AuthorizeAreaFolder("Admin", "/Category", "AdminOnly");
                     options.Conventions.AuthorizeAreaFolder("Admin", "/Product", "AdminOnly");
+                    options.Conventions.AuthorizeAreaPage("Item", "/Details");
                 });
+
+            services.AddSession(configs =>
+            {
+                configs.IdleTimeout = TimeSpan.FromMinutes(30);
+                configs.Cookie.HttpOnly = true;
+                configs.Cookie.IsEssential = true;
+            });
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -84,6 +92,7 @@ namespace ECommerce.Ui
             app.UseStaticFiles();
 
             app.UseRouting();
+            app.UseSession();
 
             app.UseAuthentication();
             app.UseAuthorization();
@@ -102,6 +111,11 @@ namespace ECommerce.Ui
                 configs.DefaultRequestHeaders.Add("Accept", "application/json");
             });
             services.AddHttpClient<ProductService>(configs =>
+            {
+                configs.BaseAddress = new Uri(Configuration["APIServer:BaseAddress"]);
+                configs.DefaultRequestHeaders.Add("Accept", "application/json");
+            });
+            services.AddHttpClient<CartService>(configs =>
             {
                 configs.BaseAddress = new Uri(Configuration["APIServer:BaseAddress"]);
                 configs.DefaultRequestHeaders.Add("Accept", "application/json");
