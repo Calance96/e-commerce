@@ -1,9 +1,13 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using ECommerce.Models;
 using ECommerce.Models.ViewModels;
+using ECommerce.Ui.Services;
+using ECommerce.Utility;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -14,11 +18,16 @@ namespace ECommerce.Ui.Areas.Account.Pages
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly CartService _cartService;
 
-        public LoginModel(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager)
+        public LoginModel(
+            UserManager<ApplicationUser> userManager, 
+            SignInManager<ApplicationUser> signInManager,
+            CartService cartService)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _cartService = cartService;
         }
 
         [BindProperty]
@@ -43,6 +52,9 @@ namespace ECommerce.Ui.Areas.Account.Pages
 
                     if (result.Succeeded)
                     {
+                        var cartItemsCount = await _cartService.GetItemsCount(user.Id);
+                        HttpContext.Session.SetInt32(AppConstant.CART_SESSION_KEY, cartItemsCount);
+                        HttpContext.Session.SetString(AppConstant.FULLNAME_SESSION_KEY, user.Name);
                         return LocalRedirect(returnUrl);
                     }
                     else
