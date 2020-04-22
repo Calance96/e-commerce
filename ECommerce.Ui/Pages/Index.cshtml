@@ -4,29 +4,37 @@
     ViewData["Title"] = "Home page";
 }
 
-    <div class="row pb-3 backgroundWhite">
+<hr />
+<div style="margin: 5px auto; text-align: center">
+    <h2>Product List</h2>
+</div>
+<hr />
+<br />
 
-        @foreach (var product in Model.Products)
-        {
-            <div class="col-lg-3 col-md-6">
-                <div class="row p-2">
-                    <div class="col-12 p-2" style="border:1px solid #2C3E50; border-radius: 5px;">
-                        <div class="card" style="border:0px;">
-                            <img src="@product.ImageUrl" class="card-img rounded mb-3" style="object-fit: contain; height: 15vw;"/>
-                            <div class="pl-1">
-                                <p class="card-title h5"><b style="color: #2c3e50">@product.Name</b></p>
-                                <p class="card-title text-primary"><b>Category: @product.Category.Name</b></p>
-                            </div>
-                            <div style="padding-left:5px;">
-                                <p><b class="">RM @product.Price</b></p>
-                            </div>
+<div class="row pb-3 backgroundWhite">
+    @foreach (var product in Model.Products)
+    {
+        <div class="col-lg-3 col-md-6">
+            <div class="row p-2">
+                <div class="col-12 p-2" style="border:1px solid #dee2e6 ; border-radius: 5px;">
+                    <div class="card" style="border:0px;">
+                        <img src="@product.ImageUrl" class="card-img rounded mb-3" style="object-fit: contain; height: 15vw;"/>
+                        <div class="pl-1">
+                            <p class="card-title h5"><b style="color: #2c3e50">@product.Name</b></p>
+                            <p class="card-title text-primary"><b>Category: @product.Category.Name</b></p>
                         </div>
-                        <div>
-                            <a class="btn btn-primary form-control text-white">Details</a>
+                        <div style="padding-left:5px;">
+                            <p><b class="">RM @product.Price</b></p>
                         </div>
+                    </div>
+                    <div>
+                        <a asp-area="Item" asp-page="/Details" asp-route-id="@product.Id" class="btn btn-primary form-control text-white">
+                            <i class="fas fa-eye"></i>&nbsp; Details
+                        </a>
                     </div>
                 </div>
             </div>
-        }
+        </div>
+    }
+</div>
 
-    </div>
