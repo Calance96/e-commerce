@@ -21,6 +21,7 @@ namespace ECommerce.Ui.Areas.Account.Pages
 
         public async Task<IActionResult> OnPostAsync()
         {
+            HttpContext.Session.Clear();
             await _signInManager.SignOutAsync();
             return LocalRedirect("/");
         }
