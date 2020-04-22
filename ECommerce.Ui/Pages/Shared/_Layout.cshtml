@@ -8,7 +8,7 @@
     <title>@ViewData["Title"] | E-Mall</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
     <link rel="stylesheet" href="~/css/site.css" />
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" />
 </head>
 <body>
     <header>
@@ -37,10 +37,10 @@
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" asp-area="Admin" asp-page="/Product/Index">Products</a>
                                 </div>
-                                
+
                             </li>
                         }
-                        </ul>
+                    </ul>
                 </div>
             </div>
         </nav>
@@ -53,13 +53,16 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2020 - ECommerce.Ui - <a asp-area="" asp-page="/Privacy">Privacy</a>
+            &copy; Copyright 2020. All Rights Reserved.
         </div>
     </footer>
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <script src="https://kit.fontawesome.com/5b4144f91d.js"></script>
+
 
     @RenderSection("Scripts", required: false)
 </body>
