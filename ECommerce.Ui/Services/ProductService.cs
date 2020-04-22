@@ -1,4 +1,5 @@
 ﻿using ECommerce.Models;
+using ECommerce.Utility;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
@@ -49,13 +50,13 @@ namespace ECommerce.Ui.Services
 
         public async Task Update(Product product)
         {
-            var data = new StringContent(JsonSerializer.Serialize<Product>(product), Encoding.UTF8, "application/json");
+            var data = new StringContent(JsonSerializer.Serialize<Product>(product), Encoding.UTF8, AppConstant.CONTENT_JSON);
             await _httpClient.PutAsync($"{_route}/{product.Id}", data);
         }
 
         public async Task Add(Product product)
         {
-            var data = new StringContent(JsonSerializer.Serialize<Product>(product), Encoding.UTF8, "application/json");
+            var data = new StringContent(JsonSerializer.Serialize<Product>(product), Encoding.UTF8, AppConstant.CONTENT_JSON);
             await _httpClient.PostAsync(_route, data);
         }
 
