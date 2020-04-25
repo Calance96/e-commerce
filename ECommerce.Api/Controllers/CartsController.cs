@@ -21,6 +21,16 @@ namespace ECommerce.Api.Controllers
         }
 
         [HttpGet("{userId}")]
+        public async Task<IEnumerable<CartItem>> GetAll(string userId)
+        {
+            return await _context.CartItems
+                .Include(item => item.Product)
+                .Include(item => item.ApplicationUser)
+                .Where(record => record.UserId == userId)
+                .ToListAsync();
+        }
+
+        [HttpGet("count/{userId}")]
         public async Task<ActionResult<Int32>> GetCount(string userId)
         {
             Int32 count = await _context.CartItems.CountAsync(x => x.UserId == userId);
