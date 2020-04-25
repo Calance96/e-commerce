@@ -1,0 +1,247 @@
+﻿@page
+@model ECommerce.Ui.Areas.Customer.Pages.ShoppingCart.ShoppingCartModel
+@using Microsoft.Extensions.Options
+@inject IOptions<ECommerce.Utility.StripeConfigs> StripeConfigs
+@{
+    ViewData["Title"] = "View Shopping Cart";
+}
+
+<br />
+
+<div class="backgroundWhiteBorder">
+    <div class="container">
+        <div class="card">
+            <div class="card-header bg-primary text-light ml-0 row container">
+                <div class="col-6 lead">
+                    <i class="fa fa-shopping-cart"></i> &nbsp;
+                    <span>Shopping Cart</span>
+                </div>
+            </div>
+
+            @if (Model.ShoppingCartVM.CartItems.Count() > 0)
+            {
+                <form method="post">
+                    <div class="card-body">
+                        @foreach (var item in Model.ShoppingCartVM.CartItems)
+                        {
+                            <div class="row">
+                                <div class="d-none d-lg-block col-lg-1 text-center py-2">
+                                    <img src="@item.Product.ImageUrl" class="rounded w-100" />
+                                </div>
+                                <div class="col-12 text-sm-center col-lg-6 text-lg-left">
+                                    <h5><strong>@item.Product.Name</strong></h5>
+                                    <p style="text-align: justify; text-justify: inter-word;"><small>@Html.Raw(item.Product.Description.Length < 250 ? item.Product.Description : item.Product.Description.Substring(0, 249) + "...")</small></p>
+                                </div>
+                                <div class="col-12 text-sm-center col-lg-5 text-lg-right row">
+                                    <div class="col-4 text-md-left" style="padding-top:5px;">
+                                        <h6><strong>RM @item.Product.Price.ToString("N")</strong></h6>
+                                    </div>
+                                    <div class="col-2 text-md-center" style="padding-top:5px;">
+                                        <h6><strong>@item.Quantity</strong></h6>
+                                    </div>
+                                    <div class="col-4 col-sm-4 col-lg-4">
+                                        <div class="float-right mx-1">
+                                            <button type="submit" class="btn btn-primary" asp-page-handler="Increase" asp-route-productId="@item.ProductId">
+                                                <i class="fas fa-plus"></i>
+                                            </button>
+                                        </div>
+                                        <div class="float-right mx-1">
+                                            <button type="submit" class="btn btn-danger" asp-page-handler="Decrease" asp-route-productId="@item.ProductId">
+                                                <i class="fas fa-minus"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="col-2 col-sm-4 col-lg-2 text-right">
+                                        <button type="submit" class="btn btn-danger" asp-page-handler="Delete" asp-route-cartItemId="@item.Id">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <hr />
+                        }
+
+                        <div class="row">
+                            <div class="col-12 col-md-6 offset-md-6 col-lg-4 offset-lg-8 pr-4">
+                                <ul class="list-group">
+                                    <li class="list-group-item d-flex justify-content-between bg-light">
+                                        <span class="font-weight-bold"> Total (RM)</span>
+                                        <strong>@Model.ShoppingCartVM.Order.OrderTotal.ToString("N")</strong>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+                <div class="card-footer"></div>
+                <form method="post">
+                    <div class="card-body" style="background-color:rgba(0, 0, 0, 0.03)">
+                        <input type="hidden" asp-for="ShoppingCartVM.Order.UserId" />
+                        <div class="lead mb-4 font-weight-bold">
+                            Order Details
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-3">
+                                <label asp-for="ShoppingCartVM.Order.Name"></label>
+                            </div>
+                            <div class="col-9">
+                                <input class="form-control" asp-for="ShoppingCartVM.Order.Name" />
+                                <span asp-validation-for="ShoppingCartVM.Order.Name" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-3">
+                                <label asp-for="ShoppingCartVM.Order.Email"></label>
+                            </div>
+                            <div class="col-9">
+                                <input class="form-control" asp-for="ShoppingCartVM.Order.Email" />
+                                <span asp-validation-for="ShoppingCartVM.Order.Email" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-3">
+                                <label asp-for="ShoppingCartVM.Order.PhoneNumber"></label>
+                            </div>
+                            <div class="col-9">
+                                <input class="form-control" asp-for="ShoppingCartVM.Order.PhoneNumber" />
+                                <span asp-validation-for="ShoppingCartVM.Order.PhoneNumber" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-3">
+                                <label asp-for="ShoppingCartVM.Order.ShippingAddress"></label>
+                            </div>
+                            <div class="col-9">
+                                <textarea class="form-control" asp-for="ShoppingCartVM.Order.ShippingAddress"></textarea>
+                                <span asp-validation-for="ShoppingCartVM.Order.ShippingAddress" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-3">
+                                <label asp-for="ShoppingCartVM.Order.BillingAddress"></label>
+                            </div>
+                            <div class="col-9">
+                                <textarea class="form-control" asp-for="ShoppingCartVM.Order.BillingAddress"></textarea>
+                                <span asp-validation-for="ShoppingCartVM.Order.BillingAddress" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-footer">
+                        <div class="row">
+                            <div class="col-sm-12 col-lg-4 col-md-6 offset-lg-4">
+                                <a asp-area="" asp-page="/Index" class="btn btn-primary form-control">
+                                    Continue Shopping
+                                </a>
+                            </div>
+
+                            <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                                    data-key="@StripeConfigs.Value.PublishableKey"
+                                    data-amount="@(Model.ShoppingCartVM.Order.OrderTotal * 100)"
+                                    data-name="ECommerce"
+                                    data-description="Get All Your Needs Effortlessly"
+                                    data-locale="auto"
+                                    data-currency="MYR"
+                                    data-allow-remember-me="false"
+                                    data-image="https://stripe.com/img/documentation/checkout/marketplace.png">
+                            </script>
+                            <script>
+                                //Hide the stripe payment button
+                                document.getElementsByClassName('stripe-button-el')[0].style.display = 'none';
+                            </script>
+                            <div class="col-sm-12 col-lg-4 col-md-6">
+                                <button type="submit" class="btn btn-danger text-white form-control">Place Order</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </form>
+            }
+            else
+            {
+                <div class="card-body text-center">
+
+                    <div>You have no items in your shopping cart.</div>
+
+                </div>
+                <div class="card-footer">
+
+                    <div class="text-center">
+                        <a asp-area="" asp-page="/Index" class="btn btn-danger">
+                            Back to Shopping
+                        </a>
+                    </div>
+
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @if (!String.IsNullOrEmpty(Model.ErrorMessage))
+    {
+<script async>
+            toastr.options = {
+                "closeButton": true,
+                "debug": false,
+                "newestOnTop": false,
+                "progressBar": true,
+                "positionClass": "toast-bottom-left",
+                "preventDuplicates": true,
+                "onclick": null,
+                "showDuration": "300",
+                "hideDuration": "1000",
+                "timeOut": "2500",
+                "extendedTimeOut": "1000",
+                "showEasing": "swing",
+                "hideEasing": "linear",
+                "showMethod": "fadeIn",
+                "hideMethod": "fadeOut"
+            }
+
+            $(document).ready(function () {
+                toastr.error('@Model.ErrorMessage', 'E-Mall');
+
+                @{
+                    Model.ErrorMessage = "";
+                }
+            });
+
+
+</script>
+    }
+    else if (!String.IsNullOrEmpty(Model.SuccessMessage))
+    {
+        <script async>
+            $(document).ready(function () {
+                toastr.options = {
+                    "closeButton": true,
+                    "debug": false,
+                    "newestOnTop": false,
+                    "progressBar": true,
+                    "positionClass": "toast-bottom-left",
+                    "preventDuplicates": true,
+                    "onclick": null,
+                    "showDuration": "300",
+                    "hideDuration": "1000",
+                    "timeOut": "2000",
+                    "extendedTimeOut": "1000",
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut"
+                }
+
+                toastr.success('@Model.SuccessMessage', 'E-Mall');
+
+                @{ 
+                    Model.SuccessMessage = "";
+                }
+            });
+        </script>
+    }
+}
+
