@@ -24,9 +24,9 @@ namespace ECommerce.Ui.Services
             _route = configuration["APIRoutes:Cart"];
         }
 
-        public async Task<IEnumerable<CartItem>> GetAll()
+        public async Task<IEnumerable<CartItem>> GetAll(string userId)
         {
-            var response = await _httpClient.GetAsync(_route);
+            var response = await _httpClient.GetAsync($"{_route}/{userId}");
             response.EnsureSuccessStatusCode();
 
             var json = await response.Content.ReadAsStreamAsync();
@@ -76,7 +76,7 @@ namespace ECommerce.Ui.Services
 
         public async Task<Int32> GetItemsCount(string userId)
         {
-            var response = await _httpClient.GetAsync($"{_route}/{userId}");
+            var response = await _httpClient.GetAsync($"{_route}/count/{userId}");
             response.EnsureSuccessStatusCode();
 
             var count = await JsonSerializer.DeserializeAsync<Int32>(await response.Content.ReadAsStreamAsync(), new JsonSerializerOptions
