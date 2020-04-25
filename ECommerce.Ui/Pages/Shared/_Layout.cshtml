@@ -39,6 +39,18 @@
                                 </div>
 
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="Admin" asp-page="/Order/Index">Orders</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="Admin" asp-page="/Management/Index">Admin Management</a>
+                            </li>
+                        }
+                        else if (User.IsInRole(AppConstant.ROLE_CUSTOMER))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="Customer" asp-page="/Order/Index">Orders</a>
+                            </li>
                         }
                     </ul>
                 </div>
