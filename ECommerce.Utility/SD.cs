@@ -2,7 +2,7 @@
 
 namespace ECommerce.Utility
 {
-    public class AppConstant
+    public class SD
     {
         public const string ROLE_ADMIN = "Admin";
         public const string ROLE_CUSTOMER = "Customer";
@@ -37,6 +37,15 @@ namespace ECommerce.Utility
             public const string SUCCEEDED = "succeeded";
             public const string PENDING = "pending";
             public const string FAILED = "failed";
+        }
+
+        // For login use to differentiate between user not found and incorrect credentials
+        public static class StatusCode
+        {
+            public const int UNAUTHORIZED = 401;
+            public const int NOTFOUND = 404;
+            public const int OK = 200;
+            public const int BAD_REQUEST = 400;
         }
     }
 }

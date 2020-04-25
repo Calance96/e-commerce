@@ -12,10 +12,10 @@
 
     switch (role)
     {
-        case AppConstant.ROLE_ADMIN:
+        case SD.ROLE_ADMIN:
             admin = "active";
             break;
-        case AppConstant.ROLE_CUSTOMER:
+        case SD.ROLE_CUSTOMER:
             customer = "active";
             break;
         default:
@@ -38,12 +38,12 @@
                             All
                         </li>
                     </a>
-                    <a style="text-decoration: none" asp-page="./Index" asp-route-role="@AppConstant.ROLE_ADMIN">
+                    <a style="text-decoration: none" asp-page="./Index" asp-route-role="@SD.ROLE_ADMIN">
                         <li class="list-group-item rounded-0 @admin">
                             Admin
                         </li>
                     </a>
-                    <a style="text-decoration: none" asp-page="./Index" asp-route-role="@AppConstant.ROLE_CUSTOMER">
+                    <a style="text-decoration: none" asp-page="./Index" asp-route-role="@SD.ROLE_CUSTOMER">
                         <li class="list-group-item rounded-0 @customer">
                             Customer
                         </li>

@@ -59,7 +59,7 @@ namespace ECommerce.Ui.Areas.Item.Pages
 
                 var cartItemsCount = await _cartService.GetItemsCount(currentUserId.Value);
 
-                HttpContext.Session.SetInt32(AppConstant.CART_SESSION_KEY, cartItemsCount);
+                HttpContext.Session.SetInt32(SD.CART_SESSION_KEY, cartItemsCount);
 
                 return LocalRedirect("/");
             }

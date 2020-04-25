@@ -44,7 +44,7 @@ namespace ECommerce.Ui.Areas.Admin.Pages.Management
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
-                    var addRoleResult = await _userManager.AddToRoleAsync(user, AppConstant.ROLE_ADMIN);
+                    var addRoleResult = await _userManager.AddToRoleAsync(user, SD.ROLE_ADMIN);
                     if (addRoleResult.Succeeded)
                     {
                         return RedirectToPage("./Index");

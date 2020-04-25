@@ -25,7 +25,7 @@
                         <li class="nav-item">
                             <a class="nav-link" asp-area="" asp-page="/Index">Home</a>
                         </li>
-                        @if (User.IsInRole(AppConstant.ROLE_ADMIN))
+                        @if (User.IsInRole(SD.ROLE_ADMIN))
                         {
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -46,7 +46,7 @@
                                 <a class="nav-link" asp-area="Admin" asp-page="/Management/Index">Admin Management</a>
                             </li>
                         }
-                        else if (User.IsInRole(AppConstant.ROLE_CUSTOMER))
+                        else if (User.IsInRole(SD.ROLE_CUSTOMER))
                         {
                             <li class="nav-item">
                                 <a class="nav-link" asp-area="Customer" asp-page="/Order/Index">Orders</a>

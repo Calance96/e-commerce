@@ -59,13 +59,13 @@ namespace ECommerce.Ui.Services
 
         public async Task Update(CartItem cartItem)
         {
-            var data = new StringContent(JsonSerializer.Serialize<CartItem>(cartItem), Encoding.UTF8, AppConstant.CONTENT_JSON);
+            var data = new StringContent(JsonSerializer.Serialize<CartItem>(cartItem), Encoding.UTF8, SD.CONTENT_JSON);
             await _httpClient.PutAsync($"{_route}/{cartItem.Id}", data);
         }
 
         public async Task Add(CartItem cartItem)
         {
-            var data = new StringContent(JsonSerializer.Serialize<CartItem>(cartItem), Encoding.Default, AppConstant.CONTENT_JSON);
+            var data = new StringContent(JsonSerializer.Serialize<CartItem>(cartItem), Encoding.Default, SD.CONTENT_JSON);
             await _httpClient.PostAsync(_route, data);
         }
 

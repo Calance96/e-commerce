@@ -104,7 +104,7 @@
                                     </div>
                                 </div>
                                 <div class="row my-1">
-                                    @if (Model.OrderDetails.Order.PaymentStatus == AppConstant.PaymentStatus.REFUNDED)
+                                    @if (Model.OrderDetails.Order.PaymentStatus == SD.PaymentStatus.REFUNDED)
                                     {
                                         <div class="col-4">Refunded On</div>
                                     }
@@ -149,7 +149,7 @@
                                     </li>
                                 </ul>
 
-                                @if (Model.OrderDetails.Order.OrderStatus == AppConstant.OrderStatus.SHIPPED)
+                                @if (Model.OrderDetails.Order.OrderStatus == SD.OrderStatus.SHIPPED)
                                 {
                                     <button type="submit" class="btn btn-primary form-control mb-2" asp-page-handler="CompleteOrder">
                                         Mark Order Complete

@@ -8,12 +8,12 @@
 @inject RoleManager<IdentityRole> RoleManager
 
 <ul class="navbar-nav">
-    @if (SignInManager.IsSignedIn(User))
+    @if (HttpContextAccessor.HttpContext.User.Identity.IsAuthenticated)
     {
-        var count = HttpContextAccessor.HttpContext.Session.GetInt32(AppConstant.CART_SESSION_KEY);
-        var name = HttpContextAccessor.HttpContext.Session.GetString(AppConstant.FULLNAME_SESSION_KEY);
+        var count = HttpContextAccessor.HttpContext.Session.GetInt32(SD.CART_SESSION_KEY);
+        var name = HttpContextAccessor.HttpContext.Session.GetString(SD.FULLNAME_SESSION_KEY);
 
-        @if (User.IsInRole(AppConstant.ROLE_CUSTOMER))
+        @if (User.IsInRole(SD.ROLE_CUSTOMER))
         {
             <li style="color:white;">
                 <a asp-area="Customer" asp-page="/ShoppingCart/Index" class="nav-link">
@@ -29,7 +29,7 @@
         <li class="nav-item">
             <a class="nav-link" style="cursor:pointer">
                 @(name == null? User.Identity.Name : name)
-                @if (User.IsInRole(AppConstant.ROLE_ADMIN))
+                @if (User.IsInRole(SD.ROLE_ADMIN))
                 {
                     <span>(Admin)</span>
                 }

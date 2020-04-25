@@ -50,13 +50,13 @@ namespace ECommerce.Ui.Services
 
         public async Task Update(Category category)
         {
-            var data = new StringContent(JsonSerializer.Serialize<Category>(category), Encoding.UTF8, AppConstant.CONTENT_JSON);
+            var data = new StringContent(JsonSerializer.Serialize<Category>(category), Encoding.UTF8, SD.CONTENT_JSON);
             await _httpClient.PutAsync($"{_route}/{category.Id}", data);
         }
 
         public async Task Add(Category category)
         {
-            var data = new StringContent(JsonSerializer.Serialize<Category>(category), Encoding.UTF8, AppConstant.CONTENT_JSON);
+            var data = new StringContent(JsonSerializer.Serialize<Category>(category), Encoding.UTF8, SD.CONTENT_JSON);
             await _httpClient.PostAsync(_route, data);
         }
 

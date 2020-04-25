@@ -50,23 +50,23 @@ namespace ECommerce.Api.Controllers
         {
             switch (status)
             {
-                case AppConstant.OrderStatus.PENDING:
-                    orders = orders.Where(order => order.PaymentStatus == AppConstant.PaymentStatus.PENDING ||
-                                            order.OrderStatus == AppConstant.OrderStatus.APPROVED);
+                case SD.OrderStatus.PENDING:
+                    orders = orders.Where(order => order.PaymentStatus == SD.PaymentStatus.PENDING ||
+                                            order.OrderStatus == SD.OrderStatus.APPROVED);
                     break;
-                case AppConstant.OrderStatus.PROCESSING:
-                    orders = orders.Where(order => order.OrderStatus == AppConstant.OrderStatus.PROCESSING);
+                case SD.OrderStatus.PROCESSING:
+                    orders = orders.Where(order => order.OrderStatus == SD.OrderStatus.PROCESSING);
                     break;
-                case AppConstant.OrderStatus.SHIPPED:
-                    orders = orders.Where(order => order.OrderStatus == AppConstant.OrderStatus.SHIPPED);
+                case SD.OrderStatus.SHIPPED:
+                    orders = orders.Where(order => order.OrderStatus == SD.OrderStatus.SHIPPED);
                     break;
-                case AppConstant.OrderStatus.COMPLETE:
-                    orders = orders.Where(order => order.OrderStatus == AppConstant.OrderStatus.COMPLETE);
+                case SD.OrderStatus.COMPLETE:
+                    orders = orders.Where(order => order.OrderStatus == SD.OrderStatus.COMPLETE);
                     break;
-                case AppConstant.OrderStatus.CANCELLED:
-                    orders = orders.Where(order => order.OrderStatus == AppConstant.OrderStatus.CANCELLED ||
-                                            order.OrderStatus == AppConstant.OrderStatus.REFUNDED ||
-                                            order.OrderStatus == AppConstant.PaymentStatus.REJECTED);
+                case SD.OrderStatus.CANCELLED:
+                    orders = orders.Where(order => order.OrderStatus == SD.OrderStatus.CANCELLED ||
+                                            order.OrderStatus == SD.OrderStatus.REFUNDED ||
+                                            order.OrderStatus == SD.PaymentStatus.REJECTED);
                     break;
             }
 

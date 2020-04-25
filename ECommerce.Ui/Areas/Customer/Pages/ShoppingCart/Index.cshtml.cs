@@ -107,15 +107,15 @@ namespace ECommerce.Ui.Areas.Customer.Pages.ShoppingCart
             var claimsIdentity = (ClaimsIdentity)User.Identity;
             var userId = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier).Value;
 
-            HttpContext.Session.SetInt32(AppConstant.CART_SESSION_KEY, await _cartService.GetItemsCount(userId));
+            HttpContext.Session.SetInt32(SD.CART_SESSION_KEY, await _cartService.GetItemsCount(userId));
 
             return RedirectToPage();
         }
 
         public async Task<IActionResult> OnPostAsync(string stripeToken)
         {
-            ShoppingCartVM.Order.PaymentStatus = AppConstant.PaymentStatus.PENDING;
-            ShoppingCartVM.Order.OrderStatus = AppConstant.OrderStatus.PENDING;
+            ShoppingCartVM.Order.PaymentStatus = SD.PaymentStatus.PENDING;
+            ShoppingCartVM.Order.OrderStatus = SD.OrderStatus.PENDING;
             ShoppingCartVM.Order.OrderDate = DateTime.Now;
             ShoppingCartVM.CartItems = await _cartService.GetAll(ShoppingCartVM.Order.UserId);
             ShoppingCartVM.Order.OrderTotal = CalculateSum(ShoppingCartVM.CartItems);
@@ -125,7 +125,7 @@ namespace ECommerce.Ui.Areas.Customer.Pages.ShoppingCart
                 try
                 {
                     Models.Order newOrder = await _orderService.Create(ShoppingCartVM);
-                    HttpContext.Session.SetInt32(AppConstant.CART_SESSION_KEY, 0);
+                    HttpContext.Session.SetInt32(SD.CART_SESSION_KEY, 0);
 
                     if (stripeToken != null)
                     {
@@ -142,17 +142,17 @@ namespace ECommerce.Ui.Areas.Customer.Pages.ShoppingCart
 
                         if (charge.BalanceTransactionId == null)
                         {
-                            newOrder.PaymentStatus = AppConstant.PaymentStatus.REJECTED;
+                            newOrder.PaymentStatus = SD.PaymentStatus.REJECTED;
                         }
                         else
                         {
                             newOrder.TransactionId = charge.Id;
                         }
 
-                        if (charge.Status.ToLower() == AppConstant.StripeChargeStatus.SUCCEEDED)
+                        if (charge.Status.ToLower() == SD.StripeChargeStatus.SUCCEEDED)
                         {
-                            newOrder.PaymentStatus = AppConstant.PaymentStatus.APPROVED;
-                            newOrder.OrderStatus = AppConstant.OrderStatus.APPROVED;
+                            newOrder.PaymentStatus = SD.PaymentStatus.APPROVED;
+                            newOrder.OrderStatus = SD.OrderStatus.APPROVED;
                             newOrder.PaymentDate = DateTime.Now;
                         }
 

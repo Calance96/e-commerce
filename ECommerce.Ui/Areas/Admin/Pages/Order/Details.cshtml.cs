@@ -34,7 +34,7 @@ namespace ECommerce.Ui.Areas.Admin.Pages.Order
         public async Task<IActionResult> OnPostProcessOrderAsync()
         {
             Models.Order orderFromDb = await _orderService.GetOrderSummaryByOrderId(OrderDetails.Order.Id);
-            orderFromDb.OrderStatus = AppConstant.OrderStatus.PROCESSING;
+            orderFromDb.OrderStatus = SD.OrderStatus.PROCESSING;
             await _orderService.Update(orderFromDb);
             return RedirectToPage();
         }
@@ -52,7 +52,7 @@ namespace ECommerce.Ui.Areas.Admin.Pages.Order
                 orderFromDb.Carrier = carrier;
                 orderFromDb.TrackingNumber = trackingNum;
                 orderFromDb.ShipDate = DateTime.Now;
-                orderFromDb.OrderStatus = AppConstant.OrderStatus.SHIPPED;
+                orderFromDb.OrderStatus = SD.OrderStatus.SHIPPED;
                 await _orderService.Update(orderFromDb);
                 return RedirectToPage();
             }
@@ -75,7 +75,7 @@ namespace ECommerce.Ui.Areas.Admin.Pages.Order
         public async Task<IActionResult> OnPostCompleteOrderAsync()
         {
             Models.Order orderFromDb = await _orderService.GetOrderSummaryByOrderId(OrderDetails.Order.Id);
-            orderFromDb.OrderStatus = AppConstant.OrderStatus.COMPLETE;
+            orderFromDb.OrderStatus = SD.OrderStatus.COMPLETE;
             await _orderService.Update(orderFromDb);
             return RedirectToPage();
         }
@@ -84,8 +84,8 @@ namespace ECommerce.Ui.Areas.Admin.Pages.Order
         {
             Models.Order orderFromDb = await _orderService.GetOrderSummaryByOrderId(OrderDetails.Order.Id);
 
-            if (orderFromDb.OrderStatus == AppConstant.OrderStatus.APPROVED || 
-                orderFromDb.OrderStatus == AppConstant.OrderStatus.PROCESSING) // Only refund when either of these conditions are met
+            if (orderFromDb.OrderStatus == SD.OrderStatus.APPROVED || 
+                orderFromDb.OrderStatus == SD.OrderStatus.PROCESSING) // Only refund when either of these conditions are met
             {
                 RefundCreateOptions refundOptions = new RefundCreateOptions
                 {
@@ -97,14 +97,14 @@ namespace ECommerce.Ui.Areas.Admin.Pages.Order
                 RefundService refundService = new RefundService();
                 Refund refund = refundService.Create(refundOptions);
 
-                orderFromDb.OrderStatus = AppConstant.OrderStatus.REFUNDED;
-                orderFromDb.PaymentStatus = AppConstant.PaymentStatus.REFUNDED;
+                orderFromDb.OrderStatus = SD.OrderStatus.REFUNDED;
+                orderFromDb.PaymentStatus = SD.PaymentStatus.REFUNDED;
                 orderFromDb.PaymentDate = DateTime.Now;
             } 
             else
             {
-                orderFromDb.OrderStatus = AppConstant.OrderStatus.CANCELLED;
-                orderFromDb.PaymentStatus = AppConstant.PaymentStatus.CANCELLED;
+                orderFromDb.OrderStatus = SD.OrderStatus.CANCELLED;
+                orderFromDb.PaymentStatus = SD.PaymentStatus.CANCELLED;
             }
             await _orderService.Update(orderFromDb);
             return RedirectToPage();

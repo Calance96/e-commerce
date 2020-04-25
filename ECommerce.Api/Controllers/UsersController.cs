@@ -34,13 +34,13 @@ namespace ECommerce.Api.Controllers
                 user.Role = roles.FirstOrDefault(role => role.Id == roleId).Name;
             }
 
-            if (role == AppConstant.ROLE_ADMIN)
+            if (role == SD.ROLE_ADMIN)
             {
-                users = users.Where(user => user.Role == AppConstant.ROLE_ADMIN).ToList();
+                users = users.Where(user => user.Role == SD.ROLE_ADMIN).ToList();
             } 
-            else if (role == AppConstant.ROLE_CUSTOMER)
+            else if (role == SD.ROLE_CUSTOMER)
             {
-                users = users.Where(user => user.Role == AppConstant.ROLE_CUSTOMER).ToList();
+                users = users.Where(user => user.Role == SD.ROLE_CUSTOMER).ToList();
             }
 
             return users;

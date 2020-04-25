@@ -7,6 +7,7 @@ using ECommerce.Models;
 using ECommerce.Models.ViewModels;
 using ECommerce.Ui.Services;
 using ECommerce.Utility;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -16,17 +17,14 @@ namespace ECommerce.Ui.Areas.Account.Pages
 {
     public class LoginModel : PageModel
     {
-        private readonly UserManager<ApplicationUser> _userManager;
-        private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly AuthService _authService;
         private readonly CartService _cartService;
 
         public LoginModel(
-            UserManager<ApplicationUser> userManager, 
-            SignInManager<ApplicationUser> signInManager,
+           AuthService authService,
             CartService cartService)
         {
-            _userManager = userManager;
-            _signInManager = signInManager;
+            _authService = authService;
             _cartService = cartService;
         }
 
@@ -43,28 +41,58 @@ namespace ECommerce.Ui.Areas.Account.Pages
             Message = "";
             if (ModelState.IsValid)
             {
-                var user = await _userManager.FindByEmailAsync(Input.Email);
+                var authResult = await _authService.Login(Input);
 
-                if (user != null)
+                switch (authResult.StatusCode)
                 {
-                    var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, false);
+                    case SD.StatusCode.OK:
+                        var claims = new List<Claim>
+                        {
+                            new Claim(ClaimTypes.NameIdentifier, authResult.ApplicationUser.Id),
+                            new Claim(ClaimTypes.Name, authResult.ApplicationUser.Name),
+                            new Claim(ClaimTypes.Email, authResult.ApplicationUser.Email),
+                            new Claim(ClaimTypes.Role, authResult.ApplicationUser.Role),
+                            new Claim(ClaimTypes.MobilePhone, authResult.ApplicationUser.PhoneNumber),
+                        };
 
-                    if (result.Succeeded)
-                    {
-                        var cartItemsCount = await _cartService.GetItemsCount(user.Id);
-                        HttpContext.Session.SetInt32(AppConstant.CART_SESSION_KEY, cartItemsCount);
-                        HttpContext.Session.SetString(AppConstant.FULLNAME_SESSION_KEY, user.Name);
+                        var claimsIdentity = new ClaimsIdentity(claims, "Password");
+                        var claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
+                        await HttpContext.SignInAsync(IdentityConstants.ApplicationScheme, new ClaimsPrincipal(claimsIdentity), new AuthenticationProperties
+                        {
+                            IsPersistent = true,
+                            RedirectUri = returnUrl
+                        });
+
                         return LocalRedirect(returnUrl);
-                    }
-                    else
-                    {
-                        Message = "Incorrect credentials.";
-                    }
-                } 
-                else
-                {
-                    Message = "User not found.";
+                    case SD.StatusCode.NOTFOUND:
+                    case SD.StatusCode.BAD_REQUEST:
+                        Message = authResult.Message[0];
+                        break;
+                       
                 }
+
+                //var user = await _userManager.FindByEmailAsync(Input.Email);
+
+                //if (user != null)
+                //{
+                //    var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, false);
+
+                //    if (result.Succeeded)
+                //    {
+                //        var cartItemsCount = await _cartService.GetItemsCount(user.Id);
+                //        HttpContext.Session.SetInt32(SD.CART_SESSION_KEY, cartItemsCount);
+                //        HttpContext.Session.SetString(SD.FULLNAME_SESSION_KEY, user.Name);
+                //        return LocalRedirect(returnUrl);
+                //    }
+                //    else
+                //    {
+                //        Message = "Incorrect credentials.";
+                //    }
+                //} 
+                //else
+                //{
+                //    Message = "User not found.";
+                //}
             }
             return Page();
         }

@@ -46,16 +46,16 @@ namespace ECommerce.Ui.Areas.Account.Pages
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
-                    if (!await _roleManager.RoleExistsAsync(AppConstant.ROLE_ADMIN))
+                    if (!await _roleManager.RoleExistsAsync(SD.ROLE_ADMIN))
                     {
-                        await _roleManager.CreateAsync(new IdentityRole(AppConstant.ROLE_ADMIN));
+                        await _roleManager.CreateAsync(new IdentityRole(SD.ROLE_ADMIN));
                     }
-                    if (!await _roleManager.RoleExistsAsync(AppConstant.ROLE_CUSTOMER))
+                    if (!await _roleManager.RoleExistsAsync(SD.ROLE_CUSTOMER))
                     {
-                        await _roleManager.CreateAsync(new IdentityRole(AppConstant.ROLE_CUSTOMER));
+                        await _roleManager.CreateAsync(new IdentityRole(SD.ROLE_CUSTOMER));
                     }
 
-                    await _userManager.AddToRoleAsync(user, AppConstant.ROLE_CUSTOMER);
+                    await _userManager.AddToRoleAsync(user, SD.ROLE_CUSTOMER);
 
                     var signInResult = await _signInManager.PasswordSignInAsync(user, Input.Password, false, false);
                     

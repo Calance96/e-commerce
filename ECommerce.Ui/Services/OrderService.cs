@@ -85,7 +85,7 @@ namespace ECommerce.Ui.Services
 
         public async Task<Order> Create(ShoppingCartVM shoppingCart)
         {
-            var data = new StringContent(JsonSerializer.Serialize<ShoppingCartVM>(shoppingCart), Encoding.UTF8, AppConstant.CONTENT_JSON);
+            var data = new StringContent(JsonSerializer.Serialize<ShoppingCartVM>(shoppingCart), Encoding.UTF8, SD.CONTENT_JSON);
             var response = await _httpClient.PostAsync(_route, data);
 
             response.EnsureSuccessStatusCode();
@@ -98,7 +98,7 @@ namespace ECommerce.Ui.Services
 
         public async Task Update(Order order)
         {
-            var data = new StringContent(JsonSerializer.Serialize<Order>(order), Encoding.UTF8, AppConstant.CONTENT_JSON);
+            var data = new StringContent(JsonSerializer.Serialize<Order>(order), Encoding.UTF8, SD.CONTENT_JSON);
             await _httpClient.PutAsync($"{_route}/{order.Id}", data);
         }
     }

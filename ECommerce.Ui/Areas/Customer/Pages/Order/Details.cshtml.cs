@@ -30,7 +30,7 @@ namespace ECommerce.Ui.Areas.Customer.Pages.Order
         public async Task<IActionResult> OnPostCompleteOrderAsync()
         {
             Models.Order orderFromDb = await _orderService.GetOrderSummaryByOrderId(OrderDetails.Order.Id);
-            orderFromDb.OrderStatus = AppConstant.OrderStatus.COMPLETE;
+            orderFromDb.OrderStatus = SD.OrderStatus.COMPLETE;
             await _orderService.Update(orderFromDb);
             return RedirectToPage();
         }

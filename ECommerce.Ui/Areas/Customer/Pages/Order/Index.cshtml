@@ -15,19 +15,19 @@
 
     switch (status)
     {
-        case AppConstant.OrderStatus.PENDING:
+        case SD.OrderStatus.PENDING:
             pending = "active";
             break;
-        case AppConstant.OrderStatus.PROCESSING:
+        case SD.OrderStatus.PROCESSING:
             processing = "active";
             break;
-        case AppConstant.OrderStatus.SHIPPED:
+        case SD.OrderStatus.SHIPPED:
             shipped = "active";
             break;
-        case AppConstant.OrderStatus.COMPLETE:
+        case SD.OrderStatus.COMPLETE:
             completed = "active";
             break;
-        case AppConstant.OrderStatus.CANCELLED:
+        case SD.OrderStatus.CANCELLED:
             cancelled = "active";
             break;
         default:
@@ -48,27 +48,27 @@
                         All
                     </li>
                 </a>
-                <a style="text-decoration: none" asp-page="./Index" asp-route-status="@AppConstant.OrderStatus.PENDING">
+                <a style="text-decoration: none" asp-page="./Index" asp-route-status="@SD.OrderStatus.PENDING">
                     <li class="list-group-item rounded-0 @pending">
                         Pending
                     </li>
                 </a>
-                <a style="text-decoration: none" asp-page="./Index" asp-route-status="@AppConstant.OrderStatus.PROCESSING">
+                <a style="text-decoration: none" asp-page="./Index" asp-route-status="@SD.OrderStatus.PROCESSING">
                     <li class="list-group-item rounded-0 @processing">
                         In Process
                     </li>
                 </a>
-                <a style="text-decoration: none" asp-page="./Index" asp-route-status="@AppConstant.OrderStatus.SHIPPED">
+                <a style="text-decoration: none" asp-page="./Index" asp-route-status="@SD.OrderStatus.SHIPPED">
                     <li class="list-group-item rounded-0 @shipped">
                         Shipped
                     </li>
                 </a>
-                <a style="text-decoration: none" asp-page="./Index" asp-route-status="@AppConstant.OrderStatus.COMPLETE">
+                <a style="text-decoration: none" asp-page="./Index" asp-route-status="@SD.OrderStatus.COMPLETE">
                     <li class="list-group-item rounded-0 @completed">
                         Completed
                     </li>
                 </a>
-                <a style="text-decoration: none" asp-page="./Index" asp-route-status="@AppConstant.OrderStatus.CANCELLED">
+                <a style="text-decoration: none" asp-page="./Index" asp-route-status="@SD.OrderStatus.CANCELLED">
                     <li class="list-group-item rounded-0 @cancelled">
                         Cancelled
                     </li>

@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ECommerce.DataAccess;
+using ECommerce.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -30,6 +32,18 @@ namespace ECommerce.Api
             {
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
             });
+
+            services.AddIdentity<ApplicationUser, IdentityRole>(configs =>
+            {
+                configs.Password.RequiredLength = 6;
+                configs.Password.RequireDigit = false;
+                configs.Password.RequireNonAlphanumeric = false;
+                configs.Password.RequireUppercase = false;
+                configs.Password.RequireLowercase = false;
+            })
+                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddDefaultTokenProviders();
+
             services.AddControllers();
         }
 

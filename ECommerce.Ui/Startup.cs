@@ -58,8 +58,8 @@ namespace ECommerce.Ui
 
             services.AddAuthorization(options =>
             {
-                options.AddPolicy("AdminOnly", policy => policy.RequireRole(AppConstant.ROLE_ADMIN));
-                options.AddPolicy("CustomerOnly", policy => policy.RequireRole(AppConstant.ROLE_CUSTOMER));
+                options.AddPolicy("AdminOnly", policy => policy.RequireRole(SD.ROLE_ADMIN));
+                options.AddPolicy("CustomerOnly", policy => policy.RequireRole(SD.ROLE_CUSTOMER));
             });
 
             services.AddRazorPages()
@@ -134,6 +134,11 @@ namespace ECommerce.Ui
                 configs.DefaultRequestHeaders.Add("Accept", "application/json");
             });
             services.AddHttpClient<UserService>(configs =>
+            {
+                configs.BaseAddress = new Uri(Configuration["APIServer:BaseAddress"]);
+                configs.DefaultRequestHeaders.Add("Accept", "application/json");
+            });
+            services.AddHttpClient<AuthService>(configs =>
             {
                 configs.BaseAddress = new Uri(Configuration["APIServer:BaseAddress"]);
                 configs.DefaultRequestHeaders.Add("Accept", "application/json");

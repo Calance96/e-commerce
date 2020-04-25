@@ -109,7 +109,7 @@
                                     </div>
                                 </div>
                                 <div class="row my-1">
-                                    @if (Model.OrderDetails.Order.PaymentStatus == AppConstant.PaymentStatus.REFUNDED)
+                                    @if (Model.OrderDetails.Order.PaymentStatus == SD.PaymentStatus.REFUNDED)
                                     {
                                         <div class="col-4">Refunded On</div>
                                     }
@@ -163,30 +163,30 @@
                                     </ul>
 
                                     <br />
-                                    @if (Model.OrderDetails.Order.OrderStatus == AppConstant.OrderStatus.APPROVED)
+                                    @if (Model.OrderDetails.Order.OrderStatus == SD.OrderStatus.APPROVED)
                                     {
                                         <button type="submit" class="btn btn-success form-control mb-2" asp-page-handler="ProcessOrder">
                                             Process Order
                                         </button>
                                     }
-                                    else if (Model.OrderDetails.Order.OrderStatus == AppConstant.OrderStatus.PROCESSING)
+                                    else if (Model.OrderDetails.Order.OrderStatus == SD.OrderStatus.PROCESSING)
                                     {
                                         <button type="submit" class="btn btn-primary form-control mb-2" asp-page-handler="ShipOrder">
                                             Ship Order
                                         </button>
                                     }
 
-                                    @if (Model.OrderDetails.Order.OrderStatus == AppConstant.OrderStatus.SHIPPED)
+                                    @if (Model.OrderDetails.Order.OrderStatus == SD.OrderStatus.SHIPPED)
                                     {
                                         <button type="submit" class="btn btn-primary form-control mb-2" asp-page-handler="CompleteOrder">
                                             Mark Order Complete
                                         </button>
                                     }
 
-                                    @if (Model.OrderDetails.Order.OrderStatus != AppConstant.OrderStatus.CANCELLED ||
-                                Model.OrderDetails.Order.OrderStatus != AppConstant.OrderStatus.REFUNDED ||
-                                Model.OrderDetails.Order.OrderStatus != AppConstant.OrderStatus.SHIPPED ||
-                                Model.OrderDetails.Order.OrderStatus != AppConstant.OrderStatus.COMPLETE)
+                                    @if (Model.OrderDetails.Order.OrderStatus != SD.OrderStatus.CANCELLED ||
+                                Model.OrderDetails.Order.OrderStatus != SD.OrderStatus.REFUNDED ||
+                                Model.OrderDetails.Order.OrderStatus != SD.OrderStatus.SHIPPED ||
+                                Model.OrderDetails.Order.OrderStatus != SD.OrderStatus.COMPLETE)
                                     {
                                         <button type="submit" class="btn btn-danger form-control" asp-page-handler="CancelOrder">
                                             Cancel Order
