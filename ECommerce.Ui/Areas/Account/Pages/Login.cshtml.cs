@@ -47,7 +47,6 @@ namespace ECommerce.Ui.Areas.Account.Pages
 
                 if (user != null)
                 {
-
                     var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, false);
 
                     if (result.Succeeded)
