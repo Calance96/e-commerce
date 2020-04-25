@@ -14,6 +14,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Stripe;
 
 namespace ECommerce.Ui
 {
@@ -49,6 +50,8 @@ namespace ECommerce.Ui
                 configs.LoginPath = "/Account/Login";
                 configs.LogoutPath = "/Account/Logout";
                 configs.AccessDeniedPath = "/AccessDenied";
+                configs.SlidingExpiration = true;
+                configs.ExpireTimeSpan = TimeSpan.FromHours(24);
             });
 
             AddApiAcessServices(services);
@@ -56,6 +59,7 @@ namespace ECommerce.Ui
             services.AddAuthorization(options =>
             {
                 options.AddPolicy("AdminOnly", policy => policy.RequireRole(AppConstant.ROLE_ADMIN));
+                options.AddPolicy("CustomerOnly", policy => policy.RequireRole(AppConstant.ROLE_CUSTOMER));
             });
 
             services.AddRazorPages()
@@ -64,15 +68,18 @@ namespace ECommerce.Ui
                 {
                     options.Conventions.AuthorizeAreaFolder("Admin", "/Category", "AdminOnly");
                     options.Conventions.AuthorizeAreaFolder("Admin", "/Product", "AdminOnly");
-                    options.Conventions.AuthorizeAreaPage("Item", "/Details");
+                    options.Conventions.AuthorizeAreaPage("Item", "/Details", "CustomerOnly");
+                    options.Conventions.AuthorizeAreaPage("Customer", "/ShoppingCart", "CustomerOnly");
                 });
 
             services.AddSession(configs =>
             {
                 configs.IdleTimeout = TimeSpan.FromMinutes(30);
-                configs.Cookie.HttpOnly = true;
+                configs.Cookie.HttpOnly = true; // Mitigate the risk of client side script accessing the protected cookie 
                 configs.Cookie.IsEssential = true;
             });
+
+            services.Configure<StripeConfigs>(Configuration.GetSection("StripeConfigs"));
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -92,6 +99,7 @@ namespace ECommerce.Ui
             app.UseStaticFiles();
 
             app.UseRouting();
+            StripeConfiguration.ApiKey = Configuration["StripeConfigs:SecretKey"];
             app.UseSession();
 
             app.UseAuthentication();
@@ -110,12 +118,22 @@ namespace ECommerce.Ui
                 configs.BaseAddress = new Uri(Configuration["APIServer:BaseAddress"]);
                 configs.DefaultRequestHeaders.Add("Accept", "application/json");
             });
-            services.AddHttpClient<ProductService>(configs =>
+            services.AddHttpClient<Services.ProductService>(configs =>
             {
                 configs.BaseAddress = new Uri(Configuration["APIServer:BaseAddress"]);
                 configs.DefaultRequestHeaders.Add("Accept", "application/json");
             });
             services.AddHttpClient<CartService>(configs =>
+            {
+                configs.BaseAddress = new Uri(Configuration["APIServer:BaseAddress"]);
+                configs.DefaultRequestHeaders.Add("Accept", "application/json");
+            });
+            services.AddHttpClient<Services.OrderService>(configs =>
+            {
+                configs.BaseAddress = new Uri(Configuration["APIServer:BaseAddress"]);
+                configs.DefaultRequestHeaders.Add("Accept", "application/json");
+            });
+            services.AddHttpClient<UserService>(configs =>
             {
                 configs.BaseAddress = new Uri(Configuration["APIServer:BaseAddress"]);
                 configs.DefaultRequestHeaders.Add("Accept", "application/json");
