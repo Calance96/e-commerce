@@ -23,7 +23,7 @@ namespace ECommerce.Ui.Areas.Account.Pages
         {
             HttpContext.Session.Clear();
             await _signInManager.SignOutAsync();
-            return LocalRedirect("/");
+            return RedirectToPage("./Login");
         }
     }
 }
