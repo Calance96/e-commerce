@@ -7,14 +7,16 @@
 @inject UserManager<ApplicationUser> UserManager
 @inject RoleManager<IdentityRole> RoleManager
 
-    <ul class="navbar-nav">
-        @if (SignInManager.IsSignedIn(User))
-        {
-            var count = HttpContextAccessor.HttpContext.Session.GetInt32(AppConstant.CART_SESSION_KEY);
-            var name = HttpContextAccessor.HttpContext.Session.GetString(AppConstant.FULLNAME_SESSION_KEY);
+<ul class="navbar-nav">
+    @if (SignInManager.IsSignedIn(User))
+    {
+        var count = HttpContextAccessor.HttpContext.Session.GetInt32(AppConstant.CART_SESSION_KEY);
+        var name = HttpContextAccessor.HttpContext.Session.GetString(AppConstant.FULLNAME_SESSION_KEY);
 
+        @if (User.IsInRole(AppConstant.ROLE_CUSTOMER))
+        {
             <li style="color:white;">
-                <a href="#" class="nav-link">
+                <a asp-area="Customer" asp-page="/ShoppingCart/Index" class="nav-link">
                     <i class="fas fa-shopping-cart"></i> &nbsp;
                     @if (@count > 0)
                     {
@@ -23,24 +25,33 @@
 
                 </a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link">
-                    Signed in as @(name == null? User.Identity.Name : name)
-                </a>
-            </li>
-            <li class="nav-item">
-                <form class="form-inline" asp-area="Account" asp-page="/Logout" method="post">
-                    <button type="submit" class="nav-link btn btn-link">Logout</button>
-                </form>
-            </li>
         }
-        else
-        {
-            <li class="nav-item">
-                <a class="nav-link" asp-area="Account" asp-page="/Register">Register</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" asp-area="Account" asp-page="/Login">Login</a>
-            </li>
-        }
-    </ul>
+        <li class="nav-item">
+            <a class="nav-link" style="cursor:pointer">
+                @(name == null? User.Identity.Name : name)
+                @if (User.IsInRole(AppConstant.ROLE_ADMIN))
+                {
+                    <span>(Admin)</span>
+                }
+                else
+                {
+                    <span>(Customer)</span>
+                }
+            </a>
+        </li>
+        <li class="nav-item">
+            <form class="form-inline" asp-area="Account" asp-page="/Logout" method="post">
+                <button type="submit" class="nav-link btn btn-link">Logout</button>
+            </form>
+        </li>
+    }
+    else
+    {
+        <li class="nav-item">
+            <a class="nav-link" asp-area="Account" asp-page="/Register">Register</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" asp-area="Account" asp-page="/Login">Login</a>
+        </li>
+    }
+</ul>
