@@ -25,7 +25,7 @@ namespace ECommerce.Models
         public int Quantity { get; set; }
 
         [NotMapped]
-        public double Price { get; set; }
+        public decimal Price { get; set; }
 
         public CartItem()
         {
