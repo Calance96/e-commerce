@@ -18,6 +18,9 @@ namespace ECommerce.Ui.Areas.Admin.Pages.Product
 
         public IEnumerable<Models.Product> Products { get; set; }
 
+        [TempData]
+        public string Message { get; set; }
+
         public async Task OnGet()
         {
             Products = await _productService.GetAll();
@@ -27,7 +30,14 @@ namespace ECommerce.Ui.Areas.Admin.Pages.Product
         {
             try
             {
-                await _productService.Delete(id);
+                var success = await _productService.Delete(id);
+                if (success)
+                {
+                    Message = "successful";
+                } else
+                {
+                    Message = "unsuccessful";
+                }
                 return RedirectToPage("Index");
             }
             catch

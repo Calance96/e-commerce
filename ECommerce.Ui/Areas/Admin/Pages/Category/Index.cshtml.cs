@@ -14,6 +14,9 @@ namespace ECommerce.Ui.Areas.Admin.Pages.Category
 
         public IEnumerable<Models.Category> Categories { get; set; } = new List<Models.Category>();
 
+        [TempData]
+        public string ErrorMessage { get; set; }
+
         public IndexModel(CategoryService categoryService)
         {
             _categoryService = categoryService;
@@ -28,7 +31,11 @@ namespace ECommerce.Ui.Areas.Admin.Pages.Category
         {
             try
             {
-                await _categoryService.Delete(id);
+                var success = await _categoryService.Delete(id);
+                if (!success)
+                {
+                    ErrorMessage = "Category cannot be deleted as there are products belong to this category.";
+                }
                 return RedirectToPage("Index");
             }
             catch
