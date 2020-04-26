@@ -47,5 +47,11 @@ namespace ECommerce.Utility
             public const int OK = 200;
             public const int BAD_REQUEST = 400;
         }
+
+        public static class Policy
+        {
+            public const string ADMIN_ONLY = "AdminOnly";
+            public const string CUSTOMER_ONLY = "CustomerOnly";
+        }
     }
 }
