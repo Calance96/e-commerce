@@ -60,9 +60,14 @@ namespace ECommerce.Ui.Services
             await _httpClient.PostAsync(_route, data);
         }
 
-        public async Task Delete(long id)
+        public async Task<Boolean> Delete(long id)
         {
-            await _httpClient.DeleteAsync($"{_route}/{id}");
+            var response = await _httpClient.DeleteAsync($"{_route}/{id}");
+            if (!response.IsSuccessStatusCode)
+            {
+                return false;
+            }
+            return true;
         }
     }
 }
