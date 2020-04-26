@@ -12,7 +12,8 @@ namespace ECommerce.Models.ViewModels
         public string Email { get; set; }
 
         [Required]
-        [MinLength(6, ErrorMessage = "The password must have be at least 6 character long.")]
+        [DataType(DataType.Password)]
+        [MinLength(6, ErrorMessage = "The password must be at least 6 character long.")]
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
