@@ -33,13 +33,6 @@ namespace ECommerce.Api.Controllers
             _userManager = userManager;
         }
 
-        [HttpGet]
-        [Route("login")]
-        public string CheckAuthApi()
-        {
-            return "Auth API is running normally";
-        }
-
         [HttpPost]
         [Route("login")]
         public async Task<AuthResult> Login(LoginViewModel loginInput)
@@ -80,50 +73,66 @@ namespace ECommerce.Api.Controllers
             }; ;
         }
 
-        //[HttpPost]
-        //[Route("register")]
-        //public async Task<ActionResult<AuthResult>> Register(RegisterViewModel registerInput)
-        //{
-        //    ApplicationUser user = new ApplicationUser
-        //    {
-        //        UserName = registerInput.Email,
-        //        Email = registerInput.Email,
-        //        Address = registerInput.Address,
-        //        Name = registerInput.Name,
-        //        PhoneNumber = registerInput.PhoneNumber,
-        //        Role = registerInput.Role
-        //    };
+        [HttpPost]
+        [Route("register")]
+        public async Task<ActionResult<AuthResult>> Register(RegisterViewModel registerInput)
+        {
+            ApplicationUser user = new ApplicationUser
+            {
+                UserName = registerInput.Email,
+                Email = registerInput.Email,
+                Address = registerInput.Address,
+                Name = registerInput.Name,
+                PhoneNumber = registerInput.PhoneNumber,
+                Role = registerInput.Role
+            };
 
-        //    var createUserResult = await _userManager.CreateAsync(user, registerInput.Password);
+            var createUserResult = await _userManager.CreateAsync(user, registerInput.Password);
 
-        //    if (createUserResult.Succeeded)
-        //    {
-        //        if (!await _roleManager.RoleExistsAsync(SD.ROLE_ADMIN))
-        //        {
-        //            await _roleManager.CreateAsync(new IdentityRole(SD.ROLE_ADMIN));
-        //        }
-        //        if (!await _roleManager.RoleExistsAsync(SD.ROLE_CUSTOMER))
-        //        {
-        //            await _roleManager.CreateAsync(new IdentityRole(SD.ROLE_CUSTOMER));
-        //        }
+            if (createUserResult.Succeeded)
+            {
+                if (!await _roleManager.RoleExistsAsync(SD.ROLE_ADMIN))
+                {
+                    await _roleManager.CreateAsync(new IdentityRole(SD.ROLE_ADMIN));
+                }
+                if (!await _roleManager.RoleExistsAsync(SD.ROLE_CUSTOMER))
+                {
+                    await _roleManager.CreateAsync(new IdentityRole(SD.ROLE_CUSTOMER));
+                }
 
+                await _userManager.AddToRoleAsync(user, user.Role ?? SD.ROLE_CUSTOMER);
 
-        //        await _userManager.AddToRoleAsync(user, user.Role ?? SD.ROLE_CUSTOMER);
+                return await Login(new LoginViewModel
+                {
+                    Email = registerInput.Email,
+                    Password = registerInput.Password,
+                    RememberMe = false
+                });
+            }
+            else
+            {
+                return new AuthResult
+                {
+                    StatusCode = SD.StatusCode.BAD_REQUEST,
+                    Message = new List<string>(createUserResult.Errors.Select(e => e.Description))
+                };
+            }
+        }
 
-        //        return await Login(new LoginViewModel
-        //        {
-        //            Email = registerInput.Email,
-        //            Password = registerInput.Password
-        //        });
-        //    }
-        //    else
-        //    {
-        //        return new AuthResult
-        //        {
-        //            StatusCode = SD.StatusCode.BAD_REQUEST,
-        //            Message = new List<string>(createUserResult.Errors.Select(e => e.Description))
-        //        };
-        //    }
-        //}
+        [HttpPost]
+        [Route("password_change")]
+        public async Task<Boolean> ChangePassword(ChangePasswordModel input)
+        {
+            var user = await _userManager.FindByIdAsync(input.UserId);
+            var changePasswordResult = await _userManager.ChangePasswordAsync(user, input.CurrentPassword, input.NewPassword);
+
+            if (changePasswordResult.Succeeded)
+            {
+                return true;
+            } else
+            {
+                return false;
+            }
+        }
     }
 }
