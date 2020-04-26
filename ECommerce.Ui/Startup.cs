@@ -1,16 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using ECommerce.DataAccess;
-using ECommerce.Models;
+using System.Security.Claims;
 using ECommerce.Ui.Services;
 using ECommerce.Utility;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -29,48 +25,8 @@ namespace ECommerce.Ui
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<ApplicationDbContext>(configs => {
-                configs.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
-            });
-
-            services.AddIdentity<ApplicationUser, IdentityRole>(configs =>
-            {
-                configs.Password.RequiredLength = 6;
-                configs.Password.RequireDigit = false;
-                configs.Password.RequireNonAlphanumeric = false;
-                configs.Password.RequireUppercase = false;
-                configs.Password.RequireLowercase = false;
-            })
-                .AddEntityFrameworkStores<ApplicationDbContext>()
-                .AddDefaultTokenProviders();
-
-            services.ConfigureApplicationCookie(configs =>
-            {
-                configs.Cookie.Name = "EMall.Cookie";
-                configs.LoginPath = "/Account/Login";
-                configs.LogoutPath = "/Account/Logout";
-                configs.AccessDeniedPath = "/AccessDenied";
-                configs.SlidingExpiration = true;
-                configs.ExpireTimeSpan = TimeSpan.FromHours(24);
-            });
-
             AddApiAcessServices(services);
-
-            services.AddAuthorization(options =>
-            {
-                options.AddPolicy("AdminOnly", policy => policy.RequireRole(SD.ROLE_ADMIN));
-                options.AddPolicy("CustomerOnly", policy => policy.RequireRole(SD.ROLE_CUSTOMER));
-            });
-
-            services.AddRazorPages()
-                .AddRazorRuntimeCompilation()
-                .AddRazorPagesOptions(options => 
-                {
-                    options.Conventions.AuthorizeAreaFolder("Admin", "/Category", "AdminOnly");
-                    options.Conventions.AuthorizeAreaFolder("Admin", "/Product", "AdminOnly");
-                    options.Conventions.AuthorizeAreaPage("Item", "/Details", "CustomerOnly");
-                    options.Conventions.AuthorizeAreaPage("Customer", "/ShoppingCart", "CustomerOnly");
-                });
+            services.AddHttpContextAccessor();
 
             services.AddSession(configs =>
             {
@@ -78,6 +34,45 @@ namespace ECommerce.Ui
                 configs.Cookie.HttpOnly = true; // Mitigate the risk of client side script accessing the protected cookie 
                 configs.Cookie.IsEssential = true;
             });
+
+            services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = IdentityConstants.ApplicationScheme;
+                options.DefaultChallengeScheme = IdentityConstants.ApplicationScheme;
+                options.DefaultSignInScheme = IdentityConstants.ExternalScheme;
+            })
+            .AddCookie(IdentityConstants.ApplicationScheme, configs =>
+            {
+                configs.Cookie.Name = "EMall";
+                configs.LoginPath = "/Account/Login";
+                configs.LogoutPath = "/Account/Logout";
+                configs.AccessDeniedPath = "/AccessDenied";
+                configs.SlidingExpiration = true;
+                configs.ExpireTimeSpan = TimeSpan.FromHours(24);
+            });
+
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy(SD.Policy.ADMIN_ONLY, policy => policy.RequireRole(SD.ROLE_ADMIN));
+                options.AddPolicy(SD.Policy.CUSTOMER_ONLY, policy => policy.RequireRole(SD.ROLE_CUSTOMER));
+            });
+
+            services.AddRazorPages()
+                .AddRazorRuntimeCompilation()
+                .AddRazorPagesOptions(options =>
+                {
+                    options.Conventions.AuthorizeAreaFolder("Admin", "/Category", SD.Policy.ADMIN_ONLY);
+                    options.Conventions.AuthorizeAreaFolder("Admin", "/Management", SD.Policy.ADMIN_ONLY);
+                    options.Conventions.AuthorizeAreaFolder("Admin", "/Order", SD.Policy.ADMIN_ONLY);
+                    options.Conventions.AuthorizeAreaFolder("Admin", "/Product", SD.Policy.ADMIN_ONLY);
+
+                    options.Conventions.AuthorizeAreaPage("Customer", "/Order", SD.Policy.CUSTOMER_ONLY);
+                    options.Conventions.AuthorizeAreaPage("Customer", "/Profile", SD.Policy.CUSTOMER_ONLY);
+                    options.Conventions.AuthorizeAreaPage("Customer", "/ShoppingCart", SD.Policy.CUSTOMER_ONLY);
+
+                    options.Conventions.AuthorizeAreaPage("Item", "/Details", SD.Policy.CUSTOMER_ONLY);
+                })
+                .AddSessionStateTempDataProvider();
 
             services.Configure<StripeConfigs>(Configuration.GetSection("StripeConfigs"));
         }
@@ -91,7 +86,6 @@ namespace ECommerce.Ui
             else
             {
                 app.UseExceptionHandler("/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
 
@@ -100,10 +94,11 @@ namespace ECommerce.Ui
 
             app.UseRouting();
             StripeConfiguration.ApiKey = Configuration["StripeConfigs:SecretKey"];
-            app.UseSession();
 
             app.UseAuthentication();
             app.UseAuthorization();
+
+            app.UseSession();
 
             app.UseEndpoints(endpoints =>
             {
