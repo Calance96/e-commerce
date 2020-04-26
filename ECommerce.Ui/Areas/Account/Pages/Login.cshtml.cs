@@ -63,36 +63,16 @@ namespace ECommerce.Ui.Areas.Account.Pages
                             RedirectUri = returnUrl
                         });
 
+                        var cartItemsCount = await _cartService.GetItemsCount(authResult.ApplicationUser.Id);
+
+                        HttpContext.Session.SetInt32(SD.CART_SESSION_KEY, cartItemsCount);
+
                         return LocalRedirect(returnUrl);
                     case SD.StatusCode.NOTFOUND:
                     case SD.StatusCode.BAD_REQUEST:
                         Message = authResult.Message[0];
                         break;
-                       
                 }
-
-                //var user = await _userManager.FindByEmailAsync(Input.Email);
-
-                //if (user != null)
-                //{
-                //    var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, false);
-
-                //    if (result.Succeeded)
-                //    {
-                //        var cartItemsCount = await _cartService.GetItemsCount(user.Id);
-                //        HttpContext.Session.SetInt32(SD.CART_SESSION_KEY, cartItemsCount);
-                //        HttpContext.Session.SetString(SD.FULLNAME_SESSION_KEY, user.Name);
-                //        return LocalRedirect(returnUrl);
-                //    }
-                //    else
-                //    {
-                //        Message = "Incorrect credentials.";
-                //    }
-                //} 
-                //else
-                //{
-                //    Message = "User not found.";
-                //}
             }
             return Page();
         }
