@@ -70,6 +70,10 @@ namespace ECommerce.Api.Controllers
             if (categoryToDelete == null)
             {
                 return NotFound();
+            } 
+            else if (_context.Products.Any(p => p.CategoryId == id))
+            {
+                return BadRequest();
             }
 
             _context.Categories.Remove(categoryToDelete);
