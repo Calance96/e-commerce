@@ -181,7 +181,7 @@
 </div>
 
 @section Scripts {
-    @if (!String.IsNullOrEmpty(Model.ErrorMessage))
+    @if (TempData["ErrorMessage"] != null)
     {
         <script async>
             toastr.options = {
@@ -203,17 +203,12 @@
             }
 
             $(document).ready(function () {
-                toastr.error('@Model.ErrorMessage', 'E-Mall');
-
-                @{
-                    Model.ErrorMessage = "";
-                }
+                toastr.error("@TempData["ErrorMessage"]", 'E-Mall');
             });
-
 
         </script>
     }
-    else if (!String.IsNullOrEmpty(Model.SuccessMessage))
+    else if (TempData["SuccessMessage"] != null)
     {
         <script async>
             $(document).ready(function () {

@@ -32,13 +32,12 @@ namespace ECommerce.Ui.Areas.Account.Pages
         public LoginViewModel Input { get; set; }
 
         [TempData]
-        public string Message { get; set; }
+        public string LoginMessage { get; set; }
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
             returnUrl ??= Url.Content("~/");
 
-            Message = "";
             if (ModelState.IsValid)
             {
                 var authResult = await _authService.Login(Input);
@@ -70,7 +69,7 @@ namespace ECommerce.Ui.Areas.Account.Pages
                         return LocalRedirect(returnUrl);
                     case SD.StatusCode.NOTFOUND:
                     case SD.StatusCode.BAD_REQUEST:
-                        Message = authResult.Message[0];
+                        LoginMessage = authResult.Message[0];
                         break;
                 }
             }

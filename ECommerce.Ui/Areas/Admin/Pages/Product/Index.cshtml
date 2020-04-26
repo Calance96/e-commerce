@@ -108,7 +108,7 @@
     </script>
     @if (TempData["Message"] != null)
     {
-        <script>
+        <script async>
             Swal.fire({
                 icon: 'info',
                 title: 'Operation @TempData["Message"]'

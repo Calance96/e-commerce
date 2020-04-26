@@ -42,9 +42,9 @@
                         </p>
                     </div>
                 </form>
-                @if (!string.IsNullOrEmpty(Model.Message))
+                @if (TempData["LoginMessage"] != null)
                 {
-                    <div class="text-danger text-center mb-3">@Model.Message</div>
+                    <div class="text-danger text-center mb-3">@TempData["LoginMessage"]</div>
                 }
             </section>
         </div>

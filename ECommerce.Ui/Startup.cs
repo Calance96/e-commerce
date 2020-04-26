@@ -35,12 +35,7 @@ namespace ECommerce.Ui
                 configs.Cookie.IsEssential = true;
             });
 
-            services.AddAuthentication(options =>
-            {
-                options.DefaultAuthenticateScheme = IdentityConstants.ApplicationScheme;
-                options.DefaultChallengeScheme = IdentityConstants.ApplicationScheme;
-                options.DefaultSignInScheme = IdentityConstants.ExternalScheme;
-            })
+            services.AddAuthentication(IdentityConstants.ApplicationScheme)
             .AddCookie(IdentityConstants.ApplicationScheme, configs =>
             {
                 configs.Cookie.Name = "EMall";
