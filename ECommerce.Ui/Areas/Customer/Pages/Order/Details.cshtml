@@ -1,6 +1,6 @@
 ﻿@page "{orderId:long}"
 @model ECommerce.Ui.Areas.Customer.Pages.Order.DetailsModel
-@using ECommerce.Utility 
+@using ECommerce.Utility
 @{
     ViewData["Title"] = "Order Details";
 }
@@ -22,12 +22,14 @@
                 <div class="card-body">
                     <div class="container rounded p-2">
                         <div class="row">
-                            <div class="col-12 col-lg-7 pb-4">
+                            <div class="col-12 col-lg-6 pb-4 m-auto border p-3 rounded">
                                 <input type="hidden" asp-for="OrderDetails.Order.Id" />
                                 <div class="row">
-                                    <h4 class="d-flex justify-content-between align-items-center mb-3">
-                                        <span class="text-primary">Order Details:</span>
-                                    </h4>
+                                    <div class="col-12">
+                                        <h4 class="d-flex justify-content-between align-items-center mb-3">
+                                            <span class="text-primary font-weight-bold">Order Details</span>
+                                        </h4>
+                                    </div>
                                 </div>
                                 <div class="row my-1">
                                     <div class="col-4">@Html.DisplayNameFor(m => m.OrderDetails.Order.Id)</div>
@@ -117,44 +119,48 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-12 col-lg-5">
-                                <h4 class="d-flex justify-content-between align-items-center mb-3">
-                                    <span class="text-primary">Order Summary</span>
-                                </h4>
-                                <ul class="list-group mb-3">
-                                    @foreach (var orderItem in Model.OrderDetails.OrderItems)
-                                    {
-                                        <li class="list-group-item d-flex justify-content-between p-2">
+
+                            <div class="col-12 col-lg-6 mx-auto mt-md-3">
+                                <div class="border rounded p-3">
+                                    <h4 class="d-flex justify-content-between align-items-center mb-3">
+                                        <span class="text-primary font-weight-bold">Order Summary</span>
+                                    </h4>
+                                    <ul class="list-group mb-3">
+                                        @foreach (var orderItem in Model.OrderDetails.OrderItems)
+                                        {
+                                            <li class="list-group-item d-flex justify-content-between p-2">
+                                                <div class="row container">
+                                                    <div class="col-7">
+                                                        <h6 class="my-0">@orderItem.Product.Name</h6>
+                                                        <small class="text-muted">Price : RM @orderItem.Price.ToString("N") | </small>
+                                                        <small class="text-muted">Quantity : @orderItem.Quantity</small>
+                                                    </div>
+                                                    <div class="col-5">
+                                                        <p class="text-success font-weight-bold">RM @((orderItem.Quantity * orderItem.Price).ToString("N"))</p>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        }
+                                        <li class="list-group-item bg-light p-2">
                                             <div class="row container">
                                                 <div class="col-7">
-                                                    <h6 class="my-0">@orderItem.Product.Name</h6>
-                                                    <small class="text-muted">Price : RM @orderItem.Price.ToString("N") | </small>
-                                                    <small class="text-muted">Quantity : @orderItem.Quantity</small>
+                                                    <h5 class="font-weight-bold">Total</h5>
                                                 </div>
                                                 <div class="col-5">
-                                                    <p class="text-success font-weight-bold">RM @((orderItem.Quantity * orderItem.Price).ToString("N"))</p>
+                                                    <h5 class="font-weight-bold">RM @Model.OrderDetails.Order.OrderTotal.ToString("N")</h5>
                                                 </div>
                                             </div>
                                         </li>
-                                    }
-                                    <li class="list-group-item bg-light p-2">
-                                        <div class="row container">
-                                            <div class="col-7">
-                                                <h5 class="font-weight-bold">Total</h5>
-                                            </div>
-                                            <div class="col-5">
-                                                <h5 class="font-weight-bold">RM @Model.OrderDetails.Order.OrderTotal.ToString("N")</h5>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
+                                    </ul>
 
-                                @if (Model.OrderDetails.Order.OrderStatus == SD.OrderStatus.SHIPPED)
-                                {
-                                    <button type="submit" class="btn btn-primary form-control mb-2" asp-page-handler="CompleteOrder">
-                                        Mark Order Complete
-                                    </button>
-                                }
+                                    @if (Model.OrderDetails.Order.OrderStatus == SD.OrderStatus.SHIPPED)
+                                    {
+                                        <br/>
+                                        <button type="submit" class="btn btn-primary form-control mb-2" asp-page-handler="CompleteOrder">
+                                            Mark Order Complete
+                                        </button>
+                                    }
+                                </div>
                             </div>
                         </div>
                     </div>
