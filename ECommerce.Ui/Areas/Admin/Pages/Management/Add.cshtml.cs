@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using ECommerce.Models;
 using ECommerce.Models.ViewModels;
+using ECommerce.Ui.Services;
 using ECommerce.Utility;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -13,15 +14,11 @@ namespace ECommerce.Ui.Areas.Admin.Pages.Management
 {
     public class AddModel : PageModel
     {
-        private readonly UserManager<ApplicationUser> _userManager;
-        private readonly SignInManager<ApplicationUser> _signInManager;
-        private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly AuthService _authService;
 
-        public AddModel(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, RoleManager<IdentityRole> roleManager)
+        public AddModel(AuthService authService)
         {
-            _userManager = userManager;
-            _signInManager = signInManager;
-            _roleManager = roleManager;
+            _authService = authService;
         }
 
         [BindProperty]
@@ -31,29 +28,21 @@ namespace ECommerce.Ui.Areas.Admin.Pages.Management
         {
             if (ModelState.IsValid)
             {
-                ApplicationUser user = new ApplicationUser
-                {
-                    UserName = Input.Email,
-                    Email = Input.Email,
-                    Address = Input.Address,
-                    Name = Input.Name,
-                    PhoneNumber = Input.PhoneNumber,
-                    Role = Input.Role
-                };
+                Input.Role = SD.ROLE_ADMIN; 
 
-                var result = await _userManager.CreateAsync(user, Input.Password);
-                if (result.Succeeded)
-                {
-                    var addRoleResult = await _userManager.AddToRoleAsync(user, SD.ROLE_ADMIN);
-                    if (addRoleResult.Succeeded)
-                    {
-                        return RedirectToPage("./Index");
-                    }
-                }
+                var result = await _authService.Register(Input);
 
-                foreach (var error in result.Errors)
+                switch (result.StatusCode)
                 {
-                    ModelState.AddModelError(string.Empty, error.Description);
+                    case SD.StatusCode.OK:
+                        RedirectToPage("./Index");
+                        break;
+                    case SD.StatusCode.BAD_REQUEST:
+                        foreach (var error in result.Message)
+                        {
+                            ModelState.AddModelError(string.Empty, error);
+                        }
+                        break;
                 }
             }
             return Page();
