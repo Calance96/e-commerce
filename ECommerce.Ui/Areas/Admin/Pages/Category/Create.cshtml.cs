@@ -21,6 +21,9 @@ namespace ECommerce.Ui.Areas.Admin.Pages.Category
         [BindProperty]
         public Models.Category Category { get; set; }
 
+        [TempData]
+        public string Message { get; set; }
+
         public async Task<IActionResult> OnPost()
         {
             if (!ModelState.IsValid)
@@ -29,7 +32,7 @@ namespace ECommerce.Ui.Areas.Admin.Pages.Category
             }
 
             await _categoryService.Add(Category);
-
+            Message = "Category added successfully";
             return RedirectToPage("Index");
         }
     }

@@ -18,10 +18,15 @@
             <div class="row p-2">
                 <div class="col-12 p-2" style="border:1px solid #dee2e6 ; border-radius: 5px;">
                     <div class="card" style="border:0px;">
-                        <img src="@product.ImageUrl" class="card-img rounded mb-3" style="object-fit: contain; height: 30vh;"/>
+                        <img src="@product.ImageUrl" class="card-img rounded mb-3" style="object-fit: contain; height: 30vh;" />
                         <div class="pl-1">
-                            <p class="card-title h5"><b style="color: #2c3e50">@product.Name</b></p>
-                            <p class="card-title text-primary"><b>Category: @product.Category.Name</b></p>
+                            <p class="card-title h5"><b style="color: #2c3e50">@(product.Name.Length <= 25? product.Name : product.Name.Substring(0, 26) + "...") </b></p>
+                            <p class="card-title text-primary">
+                                <b>
+                                    Category:
+                                    <span class="badge badge-warning">@product.Category.Name</span>
+                                </b>
+                            </p>
                         </div>
                         <div style="padding-left:5px;">
                             <p><b class="">RM @product.Price.ToString("N")</b></p>
@@ -38,3 +43,18 @@
     }
 </div>
 
+@section Scripts {
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <script async>
+
+            $(document).ready(function () {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'E-Mall',
+                    text: "@TempData["SuccessMessage"]",
+                });
+            });
+        </script>
+    }
+}
