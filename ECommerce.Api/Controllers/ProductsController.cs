@@ -73,7 +73,8 @@ namespace ECommerce.Api.Controllers
                 return NotFound();
             }
 
-            _context.Products.Remove(product);
+            product.IsAvailable = !product.IsAvailable; // Just mark it instead of deleting it
+            _context.Products.Update(product); 
             await _context.SaveChangesAsync();
 
             return NoContent();
