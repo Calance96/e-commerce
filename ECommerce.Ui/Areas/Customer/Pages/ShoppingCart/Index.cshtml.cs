@@ -19,15 +19,12 @@ namespace ECommerce.Ui.Areas.Customer.Pages.ShoppingCart
     {
         private readonly CartService _cartService;
         private readonly Services.OrderService _orderService;
-        private readonly UserManager<ApplicationUser> _userManager;
 
         public ShoppingCartModel(CartService cartService,
-            Services.OrderService orderService,
-            UserManager<ApplicationUser> userManager)
+            Services.OrderService orderService)
         {
             _cartService = cartService;
             _orderService = orderService;
-            _userManager = userManager;
         }
 
         [TempData]

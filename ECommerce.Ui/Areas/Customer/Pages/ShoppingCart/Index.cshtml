@@ -183,7 +183,7 @@
 @section Scripts {
     @if (!String.IsNullOrEmpty(Model.ErrorMessage))
     {
-<script async>
+        <script async>
             toastr.options = {
                 "closeButton": true,
                 "debug": false,
@@ -211,7 +211,7 @@
             });
 
 
-</script>
+        </script>
     }
     else if (!String.IsNullOrEmpty(Model.SuccessMessage))
     {
@@ -228,19 +228,21 @@
                     "showDuration": "300",
                     "hideDuration": "1000",
                     "timeOut": "2000",
-                    "extendedTimeOut": "1000",
+                    "extendedTimeOut": "0",
                     "showEasing": "swing",
                     "hideEasing": "linear",
                     "showMethod": "fadeIn",
-                    "hideMethod": "fadeOut"
+                    "hideMethod": "fadeOut",
+                    "onHidden": redirect,
+                    "onclick" : redirect
                 }
 
-                toastr.success('@Model.SuccessMessage', 'E-Mall');
-
-                @{ 
-                    Model.SuccessMessage = "";
-                }
+                toastr.success("@TempData["SuccessMessage"]", "E-Mall");
             });
+
+            function redirect() {
+                window.location.href = "/Customer/Order/Index";
+            }
         </script>
     }
 }
