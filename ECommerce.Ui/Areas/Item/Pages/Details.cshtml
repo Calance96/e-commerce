@@ -24,9 +24,9 @@
                                 <h5 class="pb-2">RM @Model.CartItem.Product.Price</h5>
                             </div>
                             <div class="row pl-2">
-                                <label class="text-secondary" asp-for="CartItem.Product.Description"></label>:
+                                <label asp-for="CartItem.Product.Description"></label>:
                             </div>
-                            <div class="row pl-2" style="white-space:pre-line; text-align: justify; text-justify: inter-word;">
+                            <div class="row text-secondary pl-2" style="white-space:pre-line; text-align: justify; text-justify: inter-word;">
                                 <p>@Html.Raw(Model.CartItem.Product.Description)</p>
                             </div>
                             <div class="row pl-2 mt-3">
@@ -45,9 +45,18 @@
             <div class="card-footer">
                 <div class="row">
                     <div class="col-12 col-md-6 pb-1">
-                        <button asp-page-handler="AddToCart" type="submit" value="Add to Cart" class="btn btn-primary btn-square btn-lg form-control" style="height:50px;">
-                            Add to Cart
-                        </button>
+                        @if (Model.CartItem.Product.IsAvailable)
+                        {
+                            <button asp-page-handler="AddToCart" type="submit" class="btn btn-primary btn-square btn-lg form-control" style="height:50px;">
+                                Add to Cart
+                            </button>
+                        }
+                        else
+                        {
+                            <button class="btn btn-primary btn-square btn-lg form-control" style="height:50px;" disabled>
+                                Unavailable
+                            </button>
+                        }
                     </div>
                     <div class="col-12 col-md-6 pb-1">
                         <a asp-area="" asp-page="/Index" class="btn btn-danger form-control btn-square btn-lg" style="height:50px;">

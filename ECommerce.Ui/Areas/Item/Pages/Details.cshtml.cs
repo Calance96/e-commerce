@@ -26,6 +26,9 @@ namespace ECommerce.Ui.Areas.Item.Pages
         [BindProperty]
         public CartItem CartItem { get; set; }
 
+        [TempData]
+        public string SuccessMessage { get; set; }
+
         public async Task OnGet(long id)
         {
             Product product = await _productService.GetById(id);
@@ -41,6 +44,10 @@ namespace ECommerce.Ui.Areas.Item.Pages
         {
             if (ModelState.IsValid)
             {
+                var product = await _productService.GetById(CartItem.ProductId); // For the case where user tried
+                if (!product.IsAvailable)                                        // to modify the HTML and add
+                    return RedirectToPage();                                     // unavailable item to cart
+
                 var claimsIdentity = (ClaimsIdentity)User.Identity;
                 var currentUserId = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
                 CartItem.UserId = currentUserId.Value;
@@ -58,12 +65,11 @@ namespace ECommerce.Ui.Areas.Item.Pages
                 }
 
                 var cartItemsCount = await _cartService.GetItemsCount(currentUserId.Value);
-
                 HttpContext.Session.SetInt32(SD.CART_SESSION_KEY, cartItemsCount);
-
+                SuccessMessage = "Item added to cart successfully!";
                 return LocalRedirect("/");
             }
-            return Page();
+            return RedirectToPage();
         }
     }
 }
