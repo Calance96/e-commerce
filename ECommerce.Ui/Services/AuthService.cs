@@ -36,15 +36,33 @@ namespace ECommerce.Ui.Services
             return authResult;
         }
 
-        //public async Task<AuthResult> Register(RegisterViewModel registerInput)
-        //{
-        //    var data = new StringContent(JsonSerializer.Serialize<RegisterViewModel>(registerInput), Encoding.UTF8, SD.CONTENT_JSON);
-        //    var response = await _httpClient.PostAsync($"{_route}/register", data);
+        public async Task<AuthResult> Register(RegisterViewModel registerInput)
+        {
+            var data = new StringContent(JsonSerializer.Serialize<RegisterViewModel>(registerInput), Encoding.UTF8, SD.CONTENT_JSON);
+            var response = await _httpClient.PostAsync($"{_route}/register", data);
 
-        //    response.EnsureSuccessStatusCode();
+            response.EnsureSuccessStatusCode();
 
-        //    var authResult = await JsonSerializer.DeserializeAsync<AuthResult>(await response.Content.ReadAsStreamAsync(), new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
-        //    return authResult;
-        //}
+            var authResult = await JsonSerializer.DeserializeAsync<AuthResult>(await response.Content.ReadAsStreamAsync(), new JsonSerializerOptions 
+            { 
+                PropertyNameCaseInsensitive = true 
+            });
+            return authResult;
+        }
+
+        public async Task<Boolean> ChangePassword(ChangePasswordModel changePasswordInput)
+        {
+            var data = new StringContent(JsonSerializer.Serialize<ChangePasswordModel>(changePasswordInput), Encoding.UTF8, SD.CONTENT_JSON);
+            var response = await _httpClient.PostAsync($"{_route}/password_change", data);
+
+            response.EnsureSuccessStatusCode();
+
+            var result = await JsonSerializer.DeserializeAsync<Boolean>(await response.Content.ReadAsStreamAsync(), new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true
+            });
+
+            return result;
+        }
     }
 }
