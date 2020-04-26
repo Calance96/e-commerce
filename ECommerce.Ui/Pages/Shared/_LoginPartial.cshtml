@@ -1,14 +1,19 @@
-﻿@using Microsoft.AspNetCore.Identity
-@using ECommerce.Models
+﻿@using System.Security.Claims 
 @using Microsoft.AspNetCore.Http
 @using ECommerce.Utility
+@using ECommerce.Ui.Services
 @inject IHttpContextAccessor HttpContextAccessor
+@inject CartService CartService
 
 <ul class="navbar-nav">
     @if (HttpContextAccessor.HttpContext.User.Identity.IsAuthenticated)
     {
+
         var count = HttpContextAccessor.HttpContext.Session.GetInt32(SD.CART_SESSION_KEY);
-        var name = HttpContextAccessor.HttpContext.Session.GetString(SD.FULLNAME_SESSION_KEY);
+        if (count == null)
+        {
+            count = await CartService.GetItemsCount(User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier).Value);
+        }
 
         @if (User.IsInRole(SD.ROLE_CUSTOMER))
         {
@@ -25,7 +30,7 @@
         }
         <li class="nav-item">
             <a class="nav-link" style="cursor:pointer">
-                @(name == null? User.Identity.Name : name)
+                @User.Identity.Name
                 @if (User.IsInRole(SD.ROLE_ADMIN))
                 {
                     <span>(Admin)</span>
