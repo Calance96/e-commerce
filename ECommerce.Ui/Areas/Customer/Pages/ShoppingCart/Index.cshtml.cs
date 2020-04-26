@@ -137,7 +137,7 @@ namespace ECommerce.Ui.Areas.Customer.Pages.ShoppingCart
                         var chargeService = new ChargeService();
                         Charge charge = chargeService.Create(chargeOptions);
 
-                        if (charge.BalanceTransactionId == null)
+                        if (charge.Id == null)
                         {
                             newOrder.PaymentStatus = SD.PaymentStatus.REJECTED;
                         }
