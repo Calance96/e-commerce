@@ -28,6 +28,12 @@ namespace ECommerce.Ui.Areas.Admin.Pages.Management
 
         public List<SelectListItem> SearchCriteria { get; set; }
 
+        [TempData]
+        public string UserLockSuccessMessage { get; set; }
+
+        [TempData]
+        public string UserLockFailMessage { get; set; }
+
         public async Task OnGetAsync(string searchString, string searchCriterion, string role, int? pageIndex)
         {
             RoleFilter = role ?? "all";
@@ -69,6 +75,33 @@ namespace ECommerce.Ui.Areas.Admin.Pages.Management
                     Selected = (SearchCriterion == "Name" ? true : false)
                 }
             };
+        }
+
+        public async Task<ActionResult> OnPostLockunlockAsync(string userId, string searchString, string searchCriterion, int pageIndex)
+        {
+            var user = await _userService.GetUserById(userId);
+
+            if (user != null)
+            {
+                if (user.LockoutEnd == null)
+                {
+                    user.LockoutEnd = DateTime.Now.AddYears(10);
+                    UserLockSuccessMessage = $"User {user.Name} has been locked until {DateTime.Parse(user.LockoutEnd.ToString()).ToShortDateString()}.";
+                }
+                else
+                {
+                    user.LockoutEnd = null;
+                    UserLockSuccessMessage = $"User {user.Name} has been unlocked.";
+                }
+                await _userService.Update(user);
+                
+                
+            } 
+            else
+            {
+                UserLockFailMessage = $"Error locking out {user.Name}";
+            }
+            return RedirectToPage("Index", new { role = SD.ROLE_CUSTOMER, searchString, searchCriterion, pageIndex});
         }
     }
 }

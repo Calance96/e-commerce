@@ -45,6 +45,12 @@ namespace ECommerce.Ui.Areas.Account.Pages
                 switch (authResult.StatusCode)
                 {
                     case SD.StatusCode.OK:
+                        if (authResult.ApplicationUser.LockoutEnd != null)
+                        {
+                            LoginMessage = "Your account has been locked out due to possible illegal actions. Please contact E-Mall for more information.";
+                            return RedirectToPage();
+                        }
+
                         var claims = new List<Claim>
                         {
                             new Claim(ClaimTypes.NameIdentifier, authResult.ApplicationUser.Id),
