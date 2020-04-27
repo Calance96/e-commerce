@@ -69,10 +69,9 @@ namespace ECommerce.Ui.Areas.Admin.Pages.Product
                 {
                     await files[0].CopyToAsync(fileStream);
                 }
-                ProductVM.Product.IsAvailable = true;
                 ProductVM.Product.ImageUrl = @"\images\products\" + filename + extension;
             }
-
+            ProductVM.Product.IsAvailable = true;
             await _productService.Add(ProductVM.Product);
             return RedirectToPage("Index");
         }
