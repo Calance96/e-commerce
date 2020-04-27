@@ -36,19 +36,21 @@ namespace ECommerce.Ui.Areas.Admin.Pages.Product
             CategoryFilter = category ?? "All";
             SearchTerm = searchString ?? "";
 
-            Categories = (await _categoryService.GetAll()).Select(x => new SelectListItem
+            Categories = new List<SelectListItem> {
+                new SelectListItem
+                {
+                    Text = "All",
+                    Value = "All",
+                    Selected = (CategoryFilter == "All" ? true : false)
+                } 
+            };
+
+            Categories.AddRange((await _categoryService.GetAll()).Select(x => new SelectListItem
             {
                 Text = x.Name,
                 Value = x.Name,
                 Selected = (x.Name == category ? true : false)
-            }).ToList();
-
-            Categories.Add(new SelectListItem
-            {
-                Text = "All",
-                Value = "All",
-                Selected = (CategoryFilter == "All" ? true : false)
-            });
+            }).ToList());
 
             if (!string.IsNullOrEmpty(SearchTerm))
             {
@@ -72,7 +74,8 @@ namespace ECommerce.Ui.Areas.Admin.Pages.Product
                 if (success)
                 {
                     Message = "successful";
-                } else
+                }
+                else
                 {
                     Message = "unsuccessful";
                 }

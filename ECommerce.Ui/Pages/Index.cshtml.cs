@@ -32,22 +32,32 @@ namespace ECommerce.Ui.Pages
         public async Task OnGet(string searchString, int? pageIndex, string category)
         {
             var ProductsFromDb = await _productService.GetAll();
-            Categories = (await _categoryService.GetAll()).Select(x => new SelectListItem
+            CategoryFilter = category ?? "";
+
+            Categories = new List<SelectListItem> {
+                new SelectListItem {
+                    Text = "All",
+                    Value = "",
+                    Selected = (CategoryFilter == "" ? true : false)                    
+                }
+            };
+
+            Categories.AddRange((await _categoryService.GetAll()).Select(x => new SelectListItem
             {
                 Text = x.Name,
                 Value = x.Name,
-                Selected = (x.Name == category? true : false)
-            }).ToList(); 
+                Selected = (x.Name == category ? true : false)
+            }).ToList());
 
             if (!string.IsNullOrEmpty(searchString))
             {
-                SearchTerm = searchString.ToLower();
-                ProductsFromDb = ProductsFromDb.Where(p => p.Name.ToLower().Contains(SearchTerm));
+                SearchTerm = searchString;
+                searchString = SearchTerm.ToLower();
+                ProductsFromDb = ProductsFromDb.Where(p => p.Name.ToLower().Contains(searchString));
             }
 
-            if (!string.IsNullOrEmpty(category))
+            if (!string.IsNullOrEmpty(CategoryFilter))
             {
-                CategoryFilter = category;
                 ProductsFromDb = ProductsFromDb.Where(p => p.Category.Name == category);
             }
 
