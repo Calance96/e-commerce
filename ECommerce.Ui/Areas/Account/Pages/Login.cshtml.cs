@@ -47,7 +47,7 @@ namespace ECommerce.Ui.Areas.Account.Pages
                     case SD.StatusCode.OK:
                         if (authResult.ApplicationUser.LockoutEnd != null)
                         {
-                            LoginMessage = "Your account has been locked out due to possible illegal actions. Please contact E-Mall for more information.";
+                            LoginMessage = "Your account has been suspended due to possible violation of E-Mall rules and regulations. Please contact E-Mall for more information.";
                             return RedirectToPage();
                         }
 

@@ -44,8 +44,10 @@ namespace ECommerce.Ui
                 configs.AccessDeniedPath = "/AccessDenied";
                 configs.SlidingExpiration = true;
                 configs.ExpireTimeSpan = TimeSpan.FromHours(24);
+                configs.EventsType = typeof(CustomCookieAuthenticationEvents);
             });
 
+            services.AddScoped<CustomCookieAuthenticationEvents>();
             services.AddAuthorization(options =>
             {
                 options.AddPolicy(SD.Policy.ADMIN_ONLY, policy => policy.RequireRole(SD.ROLE_ADMIN));
