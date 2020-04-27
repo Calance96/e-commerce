@@ -67,35 +67,39 @@
             }
         </div>
 
-        <div class="my-2">
-            @{
-                var prevDisabled = !Model.Products.HasPreviousPage ? "disabled" : "";
-                var nextDisabled = !Model.Products.HasNextPage ? "disabled" : "";
-            }
-            <ul class="justify-content-center pagination">
-                <li class="page-item @prevDisabled">
-                    <a asp-page="./Index"
-                       asp-route-pageIndex="@(Model.Products.PageIndex - 1)"
-                       asp-route-searchString="@Model.SearchTerm"
-                       class="page-link bg-primary">
-                        <span>&lt;</span>
-                    </a>
-                </li>
-                <li class="page-item text-black">
-                    <span class="page-link bg-primary">
-                        @(Model.Products.PageIndex) / @(Model.Products.TotalPages)
-                    </span>
-                </li>
-                <li class="page-item @nextDisabled">
-                    <a asp-page="./Index"
-                       asp-route-pageIndex="@(Model.Products.PageIndex + 1)"
-                       asp-route-searchString="@Model.SearchTerm"
-                       class="page-link bg-primary">
-                        <span>&gt;</span>
-                    </a>
-                </li>
-            </ul>
-        </div>
+        @if (Model.Products.TotalPages > 1)
+        {
+
+            <div class="my-2">
+                @{
+                    var prevDisabled = !Model.Products.HasPreviousPage ? "disabled" : "";
+                    var nextDisabled = !Model.Products.HasNextPage ? "disabled" : "";
+                }
+                <ul class="justify-content-center pagination">
+                    <li class="page-item @prevDisabled">
+                        <a asp-page="./Index"
+                           asp-route-pageIndex="@(Model.Products.PageIndex - 1)"
+                           asp-route-searchString="@Model.SearchTerm"
+                           class="page-link bg-primary">
+                            <span>&lt;</span>
+                        </a>
+                    </li>
+                    <li class="page-item text-black">
+                        <span class="page-link bg-primary">
+                            @(Model.Products.PageIndex) / @(Model.Products.TotalPages)
+                        </span>
+                    </li>
+                    <li class="page-item @nextDisabled">
+                        <a asp-page="./Index"
+                           asp-route-pageIndex="@(Model.Products.PageIndex + 1)"
+                           asp-route-searchString="@Model.SearchTerm"
+                           class="page-link bg-primary">
+                            <span>&gt;</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        }
     }
 </div>
 

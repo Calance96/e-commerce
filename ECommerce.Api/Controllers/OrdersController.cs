@@ -35,7 +35,7 @@ namespace ECommerce.Api.Controllers
             return orders;
         }
 
-        [HttpGet("{userId}/{status}")]
+        [HttpGet("user/{userId}/{status}")]
         public async Task<IEnumerable<Order>> GetAllOrdersForUserById(string userId, string status)
         {
             IEnumerable<Order> orders = await _context.Orders

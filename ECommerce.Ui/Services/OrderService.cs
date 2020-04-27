@@ -38,7 +38,7 @@ namespace ECommerce.Ui.Services
 
         public async Task<IEnumerable<Order>> GetAllOrdersForUserId(string userId, string status)
         {
-            var response = await _httpClient.GetAsync($"{_route}/{userId}/{status}");
+            var response = await _httpClient.GetAsync($"{_route}/user/{userId}/{status}");
             response.EnsureSuccessStatusCode();
 
             var orders = await JsonSerializer.DeserializeAsync<IEnumerable<Order>>(
