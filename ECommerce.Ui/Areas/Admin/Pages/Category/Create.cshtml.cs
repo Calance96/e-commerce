@@ -32,7 +32,7 @@ namespace ECommerce.Ui.Areas.Admin.Pages.Category
             }
 
             await _categoryService.Add(Category);
-            Message = "Category added successfully";
+            Message = "Category added successfully.";
             return RedirectToPage("Index");
         }
     }
