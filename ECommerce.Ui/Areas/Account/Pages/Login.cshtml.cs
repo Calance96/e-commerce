@@ -58,7 +58,7 @@ namespace ECommerce.Ui.Areas.Account.Pages
                         var claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
                         await HttpContext.SignInAsync(IdentityConstants.ApplicationScheme, new ClaimsPrincipal(claimsIdentity), new AuthenticationProperties
                         {
-                            IsPersistent = true,
+                            IsPersistent = Input.RememberMe,
                             RedirectUri = returnUrl
                         });
 
