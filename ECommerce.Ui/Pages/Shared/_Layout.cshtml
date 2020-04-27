@@ -37,6 +37,9 @@
                         </li>
                         @if (User.IsInRole(SD.ROLE_ADMIN))
                         {
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="Admin" asp-page="/Order/Index">Orders</a>
+                            </li>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Content Management
@@ -47,13 +50,9 @@
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" asp-area="Admin" asp-page="/Product/Index">Products</a>
                                 </div>
-
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" asp-area="Admin" asp-page="/Order/Index">Orders</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" asp-area="Admin" asp-page="/Management/Index">Admin Management</a>
+                                <a class="nav-link" asp-area="Admin" asp-page="/Management/Index">Users Management</a>
                             </li>
                         }
                         else if (User.IsInRole(SD.ROLE_CUSTOMER))
