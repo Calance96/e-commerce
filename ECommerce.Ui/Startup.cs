@@ -50,6 +50,7 @@ namespace ECommerce.Ui
             {
                 options.AddPolicy(SD.Policy.ADMIN_ONLY, policy => policy.RequireRole(SD.ROLE_ADMIN));
                 options.AddPolicy(SD.Policy.CUSTOMER_ONLY, policy => policy.RequireRole(SD.ROLE_CUSTOMER));
+                options.AddPolicy(SD.Policy.AUTHENTICATED_ONLY, policy => policy.RequireAuthenticatedUser());
             });
 
             services.AddRazorPages()
@@ -62,10 +63,10 @@ namespace ECommerce.Ui
                     options.Conventions.AuthorizeAreaFolder("Admin", "/Product", SD.Policy.ADMIN_ONLY);
 
                     options.Conventions.AuthorizeAreaPage("Customer", "/Order", SD.Policy.CUSTOMER_ONLY);
-                    options.Conventions.AuthorizeAreaPage("Customer", "/Profile", SD.Policy.CUSTOMER_ONLY);
                     options.Conventions.AuthorizeAreaPage("Customer", "/ShoppingCart", SD.Policy.CUSTOMER_ONLY);
-
                     options.Conventions.AuthorizeAreaPage("Item", "/Details", SD.Policy.CUSTOMER_ONLY);
+
+                    options.Conventions.AuthorizeAreaFolder("Account", "/Profile", SD.Policy.AUTHENTICATED_ONLY);
                 })
                 .AddSessionStateTempDataProvider();
 

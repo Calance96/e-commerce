@@ -52,6 +52,7 @@ namespace ECommerce.Utility
         {
             public const string ADMIN_ONLY = "AdminOnly";
             public const string CUSTOMER_ONLY = "CustomerOnly";
+            public const string AUTHENTICATED_ONLY = "AuthenticatedOnly";
         }
     }
 }

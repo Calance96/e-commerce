@@ -7,7 +7,7 @@ using ECommerce.Ui.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace ECommerce.Ui.Areas.Customer.Pages.Profile
+namespace ECommerce.Ui.Areas.Account.Pages.Profile
 {
     public class ChangePasswordModel : PageModel
     {
