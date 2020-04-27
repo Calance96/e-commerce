@@ -45,5 +45,25 @@ namespace ECommerce.Api.Controllers
 
             return users;
         }
+
+        [HttpGet("info/{userId}")]
+        public async Task<ActionResult<ApplicationUser>> Get(string userId)
+        {
+            var user = await _context.ApplicationUsers.FindAsync(userId);
+
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            return user;
+        }
+
+        [HttpPut]
+        public async Task Update(ApplicationUser user)
+        {
+            _context.ApplicationUsers.Update(user);
+            await _context.SaveChangesAsync();
+        }
     }
 }
