@@ -31,36 +31,25 @@ namespace ECommerce.Ui.Areas.Admin.Pages.Order
 
         public async Task OnGetAsync(string searchString, string searchCriterion, string status, int? pageIndex)
         {
-            if (!string.IsNullOrEmpty(status))
-            {
-                StatusFilter = status;
-            } else
-            {
-                StatusFilter = "All";
-            }
-
-            if (!string.IsNullOrEmpty(searchString))
-            {
-                SearchTerm = searchString;
-            }
-
-            if (!string.IsNullOrEmpty(searchCriterion))
-            {
-                SearchCriterion = searchCriterion;
-            }
+            StatusFilter = status ?? "All";
+            SearchTerm = searchString ?? "";
 
             var OrdersFromDb = await _orderService.GetAllOrders(StatusFilter);
             
             SearchCriteria = GetSearchCriteriaList();
 
-            switch (searchCriterion)
+            if (!string.IsNullOrEmpty(searchCriterion))
             {
-                case "OrderID":
-                    OrdersFromDb = OrdersFromDb.Where(o => o.Id.ToString() == searchString);
-                    break;
-                case "Customer":
-                    OrdersFromDb = OrdersFromDb.Where(o => o.Name.ToLower().Contains(searchString.ToLower()));
-                    break;
+                SearchCriterion = searchCriterion;
+                switch (searchCriterion)
+                {
+                    case "OrderID":
+                        OrdersFromDb = OrdersFromDb.Where(o => o.Id.ToString() == searchString);
+                        break;
+                    case "Customer":
+                        OrdersFromDb = OrdersFromDb.Where(o => o.Name.ToLower().Contains(searchString.ToLower()));
+                        break;
+                }
             }
 
             int pageSize = 10;

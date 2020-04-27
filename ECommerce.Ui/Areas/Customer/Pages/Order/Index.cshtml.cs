@@ -26,20 +26,12 @@ namespace ECommerce.Ui.Areas.Customer.Pages.Order
 
         public string StatusFilter { get; set; }
 
-
         public async Task OnGet(string searchString, string status, int? pageIndex)
         {
             var claimsIdentity = (ClaimsIdentity)User.Identity;
             var userId = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier).Value;
 
-            if (!string.IsNullOrEmpty(status))
-            {
-                StatusFilter = status;
-            }
-            else
-            {
-                StatusFilter = "All";
-            }
+            StatusFilter = status ?? "All";
 
             var OrdersFromDb = await _orderService.GetAllOrdersForUserId(userId, StatusFilter);
 
