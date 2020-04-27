@@ -25,41 +25,42 @@
                         <li class="nav-item">
                             <a class="nav-link" asp-area="" asp-page="/Index">Home</a>
                         </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Profile
-                            </a>
-
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" asp-area="Account" asp-page="/Profile/ChangePassword">Change Password</a>
-                            </div>
-
-                        </li>
-                        @if (User.IsInRole(SD.ROLE_ADMIN))
+                        @if (User.Identity.IsAuthenticated)
                         {
-                            <li class="nav-item">
-                                <a class="nav-link" asp-area="Admin" asp-page="/Order/Index">Orders</a>
-                            </li>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Content Management
+                                    Profile
                                 </a>
-
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" asp-area="Admin" asp-page="/Category/Index">Categories</a>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" asp-area="Admin" asp-page="/Product/Index">Products</a>
+                                    <a class="dropdown-item" asp-area="Account" asp-page="/Profile/ChangePassword">Change Password</a>
                                 </div>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" asp-area="Admin" asp-page="/Management/Index">Users Management</a>
-                            </li>
-                        }
-                        else if (User.IsInRole(SD.ROLE_CUSTOMER))
-                        {
-                            <li class="nav-item">
-                                <a class="nav-link" asp-area="Customer" asp-page="/Order/Index">Orders</a>
-                            </li>
+                            @if (User.IsInRole(SD.ROLE_ADMIN))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-area="Admin" asp-page="/Order/Index">Orders</a>
+                                </li>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Content Management
+                                    </a>
+
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item" asp-area="Admin" asp-page="/Category/Index">Categories</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" asp-area="Admin" asp-page="/Product/Index">Products</a>
+                                    </div>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-area="Admin" asp-page="/Management/Index">Users Management</a>
+                                </li>
+                            }
+                            else if (User.IsInRole(SD.ROLE_CUSTOMER))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-area="Customer" asp-page="/Order/Index">Orders</a>
+                                </li>
+                            }
                         }
                     </ul>
                 </div>
