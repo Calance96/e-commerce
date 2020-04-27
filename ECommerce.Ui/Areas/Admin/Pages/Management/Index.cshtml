@@ -25,8 +25,8 @@
 }
 
 <br />
-<form method="post">
-    <div class="p-4 border rounded">
+<div class="p-4 border rounded">
+    <form method="post">
         <div class="row mb-3">
             <div class="col-4">
                 <h2 class="text-primary">Users List</h2>
@@ -50,13 +50,42 @@
                     </a>
                 </ul>
             </div>
-            <div class="col-4 text-right">
-                <a asp-page="./Add" class="btn btn-primary text-white">
-                    <i class="fas fa-plus"></i>&nbsp; Add New Admin
-                </a>
+            @if (Model.RoleFilter != SD.ROLE_CUSTOMER)
+            {
+                <div class="col-4 text-right">
+                    <a asp-page="./Add" class="btn btn-primary text-white">
+                        <i class="fas fa-plus"></i>&nbsp; Add New Admin
+                    </a>
+                </div>
+            }
+        </div>
+    </form>
+
+    <hr />
+
+    <form method="GET" asp-page="./Index">
+        <input type="hidden" name="role" value="@Model.RoleFilter" />
+        <div class="row">
+            <div class="col-9 input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text bg-primary"><i class="fas fa-search text-white"></i></span>
+                </div>
+                <input name="searchString" type="text" class="form-control" placeholder="Search user" value="@Model.SearchTerm" />
+                <div class="input-group-append">
+                    @if (!string.IsNullOrEmpty(Model.SearchTerm))
+                    {
+                        <a asp-page="./Index" class="btn btn-danger">Clear</a>
+                    }
+                    <input type="submit" value="Search" class="btn btn-success" />
+                </div>
+            </div>
+            <div class="col-3">
+                <select class="form-control" name="searchCriterion" asp-items="Model.SearchCriteria"></select>
             </div>
         </div>
+    </form>
 
+    <form method="post">
         <table class="table table-striped table-bordered" style="width:100%">
             <thead class="thead-dark">
                 <tr class="table-info">
@@ -105,5 +134,39 @@
                 }
             </tbody>
         </table>
-    </div>
-</form>
+    </form>
+
+    @if (Model.Users.Count() > 0 && Model.Users.TotalPages > 1)
+    {
+        <div class="my-2">
+            @{
+                var prevDisabled = !Model.Users.HasPreviousPage ? "disabled" : "";
+                var nextDisabled = !Model.Users.HasNextPage ? "disabled" : "";
+            }
+            <ul class="justify-content-end pagination">
+                <li class="page-item @prevDisabled">
+                    <a asp-page="./Index"
+                       asp-route-pageIndex="@(Model.Users.PageIndex - 1)"
+                       asp-route-searchString="@Model.SearchTerm"
+                       class="page-link bg-primary">
+                        <span>&lt;</span>
+                    </a>
+                </li>
+                <li class="page-item text-black">
+                    <span class="page-link bg-primary">
+                        @(Model.Users.PageIndex) / @(Model.Users.TotalPages)
+                    </span>
+                </li>
+                <li class="page-item @nextDisabled">
+                    <a asp-page="./Index"
+                       asp-route-pageIndex="@(Model.Users.PageIndex + 1)"
+                       asp-route-searchString="@Model.SearchTerm"
+                       class="page-link bg-primary">
+                        <span>&gt;</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    }
+
+</div>
