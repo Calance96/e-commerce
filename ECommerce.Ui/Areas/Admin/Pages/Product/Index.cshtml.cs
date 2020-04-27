@@ -62,11 +62,11 @@ namespace ECommerce.Ui.Areas.Admin.Pages.Product
                 ProductsFromDb = ProductsFromDb.Where(p => p.Category.Name == category);
             }
 
-            int pageSize = 10;
+            int pageSize = 8;
             Products = await PaginatedList<Models.Product>.CreateAsync(ProductsFromDb.AsQueryable<Models.Product>(), pageIndex ?? 1, pageSize);
         }
 
-        public async Task<IActionResult> OnPostDelete(long id)
+        public async Task<IActionResult> OnPostDelete(long id, string searchString, string category, int pageIndex)
         {
             try
             {
@@ -79,7 +79,7 @@ namespace ECommerce.Ui.Areas.Admin.Pages.Product
                 {
                     Message = "unsuccessful";
                 }
-                return RedirectToPage("Index");
+                return RedirectToPage("Index", new { searchString, category, pageIndex });
             }
             catch
             {

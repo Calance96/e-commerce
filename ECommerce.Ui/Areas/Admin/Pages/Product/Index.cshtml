@@ -78,7 +78,7 @@
                         </td>
                         <td>
                             <div class="text-center">
-                                <form id='form_@product.Id' method="post" asp-page-handler="Delete" asp-route-id="@product.Id">
+                                <form id='form_@product.Id' method="post" asp-page-handler="Delete" asp-route-id="@product.Id" asp-route-searchString="@Model.SearchTerm" asp-route-category="@Model.CategoryFilter" asp-route-pageIndex="@Model.Products.PageIndex">
                                     <a class="btn btn-primary text-white" asp-page="Edit" asp-route-id="@product.Id" style="cursor:pointer">
                                         <i class="far fa-edit fa-lg"></i>
                                     </a>
