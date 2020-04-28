@@ -84,12 +84,12 @@
                                     </a>
                                     @if (product.IsAvailable)
                                     {
-                                        <button type="submit" onclick="showDeleteConfirmation('@product.Id', '@product.Name')" class="btn btn-danger text-white" title="Mark unavailable" style="cursor:pointer">
+                                        <button type="submit" onclick="showDeleteConfirmation('@product.Id', '@product.Name.Replace("'", "\\'").Replace("\"", "\\\"")')" class="btn btn-danger text-white" title="Mark unavailable" style="cursor:pointer">
                                             <i class="far fa-times-circle fa-lg"></i>
                                         </button>}
                                     else
                                     {
-                                        <button type="submit" onclick="showDeleteConfirmation('@product.Id', '@product.Name')" class="btn btn-success text-white" title="Mark available" style="cursor:pointer">
+                                        <button type="submit" onclick="showDeleteConfirmation('@product.Id', '@product.Name.Replace("'", "\\'").Replace("\"", "\\\"")')" class="btn btn-success text-white" title="Mark available" style="cursor:pointer">
                                             <i class="far fa-check-circle fa-lg"></i>
                                         </button>
                                     }

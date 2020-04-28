@@ -41,7 +41,7 @@
                                     <a class="btn btn-success text-white" asp-page="Edit" asp-route-id="@category.Id" style="cursor:pointer">
                                         <i class="far fa-edit"></i>&nbsp; Edit
                                     </a>
-                                    <button type="submit" onclick="showDeleteConfirmation('@category.Name')" class="btn btn-danger text-white" style="cursor:pointer">
+                                    <button type="submit" onclick="showDeleteConfirmation('@category.Name.Replace("'", "\\'").Replace("\"", "\\\"")')" class="btn btn-danger text-white" style="cursor:pointer">
                                         <i class="fas fa-trash"></i>&nbsp; Delete
                                     </button>
                                 </form>

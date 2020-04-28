@@ -127,7 +127,7 @@
                                     @if (user.LockoutEnd == null)
                                     {
                                         <div class="text-center">
-                                            <button type="submit" onclick='showLockUnlockConfirm("@user.Name", "@user.Id", "lock")'  class="btn btn-danger text-white" style="cursor:pointer">
+                                            <button type="submit" onclick="showLockUnlockConfirm('@user.Name.Replace("'", "\\'").Replace("\"", "\\\"")', '@user.Id.Replace("'", "\\'").Replace("\"", "\\\"")', 'lock')"  class="btn btn-danger text-white" style="cursor:pointer">
                                                 <i class="fas fa-lock"></i>
                                             </button>
                                         </div>
@@ -135,7 +135,7 @@
                                     else
                                     {
                                         <div class="text-center">
-                                            <button type="submit" onclick='showLockUnlockConfirm("@user.Name", "@user.Id", "unlock")' class="btn btn-success text-white" style="cursor:pointer">
+                                            <button type="submit" onclick="showLockUnlockConfirm('@user.Name.Replace("'", "\\'").Replace("\"", "\\\"")', '@user.Id.Replace("'", "\\'").Replace("\"", "\\\"")', 'unlock')" class="btn btn-success text-white" style="cursor:pointer">
                                                 <i class="fas fa-unlock"></i>
                                             </button>
                                         </div>
@@ -215,7 +215,7 @@
             Swal.fire({
                 icon: 'error',
                 title: 'Admin Operation',
-                text: "@TempData["UserLockFailMessage"]"
+                text: '@TempData["UserLockFailMessage"]'.replace("\&#x27;", "\'").replace("\&quot;", "\"")
             });
         </script>
     }
@@ -225,7 +225,7 @@
             Swal.fire({
                 icon: 'success',
                 title: 'Admin Operation',
-                text: "@TempData["UserLockSuccessMessage"]"
+                text: '@TempData["UserLockSuccessMessage"]'.replace("\&#x27;", "\'").replace("\&quot;", "\"")
             });
         </script>
     }
