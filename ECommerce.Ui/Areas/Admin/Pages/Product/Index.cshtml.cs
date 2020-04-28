@@ -21,9 +21,12 @@ namespace ECommerce.Ui.Areas.Admin.Pages.Product
             _categoryService = categoryService;
         }
 
+        public List<SelectListItem> Categories { get; set; }
+
+        private const int PAGE_SIZE = 8;
+
         public string SearchTerm { get; set; }
         public string CategoryFilter { get; set; }
-        public List<SelectListItem> Categories { get; set; }
 
         public PaginatedList<Models.Product> Products { get; set; }
 
@@ -62,8 +65,7 @@ namespace ECommerce.Ui.Areas.Admin.Pages.Product
                 ProductsFromDb = ProductsFromDb.Where(p => p.Category.Name == category);
             }
 
-            int pageSize = 8;
-            Products = await PaginatedList<Models.Product>.CreateAsync(ProductsFromDb.AsQueryable<Models.Product>(), pageIndex ?? 1, pageSize);
+            Products = await PaginatedList<Models.Product>.CreateAsync(ProductsFromDb.AsQueryable<Models.Product>(), pageIndex ?? 1, PAGE_SIZE);
         }
 
         public async Task<IActionResult> OnPostDelete(long id, string searchString, string category, int pageIndex)

@@ -21,6 +21,7 @@ namespace ECommerce.Ui.Areas.Admin.Pages.Management
         }
 
         public PaginatedList<ApplicationUser> Users { get; set; }
+        private const int PAGE_SIZE = 10;
 
         public string SearchTerm { get; set; }
         public string SearchCriterion { get; set; }
@@ -54,8 +55,7 @@ namespace ECommerce.Ui.Areas.Admin.Pages.Management
                     break;
             }
 
-            int pageSize = 10;
-            Users = await PaginatedList<ApplicationUser>.CreateAsync(UsersFromDb.AsQueryable<ApplicationUser>(), pageIndex ?? 1, pageSize);
+            Users = await PaginatedList<ApplicationUser>.CreateAsync(UsersFromDb.AsQueryable<ApplicationUser>(), pageIndex ?? 1, PAGE_SIZE);
         }
 
         private List<SelectListItem> GetSearchCriteriaList()

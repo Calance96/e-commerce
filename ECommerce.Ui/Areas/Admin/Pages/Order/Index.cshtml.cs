@@ -21,6 +21,7 @@ namespace ECommerce.Ui.Areas.Admin.Pages.Order
         }
 
         public PaginatedList<Models.Order> Orders { get; set; }
+        private cosnt int PAGE_SIZE = 10;
 
         public string SearchTerm { get; set; }
         public string SearchCriterion { get; set; }
@@ -52,8 +53,7 @@ namespace ECommerce.Ui.Areas.Admin.Pages.Order
                 }
             }
 
-            int pageSize = 10;
-            Orders = await PaginatedList<Models.Order>.CreateAsync(OrdersFromDb.AsQueryable<Models.Order>(), pageIndex ?? 1, pageSize);
+            Orders = await PaginatedList<Models.Order>.CreateAsync(OrdersFromDb.AsQueryable<Models.Order>(), pageIndex ?? 1, PAGE_SIZE);
         }
 
         private List<SelectListItem> GetSearchCriteriaList()

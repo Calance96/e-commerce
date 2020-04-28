@@ -21,6 +21,8 @@ namespace ECommerce.Ui.Pages
         public string CategoryFilter { get; set; }
         public List<SelectListItem> Categories { get; set; }
 
+        private const int PAGE_SIZE = 8;
+
         public IndexModel(ProductService productService, CategoryService categoryService)
         {
             _productService = productService;
@@ -61,8 +63,7 @@ namespace ECommerce.Ui.Pages
                 ProductsFromDb = ProductsFromDb.Where(p => p.Category.Name == category);
             }
 
-            int pageSize = 8;
-            Products = await PaginatedList<Product>.CreateAsync(ProductsFromDb.AsQueryable<Product>(), pageIndex ?? 1, pageSize);
+            Products = await PaginatedList<Product>.CreateAsync(ProductsFromDb.AsQueryable<Product>(), pageIndex ?? 1, PAGE_SIZE);
 
         }
     }
