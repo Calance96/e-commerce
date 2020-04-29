@@ -74,12 +74,12 @@ namespace ECommerce.Ui.Areas.Account.Pages
 
                         return LocalRedirect(returnUrl);
                     case SD.StatusCode.NOTFOUND:
-                    case SD.StatusCode.BAD_REQUEST:
+                    case SD.StatusCode.UNAUTHORIZED:
                         LoginMessage = authResult.Message[0];
                         break;
                 }
             }
-            return Page();
+            return RedirectToPage();
         }
     }
 }

@@ -55,14 +55,14 @@ namespace ECommerce.Api.Controllers
                 {
                     user = null;
                     statusCode = SD.StatusCode.UNAUTHORIZED;
-                    messages.Add("Invalid credentials");
+                    messages.Add("Invalid credentials.");
                 }
             }
             else
             {
                 user = null;
                 statusCode = SD.StatusCode.NOTFOUND;
-                messages.Add("User not found");
+                messages.Add("User not found.");
             }
 
             return new AuthResult
