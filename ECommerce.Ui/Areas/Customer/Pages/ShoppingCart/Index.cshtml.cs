@@ -155,20 +155,19 @@ namespace ECommerce.Ui.Areas.Customer.Pages.ShoppingCart
 
                         await _orderService.Update(newOrder);
                         SuccessMessage = "Thank you! Your order has been placed successfully!";
-                        return RedirectToPage();
                     }
                 }
                 catch
                 {
                     ErrorMessage = "There is an error placing your order. Please try again later.";
                 }
-                return Page();
+                
             }
             else
             {
                 ErrorMessage = "The information provided is not complete.";
-                return Page();
             }
+            return RedirectToPage();
         }
 
         private decimal CalculateSum(IEnumerable<CartItem> cartItems)

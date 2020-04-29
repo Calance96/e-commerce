@@ -21,7 +21,7 @@ namespace ECommerce.Ui.Areas.Admin.Pages.Order
         }
 
         public PaginatedList<Models.Order> Orders { get; set; }
-        private cosnt int PAGE_SIZE = 10;
+        private const int PAGE_SIZE = 10;
 
         public string SearchTerm { get; set; }
         public string SearchCriterion { get; set; }
