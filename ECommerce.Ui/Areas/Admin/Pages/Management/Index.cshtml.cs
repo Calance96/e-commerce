@@ -37,9 +37,9 @@ namespace ECommerce.Ui.Areas.Admin.Pages.Management
 
         public async Task OnGetAsync(string searchString, string searchCriterion, string role, int? pageIndex)
         {
-            RoleFilter = role ?? "all";
-            SearchTerm = searchString ?? "";
-            SearchCriterion = searchCriterion ?? "";
+            RoleFilter = role?.Trim() ?? "all";
+            SearchTerm = searchString?.Trim() ?? "";
+            SearchCriterion = searchCriterion?.Trim() ?? "";
 
             var UsersFromDb = await _userService.GetAllUsers(RoleFilter);
 

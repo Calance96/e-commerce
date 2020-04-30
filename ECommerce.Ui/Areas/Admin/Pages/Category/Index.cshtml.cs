@@ -29,7 +29,7 @@ namespace ECommerce.Ui.Areas.Admin.Pages.Category
 
         public async Task OnGet(string searchString, int? pageIndex)
         {
-            SearchTerm = searchString ?? "";
+            SearchTerm = searchString?.Trim() ?? "";
 
             var CategoriesFromDb = await _categoryService.GetAll();
 
@@ -39,7 +39,7 @@ namespace ECommerce.Ui.Areas.Admin.Pages.Category
                 CategoriesFromDb = CategoriesFromDb.Where(c => c.Name.ToLower().Contains(searchString));
             }
 
-            Categories = await PaginatedList<Models.Category>.CreateAsync(CategoriesFromDb.AsQueryable<Models.Category>(), pageIndex ?? 1, PAGE_SIZE);
+            Categories = await PaginatedList<Models.Category>.CreateAsync(CategoriesFromDb.AsQueryable<Models.Category>(), pageIndex ?? 1, PAGE_SIZE);            
         }
 
         public async Task<IActionResult> OnPostDeleteAsync(int id, string searchString, int? pageIndex)
@@ -48,7 +48,15 @@ namespace ECommerce.Ui.Areas.Admin.Pages.Category
             if (!success)
             {
                 ErrorMessage = "Category cannot be deleted as there are products belong to this category.";
+            } 
+            else
+            {
+                if (Categories.Count() == 1 && pageIndex > 1) // The last item at this page is deleted, so let's move to the previous page instead
+                {
+                    pageIndex--;
+                }
             }
+
             return RedirectToPage("Index", new { searchString, pageIndex });
         }
     }

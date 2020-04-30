@@ -36,8 +36,8 @@ namespace ECommerce.Ui.Areas.Admin.Pages.Product
         public async Task OnGet(string searchString, string category, int? pageIndex)
         {
             var ProductsFromDb = await _productService.GetAll();
-            CategoryFilter = category ?? "All";
-            SearchTerm = searchString ?? "";
+            CategoryFilter = category?.Trim() ?? "All";
+            SearchTerm = searchString?.Trim() ?? "";
 
             Categories = new List<SelectListItem> {
                 new SelectListItem

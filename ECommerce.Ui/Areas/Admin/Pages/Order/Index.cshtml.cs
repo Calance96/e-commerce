@@ -32,8 +32,8 @@ namespace ECommerce.Ui.Areas.Admin.Pages.Order
 
         public async Task OnGetAsync(string searchString, string searchCriterion, string status, int? pageIndex)
         {
-            StatusFilter = status ?? "All";
-            SearchTerm = searchString ?? "";
+            StatusFilter = status?.Trim() ?? "All";
+            SearchTerm = searchString?.Trim() ?? "";
 
             var OrdersFromDb = await _orderService.GetAllOrders(StatusFilter);
             

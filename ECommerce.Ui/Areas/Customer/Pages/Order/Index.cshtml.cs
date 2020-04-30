@@ -33,14 +33,14 @@ namespace ECommerce.Ui.Areas.Customer.Pages.Order
             var claimsIdentity = (ClaimsIdentity)User.Identity;
             var userId = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier).Value;
 
-            StatusFilter = status ?? "All";
+            StatusFilter = status?.Trim() ?? "All";
 
             var OrdersFromDb = await _orderService.GetAllOrdersForUserId(userId, StatusFilter);
 
             if (!string.IsNullOrEmpty(searchString))
             {
-                SearchTerm = searchString;
-                OrdersFromDb = OrdersFromDb.Where(o => o.Id.ToString() == searchString.Trim());
+                SearchTerm = searchString.Trim();
+                OrdersFromDb = OrdersFromDb.Where(o => o.Id.ToString() == SearchTerm);
             }
 
             Orders = await PaginatedList<Models.Order>.CreateAsync(OrdersFromDb.AsQueryable<Models.Order>(), pageIndex ?? 1, PAGE_SIZE);
