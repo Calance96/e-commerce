@@ -62,6 +62,7 @@ namespace ECommerce.Models
         public string BillingAddress { get; set; }
 
         [Required]
+        [Phone]
         [Display(Name = "Phone Number")]
         public string PhoneNumber { get; set; }
     }

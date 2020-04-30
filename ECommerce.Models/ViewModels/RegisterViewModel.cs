@@ -26,6 +26,7 @@ namespace ECommerce.Models.ViewModels
         public string Name { get; set; }
         
         [Required]
+        [Phone]
         public string PhoneNumber { get; set; }
 
         [Display(Name = "Postal Address")]
