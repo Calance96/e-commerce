@@ -165,7 +165,7 @@ namespace ECommerce.Ui.Areas.Customer.Pages.ShoppingCart
             }
             else
             {
-                ErrorMessage = "The information provided is not complete.";
+                ErrorMessage = "The information provided is not valid.";
             }
             return RedirectToPage();
         }
