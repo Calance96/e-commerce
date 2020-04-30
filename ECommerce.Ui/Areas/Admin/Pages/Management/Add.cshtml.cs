@@ -35,8 +35,8 @@ namespace ECommerce.Ui.Areas.Admin.Pages.Management
                 switch (result.StatusCode)
                 {
                     case SD.StatusCode.OK:
-                        RedirectToPage("./Index");
-                        break;
+                        return RedirectToPage("./Index");
+
                     case SD.StatusCode.BAD_REQUEST:
                         foreach (var error in result.Message)
                         {
