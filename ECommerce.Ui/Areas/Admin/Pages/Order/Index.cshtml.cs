@@ -34,14 +34,14 @@ namespace ECommerce.Ui.Areas.Admin.Pages.Order
         {
             StatusFilter = status?.Trim() ?? "All";
             SearchTerm = searchString?.Trim() ?? "";
+            SearchCriterion = searchCriterion?.Trim() ?? "";
 
             var OrdersFromDb = await _orderService.GetAllOrders(StatusFilter);
             
             SearchCriteria = GetSearchCriteriaList();
 
-            if (!string.IsNullOrEmpty(searchCriterion))
+            if (!string.IsNullOrEmpty(searchString))
             {
-                SearchCriterion = searchCriterion;
                 switch (searchCriterion)
                 {
                     case "OrderID":
