@@ -4,89 +4,84 @@
     ViewData["Title"] = "Update Product";
 }
 
-    <form method="post" enctype="multipart/form-data">
-        <div class="row p-3 border">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="col-12 border-bottom">
-                <h2 class="text-primary">Product Details</h2>
-            </div>
-            <div class="col-8 pt-4">
-                <input type="hidden" asp-for="ProductVM.Product.Id" />
-                <input type="hidden" asp-for="ProductVM.Product.ImageUrl" />
-                <div class="form-group row">
-                    <div class="col-4">
-                        <label asp-for="ProductVM.Product.Name"></label>
-                    </div>
-                    <div class="col-8">
-                        <input asp-for="ProductVM.Product.Name" class="form-control" />
-                        <span asp-validation-for="ProductVM.Product.Name" class="text-danger"></span>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <div class="col-4">
-                        <label asp-for="ProductVM.Product.Description"></label>
-                    </div>
-                    <div class="col-8">
-                        <textarea rows="15" asp-for="ProductVM.Product.Description" class="form-control"></textarea>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <div class="col-4">
-                        <label asp-for="ProductVM.Product.Price"></label>
-                    </div>
-                    <div class="input-group col-8">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text" id="basic-addon1">RM</span>
-                        </div>
-                        <input type="number" step="0.01" asp-for="ProductVM.Product.Price" class="form-control" />
-                        <span asp-validation-for="ProductVM.Product.Price" class="text-danger"></span>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <div class="col-4">
-                        Category
-                    </div>
-                    <div class="col-8">
-                        @Html.DropDownListFor(model => model.ProductVM.Product.CategoryId, Model.ProductVM.CategoryList, "- Select a product category -", new { @class = "form-control" })
-                        <span asp-validation-for="ProductVM.Product.CategoryId" class="text-danger"></span>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <div class="col-4">
-                        Image
-                    </div>
-                    <div class="col-8">
-                        <input type="file" name="files" id="uploadBox" multiple class="form-control" />
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <div class="col-4">
-                        <label asp-for="ProductVM.Product.IsAvailable"></label>
-                    </div>
-                    <div class="col-8">
-                        <input type="checkbox" asp-for="ProductVM.Product.IsAvailable" class="form-control" />
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <div class="col-8 offset-4">
-                        <div class="row">
-                            <div class="col">
-                                <button type="submit" class="btn btn-success form-control">Save</button>
-                            </div>
-                            <div class="col">
-                                <a asp-page="./Index" class="btn btn-danger form-control">Cancel</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            @if (Model.ProductVM.Product.ImageUrl != null)
-            {
-                <div class="col-4 pt-4">
-                    <div style="border-radius:5px; border: 1px solid #bbb9b9; padding: 10px;">
-                        <img src="@Model.ProductVM.Product.ImageUrl" class="w-100"/>
-                    </div>
-                </div>
-            }
+<form method="post" enctype="multipart/form-data">
+    <div class="row p-3 border">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="col-12 border-bottom">
+            <h2 class="text-primary">Product Details</h2>
         </div>
-    </form>
+        <div class="col-8 pt-4">
+            <input type="hidden" asp-for="ProductVM.Product.Id" />
+            <input type="hidden" asp-for="ProductVM.Product.ImageUrl" />
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="ProductVM.Product.Name"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="ProductVM.Product.Name" class="form-control" />
+                    <span asp-validation-for="ProductVM.Product.Name" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="ProductVM.Product.Description"></label>
+                </div>
+                <div class="col-8">
+                    <textarea rows="15" asp-for="ProductVM.Product.Description" class="form-control"></textarea>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="ProductVM.Product.Price"></label>
+                </div>
+                <div class="input-group col-8">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon1">RM</span>
+                    </div>
+                    <input type="number" step="0.01" asp-for="ProductVM.Product.Price" class="form-control" />
+                    <span asp-validation-for="ProductVM.Product.Price" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    Category
+                </div>
+                <div class="col-8">
+                    @Html.DropDownListFor(model => model.ProductVM.Product.CategoryId, Model.ProductVM.CategoryList, "- Select a product category -", new { @class = "form-control" })
+                    <span asp-validation-for="ProductVM.Product.CategoryId" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    Image
+                </div>
+                <div class="col-8">
+                    <input type="file" name="files" id="uploadBox" multiple class="form-control" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <input type="hidden" asp-for="ProductVM.Product.IsAvailable" class="form-control" />
+            </div>
+            <div class="form-group row">
+                <div class="col-8 offset-4">
+                    <div class="row">
+                        <div class="col">
+                            <button type="submit" class="btn btn-success form-control">Save</button>
+                        </div>
+                        <div class="col">
+                            <a asp-page="./Index" class="btn btn-danger form-control">Cancel</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @if (Model.ProductVM.Product.ImageUrl != null)
+        {
+            <div class="col-4 pt-4">
+                <div style="border-radius:5px; border: 1px solid #bbb9b9; padding: 10px;">
+                    <img src="@Model.ProductVM.Product.ImageUrl" class="w-100" />
+                </div>
+            </div>
+        }
+    </div>
+</form>
