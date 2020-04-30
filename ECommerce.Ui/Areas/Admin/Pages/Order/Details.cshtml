@@ -5,91 +5,91 @@
     ViewData["Title"] = "Order Details";
 }
 
-<form method="post">
-    <br />
-    <div class="backgroundWhite container">
-        <div class="card">
-            <div class="card-header bg-primary text-light ml-0 row container">
-                <div class="col-12 d-none d-md-block col-md-6 lead p-1">
-                    <i class="fas fa-shopping-cart"></i> &nbsp; Order Summary
-                </div>
-                <div class="col-12 col-md-4 offset-md-2 text-right lead">
-                    <a class="btn btn-danger btn-sm p-2" asp-page="./Index">Back to Orders</a>
-                </div>
+<br />
+<div class="backgroundWhite container">
+    <div class="card">
+        <div class="card-header bg-primary text-light ml-0 row container">
+            <div class="col-12 d-none d-md-block col-md-6 lead p-1">
+                <i class="fas fa-shopping-cart"></i> &nbsp; Order Summary
             </div>
-            @if (Model.OrderDetails != null)
-            {
-                <div class="card-body">
-                    <div class="container rounded p-2">
-                        <div class="row">
-                            <div class="col-12 col-lg-6 pb-4 m-auto border p-3 rounded">
+            <div class="col-12 col-md-4 offset-md-2 text-right lead">
+                <a class="btn btn-danger btn-sm p-2" asp-page="./Index">Back to Orders</a>
+            </div>
+        </div>
+        @if (Model.OrderDetails != null)
+        {
+            <div class="card-body">
+                <div class="container rounded p-2">
+                    <div class="row">
+                        <div class="col-12 col-lg-6 pb-4 m-auto border p-3 rounded">
+                            <div class="row">
+                                <div class="col-12">
+                                    <h4 class="d-flex justify-content-between align-items-center mb-3">
+                                        <span class="text-primary font-weight-bold">Order Details</span>
+                                    </h4>
+                                </div>
+                            </div>
+                            <div class="row my-1">
+                                <div class="col-4">@Html.DisplayNameFor(m => m.OrderDetails.Order.Id)</div>
+                                <div class="col-8">
+                                    <p>@Model.OrderDetails.Order.Id</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4">@Html.DisplayNameFor(m => m.OrderDetails.Order.PaymentStatus)</div>
+                                <div class="col-8">
+                                    <p class="font-weight-bold">@Model.OrderDetails.Order.PaymentStatus</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4">@Html.DisplayNameFor(m => m.OrderDetails.Order.OrderStatus)</div>
+                                <div class="col-8">
+                                    <p class="font-weight-bold">@Model.OrderDetails.Order.OrderStatus</p>
+                                </div>
+                            </div>
+                            <div class="row my-1">
+                                <div class="col-4">@Html.DisplayNameFor(m => m.OrderDetails.Order.Name)</div>
+                                <div class="col-8">
+                                    <input type="text" class="form-control" asp-for="OrderDetails.Order.Name" />
+                                    <span class="text-danger" asp-validation-for="OrderDetails.Order.Name"></span>
+                                </div>
+                            </div>
+                            <div class="row my-1">
+                                <div class="col-4">@Html.DisplayNameFor(m => m.OrderDetails.Order.PhoneNumber)</div>
+                                <div class="col-8">
+                                    <input type="text" class="form-control" asp-for="OrderDetails.Order.PhoneNumber" />
+                                    <span class="text-danger" asp-validation-for="OrderDetails.Order.PhoneNumber"></span>
+                                </div>
+                            </div>
+                            <div class="row my-1">
+                                <div class="col-4">@Html.DisplayNameFor(m => m.OrderDetails.Order.ShippingAddress)</div>
+                                <div class="col-8">
+                                    <textarea type="text" rows="6" class="form-control" asp-for="OrderDetails.Order.ShippingAddress"></textarea>
+                                </div>
+                                <span class="text-danger" asp-validation-for="OrderDetails.Order.ShippingAddress"></span>
+                            </div>
+                            <div class="row my-1">
+                                <div class="col-4">@Html.DisplayNameFor(m => m.OrderDetails.Order.BillingAddress)</div>
+                                <div class="col-8">
+                                    <textarea type="text" rows="6" class="form-control" asp-for="OrderDetails.Order.BillingAddress"></textarea>
+                                    <span class="text-danger" asp-validation-for="OrderDetails.Order.BillingAddress"></span>
+                                </div>
+                            </div>
+                            <div class="row my-1">
+                                <div class="col-4">@Html.DisplayNameFor(m => m.OrderDetails.Order.Email)</div>
+                                <div class="col-8">
+                                    <input id="txtName" type="text" class="form-control" value="@Model.OrderDetails.Order.Email" />
+                                    <span class="text-danger" asp-validation-for="OrderDetails.Order.Email"></span>
+                                </div>
+                            </div>
+                            <div class="row my-1">
+                                <div class="col-4">@Html.DisplayNameFor(m => m.OrderDetails.Order.OrderDate)</div>
+                                <div class="col-8">
+                                    <input type="text" readonly class="form-control" value="@Model.OrderDetails.Order.OrderDate.ToShortDateString()" />
+                                </div>
+                            </div>
+                            <form id="ship_form" method="post" asp-page-handler="ShipOrder">
                                 <input type="hidden" asp-for="OrderDetails.Order.Id" />
-                                <div class="row">
-                                    <div class="col-12">
-                                        <h4 class="d-flex justify-content-between align-items-center mb-3">
-                                            <span class="text-primary font-weight-bold">Order Details</span>
-                                        </h4>
-                                    </div>
-                                </div>
-                                <div class="row my-1">
-                                    <div class="col-4">@Html.DisplayNameFor(m => m.OrderDetails.Order.Id)</div>
-                                    <div class="col-8">
-                                        <p>@Model.OrderDetails.Order.Id</p>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-4">@Html.DisplayNameFor(m => m.OrderDetails.Order.PaymentStatus)</div>
-                                    <div class="col-8">
-                                        <p class="font-weight-bold">@Model.OrderDetails.Order.PaymentStatus</p>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-4">@Html.DisplayNameFor(m => m.OrderDetails.Order.OrderStatus)</div>
-                                    <div class="col-8">
-                                        <p class="font-weight-bold">@Model.OrderDetails.Order.OrderStatus</p>
-                                    </div>
-                                </div>
-                                <div class="row my-1">
-                                    <div class="col-4">@Html.DisplayNameFor(m => m.OrderDetails.Order.Name)</div>
-                                    <div class="col-8">
-                                        <input type="text" class="form-control" asp-for="OrderDetails.Order.Name" />
-                                        <span class="text-danger" asp-validation-for="OrderDetails.Order.Name"></span>
-                                    </div>
-                                </div>
-                                <div class="row my-1">
-                                    <div class="col-4">@Html.DisplayNameFor(m => m.OrderDetails.Order.PhoneNumber)</div>
-                                    <div class="col-8">
-                                        <input type="text" class="form-control" asp-for="OrderDetails.Order.PhoneNumber" />
-                                        <span class="text-danger" asp-validation-for="OrderDetails.Order.PhoneNumber"></span>
-                                    </div>
-                                </div>
-                                <div class="row my-1">
-                                    <div class="col-4">@Html.DisplayNameFor(m => m.OrderDetails.Order.ShippingAddress)</div>
-                                    <div class="col-8">
-                                        <textarea type="text" rows="6" class="form-control" asp-for="OrderDetails.Order.ShippingAddress"></textarea>
-                                    </div>
-                                    <span class="text-danger" asp-validation-for="OrderDetails.Order.ShippingAddress"></span>
-                                </div>
-                                <div class="row my-1">
-                                    <div class="col-4">@Html.DisplayNameFor(m => m.OrderDetails.Order.BillingAddress)</div>
-                                    <div class="col-8">
-                                        <textarea type="text" rows="6" class="form-control" asp-for="OrderDetails.Order.BillingAddress"></textarea>
-                                        <span class="text-danger" asp-validation-for="OrderDetails.Order.BillingAddress"></span>
-                                    </div>
-                                </div>
-                                <div class="row my-1">
-                                    <div class="col-4">@Html.DisplayNameFor(m => m.OrderDetails.Order.Email)</div>
-                                    <div class="col-8">
-                                        <input id="txtName" type="text" class="form-control" value="@Model.OrderDetails.Order.Email" />
-                                        <span class="text-danger" asp-validation-for="OrderDetails.Order.Email"></span>
-                                    </div>
-                                </div>
-                                <div class="row my-1">
-                                    <div class="col-4">@Html.DisplayNameFor(m => m.OrderDetails.Order.OrderDate)</div>
-                                    <div class="col-8">
-                                        <input type="text" readonly class="form-control" value="@Model.OrderDetails.Order.OrderDate.ToShortDateString()" />
-                                    </div>
-                                </div>
                                 <div class="row my-1">
                                     <div class="col-4">@Html.DisplayNameFor(m => m.OrderDetails.Order.Carrier)</div>
                                     <div class="col-8">
@@ -102,109 +102,136 @@
                                         <input type="text" class="form-control" asp-for="@Model.OrderDetails.Order.TrackingNumber" />
                                     </div>
                                 </div>
-                                <div class="row my-1">
-                                    <div class="col-4">@Html.DisplayNameFor(m => m.OrderDetails.Order.ShipDate)</div>
-                                    <div class="col-8">
-                                        <input id="shippingDate" type="text" readonly class="form-control" value="@(Model.OrderDetails.Order.ShipDate.ToShortDateString() == "1/1/0001" ? "" : Model.OrderDetails.Order.ShipDate.ToShortDateString())" />
-                                    </div>
-                                </div>
-                                <div class="row my-1">
-                                    @if (Model.OrderDetails.Order.PaymentStatus == SD.PaymentStatus.REFUNDED)
-                                    {
-                                        <div class="col-4">Refunded On</div>
-                                    }
-                                    else
-                                    {
-                                        <div class="col-4">@Html.DisplayNameFor(m => m.OrderDetails.Order.PaymentDate)</div>
-                                    }
-                                    <div class="col-8">
-                                        <input readonly id="paymentDate" type="text" class="form-control" value="@Model.OrderDetails.Order.PaymentDate.ToShortDateString()" />
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-4">@Html.DisplayNameFor(m => m.OrderDetails.Order.TransactionId)</div>
-                                    <div class="col-8">
-                                        <input readonly class="form-control" asp-for="OrderDetails.Order.TransactionId"/>
-                                    </div>
+                            </form>
+                            <div class="row my-1">
+                                <div class="col-4">@Html.DisplayNameFor(m => m.OrderDetails.Order.ShipDate)</div>
+                                <div class="col-8">
+                                    <input id="shippingDate" type="text" readonly class="form-control" value="@(Model.OrderDetails.Order.ShipDate.ToShortDateString() == "1/1/0001" ? "" : Model.OrderDetails.Order.ShipDate.ToShortDateString())" />
                                 </div>
                             </div>
+                            <div class="row my-1">
+                                @if (Model.OrderDetails.Order.PaymentStatus == SD.PaymentStatus.REFUNDED)
+                                {
+                                    <div class="col-4">Refunded On</div>
+                                }
+                                else
+                                {
+                                    <div class="col-4">@Html.DisplayNameFor(m => m.OrderDetails.Order.PaymentDate)</div>
+                                }
+                                <div class="col-8">
+                                    <input readonly id="paymentDate" type="text" class="form-control" value="@Model.OrderDetails.Order.PaymentDate.ToShortDateString()" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4">@Html.DisplayNameFor(m => m.OrderDetails.Order.TransactionId)</div>
+                                <div class="col-8">
+                                    <input readonly class="form-control" asp-for="OrderDetails.Order.TransactionId" />
+                                </div>
+                            </div>
+                        </div>
 
-                            <div class="col-12 col-lg-6 mx-auto mt-md-3">
-                                <div class="border rounded p-3">
-                                    <h4 class="d-flex justify-content-between align-items-center mb-3">
-                                        <span class="text-primary font-weight-bold">Order Summary</span>
-                                    </h4>
-                                    <ul class="list-group mb-3">
-                                        @foreach (var orderItem in Model.OrderDetails.OrderItems)
-                                        {
-                                            <li class="list-group-item d-flex justify-content-between p-2">
-                                                <div class="row container">
-                                                    <div class="col-7">
-                                                        <h6 class="my-0">@orderItem.Product.Name</h6>
-                                                        <small class="text-muted">Price : RM @orderItem.Price.ToString("N") | </small>
-                                                        <small class="text-muted">Quantity : @orderItem.Quantity</small>
-                                                    </div>
-                                                    <div class="col-5">
-                                                        <p class="text-success font-weight-bold">RM @((orderItem.Quantity * orderItem.Price).ToString("N"))</p>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                        }
-                                        <li class="list-group-item bg-light p-2">
+                        <div class="col-12 col-lg-6 mx-auto mt-md-3">
+                            <div class="border rounded p-3">
+                                <h4 class="d-flex justify-content-between align-items-center mb-3">
+                                    <span class="text-primary font-weight-bold">Order Summary</span>
+                                </h4>
+                                <ul class="list-group mb-3">
+                                    @foreach (var orderItem in Model.OrderDetails.OrderItems)
+                                    {
+                                        <li class="list-group-item d-flex justify-content-between p-2">
                                             <div class="row container">
                                                 <div class="col-7">
-                                                    <h5 class="font-weight-bold">Total</h5>
+                                                    <h6 class="my-0">@orderItem.Product.Name</h6>
+                                                    <small class="text-muted">Price : RM @orderItem.Price.ToString("N") | </small>
+                                                    <small class="text-muted">Quantity : @orderItem.Quantity</small>
                                                 </div>
                                                 <div class="col-5">
-                                                    <h5 class="font-weight-bold">RM @Model.OrderDetails.Order.OrderTotal.ToString("N")</h5>
+                                                    <p class="text-success font-weight-bold">RM @((orderItem.Quantity * orderItem.Price).ToString("N"))</p>
                                                 </div>
                                             </div>
                                         </li>
-                                    </ul>
+                                    }
+                                    <li class="list-group-item bg-light p-2">
+                                        <div class="row container">
+                                            <div class="col-7">
+                                                <h5 class="font-weight-bold">Total</h5>
+                                            </div>
+                                            <div class="col-5">
+                                                <h5 class="font-weight-bold">RM @Model.OrderDetails.Order.OrderTotal.ToString("N")</h5>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
 
-                                    <br />
-                                    @if (Model.OrderDetails.Order.OrderStatus == SD.OrderStatus.APPROVED)
-                                    {
-                                        <button type="submit" class="btn btn-success form-control mb-2" asp-page-handler="ProcessOrder">
+                                <br />
+                                @if (Model.OrderDetails.Order.OrderStatus == SD.OrderStatus.APPROVED)
+                                {
+                                    <form id="process_form" method="post" asp-page-handler="ProcessOrder">
+                                        <input type="hidden" asp-for="OrderDetails.Order.Id" />
+                                        <button onclick="showConfirmationDialog('process')" class="btn btn-success form-control mb-2">
                                             Process Order
                                         </button>
-                                    }
-                                    else if (Model.OrderDetails.Order.OrderStatus == SD.OrderStatus.PROCESSING)
-                                    {
-                                        <button type="submit" class="btn btn-primary form-control mb-2" asp-page-handler="ShipOrder">
-                                            Ship Order
-                                        </button>
-                                    }
+                                    </form>
+                                }
 
-                                    @if (Model.OrderDetails.Order.OrderStatus == SD.OrderStatus.SHIPPED)
-                                    {
-                                        <button type="submit" class="btn btn-primary form-control mb-2" asp-page-handler="CompleteOrder">
+
+                                else if (Model.OrderDetails.Order.OrderStatus == SD.OrderStatus.PROCESSING)
+                                {
+                                    <button onclick="showConfirmationDialog('ship')" class="btn btn-primary form-control mb-2" asp-page-handler="ShipOrder">
+                                        Ship Order
+                                    </button>
+                                }
+
+                                @if (Model.OrderDetails.Order.OrderStatus == SD.OrderStatus.SHIPPED)
+                                {
+
+                                    <form id="complete_form" method="post" asp-page-handler="CompleteOrder">
+                                        <input type="hidden" asp-for="OrderDetails.Order.Id" />
+                                        <button onclick="showConfirmationDialog('complete')" class="btn btn-primary form-control mb-2">
                                             Mark Order Complete
                                         </button>
-                                    }
+                                    </form>
+                                }
 
-                                    @if (Model.OrderDetails.Order.OrderStatus != SD.OrderStatus.CANCELLED &&
-                                Model.OrderDetails.Order.OrderStatus != SD.OrderStatus.REFUNDED &&
-                                Model.OrderDetails.Order.OrderStatus != SD.OrderStatus.SHIPPED &&
-                                Model.OrderDetails.Order.OrderStatus != SD.OrderStatus.COMPLETE)
-                                    {
-                                        <button type="submit" class="btn btn-danger form-control" asp-page-handler="CancelOrder">
+                                @if (Model.OrderDetails.Order.OrderStatus != SD.OrderStatus.CANCELLED &&
+                    Model.OrderDetails.Order.OrderStatus != SD.OrderStatus.REFUNDED &&
+                    Model.OrderDetails.Order.OrderStatus != SD.OrderStatus.SHIPPED &&
+                    Model.OrderDetails.Order.OrderStatus != SD.OrderStatus.COMPLETE)
+                                {
+                                    <form id="cancel_form" method="post" asp-page-handler="CancelOrder">
+                                        <input type="hidden" asp-for="OrderDetails.Order.Id" />
+                                        <button onclick="showConfirmationDialog('cancel')" class="btn btn-danger form-control">
                                             Cancel Order
                                         </button>
-                                    }
-                                </div>
+                                    </form>
+                                }
                             </div>
                         </div>
                     </div>
                 </div>
-            }
-        </div>
+            </div>
+        }
     </div>
-</form>
+</div>
 
 @section Scripts {
 
     <partial name="_ValidationScriptsPartial.cshtml" />
+    <script>
+        function showConfirmationDialog(action) {
+            event.preventDefault();
+            Swal.fire({
+                icon: 'question',
+                title: 'Confirmation',
+                text: `Are you sure you want to ${action} this order?`,
+                showCancelButton: true,
+                cancelButtonColor: 'red'
+            }).then(function (confirm) {
+                if (confirm.value)
+                    document.getElementById(`${action}_form`).submit();
+            });
+        }
+    </script>
 
     @if (!string.IsNullOrEmpty(Model.ErrorMessage))
     {
