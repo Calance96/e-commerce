@@ -20,6 +20,9 @@ namespace ECommerce.Ui.Areas.Admin.Pages.Category
         [BindProperty]
         public Models.Category Category { get; set; }
 
+        [TempData]
+        public string ErrorMessage { get; set; }
+
         public async Task<IActionResult> OnGetAsync(long id)
         {
             Category = await _categoryService.GetById(id);
@@ -39,7 +42,11 @@ namespace ECommerce.Ui.Areas.Admin.Pages.Category
                 return Page();
             }
 
-            await _categoryService.Update(Category);
+            var success = await _categoryService.Update(Category);
+            if (!success)
+            {
+                ErrorMessage = "Duplicate category name is prohibited.";
+            }
             return RedirectToPage("Index");
         }
     }

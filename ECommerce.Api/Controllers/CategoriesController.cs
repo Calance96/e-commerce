@@ -23,7 +23,7 @@ namespace ECommerce.Api.Controllers
         [HttpGet]
         public async Task<ActionResult<List<Category>>> GetAll()
         {
-            return await _context.Categories.ToListAsync();
+            return await _context.Categories.OrderBy(x => x.Name).ToListAsync();
         }
         
         [HttpGet("{id}")]
@@ -40,26 +40,42 @@ namespace ECommerce.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Category>> Add(Category category)
+        public async Task<Boolean> Add(Category category)
         {
-            _context.Categories.Add(category);
-            await _context.SaveChangesAsync();
+            var existingCategory = await _context.Categories.FirstOrDefaultAsync(c => c.Name.ToLower() == category.Name.Trim().ToLower());
 
-            return CreatedAtAction(nameof(Get), new { id = category.Id }, category);
+            if (existingCategory == null)
+            {
+                _context.Categories.Add(category);
+                await _context.SaveChangesAsync();
+                return true;
+            } 
+            else
+            {
+                return false;
+            }
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Update(long id, Category category)
+        public async Task<ActionResult<Boolean>> Update(long id, Category category)
         {
             if (id != category.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(category).State = EntityState.Modified;
-            await _context.SaveChangesAsync();
+            var existingCategory = await _context.Categories.FirstOrDefaultAsync(c => c.Name.ToLower() == category.Name.Trim().ToLower());
 
-            return NoContent();
+            if (existingCategory == null)
+            {
+                _context.Entry(category).State = EntityState.Modified;
+                await _context.SaveChangesAsync();
+                return true;
+            } 
+            else
+            {
+                return false;
+            }
         }
         
         [HttpDelete("{id}")]

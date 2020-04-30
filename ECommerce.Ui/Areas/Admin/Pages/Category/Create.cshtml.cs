@@ -24,6 +24,9 @@ namespace ECommerce.Ui.Areas.Admin.Pages.Category
         [TempData]
         public string Message { get; set; }
 
+        [TempData]
+        public string ErrorMessage { get; set; }
+
         public async Task<IActionResult> OnPost()
         {
             if (!ModelState.IsValid)
@@ -31,8 +34,15 @@ namespace ECommerce.Ui.Areas.Admin.Pages.Category
                 return Page();
             }
 
-            await _categoryService.Add(Category);
-            Message = "Category added successfully.";
+            var success = await _categoryService.Add(Category);
+            if (success)
+            {
+                Message = "Category added successfully.";
+            } 
+            else
+            {
+                ErrorMessage = "Category cannot be added due to possible duplicate.";
+            }
             return RedirectToPage("Index");
         }
     }
