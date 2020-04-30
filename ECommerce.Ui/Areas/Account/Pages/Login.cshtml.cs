@@ -37,7 +37,7 @@ namespace ECommerce.Ui.Areas.Account.Pages
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
             returnUrl ??= Url.Content("~/");
-
+            
             if (ModelState.IsValid)
             {
                 var authResult = await _authService.Login(Input);
