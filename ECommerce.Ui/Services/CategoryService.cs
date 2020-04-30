@@ -48,16 +48,36 @@ namespace ECommerce.Ui.Services
             return category;
         }
 
-        public async Task Update(Category category)
+        public async Task<Boolean> Update(Category category)
         {
             var data = new StringContent(JsonSerializer.Serialize<Category>(category), Encoding.UTF8, SD.CONTENT_JSON);
-            await _httpClient.PutAsync($"{_route}/{category.Id}", data);
+            var response = await _httpClient.PutAsync($"{_route}/{category.Id}", data);
+            var success = false;
+
+            if (response.IsSuccessStatusCode)
+            {
+                success = await JsonSerializer.DeserializeAsync<Boolean>(await response.Content.ReadAsStreamAsync(), new JsonSerializerOptions
+                {
+                    PropertyNameCaseInsensitive = true
+                });
+            }
+            return success;
         }
 
-        public async Task Add(Category category)
+        public async Task<Boolean> Add(Category category)
         {
             var data = new StringContent(JsonSerializer.Serialize<Category>(category), Encoding.UTF8, SD.CONTENT_JSON);
-            await _httpClient.PostAsync(_route, data);
+            var response = await _httpClient.PostAsync(_route, data);
+            var success = false;
+
+            if (response.IsSuccessStatusCode)
+            {
+                success = await JsonSerializer.DeserializeAsync<Boolean>(await response.Content.ReadAsStreamAsync(), new JsonSerializerOptions
+                {
+                    PropertyNameCaseInsensitive = true
+                });
+            }
+            return success;
         }
 
         public async Task<Boolean> Delete(long id)
