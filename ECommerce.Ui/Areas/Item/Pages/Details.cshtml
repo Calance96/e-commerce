@@ -8,11 +8,11 @@
     <input hidden asp-for="@Model.CartItem.ProductId" />
     <div class="container w-75">
         <div class="card">
-            <div class="card-header bg-light text-light ml-0 row container">
-                <div class="col-12 col-md-6">
-                    <h1 class="text-primary">@Model.CartItem.Product.Name</h1>
+            <div class="card-header bg-light text-light ml-0 row container p-3">
+                <div class="col-12 col-md-8">
+                    <h4 class="text-primary">@Model.CartItem.Product.Name</h4>
                 </div>
-                <div class="col-12 col-md-6 text-md-right pt-4">
+                <div class="col-12 col-md-4 text-md-right">
                     <span class="badge badge-warning pt-2" style="height:30px;">@Model.CartItem.Product.Category.Name</span>
                 </div>
             </div>
