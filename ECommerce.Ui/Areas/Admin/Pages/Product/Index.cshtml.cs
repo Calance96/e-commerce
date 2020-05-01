@@ -65,7 +65,7 @@ namespace ECommerce.Ui.Areas.Admin.Pages.Product
                 ProductsFromDb = ProductsFromDb.Where(p => p.Category.Name == category);
             }
 
-            Products = await PaginatedList<Models.Product>.CreateAsync(ProductsFromDb.AsQueryable<Models.Product>(), pageIndex ?? 1, PAGE_SIZE);
+            Products = PaginatedList<Models.Product>.Create(ProductsFromDb.AsQueryable<Models.Product>(), pageIndex ?? 1, PAGE_SIZE);
         }
 
         public async Task<IActionResult> OnPostDelete(long id, string searchString, string category, int pageIndex)

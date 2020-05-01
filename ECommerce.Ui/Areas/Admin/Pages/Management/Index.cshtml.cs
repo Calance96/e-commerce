@@ -55,7 +55,7 @@ namespace ECommerce.Ui.Areas.Admin.Pages.Management
                     break;
             }
 
-            Users = await PaginatedList<ApplicationUser>.CreateAsync(UsersFromDb.AsQueryable<ApplicationUser>(), pageIndex ?? 1, PAGE_SIZE);
+            Users = PaginatedList<ApplicationUser>.Create(UsersFromDb.AsQueryable<ApplicationUser>(), pageIndex ?? 1, PAGE_SIZE);
         }
 
         private List<SelectListItem> GetSearchCriteriaList()

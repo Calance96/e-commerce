@@ -53,7 +53,7 @@ namespace ECommerce.Ui.Areas.Admin.Pages.Order
                 }
             }
 
-            Orders = await PaginatedList<Models.Order>.CreateAsync(OrdersFromDb.AsQueryable<Models.Order>(), pageIndex ?? 1, PAGE_SIZE);
+            Orders = PaginatedList<Models.Order>.Create(OrdersFromDb.AsQueryable<Models.Order>(), pageIndex ?? 1, PAGE_SIZE);
         }
 
         private List<SelectListItem> GetSearchCriteriaList()

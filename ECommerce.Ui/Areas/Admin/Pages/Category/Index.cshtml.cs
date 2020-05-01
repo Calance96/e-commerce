@@ -39,7 +39,7 @@ namespace ECommerce.Ui.Areas.Admin.Pages.Category
                 CategoriesFromDb = CategoriesFromDb.Where(c => c.Name.ToLower().Contains(searchString));
             }
 
-            Categories = await PaginatedList<Models.Category>.CreateAsync(CategoriesFromDb.AsQueryable<Models.Category>(), pageIndex ?? 1, PAGE_SIZE); 
+            Categories = PaginatedList<Models.Category>.Create(CategoriesFromDb.AsQueryable<Models.Category>(), pageIndex ?? 1, PAGE_SIZE); 
             
             if (Categories.TotalPages < pageIndex && pageIndex > 1)
             {

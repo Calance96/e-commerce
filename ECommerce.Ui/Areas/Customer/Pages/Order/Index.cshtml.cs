@@ -43,7 +43,7 @@ namespace ECommerce.Ui.Areas.Customer.Pages.Order
                 OrdersFromDb = OrdersFromDb.Where(o => o.Id.ToString() == SearchTerm);
             }
 
-            Orders = await PaginatedList<Models.Order>.CreateAsync(OrdersFromDb.AsQueryable<Models.Order>(), pageIndex ?? 1, PAGE_SIZE);
+            Orders = PaginatedList<Models.Order>.Create(OrdersFromDb.AsQueryable<Models.Order>(), pageIndex ?? 1, PAGE_SIZE);
         }
     }
 }
