@@ -14,7 +14,6 @@ namespace ECommerce.Utility
 
         public static class PaymentStatus
         {
-            public const string PENDING = "Pending";
             public const string APPROVED = "Approved";
             public const string REJECTED = "Rejected";
             public const string REFUNDED = "Refunded";
@@ -23,7 +22,6 @@ namespace ECommerce.Utility
 
         public static class OrderStatus
         {
-            public const string PENDING = "Pending";
             public const string APPROVED = "Approved";
             public const string PROCESSING = "Processing";
             public const string SHIPPED = "Shipped";
