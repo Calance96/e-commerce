@@ -55,6 +55,7 @@ namespace ECommerce.Ui.Areas.Account.Pages
 
                         return LocalRedirect(returnUrl);
                     case SD.StatusCode.BAD_REQUEST:
+                    default:
                         foreach (var error in authResult.Message)
                         {
                             ModelState.AddModelError(string.Empty, error);
