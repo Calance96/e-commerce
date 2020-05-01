@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using ECommerce.DataAccess;
 using ECommerce.Models;
@@ -8,6 +9,7 @@ using ECommerce.Models.ViewModels;
 using ECommerce.Utility;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -18,10 +20,12 @@ namespace ECommerce.Api.Controllers
     public class OrdersController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly ILogger<OrdersController> _logger;
 
-        public OrdersController(ApplicationDbContext context)
+        public OrdersController(ApplicationDbContext context, ILogger<OrdersController> logger)
         {
             _context = context;
+            _logger = logger;
         }
 
         [HttpGet("{status}")]
@@ -50,9 +54,8 @@ namespace ECommerce.Api.Controllers
         {
             switch (status)
             {
-                case SD.OrderStatus.PENDING:
-                    orders = orders.Where(order => order.PaymentStatus == SD.PaymentStatus.PENDING ||
-                                            order.OrderStatus == SD.OrderStatus.APPROVED);
+                case SD.OrderStatus.APPROVED:
+                    orders = orders.Where(order => order.OrderStatus == SD.OrderStatus.APPROVED);
                     break;
                 case SD.OrderStatus.PROCESSING:
                     orders = orders.Where(order => order.OrderStatus == SD.OrderStatus.PROCESSING);
@@ -80,6 +83,7 @@ namespace ECommerce.Api.Controllers
 
             if (order == null)
             {
+                _logger.LogWarning("Couldn't find summary for order of ID {OrderId}", orderId);
                 return NotFound();
             }
 
@@ -93,6 +97,7 @@ namespace ECommerce.Api.Controllers
 
             if (order == null)
             {
+                _logger.LogWarning("Couldn't find details for order of ID {OrderId}", orderId);
                 return NotFound();
             }
 
@@ -112,28 +117,37 @@ namespace ECommerce.Api.Controllers
         [HttpPost]
         public async Task<ActionResult<Order>> Create(ShoppingCartVM shoppingCart)
         {
-            var newOrder = shoppingCart.Order;
-            await _context.Orders.AddAsync(newOrder);
-            await _context.SaveChangesAsync();
-
-            foreach (var item in shoppingCart.CartItems)
+            try
             {
-                OrderItem orderItem = new OrderItem
-                {
-                    OrderId = newOrder.Id,
-                    ProductId = item.ProductId,
-                    Quantity = item.Quantity,
-                    Price = item.Price
-                };
-                await _context.OrderItems.AddAsync(orderItem);
-            }
+                var newOrder = shoppingCart.Order;
+                await _context.Orders.AddAsync(newOrder);
+                await _context.SaveChangesAsync();
 
-            IEnumerable<CartItem> cartItems = await _context.CartItems
-                .Where(x => x.UserId == shoppingCart.Order.UserId)
-                .ToListAsync();
-            _context.RemoveRange(cartItems);
-            await _context.SaveChangesAsync();
-            return newOrder;
+                foreach (var item in shoppingCart.CartItems)
+                {
+                    OrderItem orderItem = new OrderItem
+                    {
+                        OrderId = newOrder.Id,
+                        ProductId = item.ProductId,
+                        Quantity = item.Quantity,
+                        Price = item.Price
+                    };
+                    await _context.OrderItems.AddAsync(orderItem);
+                }
+
+
+                IEnumerable<CartItem> cartItems = await _context.CartItems
+                    .Where(x => x.UserId == shoppingCart.Order.UserId)
+                    .ToListAsync();
+                _context.RemoveRange(cartItems);
+                await _context.SaveChangesAsync();
+                return newOrder;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error occurred while creating order for user {UserId}", shoppingCart.Order.UserId);
+                return StatusCode(Convert.ToInt32(HttpStatusCode.InternalServerError));
+            }
         }
 
         [HttpPut("{orderId}")]
@@ -144,8 +158,16 @@ namespace ECommerce.Api.Controllers
                 return BadRequest();
             }
 
-            _context.Entry(order).State = EntityState.Modified;
-            await _context.SaveChangesAsync();
+            try
+            {
+                _context.Entry(order).State = EntityState.Modified;
+                await _context.SaveChangesAsync();
+            } 
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error occurred while updating order of ID {OrderId}", order.Id);
+                return StatusCode(Convert.ToInt32(HttpStatusCode.InternalServerError));
+            }
 
             return NoContent();
         }

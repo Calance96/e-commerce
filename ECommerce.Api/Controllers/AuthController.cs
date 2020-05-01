@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using ECommerce.DataAccess;
@@ -11,8 +12,8 @@ using ECommerce.Utility;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace ECommerce.Api.Controllers
 {
@@ -23,14 +24,17 @@ namespace ECommerce.Api.Controllers
         private readonly ApplicationDbContext _context;
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly ILogger<AuthController> _logger;
 
         public AuthController(ApplicationDbContext context,
                               RoleManager<IdentityRole> roleManager,
-                              UserManager<ApplicationUser> userManager)
+                              UserManager<ApplicationUser> userManager,
+                              ILogger<AuthController> logger)
         {
             _context = context;
             _roleManager = roleManager;
             _userManager = userManager;
+            _logger = logger;
         }
 
         [HttpPost]
@@ -53,6 +57,7 @@ namespace ECommerce.Api.Controllers
                 }
                 else
                 {
+                    _logger.LogWarning("User {UserId} provided the wrong password", user.Id);
                     user = null;
                     statusCode = SD.StatusCode.UNAUTHORIZED;
                     messages.Add("Invalid credentials.");
@@ -60,6 +65,7 @@ namespace ECommerce.Api.Controllers
             }
             else
             {
+                _logger.LogWarning("Attempt to login with {Email} which doesn't exist", loginInput.Email);
                 user = null;
                 statusCode = SD.StatusCode.NOTFOUND;
                 messages.Add("User not found.");
@@ -77,62 +83,91 @@ namespace ECommerce.Api.Controllers
         [Route("register")]
         public async Task<ActionResult<AuthResult>> Register(RegisterViewModel registerInput)
         {
-            ApplicationUser user = new ApplicationUser
+            try
             {
-                UserName = registerInput.Email,
-                Email = registerInput.Email,
-                Address = registerInput.Address,
-                Name = registerInput.Name,
-                PhoneNumber = registerInput.PhoneNumber,
-                Role = registerInput.Role
+                ApplicationUser user = new ApplicationUser
+                {
+                    UserName = registerInput.Email,
+                    Email = registerInput.Email,
+                    Address = registerInput.Address,
+                    Name = registerInput.Name,
+                    PhoneNumber = registerInput.PhoneNumber,
+                    Role = registerInput.Role
+                };
+
+                var createUserResult = await _userManager.CreateAsync(user, registerInput.Password);
+
+                if (createUserResult.Succeeded)
+                {
+                    if (!await _roleManager.RoleExistsAsync(SD.ROLE_ADMIN))
+                    {
+                        await _roleManager.CreateAsync(new IdentityRole(SD.ROLE_ADMIN));
+                    }
+                    if (!await _roleManager.RoleExistsAsync(SD.ROLE_CUSTOMER))
+                    {
+                        await _roleManager.CreateAsync(new IdentityRole(SD.ROLE_CUSTOMER));
+                    }
+
+                    user.Role ??= SD.ROLE_CUSTOMER;
+                    await _userManager.AddToRoleAsync(user, user.Role);
+
+                    _logger.LogWarning("User {Email} has been created with role as {Role}", user.UserName, user.Role);
+
+                    return await Login(new LoginViewModel
+                    {
+                        Email = registerInput.Email,
+                        Password = registerInput.Password,
+                        RememberMe = false
+                    });
+                }
+                else
+                {
+                    _logger.LogWarning("User {Email} failed to be registered", user.UserName);
+
+                    return new AuthResult
+                    {
+                        StatusCode = SD.StatusCode.BAD_REQUEST,
+                        Message = new List<string>(createUserResult.Errors.Select(e => e.Description))
+                    };
+                }
+            } 
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Register failed with register inputs {@RegisterInput} with exception", registerInput);
+            }
+
+            var errorMessage = new List<string>
+            {
+                "Registration cannot be processed. Please try again later or contact E-Mall for further information."
             };
 
-            var createUserResult = await _userManager.CreateAsync(user, registerInput.Password);
-
-            if (createUserResult.Succeeded)
+            return new AuthResult
             {
-                if (!await _roleManager.RoleExistsAsync(SD.ROLE_ADMIN))
-                {
-                    await _roleManager.CreateAsync(new IdentityRole(SD.ROLE_ADMIN));
-                }
-                if (!await _roleManager.RoleExistsAsync(SD.ROLE_CUSTOMER))
-                {
-                    await _roleManager.CreateAsync(new IdentityRole(SD.ROLE_CUSTOMER));
-                }
-
-                await _userManager.AddToRoleAsync(user, user.Role ?? SD.ROLE_CUSTOMER);
-
-                return await Login(new LoginViewModel
-                {
-                    Email = registerInput.Email,
-                    Password = registerInput.Password,
-                    RememberMe = false
-                });
-            }
-            else
-            {
-                return new AuthResult
-                {
-                    StatusCode = SD.StatusCode.BAD_REQUEST,
-                    Message = new List<string>(createUserResult.Errors.Select(e => e.Description))
-                };
-            }
+                StatusCode = Convert.ToInt32(HttpStatusCode.InternalServerError),
+                Message = errorMessage
+            };
         }
 
         [HttpPost]
         [Route("password_change")]
         public async Task<Boolean> ChangePassword(ChangePasswordModel input)
         {
-            var user = await _userManager.FindByIdAsync(input.UserId);
-            var changePasswordResult = await _userManager.ChangePasswordAsync(user, input.CurrentPassword, input.NewPassword);
+            ApplicationUser user = null;
+            try
+            {
+                user = await _userManager.FindByIdAsync(input.UserId);
+                var changePasswordResult = await _userManager.ChangePasswordAsync(user, input.CurrentPassword, input.NewPassword);
 
-            if (changePasswordResult.Succeeded)
-            {
-                return true;
-            } else
-            {
-                return false;
+                if (changePasswordResult.Succeeded)
+                {
+                    return true;
+                }
             }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Password change by User {UserId} failed inputs {@RegisterInput} with exception", user.Id, input);
+            }
+            return false;
         }
     }
 }

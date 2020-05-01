@@ -1,0 +1,195 @@
+{
+    "Timestamp": "2020-04-30T19:38:05.5257830+08:00",
+    "Level": "Information",
+    "MessageTemplate": "API Server starting up"
+}
+{
+    "Timestamp": "2020-04-30T19:38:06.0326157+08:00",
+    "Level": "Information",
+    "MessageTemplate": "Application started. Press Ctrl+C to shut down.",
+    "Properties": {
+        "SourceContext": "Microsoft.Hosting.Lifetime"
+    }
+}
+{
+    "Timestamp": "2020-04-30T19:38:06.0368304+08:00",
+    "Level": "Information",
+    "MessageTemplate": "Hosting environment: {envName}",
+    "Properties": {
+        "envName": "Development",
+        "SourceContext": "Microsoft.Hosting.Lifetime"
+    }
+}
+{
+    "Timestamp": "2020-04-30T19:38:06.0387154+08:00",
+    "Level": "Information",
+    "MessageTemplate": "Content root path: {contentRoot}",
+    "Properties": {
+        "contentRoot": "C:\\Users\\yzhon\\source\\repos\\ECommerce\\ECommerce.Api",
+        "SourceContext": "Microsoft.Hosting.Lifetime"
+    }
+}
+{
+    "Timestamp": "2020-04-30T19:38:06.1522942+08:00",
+    "Level": "Information",
+    "MessageTemplate": "HTTP {RequestMethod} {RequestPath} responded {StatusCode} in {Elapsed:0.0000} ms",
+    "Properties": {
+        "RequestMethod": "GET",
+        "RequestPath": "/api/status",
+        "StatusCode": 200,
+        "Elapsed": 89.7137,
+        "SourceContext": "Serilog.AspNetCore.RequestLoggingMiddleware",
+        "RequestId": "80000103-0005-fc00-b63f-84710c7967bb",
+        "SpanId": "|d27e80cb-4b33d2b76230f5c8.",
+        "TraceId": "d27e80cb-4b33d2b76230f5c8",
+        "ParentId": ""
+    },
+    "Renderings": {
+        "Elapsed": [
+            {
+                "Format": "0.0000",
+                "Rendering": "89.7137"
+            }
+        ]
+    }
+}
+{
+    "Timestamp": "2020-04-30T19:38:14.7096542+08:00",
+    "Level": "Information",
+    "MessageTemplate": "Entity Framework Core {version} initialized '{contextType}' using provider '{provider}' with options: {options}",
+    "Properties": {
+        "version": "3.1.3",
+        "contextType": "ApplicationDbContext",
+        "provider": "Microsoft.EntityFrameworkCore.SqlServer",
+        "options": "None",
+        "EventId": {
+            "Id": 10403,
+            "Name": "Microsoft.EntityFrameworkCore.Infrastructure.ContextInitialized"
+        },
+        "SourceContext": "Microsoft.EntityFrameworkCore.Infrastructure",
+        "ActionId": "246c7bd9-75e9-4f18-ac0a-f9438fb07773",
+        "ActionName": "ECommerce.Api.Controllers.AuthController.Register (ECommerce.Api)",
+        "RequestId": "80000215-0008-ff00-b63f-84710c7967bb",
+        "RequestPath": "/api/auth/register",
+        "SpanId": "|5e229f6c-485ee6c5d9f7ce90.1.d27e80cc_",
+        "TraceId": "5e229f6c-485ee6c5d9f7ce90",
+        "ParentId": "|5e229f6c-485ee6c5d9f7ce90.1."
+    }
+}
+{
+    "Timestamp": "2020-04-30T19:38:15.3918222+08:00",
+    "Level": "Information",
+    "MessageTemplate": "Executed DbCommand ({elapsed}ms) [Parameters=[{parameters}], CommandType='{commandType}', CommandTimeout='{commandTimeout}']{newLine}{commandText}",
+    "Properties": {
+        "elapsed": "81",
+        "parameters": "@__normalizedUserName_0='?' (Size = 256)",
+        "commandType": "Text",
+        "commandTimeout": 30,
+        "newLine": "\r\n",
+        "commandText": "SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[Address], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[Name], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]\r\nFROM [AspNetUsers] AS [a]\r\nWHERE [a].[NormalizedUserName] = @__normalizedUserName_0",
+        "EventId": {
+            "Id": 20101,
+            "Name": "Microsoft.EntityFrameworkCore.Database.Command.CommandExecuted"
+        },
+        "SourceContext": "Microsoft.EntityFrameworkCore.Database.Command",
+        "ActionId": "246c7bd9-75e9-4f18-ac0a-f9438fb07773",
+        "ActionName": "ECommerce.Api.Controllers.AuthController.Register (ECommerce.Api)",
+        "RequestId": "80000215-0008-ff00-b63f-84710c7967bb",
+        "RequestPath": "/api/auth/register",
+        "SpanId": "|5e229f6c-485ee6c5d9f7ce90.1.d27e80cc_",
+        "TraceId": "5e229f6c-485ee6c5d9f7ce90",
+        "ParentId": "|5e229f6c-485ee6c5d9f7ce90.1."
+    }
+}
+{
+    "Timestamp": "2020-04-30T19:38:15.5033066+08:00",
+    "Level": "Warning",
+    "MessageTemplate": "User {userId} validation failed: {errors}.",
+    "Properties": {
+        "userId": "7998254c-c91b-4810-a877-0feed5f620fb",
+        "errors": "DuplicateUserName",
+        "EventId": {
+            "Id": 13
+        },
+        "SourceContext": "Microsoft.AspNetCore.Identity.UserManager",
+        "ActionId": "246c7bd9-75e9-4f18-ac0a-f9438fb07773",
+        "ActionName": "ECommerce.Api.Controllers.AuthController.Register (ECommerce.Api)",
+        "RequestId": "80000215-0008-ff00-b63f-84710c7967bb",
+        "RequestPath": "/api/auth/register",
+        "SpanId": "|5e229f6c-485ee6c5d9f7ce90.1.d27e80cc_",
+        "TraceId": "5e229f6c-485ee6c5d9f7ce90",
+        "ParentId": "|5e229f6c-485ee6c5d9f7ce90.1."
+    }
+}
+{
+    "Timestamp": "2020-04-30T19:38:15.5052592+08:00",
+    "Level": "Information",
+    "MessageTemplate": "User {Email} failed to be registered",
+    "Properties": {
+        "Email": "yzhong1996@live.com",
+        "SourceContext": "ECommerce.Api.Controllers.AuthController",
+        "ActionId": "246c7bd9-75e9-4f18-ac0a-f9438fb07773",
+        "ActionName": "ECommerce.Api.Controllers.AuthController.Register (ECommerce.Api)",
+        "RequestId": "80000215-0008-ff00-b63f-84710c7967bb",
+        "RequestPath": "/api/auth/register",
+        "SpanId": "|5e229f6c-485ee6c5d9f7ce90.1.d27e80cc_",
+        "TraceId": "5e229f6c-485ee6c5d9f7ce90",
+        "ParentId": "|5e229f6c-485ee6c5d9f7ce90.1."
+    }
+}
+{
+    "Timestamp": "2020-04-30T19:38:15.5187540+08:00",
+    "Level": "Information",
+    "MessageTemplate": "HTTP {RequestMethod} {RequestPath} responded {StatusCode} in {Elapsed:0.0000} ms",
+    "Properties": {
+        "RequestMethod": "POST",
+        "RequestPath": "/api/auth/register",
+        "StatusCode": 200,
+        "Elapsed": 1702.1752,
+        "SourceContext": "Serilog.AspNetCore.RequestLoggingMiddleware",
+        "RequestId": "80000215-0008-ff00-b63f-84710c7967bb",
+        "SpanId": "|5e229f6c-485ee6c5d9f7ce90.1.d27e80cc_",
+        "TraceId": "5e229f6c-485ee6c5d9f7ce90",
+        "ParentId": "|5e229f6c-485ee6c5d9f7ce90.1."
+    },
+    "Renderings": {
+        "Elapsed": [
+            {
+                "Format": "0.0000",
+                "Rendering": "1702.1752"
+            }
+        ]
+    }
+}
+{
+    "Timestamp": "2020-04-30T19:39:22.3574117+08:00",
+    "Level": "Information",
+    "MessageTemplate": "HTTP {RequestMethod} {RequestPath} responded {StatusCode} in {Elapsed:0.0000} ms",
+    "Properties": {
+        "RequestMethod": "GET",
+        "RequestPath": "/Logs/Log-20200430.json",
+        "StatusCode": 404,
+        "Elapsed": 0.2918,
+        "SourceContext": "Serilog.AspNetCore.RequestLoggingMiddleware",
+        "RequestId": "800000ab-0003-fe00-b63f-84710c7967bb",
+        "SpanId": "|d27e80cd-4b33d2b76230f5c8.",
+        "TraceId": "d27e80cd-4b33d2b76230f5c8",
+        "ParentId": ""
+    },
+    "Renderings": {
+        "Elapsed": [
+            {
+                "Format": "0.0000",
+                "Rendering": "0.2918"
+            }
+        ]
+    }
+}
+{
+    "Timestamp": "2020-04-30T20:05:39.6446278+08:00",
+    "Level": "Information",
+    "MessageTemplate": "Application is shutting down...",
+    "Properties": {
+        "SourceContext": "Microsoft.Hosting.Lifetime"
+    }
+}

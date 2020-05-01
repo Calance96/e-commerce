@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using ECommerce.DataAccess;
 using ECommerce.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 namespace ECommerce.Api.Controllers
 {
@@ -14,16 +16,17 @@ namespace ECommerce.Api.Controllers
     public class ProductsController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly ILogger<ProductsController> _logger;
 
-        public ProductsController(ApplicationDbContext context)
+        public ProductsController(ApplicationDbContext context, ILogger<ProductsController> logger)
         {
             _context = context;
+            _logger = logger;
         }
         
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Product>>> GetAll()
         {
-            // Eager loading with Include
             return await _context.Products.Include(product => product.Category).ToListAsync();
         }
 
@@ -34,6 +37,7 @@ namespace ECommerce.Api.Controllers
 
             if (product == null)
             {
+                _logger.LogWarning("Product of ID {ProductId} not found", id);
                 return NotFound();
             }
 
@@ -43,8 +47,16 @@ namespace ECommerce.Api.Controllers
         [HttpPost]
         public async Task<ActionResult<Product>> Add(Product product)
         {
-            await _context.Products.AddAsync(product);
-            await _context.SaveChangesAsync();
+            try
+            {
+                await _context.Products.AddAsync(product);
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error occurred while adding new product {@Product} to database", product);
+                return StatusCode(Convert.ToInt32(HttpStatusCode.InternalServerError));
+            }
 
             return CreatedAtAction(nameof(Get), new { id = product.Id }, product);
         }
@@ -57,8 +69,16 @@ namespace ECommerce.Api.Controllers
                 return BadRequest();
             }
 
-            _context.Entry(product).State = EntityState.Modified;
-            await _context.SaveChangesAsync();
+            try
+            {
+                _context.Entry(product).State = EntityState.Modified;
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error occurred while updating product {@Product} in database", product);
+                return StatusCode(Convert.ToInt32(HttpStatusCode.InternalServerError));
+            }
 
             return NoContent();
         }
@@ -70,12 +90,21 @@ namespace ECommerce.Api.Controllers
 
             if (product == null)
             {
+                _logger.LogWarning("Attempt to delete non-existing product of ID {ProductId}", id);
                 return NotFound();
             }
 
-            product.IsAvailable = !product.IsAvailable; // Just mark it instead of deleting it
-            _context.Products.Update(product); 
-            await _context.SaveChangesAsync();
+            try
+            {
+                product.IsAvailable = !product.IsAvailable; // Just mark it instead of deleting it
+                _context.Products.Update(product);
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error occurred while changing product {@Product} availability in database", product);
+                return StatusCode(Convert.ToInt32(HttpStatusCode.InternalServerError));
+            }
 
             return NoContent();
         }

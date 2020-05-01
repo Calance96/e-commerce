@@ -14,6 +14,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Serilog;
 
 namespace ECommerce.Api
 {
@@ -55,6 +56,8 @@ namespace ECommerce.Api
             }
 
             app.UseHttpsRedirection();
+
+            app.UseSerilogRequestLogging(); // Serilog middleware to know what requests the app is handling
 
             app.UseRouting();
 

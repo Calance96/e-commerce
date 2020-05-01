@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using ECommerce.DataAccess;
 using ECommerce.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 namespace ECommerce.Api.Controllers
 {
@@ -14,10 +16,12 @@ namespace ECommerce.Api.Controllers
     public class CategoriesController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly ILogger<CategoriesController> _logger;
 
-        public CategoriesController(ApplicationDbContext context)
+        public CategoriesController(ApplicationDbContext context, ILogger<CategoriesController> logger)
         {
             _context = context;
+            _logger = logger;
         }
 
         [HttpGet]
@@ -33,6 +37,7 @@ namespace ECommerce.Api.Controllers
 
             if (category == null)
             {
+                _logger.LogWarning("Category of ID {CategoryId} not found", id);
                 return NotFound();
             }
 
@@ -44,14 +49,23 @@ namespace ECommerce.Api.Controllers
         {
             var existingCategory = await _context.Categories.FirstOrDefaultAsync(c => c.Name.ToLower() == category.Name.Trim().ToLower());
 
-            if (existingCategory == null)
+            try
             {
-                _context.Categories.Add(category);
-                await _context.SaveChangesAsync();
-                return true;
+                if (existingCategory == null)
+                {
+                    _context.Categories.Add(category);
+                    await _context.SaveChangesAsync();
+                    return true;
+                }
+                else
+                {
+                    _logger.LogWarning("Attempt to add duplicate product category {@Category}", existingCategory);
+                    return false;
+                }
             } 
-            else
+            catch (Exception ex)
             {
+                _logger.LogError(ex, "Error adding new product category {@Category}", category);
                 return false;
             }
         }
@@ -66,14 +80,23 @@ namespace ECommerce.Api.Controllers
 
             var existingCategory = await _context.Categories.FirstOrDefaultAsync(c => c.Name.ToLower() == category.Name.Trim().ToLower());
 
-            if (existingCategory == null)
+            try
             {
-                _context.Entry(category).State = EntityState.Modified;
-                await _context.SaveChangesAsync();
-                return true;
-            } 
-            else
+                if (existingCategory == null)
+                {
+                    _context.Entry(category).State = EntityState.Modified;
+                    await _context.SaveChangesAsync();
+                    return true;
+                }
+                else
+                {
+                    _logger.LogWarning("Attempt to update product category {@Category} failed due to duplicate category {@ExistingCategory}", category, existingCategory);
+                    return false;
+                }
+            }
+            catch (Exception ex)
             {
+                _logger.LogError(ex, "Error updating product category {@Category}", category);
                 return false;
             }
         }
@@ -85,6 +108,7 @@ namespace ECommerce.Api.Controllers
 
             if (categoryToDelete == null)
             {
+                _logger.LogWarning("Attempt to delete non-existing category of ID {CategoryId}", id);
                 return NotFound();
             } 
             else if (_context.Products.Any(p => p.CategoryId == id))
@@ -92,8 +116,16 @@ namespace ECommerce.Api.Controllers
                 return BadRequest();
             }
 
-            _context.Categories.Remove(categoryToDelete);
-            await _context.SaveChangesAsync();
+            try
+            {
+                _context.Categories.Remove(categoryToDelete);
+                await _context.SaveChangesAsync();
+            } 
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error deleting {@Category} from database", categoryToDelete);
+                return StatusCode(Convert.ToInt32(HttpStatusCode.InternalServerError));
+            }
 
             return NoContent();
         }
