@@ -35,7 +35,7 @@ namespace ECommerce.Utility
             }
         }
 
-        public static async Task<PaginatedList<T>> CreateAsync(
+        public static PaginatedList<T> Create(
             IQueryable<T> source, int pageIndex, int pageSize)
         {
             var count = source.Count<T>();
