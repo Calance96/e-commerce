@@ -5,7 +5,7 @@
     ViewData["Title"] = "Order Details";
 }
 
-<form method="post">
+<form method="post" asp-page-handler="CompleteOrder">
     <br />
     <div class="backgroundWhite container">
         <div class="card">
@@ -120,7 +120,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-12 col-lg-6 mx-auto mt-md-3">
+                            <div class="col-12 col-lg-6 mx-auto">
                                 <div class="border rounded p-3">
                                     <h4 class="d-flex justify-content-between align-items-center mb-3">
                                         <span class="text-primary font-weight-bold">Order Summary</span>
@@ -156,7 +156,7 @@
                                     @if (Model.OrderDetails.Order.OrderStatus == SD.OrderStatus.SHIPPED)
                                     {
                                         <br/>
-                                        <button type="submit" class="btn btn-primary form-control mb-2" asp-page-handler="CompleteOrder">
+                                        <button onclick="showConfirmationDialog('complete')" class="btn btn-primary form-control mb-2">
                                             Mark Order Complete
                                         </button>
                                     }
@@ -166,6 +166,31 @@
                     </div>
                 </div>
             }
+            else
+            {
+                <h2 class="text-danger">Order details not found.</h2>
+            }
         </div>
     </div>
 </form>
+
+@section Scripts {
+    @if (Model.OrderDetails.Order.OrderStatus == SD.OrderStatus.SHIPPED)
+    {
+        <script>
+            function showConfirmationDialog(action) {
+                event.preventDefault();
+                Swal.fire({
+                    icon: 'question',
+                    title: 'Confirmation',
+                    text: `Are you sure you want to ${action} this order?`,
+                    showCancelButton: true,
+                    cancelButtonColor: 'red'
+                }).then(function (confirm) {
+                    if (confirm.value)
+                        document.getElementsByTagName("form")[1].submit();
+                });
+            }
+        </script>
+    }
+}
