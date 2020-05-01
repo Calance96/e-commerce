@@ -13,7 +13,7 @@
 
     <form method="get" asp-page="./Index">
         <div class="row">
-            <div class="col-9 input-group mb-3">
+            <div class="col-12 col-md-9 input-group mb-3">
                 <div class="input-group-prepend">
                     <span class="input-group-text"><i class="fas fa-search"></i></span>
                 </div>
@@ -26,8 +26,16 @@
                     <input type="submit" value="Search" class="btn btn-success" />
                 </div>
             </div>
-            <div class="col-3">
+            <div class="col-12 col-md-3">
                 <select class="form-control" name="category" selected="@Model.CategoryFilter" asp-items="Model.Categories"></select>
+            </div>
+        </div>
+        <div class="row mt-1 mb-1">
+            <div class="col-12">
+                <div class="form-check">
+                    <input id="availableOnly" name="availableOnly" type="checkbox" class="form-check-input" checked="@Model.ShowAvailableOnly" />
+                    <label class="form-check-label" for="availableOnly">Show Available Products Only</label>
+                </div>
             </div>
         </div>
     </form>
@@ -114,6 +122,19 @@
                     icon: 'success',
                     title: 'E-Mall',
                     text: "@TempData["SuccessMessage"]",
+                });
+            });
+        </script>
+    }
+
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <script async>
+            $(document).ready(function () {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'E-Mall',
+                    text: "@TempData["ErrorMessage"]",
                 });
             });
         </script>

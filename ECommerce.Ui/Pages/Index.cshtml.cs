@@ -19,6 +19,9 @@ namespace ECommerce.Ui.Pages
 
         public string SearchTerm { get; set; }
         public string CategoryFilter { get; set; }
+
+        public bool ShowAvailableOnly { get; set; }
+
         public List<SelectListItem> Categories { get; set; }
 
         private const int PAGE_SIZE = 8;
@@ -31,9 +34,10 @@ namespace ECommerce.Ui.Pages
 
         public PaginatedList<Product> Products { get; set; }
 
-        public async Task OnGet(string searchString, int? pageIndex, string category)
+        public async Task OnGet(string searchString, int? pageIndex, string category, string availableOnly = "on")
         {
             var ProductsFromDb = await _productService.GetAll();
+            ShowAvailableOnly = availableOnly.Trim() == "on" ? true : false;
             CategoryFilter = category ?? "";
 
             Categories = new List<SelectListItem> {
@@ -63,7 +67,12 @@ namespace ECommerce.Ui.Pages
                 ProductsFromDb = ProductsFromDb.Where(p => p.Category.Name == category);
             }
 
-            Products = await PaginatedList<Product>.CreateAsync(ProductsFromDb.AsQueryable<Product>(), pageIndex ?? 1, PAGE_SIZE);
+            if (ShowAvailableOnly)
+            {
+                ProductsFromDb = ProductsFromDb.Where(p => p.IsAvailable);
+            }
+
+            Products = PaginatedList<Product>.Create(ProductsFromDb.AsQueryable<Product>(), pageIndex ?? 1, PAGE_SIZE);
 
         }
     }
