@@ -7,7 +7,7 @@
     var status = HttpContext.Request.Query["status"];
 
     var all = "text-dark";
-    var pending = "text-dark";
+    var approved = "text-dark";
     var processing = "text-dark";
     var completed = "text-dark";
     var shipped = "text-dark";
@@ -15,8 +15,8 @@
 
     switch (status)
     {
-        case SD.OrderStatus.PENDING:
-            pending = "active";
+        case SD.OrderStatus.APPROVED:
+            approved = "active";
             break;
         case SD.OrderStatus.PROCESSING:
             processing = "active";
@@ -49,9 +49,9 @@
                         All
                     </li>
                 </a>
-                <a style="text-decoration: none" asp-page="./Index" asp-route-status="@SD.OrderStatus.PENDING">
-                    <li class="list-group-item rounded-0 @pending">
-                        Pending
+                <a style="text-decoration: none" asp-page="./Index" asp-route-status="@SD.OrderStatus.APPROVED">
+                    <li class="list-group-item rounded-0 @approved">
+                        Approved
                     </li>
                 </a>
                 <a style="text-decoration: none" asp-page="./Index" asp-route-status="@SD.OrderStatus.PROCESSING">
