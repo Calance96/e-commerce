@@ -60,6 +60,26 @@ namespace ECommerce.Ui.Services
             }
         }
 
+        public async Task<CartItem> GetCartItemByCartId(long cartId)
+        {
+            var response = await _httpClient.GetAsync($"{_route}/details/{cartId}");
+
+            if (response.IsSuccessStatusCode)
+            {
+                var json = await response.Content.ReadAsStreamAsync();
+                var item = await JsonSerializer.DeserializeAsync<CartItem>(json, new JsonSerializerOptions
+                {
+                    PropertyNameCaseInsensitive = true
+                });
+
+                return item;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
         public async Task<Boolean> Update(CartItem cartItem)
         {
             var data = new StringContent(JsonSerializer.Serialize<CartItem>(cartItem), Encoding.UTF8, SD.CONTENT_JSON);

@@ -61,16 +61,9 @@ namespace ECommerce.Ui.Areas.Customer.Pages.ShoppingCart
             }
         }
 
-        public async Task<IActionResult> OnPostIncreaseAsync(long productId)
+        public async Task<IActionResult> OnPostIncreaseAsync(long cartId)
         {
-            var claimsIdentity = (ClaimsIdentity)User.Identity;
-            var userId = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier).Value;
-
-            CartItem cartItem = await _cartService.GetCartItemByUserIdAndProductId(new CartItem
-            {
-                ProductId = productId,
-                UserId = userId
-            });
+            CartItem cartItem = await _cartService.GetCartItemByCartId(cartId);
 
             cartItem.Quantity += 1;
             var updateCartSuccess = await _cartService.Update(cartItem);
@@ -83,16 +76,9 @@ namespace ECommerce.Ui.Areas.Customer.Pages.ShoppingCart
             return RedirectToPage();
         }
 
-        public async Task<IActionResult> OnPostDecreaseAsync(long productId)
+        public async Task<IActionResult> OnPostDecreaseAsync(long cartId)
         {
-            var claimsIdentity = (ClaimsIdentity)User.Identity;
-            var userId = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier).Value;
-
-            CartItem cartItem = await _cartService.GetCartItemByUserIdAndProductId(new CartItem
-            {
-                ProductId = productId,
-                UserId = userId
-            });
+            CartItem cartItem = await _cartService.GetCartItemByCartId(cartId);
 
             if (cartItem.Quantity == 1)
             {

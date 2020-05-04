@@ -54,11 +54,26 @@ namespace ECommerce.Api.Controllers
         }
 
         [HttpGet("{userId}/{productId}")]
-        public async Task<ActionResult<CartItem>> Get(string userId, long productId)
+        public async Task<ActionResult<CartItem>> GetCartItemBasedOnUserIdAndProductId(string userId, long productId)
         {
             CartItem cartItemFromDb = await _context.CartItems
                                     .Include(item => item.Product)
                                     .FirstOrDefaultAsync(item => item.UserId == userId && item.ProductId == productId);
+
+            if (cartItemFromDb == null)
+            {
+                return NotFound();
+            }
+
+            return cartItemFromDb;
+        }
+
+        [HttpGet("details/{cartId}")]
+        public async Task<ActionResult<CartItem>> GetCartItemBasedOnCartId(long cartId)
+        {
+            CartItem cartItemFromDb = await _context.CartItems
+                                    .Include(item => item.Product)
+                                    .FirstOrDefaultAsync(item => item.Id == cartId);
 
             if (cartItemFromDb == null)
             {
