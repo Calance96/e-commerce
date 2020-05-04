@@ -37,8 +37,7 @@ namespace ECommerce.Api.Controllers
             _logger = logger;
         }
 
-        [HttpPost]
-        [Route("login")]
+        [HttpPost("login")]
         public async Task<AuthResult> Login(LoginViewModel loginInput)
         {
             ApplicationUser user = await _userManager.FindByEmailAsync(loginInput.Email);
@@ -79,8 +78,7 @@ namespace ECommerce.Api.Controllers
             }; ;
         }
 
-        [HttpPost]
-        [Route("register")]
+        [HttpPost("register")]
         public async Task<ActionResult<AuthResult>> Register(RegisterViewModel registerInput)
         {
             try
@@ -142,8 +140,7 @@ namespace ECommerce.Api.Controllers
             };
         }
 
-        [HttpPost]
-        [Route("password_change")]
+        [HttpPost("password_change")]
         public async Task<Boolean> ChangePassword(ChangePasswordModel input)
         {
             ApplicationUser user = null;
