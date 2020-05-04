@@ -14,13 +14,13 @@
                     <h4 class="text-primary">@Model.CartItem.Product.Name</h4>
                 </div>
                 <div class="col-12 col-md-4 text-md-right">
-                    @if (Model.ProductVM.Categories.Count() == 0)
+                    @if (Model.Categories.Count() == 0)
                     {
                         <span class="badge badge-danger">None</span>
                     }
                     else
                     {
-                        @foreach (var category in Model.ProductVM.Categories)
+                        @foreach (var category in Model.Categories)
                         {
                             <span class="badge badge-warning">@category</span>
                         }

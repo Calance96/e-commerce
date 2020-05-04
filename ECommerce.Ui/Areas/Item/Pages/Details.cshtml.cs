@@ -27,8 +27,7 @@ namespace ECommerce.Ui.Areas.Item.Pages
         [BindProperty]
         public CartItem CartItem { get; set; }
 
-        [BindProperty]
-        public ProductViewModel ProductVM { get; set; }
+        public List<string> Categories { get; set; }
 
         [TempData]
         public string SuccessMessage { get; set; }
@@ -38,11 +37,12 @@ namespace ECommerce.Ui.Areas.Item.Pages
 
         public async Task OnGet(long id)
         {
-            ProductVM = await _productService.GetById(id);
+            var ProductVM = await _productService.GetById(id);
 
             if (ProductVM != null)
             {
                 var product = ProductVM.Product;
+                Categories = ProductVM.Categories;
                 CartItem = new CartItem
                 {
                     Product = product,
