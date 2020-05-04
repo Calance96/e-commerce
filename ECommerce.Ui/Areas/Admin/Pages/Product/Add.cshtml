@@ -42,30 +42,11 @@
             </div>
             <div class="form-group row">
                 <div class="col-4">
-                    Category 1
+                    Categories
                 </div>
                 <div class="col-8">
-                    @Html.DropDownListFor(m => m.ProductVM.CategoryId_1, Model.CategoryList, "- Select a Category -",
-                   new { @class = "form-control" })
-                    <span asp-validation-for="ProductVM.CategoryId_1" class="text-danger"></span>
-                </div>
-            </div>
-            <div class="form-group row">
-                <div class="col-4">
-                    Category 2
-                </div>
-                <div class="col-8">
-                    @Html.DropDownListFor(m => m.ProductVM.CategoryId_2, Model.CategoryList, "- Select a Category -",
-                   new { @class = "form-control" })
-                </div>
-            </div>
-            <div class="form-group row">
-                <div class="col-4">
-                    Category 3
-                </div>
-                <div class="col-8">
-                    @Html.DropDownListFor(m => m.ProductVM.CategoryId_3, Model.CategoryList, "- Select a Category -",
-                   new { @class = "form-control" })
+                    <select id="categoryDropDown" asp-for="ProductVM.CategoryIds" asp-items="Model.CategoryList"></select>
+                    <span asp-validation-for="ProductVM.CategoryIds" class="text-danger"></span>
                 </div>
             </div>
             <div class="form-group row">
@@ -94,4 +75,7 @@
 
 @section Scripts{
     <partial name="_ValidationScriptsPartial" />
+    <script>
+        $('#categoryDropDown').multi();
+    </script>
 }

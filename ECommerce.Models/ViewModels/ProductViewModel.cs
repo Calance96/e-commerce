@@ -12,13 +12,8 @@ namespace ECommerce.Models.ViewModels
 
         public List<string> Categories { get; set; }
 
+        [Required(ErrorMessage = "Must set at least one category for the product.")]
+        [MinLength(1)]
         public List<long> CategoryIds { get; set; }
-
-        [Required(ErrorMessage = "One least one category must be set for the product.")]
-        public string CategoryId_1 { get; set; }
-
-        public string CategoryId_2 { get; set; }
-
-        public string CategoryId_3 { get; set; }
     }
 }

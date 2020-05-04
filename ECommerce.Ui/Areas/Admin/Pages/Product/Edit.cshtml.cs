@@ -47,26 +47,6 @@ namespace ECommerce.Ui.Areas.Admin.Pages.Product
                 await GetCategoryList();
                 return Page();
             }
-            else if (HasDuplicateCategory())
-            {
-                await GetCategoryList();
-                ModelState.AddModelError(string.Empty, "Duplicate category is not prohibited.");
-                return Page();
-            }
-
-            ProductVM.CategoryIds = new List<long>();
-            if (!string.IsNullOrEmpty(ProductVM.CategoryId_1))
-            {
-                ProductVM.CategoryIds.Add(long.Parse(ProductVM.CategoryId_1));
-            }
-            if (!string.IsNullOrEmpty(ProductVM.CategoryId_2))
-            {
-                ProductVM.CategoryIds.Add(long.Parse(ProductVM.CategoryId_2));
-            }
-            if (!string.IsNullOrEmpty(ProductVM.CategoryId_3))
-            {
-                ProductVM.CategoryIds.Add(long.Parse(ProductVM.CategoryId_3));
-            }
 
             var files = HttpContext.Request.Form.Files;
             if (files.Count > 0)
@@ -109,22 +89,6 @@ namespace ECommerce.Ui.Areas.Admin.Pages.Product
                 Text = item.Name,
                 Value = item.Id.ToString()
             }).ToList();
-        }
-
-        private bool HasDuplicateCategory()
-        {
-            var hasDuplicate = false;
-
-            if (!string.IsNullOrEmpty(ProductVM.CategoryId_2) && string.IsNullOrEmpty(ProductVM.CategoryId_3))
-                hasDuplicate = ProductVM.CategoryId_1.Equals(ProductVM.CategoryId_2);
-            else if (!string.IsNullOrEmpty(ProductVM.CategoryId_3) && string.IsNullOrEmpty(ProductVM.CategoryId_2))
-                hasDuplicate = ProductVM.CategoryId_1.Equals(ProductVM.CategoryId_3);
-            else if (!string.IsNullOrEmpty(ProductVM.CategoryId_2) && !string.IsNullOrEmpty(ProductVM.CategoryId_3))
-                hasDuplicate = (ProductVM.CategoryId_1.Equals(ProductVM.CategoryId_2) ||
-                                ProductVM.CategoryId_1.Equals(ProductVM.CategoryId_3) ||
-                                ProductVM.CategoryId_2.Equals(ProductVM.CategoryId_3));
-
-            return hasDuplicate;
         }
     }
 }

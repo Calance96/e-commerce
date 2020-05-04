@@ -50,18 +50,6 @@ namespace ECommerce.Api.Controllers
 
                 for (int i = 0; i < productVM.CategoryIds.Count(); ++i)
                 {
-                    if (i == 0)
-                    {
-                        productVM.CategoryId_1 = productVM.CategoryIds[0].ToString();
-                    }
-                    if (i == 1)
-                    {
-                        productVM.CategoryId_2 = productVM.CategoryIds[1].ToString();
-                    }
-                    if (i == 2)
-                    {
-                        productVM.CategoryId_3 = productVM.CategoryIds[2].ToString();
-                    }
                     productVM.Categories.Add(productCategories.First(x => x.CategoryId == productVM.CategoryIds[i]).Category.Name);
                 }
                 productVMs.Add(productVM);
@@ -96,18 +84,6 @@ namespace ECommerce.Api.Controllers
 
             for (int i = 0; i < productVM.CategoryIds.Count(); ++i)
             {
-                if (i == 0)
-                {
-                    productVM.CategoryId_1 = productVM.CategoryIds[0].ToString();
-                }
-                if (i == 1)
-                {
-                    productVM.CategoryId_2 = productVM.CategoryIds[1].ToString();
-                }
-                if (i == 2)
-                {
-                    productVM.CategoryId_3 = productVM.CategoryIds[2].ToString();
-                }
                 productVM.Categories.Add(productCategories[i].Category.Name);
             }
             return productVM;
