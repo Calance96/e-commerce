@@ -339,4 +339,4 @@ ASALocalRun/
 # BeatPulse healthcheck temp database
 healthchecksdb
 
-./ECommerce.Ui/wwwroot/images/products/*
+ECommerce.Ui/wwwroot/images/products/*
