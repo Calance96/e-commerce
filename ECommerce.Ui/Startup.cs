@@ -66,8 +66,8 @@ namespace ECommerce.Ui
 
                     options.Conventions.AuthorizeAreaPage("Customer", "/Order", SD.Policy.CUSTOMER_ONLY);
                     options.Conventions.AuthorizeAreaPage("Customer", "/ShoppingCart", SD.Policy.CUSTOMER_ONLY);
-                    options.Conventions.AuthorizeAreaPage("Item", "/Details", SD.Policy.CUSTOMER_ONLY);
 
+                    options.Conventions.AuthorizeAreaPage("Item", "/Details", SD.Policy.AUTHENTICATED_ONLY);
                     options.Conventions.AuthorizeAreaFolder("Account", "/Profile", SD.Policy.AUTHENTICATED_ONLY);
                 })
                 .AddSessionStateTempDataProvider();

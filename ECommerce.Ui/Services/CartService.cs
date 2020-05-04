@@ -27,13 +27,16 @@ namespace ECommerce.Ui.Services
         public async Task<IEnumerable<CartItem>> GetAll(string userId)
         {
             var response = await _httpClient.GetAsync($"{_route}/{userId}");
-            response.EnsureSuccessStatusCode();
+            IEnumerable<CartItem> cartItems = Enumerable.Empty<CartItem>();
 
-            var json = await response.Content.ReadAsStreamAsync();
-            var cartItems = await JsonSerializer.DeserializeAsync<IEnumerable<CartItem>>(json, new JsonSerializerOptions
+            if (response.IsSuccessStatusCode)
             {
-                PropertyNameCaseInsensitive = true
-            });
+                var json = await response.Content.ReadAsStreamAsync();
+                cartItems = await JsonSerializer.DeserializeAsync<IEnumerable<CartItem>>(json, new JsonSerializerOptions
+                {
+                    PropertyNameCaseInsensitive = true
+                });
+            }
             return cartItems;
         }
 
@@ -57,32 +60,62 @@ namespace ECommerce.Ui.Services
             }
         }
 
-        public async Task Update(CartItem cartItem)
+        public async Task<Boolean> Update(CartItem cartItem)
         {
             var data = new StringContent(JsonSerializer.Serialize<CartItem>(cartItem), Encoding.UTF8, SD.CONTENT_JSON);
-            await _httpClient.PutAsync($"{_route}/{cartItem.Id}", data);
+            var response = await _httpClient.PutAsync($"{_route}/{cartItem.Id}", data);
+
+            if (response.IsSuccessStatusCode)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
-        public async Task Add(CartItem cartItem)
+        public async Task<Boolean> Add(CartItem cartItem)
         {
             var data = new StringContent(JsonSerializer.Serialize<CartItem>(cartItem), Encoding.Default, SD.CONTENT_JSON);
-            await _httpClient.PostAsync(_route, data);
+            var response = await _httpClient.PostAsync(_route, data);
+
+            if (response.IsSuccessStatusCode)
+            {
+                return true;
+            } 
+            else
+            {
+                return false;
+            }
         }
 
-        public async Task Delete(long id)
+        public async Task<Boolean> Delete(long id)
         {
-            await _httpClient.DeleteAsync($"{_route}/{id}");
+            var response = await _httpClient.DeleteAsync($"{_route}/{id}");
+
+            if (response.IsSuccessStatusCode)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public async Task<Int32> GetItemsCount(string userId)
         {
             var response = await _httpClient.GetAsync($"{_route}/count/{userId}");
-            response.EnsureSuccessStatusCode();
+            var count = -1;
 
-            var count = await JsonSerializer.DeserializeAsync<Int32>(await response.Content.ReadAsStreamAsync(), new JsonSerializerOptions
+            if (response.IsSuccessStatusCode)
             {
-                PropertyNameCaseInsensitive = true
-            });
+                count = await JsonSerializer.DeserializeAsync<Int32>(await response.Content.ReadAsStreamAsync(), new JsonSerializerOptions
+                {
+                    PropertyNameCaseInsensitive = true
+                });
+            }
             return count;
         }
     }

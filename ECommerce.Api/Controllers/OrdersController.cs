@@ -160,6 +160,17 @@ namespace ECommerce.Api.Controllers
 
             try
             {
+                if (order.OrderActionId > 0)
+                {
+                    var orderAuditTrail = new OrderAuditTrail
+                    {
+                        OrderId = order.Id,
+                        OrderActionId = order.OrderActionId,
+                        PerformedBy = order.UpdatedBy,
+                        PerformedDate = order.UpdatedAt
+                    };
+                    _context.OrderAuditTrails.Add(orderAuditTrail);
+                }
                 _context.Entry(order).State = EntityState.Modified;
                 await _context.SaveChangesAsync();
             } 

@@ -47,38 +47,39 @@
                                     <p class="font-weight-bold">@Model.OrderDetails.Order.OrderStatus</p>
                                 </div>
                             </div>
+                            <input type="hidden" asp-for="OrderDetails.Order.Id" />
                             <div class="row my-1">
                                 <div class="col-4">@Html.DisplayNameFor(m => m.OrderDetails.Order.Name)</div>
                                 <div class="col-8">
-                                    <input type="text" class="form-control" asp-for="OrderDetails.Order.Name" />
+                                    <input readonly type="text" class="form-control" asp-for="OrderDetails.Order.Name" />
                                     <span class="text-danger" asp-validation-for="OrderDetails.Order.Name"></span>
                                 </div>
                             </div>
                             <div class="row my-1">
                                 <div class="col-4">@Html.DisplayNameFor(m => m.OrderDetails.Order.PhoneNumber)</div>
                                 <div class="col-8">
-                                    <input type="text" class="form-control" asp-for="OrderDetails.Order.PhoneNumber" />
+                                    <input readonly type="text" class="form-control" asp-for="OrderDetails.Order.PhoneNumber" />
                                     <span class="text-danger" asp-validation-for="OrderDetails.Order.PhoneNumber"></span>
                                 </div>
                             </div>
                             <div class="row my-1">
                                 <div class="col-4">@Html.DisplayNameFor(m => m.OrderDetails.Order.ShippingAddress)</div>
                                 <div class="col-8">
-                                    <textarea type="text" rows="6" class="form-control" asp-for="OrderDetails.Order.ShippingAddress"></textarea>
+                                    <textarea readonly type="text" rows="6" class="form-control" asp-for="OrderDetails.Order.ShippingAddress"></textarea>
                                 </div>
                                 <span class="text-danger" asp-validation-for="OrderDetails.Order.ShippingAddress"></span>
                             </div>
                             <div class="row my-1">
                                 <div class="col-4">@Html.DisplayNameFor(m => m.OrderDetails.Order.BillingAddress)</div>
                                 <div class="col-8">
-                                    <textarea type="text" rows="6" class="form-control" asp-for="OrderDetails.Order.BillingAddress"></textarea>
+                                    <textarea readonly type="text" rows="6" class="form-control" asp-for="OrderDetails.Order.BillingAddress"></textarea>
                                     <span class="text-danger" asp-validation-for="OrderDetails.Order.BillingAddress"></span>
                                 </div>
                             </div>
                             <div class="row my-1">
                                 <div class="col-4">@Html.DisplayNameFor(m => m.OrderDetails.Order.Email)</div>
                                 <div class="col-8">
-                                    <input id="txtName" type="text" class="form-control" value="@Model.OrderDetails.Order.Email" />
+                                    <input readonly type="text" class="form-control" value="@Model.OrderDetails.Order.Email" />
                                     <span class="text-danger" asp-validation-for="OrderDetails.Order.Email"></span>
                                 </div>
                             </div>
@@ -93,13 +94,27 @@
                                 <div class="row my-1">
                                     <div class="col-4">@Html.DisplayNameFor(m => m.OrderDetails.Order.Carrier)</div>
                                     <div class="col-8">
-                                        <input type="text" class="form-control" asp-for="OrderDetails.Order.Carrier" />
+                                        @if (Model.OrderDetails.Order.OrderStatus == SD.OrderStatus.PROCESSING)
+                                        {
+                                            <input type="text" class="form-control" asp-for="OrderDetails.Order.Carrier" />
+                                        }
+                                        else
+                                        {
+                                            <input readonly type="text" class="form-control" asp-for="OrderDetails.Order.Carrier" />
+                                        }
                                     </div>
                                 </div>
                                 <div class="row my-1">
                                     <div class="col-4">@Html.DisplayNameFor(m => m.OrderDetails.Order.TrackingNumber)</div>
                                     <div class="col-8">
-                                        <input type="text" class="form-control" asp-for="@Model.OrderDetails.Order.TrackingNumber" />
+                                        @if (Model.OrderDetails.Order.OrderStatus == SD.OrderStatus.PROCESSING)
+                                        {
+                                            <input type="text" class="form-control" asp-for="@Model.OrderDetails.Order.TrackingNumber" />
+                                        }
+                                        else
+                                        {
+                                            <input readonly type="text" class="form-control" asp-for="@Model.OrderDetails.Order.TrackingNumber" />
+                                        }
                                     </div>
                                 </div>
                             </form>
@@ -177,14 +192,13 @@
 
                                 else if (Model.OrderDetails.Order.OrderStatus == SD.OrderStatus.PROCESSING)
                                 {
-                                    <button onclick="showConfirmationDialog('ship')" class="btn btn-primary form-control mb-2" asp-page-handler="ShipOrder">
+                                    <button onclick="showConfirmationDialog('ship')" class="btn btn-primary form-control mb-2">
                                         Ship Order
                                     </button>
                                 }
 
                                 @if (Model.OrderDetails.Order.OrderStatus == SD.OrderStatus.SHIPPED)
                                 {
-
                                     <form id="complete_form" method="post" asp-page-handler="CompleteOrder">
                                         <input type="hidden" asp-for="OrderDetails.Order.Id" />
                                         <button onclick="showConfirmationDialog('complete')" class="btn btn-primary form-control mb-2">
@@ -194,9 +208,9 @@
                                 }
 
                                 @if (Model.OrderDetails.Order.OrderStatus != SD.OrderStatus.CANCELLED &&
-                    Model.OrderDetails.Order.OrderStatus != SD.OrderStatus.REFUNDED &&
-                    Model.OrderDetails.Order.OrderStatus != SD.OrderStatus.SHIPPED &&
-                    Model.OrderDetails.Order.OrderStatus != SD.OrderStatus.COMPLETE)
+Model.OrderDetails.Order.OrderStatus != SD.OrderStatus.REFUNDED &&
+Model.OrderDetails.Order.OrderStatus != SD.OrderStatus.SHIPPED &&
+Model.OrderDetails.Order.OrderStatus != SD.OrderStatus.COMPLETE)
                                 {
                                     <form id="cancel_form" method="post" asp-page-handler="CancelOrder">
                                         <input type="hidden" asp-for="OrderDetails.Order.Id" />

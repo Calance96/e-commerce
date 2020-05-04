@@ -65,5 +65,14 @@ namespace ECommerce.Models
         [Phone]
         [Display(Name = "Phone Number")]
         public string PhoneNumber { get; set; }
+
+        [NotMapped]
+        public string UpdatedBy { get; set; }
+
+        [NotMapped]
+        public DateTime UpdatedAt { get; set; }
+
+        [NotMapped]
+        public long OrderActionId { get; set; }
     }
 }

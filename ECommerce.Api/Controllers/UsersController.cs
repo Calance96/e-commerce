@@ -28,7 +28,7 @@ namespace ECommerce.Api.Controllers
         [HttpGet("{role}")]
         public async Task<IEnumerable<ApplicationUser>> GetAll(string role)
         {
-            var users = await _context.ApplicationUsers.ToListAsync();
+            var users = await _context.ApplicationUsers.OrderByDescending(x => x.CreatedAt).ToListAsync();
             var userRoles = await _context.UserRoles.ToListAsync();
             var roles = await _context.Roles.ToListAsync();
 

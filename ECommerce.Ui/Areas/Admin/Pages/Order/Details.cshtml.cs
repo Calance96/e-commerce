@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using ECommerce.Models.ViewModels;
 using ECommerce.Ui.Services;
@@ -35,6 +36,9 @@ namespace ECommerce.Ui.Areas.Admin.Pages.Order
         {
             Models.Order orderFromDb = await _orderService.GetOrderSummaryByOrderId(OrderDetails.Order.Id);
             orderFromDb.OrderStatus = SD.OrderStatus.PROCESSING;
+            orderFromDb.UpdatedAt = DateTime.Now;
+            orderFromDb.UpdatedBy = User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier).Value;
+            orderFromDb.OrderActionId = (long)SD.OrderAction.PROCESS;
             await _orderService.Update(orderFromDb);
             return RedirectToPage();
         }
@@ -44,7 +48,6 @@ namespace ECommerce.Ui.Areas.Admin.Pages.Order
             var carrier = OrderDetails.Order.Carrier?.Trim();
             var trackingNum = OrderDetails.Order.TrackingNumber?.Trim();
 
-
             if (!string.IsNullOrEmpty(carrier) && !string.IsNullOrEmpty(trackingNum))
             {
                 Models.Order orderFromDb = await _orderService.GetOrderSummaryByOrderId(OrderDetails.Order.Id);
@@ -53,6 +56,9 @@ namespace ECommerce.Ui.Areas.Admin.Pages.Order
                 orderFromDb.TrackingNumber = trackingNum;
                 orderFromDb.ShipDate = DateTime.Now;
                 orderFromDb.OrderStatus = SD.OrderStatus.SHIPPED;
+                orderFromDb.UpdatedAt = DateTime.Now;
+                orderFromDb.UpdatedBy = User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier).Value;
+                orderFromDb.OrderActionId = (long)SD.OrderAction.SHIP;
                 await _orderService.Update(orderFromDb);
                 return RedirectToPage();
             }
@@ -76,6 +82,9 @@ namespace ECommerce.Ui.Areas.Admin.Pages.Order
         {
             Models.Order orderFromDb = await _orderService.GetOrderSummaryByOrderId(OrderDetails.Order.Id);
             orderFromDb.OrderStatus = SD.OrderStatus.COMPLETE;
+            orderFromDb.UpdatedAt = DateTime.Now;
+            orderFromDb.UpdatedBy = User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier).Value;
+            orderFromDb.OrderActionId = (long)SD.OrderAction.COMPLETE;
             await _orderService.Update(orderFromDb);
             return RedirectToPage();
         }
@@ -100,11 +109,17 @@ namespace ECommerce.Ui.Areas.Admin.Pages.Order
                 orderFromDb.OrderStatus = SD.OrderStatus.REFUNDED;
                 orderFromDb.PaymentStatus = SD.PaymentStatus.REFUNDED;
                 orderFromDb.PaymentDate = DateTime.Now;
+                orderFromDb.UpdatedAt = DateTime.Now;
+                orderFromDb.UpdatedBy = User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier).Value;
+                orderFromDb.OrderActionId = (long)SD.OrderAction.REFUND;
             } 
             else
             {
                 orderFromDb.OrderStatus = SD.OrderStatus.CANCELLED;
                 orderFromDb.PaymentStatus = SD.PaymentStatus.CANCELLED;
+                orderFromDb.UpdatedAt = DateTime.Now;
+                orderFromDb.UpdatedBy = User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier).Value;
+                orderFromDb.OrderActionId = (long)SD.OrderAction.CANCEL;
             }
             await _orderService.Update(orderFromDb);
             return RedirectToPage();

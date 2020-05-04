@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ECommerce.Models.ViewModels;
 using ECommerce.Ui.Services;
 using ECommerce.Utility;
 using Microsoft.AspNetCore.Mvc;
@@ -57,15 +58,15 @@ namespace ECommerce.Ui.Areas.Admin.Pages.Product
 
             if (!string.IsNullOrEmpty(SearchTerm))
             {
-                ProductsFromDb = ProductsFromDb.Where(p => p.Name.ToLower().Contains(SearchTerm.ToLower()));
+                ProductsFromDb = ProductsFromDb.Where(p => p.Product.Name.ToLower().Contains(SearchTerm.ToLower()));
             }
 
             if (!string.IsNullOrEmpty(category) && CategoryFilter != "All")
             {
-                ProductsFromDb = ProductsFromDb.Where(p => p.Category.Name == category);
+                ProductsFromDb = ProductsFromDb.Where(p => p.Categories.Contains(category, StringComparer.OrdinalIgnoreCase));
             }
 
-            Products = PaginatedList<Models.Product>.Create(ProductsFromDb.AsQueryable<Models.Product>(), pageIndex ?? 1, PAGE_SIZE);
+            Products = PaginatedList<Models.Product>.Create(ProductsFromDb.Select(x => x.Product).AsQueryable<Models.Product>(), pageIndex ?? 1, PAGE_SIZE);
         }
 
         public async Task<IActionResult> OnPostDelete(long id, string searchString, string category, int pageIndex)

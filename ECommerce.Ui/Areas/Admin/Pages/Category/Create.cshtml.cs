@@ -6,6 +6,7 @@ using ECommerce.Ui.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using ECommerce.Models;
+using System.Security.Claims;
 
 namespace ECommerce.Ui.Areas.Admin.Pages.Category
 {
@@ -34,6 +35,8 @@ namespace ECommerce.Ui.Areas.Admin.Pages.Category
                 return Page();
             }
 
+            Category.CreatedBy = User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier).Value;
+            Category.CreatedAt = DateTime.Now;
             var success = await _categoryService.Add(Category);
             if (success)
             {

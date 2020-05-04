@@ -2,21 +2,21 @@
 
 namespace ECommerce.DataAccess.Migrations
 {
-    public partial class AddPaymentStatusToDb : Migration
+    public partial class AddCategoriesToProductAuditTrail : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AddColumn<string>(
-                name: "PaymentStatus",
-                table: "Orders",
+                name: "Categories",
+                table: "ProductAuditTrails",
                 nullable: true);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
-                name: "PaymentStatus",
-                table: "Orders");
+                name: "Categories",
+                table: "ProductAuditTrails");
         }
     }
 }

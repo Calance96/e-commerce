@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using ECommerce.Ui.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -42,6 +43,8 @@ namespace ECommerce.Ui.Areas.Admin.Pages.Category
                 return Page();
             }
 
+            Category.UpdatedAt = DateTime.Now;
+            Category.UpdatedBy = User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)?.Value;
             var success = await _categoryService.Update(Category);
             if (!success)
             {

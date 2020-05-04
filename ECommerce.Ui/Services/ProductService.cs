@@ -1,4 +1,5 @@
 ﻿using ECommerce.Models;
+using ECommerce.Models.ViewModels;
 using ECommerce.Utility;
 using Microsoft.Extensions.Configuration;
 using System;
@@ -22,42 +23,66 @@ namespace ECommerce.Ui.Services
             _route = configuration["APIRoutes:Product"];
         }
 
-        public async Task<IEnumerable<Product>> GetAll()
+        public async Task<IEnumerable<ProductViewModel>> GetAll()
         {
             var response = await _httpClient.GetAsync(_route);
-            response.EnsureSuccessStatusCode();
+            var products = Enumerable.Empty<ProductViewModel>();
 
-            var json = await response.Content.ReadAsStreamAsync();
-            var products = await JsonSerializer.DeserializeAsync<IEnumerable<Product>>(json, new JsonSerializerOptions
+            if (response.IsSuccessStatusCode)
             {
-                PropertyNameCaseInsensitive = true
-            });
+                var json = await response.Content.ReadAsStreamAsync();
+                products = await JsonSerializer.DeserializeAsync<IEnumerable<ProductViewModel>>(json, new JsonSerializerOptions
+                {
+                    PropertyNameCaseInsensitive = true
+                });
+            }
             return products;
         }
 
-        public async Task<Product> GetById(long id)
+        public async Task<ProductViewModel> GetById(long id)
         {
             var response = await _httpClient.GetAsync($"{_route}/{id}");
-            response.EnsureSuccessStatusCode();
+            ProductViewModel productVM = null;
 
-            var json = await response.Content.ReadAsStreamAsync();
-            var product = await JsonSerializer.DeserializeAsync<Product>(json, new JsonSerializerOptions
+            if (response.IsSuccessStatusCode)
             {
-                PropertyNameCaseInsensitive = true
-            });
-            return product;
+                var json = await response.Content.ReadAsStreamAsync();
+                productVM = await JsonSerializer.DeserializeAsync<ProductViewModel>(json, new JsonSerializerOptions
+                {
+                    PropertyNameCaseInsensitive = true
+                });
+            }
+            return productVM;
         }
 
-        public async Task Update(Product product)
+        public async Task<Boolean> Update(ProductViewModel productVM)
         {
-            var data = new StringContent(JsonSerializer.Serialize<Product>(product), Encoding.UTF8, SD.CONTENT_JSON);
-            await _httpClient.PutAsync($"{_route}/{product.Id}", data);
+            var data = new StringContent(JsonSerializer.Serialize<ProductViewModel>(productVM), Encoding.UTF8, SD.CONTENT_JSON);
+            var response = await _httpClient.PutAsync($"{_route}/{productVM.Product.Id}", data);
+
+            if (response.IsSuccessStatusCode)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
-        public async Task Add(Product product)
+        public async Task<Boolean> Add(ProductViewModel productVM)
         {
-            var data = new StringContent(JsonSerializer.Serialize<Product>(product), Encoding.UTF8, SD.CONTENT_JSON);
-            await _httpClient.PostAsync(_route, data);
+            var data = new StringContent(JsonSerializer.Serialize<ProductViewModel>(productVM), Encoding.UTF8, SD.CONTENT_JSON);
+            var response = await _httpClient.PostAsync(_route, data);
+
+            if (response.IsSuccessStatusCode)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public async Task<Boolean> Delete(long id)

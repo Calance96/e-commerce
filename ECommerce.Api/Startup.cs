@@ -46,9 +46,10 @@ namespace ECommerce.Api
                 .AddDefaultTokenProviders();
 
             services.AddControllers();
+            services.AddScoped<IDbInitializer, DbInitializer>();
         }
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IDbInitializer dbInitializer)
         {
             if (env.IsDevelopment())
             {
@@ -62,7 +63,7 @@ namespace ECommerce.Api
             app.UseRouting();
 
             app.UseAuthorization();
-
+            dbInitializer.Initialize();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

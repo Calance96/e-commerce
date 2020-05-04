@@ -92,26 +92,20 @@ namespace ECommerce.Api.Controllers
                     Address = registerInput.Address,
                     Name = registerInput.Name,
                     PhoneNumber = registerInput.PhoneNumber,
-                    Role = registerInput.Role
+                    Role = registerInput.Role,
+                    CreatedAt = DateTime.Now,
                 };
 
                 var createUserResult = await _userManager.CreateAsync(user, registerInput.Password);
 
                 if (createUserResult.Succeeded)
                 {
-                    if (!await _roleManager.RoleExistsAsync(SD.ROLE_ADMIN))
-                    {
-                        await _roleManager.CreateAsync(new IdentityRole(SD.ROLE_ADMIN));
-                    }
-                    if (!await _roleManager.RoleExistsAsync(SD.ROLE_CUSTOMER))
-                    {
-                        await _roleManager.CreateAsync(new IdentityRole(SD.ROLE_CUSTOMER));
-                    }
-
                     user.Role ??= SD.ROLE_CUSTOMER;
                     await _userManager.AddToRoleAsync(user, user.Role);
+                    user.CreatedBy = user.Id;
+                    await _context.SaveChangesAsync();
 
-                    _logger.LogWarning("User {Email} has been created with role as {Role}", user.UserName, user.Role);
+                    _logger.LogInformation("User {Email} has been created with role as {Role}", user.UserName, user.Role);
 
                     return await Login(new LoginViewModel
                     {

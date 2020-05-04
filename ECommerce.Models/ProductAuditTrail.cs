@@ -6,18 +6,20 @@ using System.Text;
 
 namespace ECommerce.Models
 {
-    public class Product
+    public class ProductAuditTrail
     {
         [Key]
         public long Id { get; set; }
 
         [Required]
-        [Display(Name = "Product Name")]
+        public long ProductId { get; set; }
+
+        [Required]
         public string Name { get; set; }
 
-        [Display(Name = "Product Description")]
+        [Required]
         public string Description { get; set; }
-        
+
         [Required]
         [Column(TypeName = "decimal(18,2)")]
         [Range(0.01, 99999.99)]
@@ -27,14 +29,18 @@ namespace ECommerce.Models
 
         public bool IsAvailable { get; set; }
 
-        public string CreatedBy { get; set; }
+        public string Categories { get; set; }
 
-        public DateTime CreatedAt { get; set; }
+        [Required]
+        public long ActionTypeId { get; set; }
 
-        [NotMapped]
-        public string UpdatedBy { get; set; }
+        [ForeignKey("ActionTypeId")]
+        public EntityActionType ActionType { get; set; }
 
-        [NotMapped]
-        public DateTime UpdatedAt { get; set; }
+        [Required]
+        public string PerformedBy { get; set; }
+
+        [Required]
+        public DateTime PerformedDate { get; set; }
     }
 }

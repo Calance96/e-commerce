@@ -45,7 +45,7 @@
             <tr class="table-info">
                 <th>Name</th>
                 <th>Price (RM)</th>
-                <th>Category</th>
+                @*<th>Category</th>*@
                 <th>Availability</th>
                 <th class="text-center">Actions</th>
             </tr>
@@ -63,9 +63,9 @@
                         <td>
                             @product.Price
                         </td>
-                        <td>
-                            @product.Category.Name
-                        </td>
+                        @*<td>
+                                @product.Category.Name
+                            </td>*@
                         <td>
                             @if (product.IsAvailable)
                             {

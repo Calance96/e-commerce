@@ -22,5 +22,17 @@ namespace ECommerce.DataAccess
         public DbSet<Order> Orders { get; set; }
 
         public DbSet<OrderItem> OrderItems { get; set; }
+
+        public DbSet<EntityActionType> EntityActionTypes { get; set; }
+
+        public DbSet<OrderAction> OrderActions { get; set; }
+
+        public DbSet<CategoryAuditTrail> CategoryAuditTrails { get; set; }
+
+        public DbSet<ProductAuditTrail> ProductAuditTrails { get; set; }
+
+        public DbSet<OrderAuditTrail> OrderAuditTrails { get; set; }
+        
+        public DbSet<ProductCategory> ProductCategories { get; set; }
     }
 }

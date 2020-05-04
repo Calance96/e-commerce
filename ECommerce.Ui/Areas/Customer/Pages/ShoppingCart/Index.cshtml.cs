@@ -73,7 +73,13 @@ namespace ECommerce.Ui.Areas.Customer.Pages.ShoppingCart
             });
 
             cartItem.Quantity += 1;
-            await _cartService.Update(cartItem);
+            var updateCartSuccess = await _cartService.Update(cartItem);
+
+            if (!updateCartSuccess)
+            {
+                ErrorMessage = "Error increasing cart item count. Please contact E-Mall to resolve the issue.";
+            }
+
             return RedirectToPage();
         }
 
@@ -94,25 +100,39 @@ namespace ECommerce.Ui.Areas.Customer.Pages.ShoppingCart
             }
 
             cartItem.Quantity -= 1;
-            await _cartService.Update(cartItem);
+            var updateCartSuccess = await _cartService.Update(cartItem);
+
+            if (!updateCartSuccess)
+            {
+                ErrorMessage = "Error decreasing cart item count. Please contact E-Mall to resolve the issue.";
+            }
+
             return RedirectToPage();
         }
 
         public async Task<IActionResult> OnPostDeleteAsync(long cartItemId)
         {
-            await _cartService.Delete(cartItemId);
-            var claimsIdentity = (ClaimsIdentity)User.Identity;
-            var userId = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier).Value;
+            var deleteCartSuccess = await _cartService.Delete(cartItemId);
 
-            HttpContext.Session.SetInt32(SD.CART_SESSION_KEY, await _cartService.GetItemsCount(userId));
+            if (deleteCartSuccess)
+            {
+                var claimsIdentity = (ClaimsIdentity)User.Identity;
+                var userId = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier).Value;
+
+                HttpContext.Session.SetInt32(SD.CART_SESSION_KEY, await _cartService.GetItemsCount(userId));
+            } 
+            else
+            {
+                ErrorMessage = "Error removing item from cart. Please contact E-Mall to resolve the issue.";
+            }
 
             return RedirectToPage();
         }
 
         public async Task<IActionResult> OnPostAsync(string stripeToken)
         {
-            ShoppingCartVM.Order.PaymentStatus = SD.PaymentStatus.PENDING;
-            ShoppingCartVM.Order.OrderStatus = SD.OrderStatus.PENDING;
+            ShoppingCartVM.Order.PaymentStatus = SD.PaymentStatus.APPROVED;
+            ShoppingCartVM.Order.OrderStatus = SD.OrderStatus.APPROVED;
             ShoppingCartVM.Order.OrderDate = DateTime.Now;
             ShoppingCartVM.CartItems = await _cartService.GetAll(ShoppingCartVM.Order.UserId);
             ShoppingCartVM.Order.OrderTotal = CalculateSum(ShoppingCartVM.CartItems);
@@ -121,11 +141,16 @@ namespace ECommerce.Ui.Areas.Customer.Pages.ShoppingCart
             {
                 try
                 {
-                    Models.Order newOrder = await _orderService.Create(ShoppingCartVM);
-                    HttpContext.Session.SetInt32(SD.CART_SESSION_KEY, 0);
-
                     if (stripeToken != null)
                     {
+                        Models.Order newOrder = await _orderService.Create(ShoppingCartVM);
+                        if (newOrder == null)
+                        {
+                            throw new Exception("Order creation failed");
+                        }
+
+                        HttpContext.Session.SetInt32(SD.CART_SESSION_KEY, 0);
+
                         var chargeOptions = new ChargeCreateOptions
                         {
                             Amount = Convert.ToInt32(newOrder.OrderTotal * 100),

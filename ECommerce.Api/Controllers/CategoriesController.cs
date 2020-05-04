@@ -5,6 +5,7 @@ using System.Net;
 using System.Threading.Tasks;
 using ECommerce.DataAccess;
 using ECommerce.Models;
+using ECommerce.Utility;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -27,7 +28,7 @@ namespace ECommerce.Api.Controllers
         [HttpGet]
         public async Task<ActionResult<List<Category>>> GetAll()
         {
-            return await _context.Categories.OrderBy(x => x.Name).ToListAsync();
+            return await _context.Categories.AsNoTracking().OrderBy(x => x.Name).ToListAsync();
         }
         
         [HttpGet("{id}")]
@@ -84,6 +85,18 @@ namespace ECommerce.Api.Controllers
             {
                 if (existingCategory == null)
                 {
+                    var oldCategoryValues = await _context.Categories.AsNoTracking().FirstAsync(c => c.Id == category.Id);
+
+                    var categoryAuditTrail = new CategoryAuditTrail
+                    {
+                        CategoryId = oldCategoryValues.Id,
+                        Name = oldCategoryValues.Name,
+                        ActionTypeId = (long) SD.EntityActionType.Update,
+                        PerformedBy = category.UpdatedBy,
+                        PerformedDate = category.UpdatedAt
+                    };
+
+                    _context.CategoryAuditTrails.Add(categoryAuditTrail);
                     _context.Entry(category).State = EntityState.Modified;
                     await _context.SaveChangesAsync();
                     return true;
@@ -111,10 +124,6 @@ namespace ECommerce.Api.Controllers
                 _logger.LogWarning("Attempt to delete non-existing category of ID {CategoryId}", id);
                 return NotFound();
             } 
-            else if (_context.Products.Any(p => p.CategoryId == id))
-            {
-                return BadRequest();
-            }
 
             try
             {

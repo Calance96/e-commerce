@@ -1,11 +1,13 @@
 ﻿@page "{id:long}"
 @model ECommerce.Ui.Areas.Item.Pages.DetailsModel
+@using ECommerce.Utility;
 @{
     ViewData["Title"] = "Product Details";
 }
 
 <form method="post">
     <input hidden asp-for="@Model.CartItem.ProductId" />
+    <input hidden asp-for="@Model.ProductVM.CategoryId_1" />
     <div class="container w-75">
         <div class="card">
             <div class="card-header bg-light text-light ml-0 row container p-3">
@@ -13,7 +15,17 @@
                     <h4 class="text-primary">@Model.CartItem.Product.Name</h4>
                 </div>
                 <div class="col-12 col-md-4 text-md-right">
-                    <span class="badge badge-warning pt-2" style="height:30px;">@Model.CartItem.Product.Category.Name</span>
+                    @if (Model.ProductVM.Categories.Count() == 0)
+                    {
+                        <span class="badge badge-danger">None</span>
+                    }
+                    else
+                    {
+                        @foreach (var category in Model.ProductVM.Categories)
+                        {
+                            <span class="badge badge-warning">@category</span>
+                        }
+                    }
                 </div>
             </div>
             <div class="card-body">
@@ -45,16 +57,25 @@
             <div class="card-footer">
                 <div class="row">
                     <div class="col-12 col-md-6 pb-1">
-                        @if (Model.CartItem.Product.IsAvailable)
+                        @if (User.IsInRole(SD.ROLE_CUSTOMER))
                         {
-                            <button asp-page-handler="AddToCart" type="submit" class="btn btn-primary btn-square btn-lg form-control" style="height:50px;">
-                                Add to Cart
-                            </button>
+                            @if (Model.CartItem.Product.IsAvailable)
+                            {
+                                <button asp-page-handler="AddToCart" type="submit" class="btn btn-primary btn-square btn-lg form-control" style="height:50px;">
+                                    Add to Cart
+                                </button>
+                            }
+                            else
+                            {
+                                <a class="btn btn-primary btn-square btn-lg text-white form-control disabled" style="height:50px;">
+                                    Unavailable
+                                </a>
+                            }
                         }
-                        else
+                        else if (User.IsInRole(SD.ROLE_ADMIN))
                         {
-                            <a class="btn btn-primary btn-square btn-lg text-white form-control disabled" style="height:50px;">
-                                Unavailable
+                            <a asp-area="Admin" asp-page="/Product/Edit" asp-route-id="@Model.CartItem.ProductId" class="btn btn-primary btn-square btn-lg form-control" style="height:50px;">
+                                Update Product
                             </a>
                         }
                     </div>

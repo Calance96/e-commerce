@@ -26,12 +26,15 @@ namespace ECommerce.Ui.Services
         public async Task<IEnumerable<Order>> GetAllOrders(string status)
         {
             var response = await _httpClient.GetAsync($"{_route}/{status}");
-            response.EnsureSuccessStatusCode();
+            IEnumerable<Order> orders = Enumerable.Empty<Order>();
 
-            var orders = await JsonSerializer.DeserializeAsync<IEnumerable<Order>>(
-                await response.Content.ReadAsStreamAsync(),
-                new JsonSerializerOptions { PropertyNameCaseInsensitive = true }
-                );
+            if (response.IsSuccessStatusCode)
+            {
+                orders = await JsonSerializer.DeserializeAsync<IEnumerable<Order>>(
+                   await response.Content.ReadAsStreamAsync(),
+                   new JsonSerializerOptions { PropertyNameCaseInsensitive = true }
+                   );
+            }
 
             return orders;
         }
@@ -39,13 +42,15 @@ namespace ECommerce.Ui.Services
         public async Task<IEnumerable<Order>> GetAllOrdersForUserId(string userId, string status)
         {
             var response = await _httpClient.GetAsync($"{_route}/user/{userId}/{status}");
-            response.EnsureSuccessStatusCode();
+            IEnumerable<Order> orders = Enumerable.Empty<Order>();
 
-            var orders = await JsonSerializer.DeserializeAsync<IEnumerable<Order>>(
-                await response.Content.ReadAsStreamAsync(), 
-                new JsonSerializerOptions { PropertyNameCaseInsensitive = true }
-                );
-
+            if (response.IsSuccessStatusCode)
+            {
+                orders = await JsonSerializer.DeserializeAsync<IEnumerable<Order>>(
+                    await response.Content.ReadAsStreamAsync(),
+                    new JsonSerializerOptions { PropertyNameCaseInsensitive = true }
+                    );
+            }
             return orders;
         }
 
@@ -69,14 +74,14 @@ namespace ECommerce.Ui.Services
         public async Task<OrderDetailsVM> GetOrderDetailsByOrderId(long orderId)
         {
             var response = await _httpClient.GetAsync($"{_route}/details/{orderId}");
-            
+
             if (response.IsSuccessStatusCode)
             {
                 var orderDetailsVM = await JsonSerializer.DeserializeAsync<OrderDetailsVM>(
-                                        await response.Content.ReadAsStreamAsync(), 
+                                        await response.Content.ReadAsStreamAsync(),
                                         new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
-                return orderDetailsVM; 
-            } 
+                return orderDetailsVM;
+            }
             else
             {
                 return null;
@@ -87,19 +92,33 @@ namespace ECommerce.Ui.Services
         {
             var data = new StringContent(JsonSerializer.Serialize<ShoppingCartVM>(shoppingCart), Encoding.UTF8, SD.CONTENT_JSON);
             var response = await _httpClient.PostAsync(_route, data);
+            Order order = null;
 
-            response.EnsureSuccessStatusCode();
-            var order = await JsonSerializer.DeserializeAsync<Order>(await response.Content.ReadAsStreamAsync(), 
-                new JsonSerializerOptions { 
-                    PropertyNameCaseInsensitive = true 
-                });
+            if (response.IsSuccessStatusCode)
+            {
+                order = await JsonSerializer.DeserializeAsync<Order>(await response.Content.ReadAsStreamAsync(),
+                    new JsonSerializerOptions
+                    {
+                        PropertyNameCaseInsensitive = true
+                    });
+            }
+
             return order;
         }
 
-        public async Task Update(Order order)
+        public async Task<Boolean> Update(Order order)
         {
             var data = new StringContent(JsonSerializer.Serialize<Order>(order), Encoding.UTF8, SD.CONTENT_JSON);
-            await _httpClient.PutAsync($"{_route}/{order.Id}", data);
+            var response = await _httpClient.PutAsync($"{_route}/{order.Id}", data);
+
+            if (response.IsSuccessStatusCode)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }

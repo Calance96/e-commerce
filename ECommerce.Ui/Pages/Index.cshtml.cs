@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ECommerce.Models;
+using ECommerce.Models.ViewModels;
 using ECommerce.Ui.Services;
 using ECommerce.Utility;
 using Microsoft.AspNetCore.Mvc;
@@ -32,14 +33,15 @@ namespace ECommerce.Ui.Pages
             _categoryService = categoryService;
         }
 
-        public PaginatedList<Product> Products { get; set; }
+        public PaginatedList<ProductViewModel> ProductVMs { get; set; }
 
-        public async Task OnGet(string searchString, int? pageIndex, string category, string availableOnly = "on")
+        public async Task OnGet(string availableOnly, string searchString, int? pageIndex, string category)
         {
-            var ProductsFromDb = await _productService.GetAll();
-            ShowAvailableOnly = availableOnly.Trim() == "on" ? true : false;
+            ShowAvailableOnly = availableOnly == null ? false : true;
             CategoryFilter = category ?? "";
 
+            var ProductsFromDb = await _productService.GetAll();
+            
             Categories = new List<SelectListItem> {
                 new SelectListItem {
                     Text = "All",
@@ -59,21 +61,20 @@ namespace ECommerce.Ui.Pages
             {
                 SearchTerm = searchString;
                 searchString = SearchTerm.ToLower();
-                ProductsFromDb = ProductsFromDb.Where(p => p.Name.ToLower().Contains(searchString));
+                ProductsFromDb = ProductsFromDb.Where(p => p.Product.Name.ToLower().Contains(searchString));
             }
 
             if (!string.IsNullOrEmpty(CategoryFilter))
             {
-                ProductsFromDb = ProductsFromDb.Where(p => p.Category.Name == category);
+                ProductsFromDb = ProductsFromDb.Where(p => p.Categories.Contains(category, StringComparer.OrdinalIgnoreCase));
             }
 
             if (ShowAvailableOnly)
             {
-                ProductsFromDb = ProductsFromDb.Where(p => p.IsAvailable);
+                ProductsFromDb = ProductsFromDb.Where(x => x.Product.IsAvailable);
             }
 
-            Products = PaginatedList<Product>.Create(ProductsFromDb.AsQueryable<Product>(), pageIndex ?? 1, PAGE_SIZE);
-
+            ProductVMs = PaginatedList<ProductViewModel>.Create(ProductsFromDb.AsQueryable<ProductViewModel>(), pageIndex ?? 1, PAGE_SIZE);
         }
     }
 }

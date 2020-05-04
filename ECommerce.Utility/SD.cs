@@ -52,5 +52,20 @@ namespace ECommerce.Utility
             public const string CUSTOMER_ONLY = "CustomerOnly";
             public const string AUTHENTICATED_ONLY = "AuthenticatedOnly";
         }
+
+        public enum OrderAction
+        {
+            PROCESS = 1,
+            SHIP = 2,
+            CANCEL = 3,
+            REFUND = 4,
+            COMPLETE = 5
+        }
+
+        public enum EntityActionType
+        {
+            Update = 1,
+            Delete = 2
+        }
     }
 }

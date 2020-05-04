@@ -14,6 +14,11 @@ namespace ECommerce.Models
 
         public string Address { get; set; }
 
+        public string CreatedBy { get; set; }
+
+        public DateTime CreatedAt { get; set; }
+
+
         [NotMapped]
         public string Role { get; set; }
     }

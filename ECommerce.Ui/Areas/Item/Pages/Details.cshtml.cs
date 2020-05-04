@@ -4,6 +4,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using ECommerce.Models;
+using ECommerce.Models.ViewModels;
 using ECommerce.Ui.Services;
 using ECommerce.Utility;
 using Microsoft.AspNetCore.Http;
@@ -26,47 +27,66 @@ namespace ECommerce.Ui.Areas.Item.Pages
         [BindProperty]
         public CartItem CartItem { get; set; }
 
+        [BindProperty]
+        public ProductViewModel ProductVM { get; set; }
+
         [TempData]
         public string SuccessMessage { get; set; }
 
+        [TempData]
+        public string ErrorMessage { get; set; }
+
         public async Task OnGet(long id)
         {
-            Product product = await _productService.GetById(id);
+            ProductVM = await _productService.GetById(id);
 
-            CartItem = new CartItem
+            if (ProductVM != null)
             {
-                Product = product,
-                ProductId = product.Id
-            };
+                var product = ProductVM.Product;
+                CartItem = new CartItem
+                {
+                    Product = product,
+                    ProductId = product.Id
+                };
+            }
         }
 
         public async Task<IActionResult> OnPostAddToCartAsync()
         {
             if (ModelState.IsValid)
             {
-                var product = await _productService.GetById(CartItem.ProductId); // For the case where user tried
-                if (!product.IsAvailable)                                        // to modify the HTML and add
-                    return RedirectToPage();                                     // unavailable item to cart
+                var productVM = await _productService.GetById(CartItem.ProductId); // For the case where user tried
+                if (!productVM.Product.IsAvailable)                                // to modify the HTML and add
+                    return RedirectToPage();                                       // unavailable item to cart
 
                 var claimsIdentity = (ClaimsIdentity)User.Identity;
                 var currentUserId = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
                 CartItem.UserId = currentUserId.Value;
 
                 CartItem cartItemFromDb = await _cartService.GetCartItemByUserIdAndProductId(CartItem);
+                bool addToCartSuccess = false;
 
                 if (cartItemFromDb == null)
                 {
-                    await _cartService.Add(CartItem);
+                    addToCartSuccess = await _cartService.Add(CartItem);
                 }
                 else
                 {
                     cartItemFromDb.Quantity += CartItem.Quantity;
-                    await _cartService.Update(cartItemFromDb);
+                    addToCartSuccess = await _cartService.Update(cartItemFromDb);
                 }
 
-                var cartItemsCount = await _cartService.GetItemsCount(currentUserId.Value);
-                HttpContext.Session.SetInt32(SD.CART_SESSION_KEY, cartItemsCount);
-                SuccessMessage = "Item added to cart successfully!";
+                if (addToCartSuccess)
+                {
+                    var cartItemsCount = await _cartService.GetItemsCount(currentUserId.Value);
+                    HttpContext.Session.SetInt32(SD.CART_SESSION_KEY, cartItemsCount);
+                    SuccessMessage = "Item added to cart successfully!";
+                } 
+                else
+                {
+                    ErrorMessage = "Add to cart failed.";
+                }
+
                 return LocalRedirect("/");
             }
             return RedirectToPage();
