@@ -84,7 +84,7 @@ namespace ECommerce.Api.Controllers
         [HttpPut]
         public async Task<ActionResult> Update(ApplicationUser user)
         {
-            var userFromDb = _context.ApplicationUsers.FindAsync(user.Id);
+            var userFromDb = await _context.ApplicationUsers.AsNoTracking().FirstOrDefaultAsync(x => x.Id == user.Id);
 
             if (userFromDb == null)
             {
