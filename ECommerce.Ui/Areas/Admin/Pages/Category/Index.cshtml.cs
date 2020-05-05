@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using ECommerce.Ui.Services;
 using ECommerce.Utility;
@@ -51,7 +52,9 @@ namespace ECommerce.Ui.Areas.Admin.Pages.Category
 
         public async Task<IActionResult> OnPostDeleteAsync(int id, string searchString, int? pageIndex)
         {
-            var success = await _categoryService.Delete(id);
+            var userId = User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier).Value;
+
+            var success = await _categoryService.Delete(id, userId);
             if (!success)
             {
                 ErrorMessage = "Category cannot be deleted as there are products belong to this category.";

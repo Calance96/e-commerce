@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using ECommerce.Models.ViewModels;
 using ECommerce.Ui.Services;
@@ -71,9 +72,11 @@ namespace ECommerce.Ui.Areas.Admin.Pages.Product
 
         public async Task<IActionResult> OnPostDelete(long id, string searchString, string category, int pageIndex)
         {
+            var userId = User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier).Value;
+
             try
             {
-                var success = await _productService.Delete(id);
+                var success = await _productService.Delete(id, userId);
                 if (success)
                 {
                     Message = "successful";

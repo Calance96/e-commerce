@@ -197,9 +197,10 @@ namespace ECommerce.Api.Controllers
         /// Mark a product as not available instead of truly deleting it.
         /// </summary>
         /// <param name="id">Product ID</param>
+        /// <param name="userId">User ID</param>
         /// <returns></returns>
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(long id)
+        [HttpDelete("{userId}/{id}")]
+        public async Task<IActionResult> Delete(long id, string userId)
         {
             Product product = await _context.Products.FindAsync(id);
 
@@ -211,6 +212,25 @@ namespace ECommerce.Api.Controllers
 
             try
             {
+                var currentProductCategoryMapping = await _context.ProductCategories.Include(x => x.Category)
+                                                            .Where(x => x.ProductId == product.Id)
+                                                            .ToListAsync();
+
+                var productAuditTrail = new ProductAuditTrail
+                {
+                    ProductId = product.Id,
+                    Name = product.Name,
+                    Description = product.Description,
+                    Price = product.Price,
+                    ImageUrl = product.ImageUrl,
+                    IsAvailable = product.IsAvailable,
+                    Categories = string.Join(",", currentProductCategoryMapping.Select(x => x.Category.Name).ToList()),
+                    ActionTypeId = (long)SD.EntityActionType.Delete,
+                    PerformedBy = userId,
+                    PerformedDate = DateTime.Now
+                };
+                _context.ProductAuditTrails.Add(productAuditTrail);
+
                 product.IsAvailable = !product.IsAvailable; // Just mark it instead of deleting it
                 _context.Products.Update(product);
                 await _context.SaveChangesAsync();

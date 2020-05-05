@@ -85,9 +85,9 @@ namespace ECommerce.Ui.Services
             }
         }
 
-        public async Task<Boolean> Delete(long id)
+        public async Task<Boolean> Delete(long id, string userId)
         {
-            var response = await _httpClient.DeleteAsync($"{_route}/{id}");
+            var response = await _httpClient.DeleteAsync($"{_route}/{userId}/{id}");
             if (!response.IsSuccessStatusCode)
             {
                 return false;

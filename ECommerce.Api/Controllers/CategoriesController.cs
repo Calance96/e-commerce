@@ -133,14 +133,15 @@ namespace ECommerce.Api.Controllers
                 return false;
             }
         }
-        
+
         /// <summary>
         /// Remove an existing category from database.
         /// </summary>
         /// <param name="id">Category ID</param>
+        /// <param name="userId">User ID</param>
         /// <returns></returns>
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(long id)
+        [HttpDelete("{userId}/{id}")]
+        public async Task<IActionResult> Delete(long id, string userId)
         {
             var categoryToDelete = await _context.Categories.FindAsync(id);
 
@@ -152,6 +153,15 @@ namespace ECommerce.Api.Controllers
 
             try
             {
+                var categoryAuditTrail = new CategoryAuditTrail
+                {
+                    CategoryId = categoryToDelete.Id,
+                    Name = categoryToDelete.Name,
+                    ActionTypeId = (long)SD.EntityActionType.Delete,
+                    PerformedBy = userId,
+                    PerformedDate = DateTime.Now
+                };
+                _context.CategoryAuditTrails.Add(categoryAuditTrail);
                 _context.Categories.Remove(categoryToDelete);
                 await _context.SaveChangesAsync();
             } 
