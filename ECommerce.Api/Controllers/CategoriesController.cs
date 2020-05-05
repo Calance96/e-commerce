@@ -25,12 +25,21 @@ namespace ECommerce.Api.Controllers
             _logger = logger;
         }
 
+        /// <summary>
+        /// Retrieve all existing categories in the database.
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public async Task<ActionResult<List<Category>>> GetAll()
         {
             return await _context.Categories.AsNoTracking().OrderBy(x => x.Name).ToListAsync();
         }
         
+        /// <summary>
+        /// Retrieve a specific category.
+        /// </summary>
+        /// <param name="id">Category ID</param>
+        /// <returns></returns>
         [HttpGet("{id}")]
         public async Task<ActionResult<Category>> Get(long id)
         {
@@ -45,6 +54,11 @@ namespace ECommerce.Api.Controllers
             return category;
         }
 
+        /// <summary>
+        /// Add a new category to the database. This checks for duplicate category name.
+        /// </summary>
+        /// <param name="category">Category Object</param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<Boolean> Add(Category category)
         {
@@ -71,6 +85,12 @@ namespace ECommerce.Api.Controllers
             }
         }
 
+        /// <summary>
+        /// Update an existing category in the database. This checks for duplicate category name.
+        /// </summary>
+        /// <param name="id">Category ID</param>
+        /// <param name="category">Category Object</param>
+        /// <returns></returns>
         [HttpPut("{id}")]
         public async Task<ActionResult<Boolean>> Update(long id, Category category)
         {
@@ -114,6 +134,11 @@ namespace ECommerce.Api.Controllers
             }
         }
         
+        /// <summary>
+        /// Remove an existing category from database.
+        /// </summary>
+        /// <param name="id">Category ID</param>
+        /// <returns></returns>
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(long id)
         {

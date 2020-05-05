@@ -37,6 +37,17 @@ namespace ECommerce.Api.Controllers
             _logger = logger;
         }
 
+        /// <summary>
+        /// Verify the combination of email and password to grant user access to use E-Mall.
+        /// </summary>
+        /// <param name="loginInput">
+        /// Provides the necessary email and password combination for authentication
+        /// </param>
+        /// <returns>
+        /// An authentication result object that contains a status code. If authentication is
+        /// successful, a user is included for creation of claims. Otherwise, an error message
+        /// is included to indicate the failure reason.
+        /// </returns>
         [HttpPost("login")]
         public async Task<AuthResult> Login(LoginViewModel loginInput)
         {
@@ -78,6 +89,16 @@ namespace ECommerce.Api.Controllers
             }; ;
         }
 
+        /// <summary>
+        /// Take input from user to register a new account
+        /// </summary>
+        /// <param name="registerInput">
+        /// Provide necessary information for registering a new user in the database
+        /// </param>
+        /// <returns>
+        /// Similarly return an authentication result object that contains a status 
+        /// code to indicate success or failure.
+        /// </returns>
         [HttpPost("register")]
         public async Task<ActionResult<AuthResult>> Register(RegisterViewModel registerInput)
         {
@@ -140,6 +161,14 @@ namespace ECommerce.Api.Controllers
             };
         }
 
+
+        /// <summary>
+        /// Accepts a combination of user ID, current password and new password for password change.
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns>
+        /// Returns boolean to indicate success or failure.
+        /// </returns>
         [HttpPost("password_change")]
         public async Task<Boolean> ChangePassword(ChangePasswordModel input)
         {

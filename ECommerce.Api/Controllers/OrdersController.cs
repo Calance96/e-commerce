@@ -28,6 +28,11 @@ namespace ECommerce.Api.Controllers
             _logger = logger;
         }
 
+        /// <summary>
+        /// Get all orders of a specific status.
+        /// </summary>
+        /// <param name="status">Order status, e.g. Approved, Processing, Shipped, Complete, Cancelled</param>
+        /// <returns></returns>
         [HttpGet("{status}")]
         public async Task<IEnumerable<Order>> GetAllOrdersOfStatus(string status)
         {
@@ -39,6 +44,12 @@ namespace ECommerce.Api.Controllers
             return orders;
         }
 
+        /// <summary>
+        /// Get all orders of a specific status for a specific user.
+        /// </summary>
+        /// <param name="userId">User ID</param>
+        /// <param name="status">Order status, e.g. Approved, Processing, Shipped, Complete, Cancelled</param>
+        /// <returns></returns>
         [HttpGet("user/{userId}/{status}")]
         public async Task<IEnumerable<Order>> GetAllOrdersForUserById(string userId, string status)
         {
@@ -76,6 +87,11 @@ namespace ECommerce.Api.Controllers
             return orders;
         }
 
+        /// <summary>
+        /// Retrieve a specific order.
+        /// </summary>
+        /// <param name="orderId">Order ID</param>
+        /// <returns></returns>
         [HttpGet("summary/{orderId}")]
         public async Task<ActionResult<Order>> GetOrderById(long orderId)
         {
@@ -90,6 +106,11 @@ namespace ECommerce.Api.Controllers
             return order;
         }
 
+        /// <summary>
+        /// Retrieve a specific order and its order items.
+        /// </summary>
+        /// <param name="orderId">Order ID</param>
+        /// <returns></returns>
         [HttpGet("details/{orderId}")]
         public async Task<ActionResult<OrderDetailsVM>> GetOrderDetailsByOrderId(long orderId)
         {
@@ -114,6 +135,11 @@ namespace ECommerce.Api.Controllers
 
         }
 
+        /// <summary>
+        /// Create an order from a user's shopping cart upon place order.
+        /// </summary>
+        /// <param name="shoppingCart">Shopping Cart Object</param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<ActionResult<Order>> Create(ShoppingCartVM shoppingCart)
         {
@@ -150,12 +176,25 @@ namespace ECommerce.Api.Controllers
             }
         }
 
+        /// <summary>
+        /// Update an existing order.
+        /// </summary>
+        /// <param name="orderId"></param>
+        /// <param name="order"></param>
+        /// <returns></returns>
         [HttpPut("{orderId}")]
         public async Task<IActionResult> Update(long orderId, Order order)
         {
             if (orderId != order.Id)
             {
                 return BadRequest();
+            }
+
+            var orderFromDb = await _context.Orders.FindAsync(orderId);
+
+            if (orderFromDb == null)
+            {
+                return NotFound();
             }
 
             try

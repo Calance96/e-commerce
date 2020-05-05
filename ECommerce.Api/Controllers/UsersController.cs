@@ -25,6 +25,11 @@ namespace ECommerce.Api.Controllers
             _logger = logger;
         }
 
+        /// <summary>
+        /// Retrieve all users from the database based on role. 
+        /// </summary>
+        /// <param name="role">Role string, e.g. Admin, Customer</param>
+        /// <returns></returns>
         [HttpGet("{role}")]
         public async Task<IEnumerable<ApplicationUser>> GetAll(string role)
         {
@@ -38,18 +43,25 @@ namespace ECommerce.Api.Controllers
                 user.Role = roles.FirstOrDefault(role => role.Id == roleId).Name;
             }
 
-            if (role == SD.ROLE_ADMIN)
+            switch (role)
             {
-                users = users.Where(user => user.Role == SD.ROLE_ADMIN).ToList();
-            } 
-            else if (role == SD.ROLE_CUSTOMER)
-            {
-                users = users.Where(user => user.Role == SD.ROLE_CUSTOMER).ToList();
+                case SD.ROLE_ADMIN:
+                    users = users.Where(user => user.Role == SD.ROLE_ADMIN).ToList();
+                    break;
+                case SD.ROLE_CUSTOMER:
+                    users = users.Where(user => user.Role == SD.ROLE_CUSTOMER).ToList();
+                    break;
+
             }
 
             return users;
         }
 
+        /// <summary>
+        /// Get the details of a specific user.
+        /// </summary>
+        /// <param name="userId">User ID</param>
+        /// <returns></returns>
         [HttpGet("info/{userId}")]
         public async Task<ActionResult<ApplicationUser>> Get(string userId)
         {
@@ -64,9 +76,21 @@ namespace ECommerce.Api.Controllers
             return user;
         }
 
+        /// <summary>
+        /// Update an existing user in the database.
+        /// </summary>
+        /// <param name="user">ApplicationUser Object</param>
+        /// <returns></returns>
         [HttpPut]
         public async Task<ActionResult> Update(ApplicationUser user)
         {
+            var userFromDb = _context.ApplicationUsers.FindAsync(user.Id);
+
+            if (userFromDb == null)
+            {
+                return NotFound();
+            }
+
             try
             {
                 _context.ApplicationUsers.Update(user);

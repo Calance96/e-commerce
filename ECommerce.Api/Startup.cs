@@ -15,6 +15,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Serilog;
+using Microsoft.OpenApi.Models;
+using System.Reflection;
+using System.IO;
 
 namespace ECommerce.Api
 {
@@ -47,6 +50,21 @@ namespace ECommerce.Api
 
             services.AddControllers();
             services.AddScoped<IDbInitializer, DbInitializer>();
+
+
+            services.AddSwaggerGen(setupAction =>
+            {
+                setupAction.SwaggerDoc("v1", new OpenApiInfo { 
+                    Version = "v1", 
+                    Title = "E-Mall API", 
+                    Description = "A simple Web API build based on ASP.NET Core 3.1"
+                });
+
+                // Set the comments path for the Swagger JSON and UI.
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                setupAction.IncludeXmlComments(xmlPath);
+            });
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IDbInitializer dbInitializer)
@@ -57,6 +75,14 @@ namespace ECommerce.Api
             }
 
             app.UseHttpsRedirection();
+
+            app.UseSwagger();
+
+            app.UseSwaggerUI(setupAction =>
+            {
+                setupAction.SwaggerEndpoint("/swagger/v1/swagger.json", "E-Mall API v1");
+                setupAction.RoutePrefix = string.Empty;
+            });
 
             app.UseSerilogRequestLogging(); // Serilog middleware to know what requests the app is handling
 

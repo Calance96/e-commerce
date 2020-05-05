@@ -26,6 +26,10 @@ namespace ECommerce.Api.Controllers
             _logger = logger;
         }
         
+        /// <summary>
+        /// Get all products from the database.
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public async Task<IEnumerable<ProductViewModel>> GetAll()
         {
@@ -58,6 +62,11 @@ namespace ECommerce.Api.Controllers
             return productVMs;
         }
 
+        /// <summary>
+        /// Get a specific product from the database.
+        /// </summary>
+        /// <param name="id">Product ID</param>
+        /// <returns></returns>
         [HttpGet("{id}")]
         public async Task<ActionResult<ProductViewModel>> Get(long id)
         {
@@ -89,6 +98,11 @@ namespace ECommerce.Api.Controllers
             return productVM;
         }
 
+        /// <summary>
+        /// Add a new product to the database.
+        /// </summary>
+        /// <param name="productVM">ProductViewModel Object</param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<ActionResult> Add(ProductViewModel productVM)
         {
@@ -116,12 +130,25 @@ namespace ECommerce.Api.Controllers
             return NoContent();
         }
 
+        /// <summary>
+        /// Update an existing product in the database.
+        /// </summary>
+        /// <param name="id">Product ID</param>
+        /// <param name="productVM">ProductViewModel Object</param>
+        /// <returns></returns>
         [HttpPut("{id}")]
         public async Task<IActionResult> Update(long id, ProductViewModel productVM)
         {
             if (id != productVM.Product.Id)
             {
                 return BadRequest();
+            }
+
+            var productFromDb = await _context.Products.FindAsync(id);
+
+            if (productFromDb == null)
+            {
+                return NotFound();
             }
 
             try
@@ -166,6 +193,11 @@ namespace ECommerce.Api.Controllers
             return NoContent();
         }
 
+        /// <summary>
+        /// Mark a product as not available instead of truly deleting it.
+        /// </summary>
+        /// <param name="id">Product ID</param>
+        /// <returns></returns>
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(long id)
         {
