@@ -17,9 +17,9 @@ namespace ECommerce.Ui.Services
         private readonly string _route;
         private readonly HttpClient _httpClient;
 
-        public OrderService(HttpClient httpClient, IConfiguration configuration)
+        public OrderService(IHttpClientFactory httpClientFactory, IConfiguration configuration)
         {
-            _httpClient = httpClient;
+            _httpClient = httpClientFactory.CreateClient("api");
             _route = configuration["APIRoutes:Order"];
         }
 

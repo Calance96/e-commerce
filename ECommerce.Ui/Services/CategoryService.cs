@@ -16,9 +16,9 @@ namespace ECommerce.Ui.Services
         private readonly string _route;
         private readonly HttpClient _httpClient;
 
-        public CategoryService(HttpClient httpClient, IConfiguration configuration)
+        public CategoryService(IHttpClientFactory httpClientFactory, IConfiguration configuration)
         {
-            _httpClient = httpClient;
+            _httpClient = httpClientFactory.CreateClient("api");
             _route = configuration["APIRoutes:Category"];
         }
 

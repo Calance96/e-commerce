@@ -18,9 +18,9 @@ namespace ECommerce.Ui.Services
         private readonly string _route;
         private readonly HttpClient _httpClient;
 
-        public CartService(HttpClient httpClient, IConfiguration configuration)
+        public CartService(IHttpClientFactory httpClientFactory, IConfiguration configuration)
         {
-            _httpClient = httpClient;
+            _httpClient = httpClientFactory.CreateClient("api");
             _route = configuration["APIRoutes:Cart"];
         }
 

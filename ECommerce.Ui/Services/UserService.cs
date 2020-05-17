@@ -16,9 +16,9 @@ namespace ECommerce.Ui.Services
         private readonly string _route;
         private readonly HttpClient _httpClient;
 
-        public UserService(HttpClient httpClient, IConfiguration configuration)
+        public UserService(IHttpClientFactory httpClientFactory, IConfiguration configuration)
         {
-            _httpClient = httpClient;
+            _httpClient = httpClientFactory.CreateClient("api");
             _route = configuration["APIRoutes:User"];
         }
 

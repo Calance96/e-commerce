@@ -25,9 +25,7 @@ namespace ECommerce.Ui
 
         public void ConfigureServices(IServiceCollection services)
         {
-            AddApiAcessServices(services);
             services.AddHttpContextAccessor();
-
             services.AddSession(configs =>
             {
                 configs.IdleTimeout = TimeSpan.FromMinutes(30);
@@ -46,14 +44,26 @@ namespace ECommerce.Ui
                 configs.ExpireTimeSpan = TimeSpan.FromHours(24);
                 configs.EventsType = typeof(CustomCookieAuthenticationEvents);
             });
-
-            services.AddScoped<CustomCookieAuthenticationEvents>();
             services.AddAuthorization(options =>
             {
                 options.AddPolicy(SD.Policy.ADMIN_ONLY, policy => policy.RequireRole(SD.ROLE_ADMIN));
                 options.AddPolicy(SD.Policy.CUSTOMER_ONLY, policy => policy.RequireRole(SD.ROLE_CUSTOMER));
                 options.AddPolicy(SD.Policy.AUTHENTICATED_ONLY, policy => policy.RequireAuthenticatedUser());
             });
+            services.AddScoped<CustomCookieAuthenticationEvents>();
+
+            services.AddHttpClient("api", config =>
+            {
+                config.BaseAddress = new Uri(Configuration["APIServer:BaseAddress"]);
+                config.DefaultRequestHeaders.Add("Accept", "application/json");
+            });
+            services.AddScoped<AuthService>();
+            services.AddScoped<CartService>();
+            services.AddScoped<CategoryService>();
+            services.AddScoped<Services.OrderService>();
+            services.AddScoped<Services.ProductService>();
+            services.AddScoped<UserService>();
+
 
             services.AddRazorPages()
                 .AddRazorRuntimeCompilation()
@@ -101,40 +111,6 @@ namespace ECommerce.Ui
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapRazorPages();
-            });
-        }
-
-        private void AddApiAcessServices(IServiceCollection services)
-        {
-            services.AddHttpClient<CategoryService>(configs =>
-            {
-                configs.BaseAddress = new Uri(Configuration["APIServer:BaseAddress"]);
-                configs.DefaultRequestHeaders.Add("Accept", "application/json");
-            });
-            services.AddHttpClient<Services.ProductService>(configs =>
-            {
-                configs.BaseAddress = new Uri(Configuration["APIServer:BaseAddress"]);
-                configs.DefaultRequestHeaders.Add("Accept", "application/json");
-            });
-            services.AddHttpClient<CartService>(configs =>
-            {
-                configs.BaseAddress = new Uri(Configuration["APIServer:BaseAddress"]);
-                configs.DefaultRequestHeaders.Add("Accept", "application/json");
-            });
-            services.AddHttpClient<Services.OrderService>(configs =>
-            {
-                configs.BaseAddress = new Uri(Configuration["APIServer:BaseAddress"]);
-                configs.DefaultRequestHeaders.Add("Accept", "application/json");
-            });
-            services.AddHttpClient<UserService>(configs =>
-            {
-                configs.BaseAddress = new Uri(Configuration["APIServer:BaseAddress"]);
-                configs.DefaultRequestHeaders.Add("Accept", "application/json");
-            });
-            services.AddHttpClient<AuthService>(configs =>
-            {
-                configs.BaseAddress = new Uri(Configuration["APIServer:BaseAddress"]);
-                configs.DefaultRequestHeaders.Add("Accept", "application/json");
             });
         }
     }
