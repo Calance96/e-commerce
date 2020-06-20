@@ -190,7 +190,7 @@ namespace ECommerce.Api.Controllers
                 return BadRequest();
             }
 
-            var orderFromDb = await _context.Orders.FindAsync(orderId);
+            var orderFromDb = await _context.Orders.AsNoTracking().FirstOrDefaultAsync(order => order.Id == orderId);
 
             if (orderFromDb == null)
             {
