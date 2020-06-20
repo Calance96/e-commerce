@@ -134,7 +134,7 @@
                                     <div class="col-4">@Html.DisplayNameFor(m => m.OrderDetails.Order.PaymentDate)</div>
                                 }
                                 <div class="col-8">
-                                    <input readonly id="paymentDate" type="text" class="form-control" value="@Model.OrderDetails.Order.PaymentDate.ToShortDateString()" />
+                                    <input readonly id="paymentDate" type="text" class="form-control" value="@(Model.OrderDetails.Order.PaymentDate.ToShortDateString() == "1/1/0001" ? "" : Model.OrderDetails.Order.PaymentDate.ToShortDateString())" />
                                 </div>
                             </div>
                             <div class="row">
@@ -247,10 +247,10 @@ Model.OrderDetails.Order.OrderStatus != SD.OrderStatus.COMPLETE)
         }
     </script>
 
-    @if (!string.IsNullOrEmpty(Model.ErrorMessage))
+    @if (TempData["ErrorMessage"] != null && !string.IsNullOrEmpty(TempData["ErrorMessage"].ToString()))
     {
 
-        <script async>
+<script async>
             toastr.options = {
                 "closeButton": true,
                 "debug": false,
@@ -270,12 +270,8 @@ Model.OrderDetails.Order.OrderStatus != SD.OrderStatus.COMPLETE)
             }
 
             $(document).ready(function () {
-                toastr.error('@Model.ErrorMessage', 'E-Mall');
-
-                @{
-                    Model.ErrorMessage = "";
-                }
+                toastr.error('@TempData["ErrorMessage"]', 'E-Mall');
             });
-        </script>
+</script>
     }
 }
