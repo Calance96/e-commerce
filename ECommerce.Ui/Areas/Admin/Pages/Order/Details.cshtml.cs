@@ -39,7 +39,13 @@ namespace ECommerce.Ui.Areas.Admin.Pages.Order
             orderFromDb.UpdatedAt = DateTime.Now;
             orderFromDb.UpdatedBy = User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier).Value;
             orderFromDb.OrderActionId = (long)SD.OrderAction.PROCESS;
-            await _orderService.Update(orderFromDb);
+            var isProcessSuccess = await _orderService.Update(orderFromDb);
+
+            if (!isProcessSuccess)
+            {
+                ErrorMessage = "Failed to process order.";
+            }
+
             return RedirectToPage();
         }
 
@@ -59,7 +65,13 @@ namespace ECommerce.Ui.Areas.Admin.Pages.Order
                 orderFromDb.UpdatedAt = DateTime.Now;
                 orderFromDb.UpdatedBy = User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier).Value;
                 orderFromDb.OrderActionId = (long)SD.OrderAction.SHIP;
-                await _orderService.Update(orderFromDb);
+                var isShipSuccess = await _orderService.Update(orderFromDb);
+
+                if (!isShipSuccess)
+                {
+                    ErrorMessage = "Failed to ship order.";
+                }
+
                 return RedirectToPage();
             }
 
@@ -85,7 +97,13 @@ namespace ECommerce.Ui.Areas.Admin.Pages.Order
             orderFromDb.UpdatedAt = DateTime.Now;
             orderFromDb.UpdatedBy = User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier).Value;
             orderFromDb.OrderActionId = (long)SD.OrderAction.COMPLETE;
-            await _orderService.Update(orderFromDb);
+            var isCompleteSuccess = await _orderService.Update(orderFromDb);
+
+            if (!isCompleteSuccess)
+            {
+                ErrorMessage = "Failed to complete order.";
+            }
+
             return RedirectToPage();
         }
 
@@ -121,7 +139,14 @@ namespace ECommerce.Ui.Areas.Admin.Pages.Order
                 orderFromDb.UpdatedBy = User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier).Value;
                 orderFromDb.OrderActionId = (long)SD.OrderAction.CANCEL;
             }
-            await _orderService.Update(orderFromDb);
+            
+            var isCancelSuccess = await _orderService.Update(orderFromDb);
+
+            if (!isCancelSuccess)
+            {
+                ErrorMessage = $"Failed to {(orderFromDb.OrderActionId == (long)SD.OrderAction.REFUND ? "refund" : "cancel")} order.";
+            }
+
             return RedirectToPage();
         }
     }
