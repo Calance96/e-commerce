@@ -342,3 +342,4 @@ healthchecksdb
 ECommerce.Ui/wwwroot/images/products/*
 !ECommerce.Ui/wwwroot/images/products/.gitkeep
 !ECommerce.Ui/wwwroot/images/No_Image_Available.jpg
+ECommerce.Api/Logs/*
