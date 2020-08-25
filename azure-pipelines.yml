@@ -18,12 +18,14 @@ steps:
 - task: NuGetToolInstaller@1
 
 - task: DotNetCoreCLI@2
+  displayName: 'dotnet restore'
   inputs:
     command: 'restore'
     projects: '$(solution)'
     feedsToUse: 'select'
 
 - task: DotNetCoreCLI@2
+  displayName: 'dotnet build w/o restore'
   inputs:
     command: 'build'
     projects: '$(solution)'
@@ -31,6 +33,7 @@ steps:
     configuration: '$(buildConfiguration)'
 
 - task: DotNetCoreCLI@2
+  displayName: 'dotnet pack'
   inputs:
     command: 'pack'
     packagesToPack: '**/*.csproj'
@@ -45,3 +48,4 @@ steps:
     command: 'push'
     packagesToPush: '$(Build.ArtifactStagingDirectory)/*.nupkg'
     nuGetFeedType: 'internal'
+    publishVstsFeed: '46a4dd82-34fb-4605-9cd7-d70020e50202/c82446dc-a554-4e59-b571-ce7f95e14cd7'
