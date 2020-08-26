@@ -33,6 +33,7 @@ steps:
     arguments: '--configuration $(buildConfiguration) --no-restore'
 
 - task: DotNetCoreCLI@2
+  displayName: 'dotnet pack'
   inputs:
     command: 'pack'
     packagesToPack: '**/*.csproj'
@@ -42,6 +43,7 @@ steps:
     patchVersion: '0'
 
 - task: DotNetCoreCLI@2
+  displayName: 'dotnet publish'
   inputs:
     command: 'publish'
     publishWebProjects: false
@@ -49,6 +51,7 @@ steps:
     arguments: '--configuration $(buildConfiguration) --no-restore --output $(Build.ArtifactStagingDirectory)'
 
 - task: DotNetCoreCLI@2
+  displayName: 'dotnet push'
   inputs:
     command: 'push'
     packagesToPush: '$(Build.ArtifactStagingDirectory)/*.nupkg'
