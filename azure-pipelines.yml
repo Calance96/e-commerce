@@ -32,15 +32,9 @@ steps:
     arguments: '--configuration $(buildConfiguration) --no-restore'
 
 - task: DotNetCoreCLI@2
-  displayName: 'dotnet pack'
   inputs:
-    command: 'pack'
-    packagesToPack: '**/*.csproj'
-    versioningScheme: 'byPrereleaseNumber'
-    majorVersion: '1'
-    minorVersion: '0'
-    patchVersion: '0'
-    verbosityPack: 'Normal'
+    command: 'publish'
+    publishWebProjects: true
 
 - task: DotNetCoreCLI@2
   inputs:
