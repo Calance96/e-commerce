@@ -48,7 +48,7 @@ steps:
     command: 'publish'
     publishWebProjects: false
     projects: '$(csproject)'
-    arguments: '--configuration $(buildConfiguration) --no-restore --output $(Build.ArtifactStagingDirectory)'
+    arguments: '--configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)'
 
 - task: DotNetCoreCLI@2
   displayName: 'dotnet push'
@@ -57,3 +57,9 @@ steps:
     packagesToPush: '$(Build.ArtifactStagingDirectory)/*.nupkg'
     nuGetFeedType: 'internal'
     publishVstsFeed: '46a4dd82-34fb-4605-9cd7-d70020e50202/c82446dc-a554-4e59-b571-ce7f95e14cd7'
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'drop'
+    publishLocation: 'Container'
