@@ -37,6 +37,7 @@ steps:
     command: 'publish'
     publishWebProjects: false
     projects: '$(csproject)'
+    arguments: '--configuration $(buildConfiguration) --no-restore --output $(Build.ArtifactStagingDirectory)'
 
 - task: DotNetCoreCLI@2
   inputs:
