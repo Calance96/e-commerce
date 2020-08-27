@@ -7,6 +7,7 @@ using ECommerce.DataAccess;
 using ECommerce.Models;
 using ECommerce.Models.ViewModels;
 using ECommerce.Utility;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -31,6 +32,8 @@ namespace ECommerce.Api.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
+        [ProducesResponseType(typeof(IEnumerable<ProductViewModel>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(object), StatusCodes.Status500InternalServerError)]
         public async Task<IEnumerable<ProductViewModel>> GetAll()
         {
             var products = await _context.Products.ToListAsync();
@@ -68,6 +71,9 @@ namespace ECommerce.Api.Controllers
         /// <param name="id">Product ID</param>
         /// <returns></returns>
         [HttpGet("{id}")]
+        [ProducesResponseType(typeof(ProductViewModel), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(object), StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(object), StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<ProductViewModel>> Get(long id)
         {
             var product = await _context.Products.FindAsync(id);
@@ -104,6 +110,8 @@ namespace ECommerce.Api.Controllers
         /// <param name="productVM">ProductViewModel Object</param>
         /// <returns></returns>
         [HttpPost]
+        [ProducesResponseType(typeof(object), StatusCodes.Status204NoContent)]
+        [ProducesResponseType(typeof(object), StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult> Add(ProductViewModel productVM)
         {
             try
@@ -137,6 +145,10 @@ namespace ECommerce.Api.Controllers
         /// <param name="productVM">ProductViewModel Object</param>
         /// <returns></returns>
         [HttpPut("{id}")]
+        [ProducesResponseType(typeof(object), StatusCodes.Status204NoContent)]
+        [ProducesResponseType(typeof(object), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(object), StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(object), StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> Update(long id, ProductViewModel productVM)
         {
             if (id != productVM.Product.Id)
@@ -200,6 +212,9 @@ namespace ECommerce.Api.Controllers
         /// <param name="userId">User ID</param>
         /// <returns></returns>
         [HttpDelete("{userId}/{id}")]
+        [ProducesResponseType(typeof(object), StatusCodes.Status204NoContent)]
+        [ProducesResponseType(typeof(object), StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(object), StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> Delete(long id, string userId)
         {
             Product product = await _context.Products.FindAsync(id);

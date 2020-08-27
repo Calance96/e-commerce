@@ -9,6 +9,7 @@ using ECommerce.Models;
 using ECommerce.Models.DTO;
 using ECommerce.Models.ViewModels;
 using ECommerce.Utility;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -49,6 +50,8 @@ namespace ECommerce.Api.Controllers
         /// is included to indicate the failure reason.
         /// </returns>
         [HttpPost("login")]
+        [ProducesResponseType(typeof(AuthResult), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(object), StatusCodes.Status500InternalServerError)]
         public async Task<AuthResult> Login(LoginViewModel loginInput)
         {
             ApplicationUser user = await _userManager.FindByEmailAsync(loginInput.Email);
@@ -100,6 +103,8 @@ namespace ECommerce.Api.Controllers
         /// code to indicate success or failure.
         /// </returns>
         [HttpPost("register")]
+        [ProducesResponseType(typeof(AuthResult), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(object), StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<AuthResult>> Register(RegisterViewModel registerInput)
         {
             try
@@ -170,6 +175,8 @@ namespace ECommerce.Api.Controllers
         /// Returns boolean to indicate success or failure.
         /// </returns>
         [HttpPost("password_change")]
+        [ProducesResponseType(typeof(bool), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(object), StatusCodes.Status500InternalServerError)]
         public async Task<Boolean> ChangePassword(ChangePasswordModel input)
         {
             ApplicationUser user = null;

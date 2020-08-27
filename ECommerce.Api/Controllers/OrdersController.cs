@@ -7,6 +7,7 @@ using ECommerce.DataAccess;
 using ECommerce.Models;
 using ECommerce.Models.ViewModels;
 using ECommerce.Utility;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -34,6 +35,8 @@ namespace ECommerce.Api.Controllers
         /// <param name="status">Order status, e.g. Approved, Processing, Shipped, Complete, Cancelled</param>
         /// <returns></returns>
         [HttpGet("{status}")]
+        [ProducesResponseType(typeof(IEnumerable<Order>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(object), StatusCodes.Status500InternalServerError)]
         public async Task<IEnumerable<Order>> GetAllOrdersOfStatus(string status)
         {
             IEnumerable<Order> orders = await _context.Orders
@@ -51,6 +54,8 @@ namespace ECommerce.Api.Controllers
         /// <param name="status">Order status, e.g. Approved, Processing, Shipped, Complete, Cancelled</param>
         /// <returns></returns>
         [HttpGet("user/{userId}/{status}")]
+        [ProducesResponseType(typeof(IEnumerable<Order>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(object), StatusCodes.Status500InternalServerError)]
         public async Task<IEnumerable<Order>> GetAllOrdersForUserById(string userId, string status)
         {
             IEnumerable<Order> orders = await _context.Orders
@@ -93,6 +98,9 @@ namespace ECommerce.Api.Controllers
         /// <param name="orderId">Order ID</param>
         /// <returns></returns>
         [HttpGet("summary/{orderId}")]
+        [ProducesResponseType(typeof(Order), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(object), StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(object), StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<Order>> GetOrderById(long orderId)
         {
             Order order = await _context.Orders.FindAsync(orderId);
@@ -112,6 +120,9 @@ namespace ECommerce.Api.Controllers
         /// <param name="orderId">Order ID</param>
         /// <returns></returns>
         [HttpGet("details/{orderId}")]
+        [ProducesResponseType(typeof(OrderDetailsVM), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(object), StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(object), StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<OrderDetailsVM>> GetOrderDetailsByOrderId(long orderId)
         {
             Order order = await _context.Orders.Include(order => order.User).FirstOrDefaultAsync(order => order.Id == orderId);
@@ -141,6 +152,8 @@ namespace ECommerce.Api.Controllers
         /// <param name="shoppingCart">Shopping Cart Object</param>
         /// <returns></returns>
         [HttpPost]
+        [ProducesResponseType(typeof(Order), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(object), StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<Order>> Create(ShoppingCartVM shoppingCart)
         {
             try
@@ -183,6 +196,10 @@ namespace ECommerce.Api.Controllers
         /// <param name="order"></param>
         /// <returns></returns>
         [HttpPut("{orderId}")]
+        [ProducesResponseType(typeof(object), StatusCodes.Status204NoContent)]
+        [ProducesResponseType(typeof(object), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(object), StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(object), StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> Update(long orderId, Order order)
         {
             if (orderId != order.Id)

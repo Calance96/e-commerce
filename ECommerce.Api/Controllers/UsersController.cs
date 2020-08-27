@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using ECommerce.DataAccess;
 using ECommerce.Models;
 using ECommerce.Utility;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -31,6 +32,8 @@ namespace ECommerce.Api.Controllers
         /// <param name="role">Role string, e.g. Admin, Customer</param>
         /// <returns></returns>
         [HttpGet("{role}")]
+        [ProducesResponseType(typeof(IEnumerable<ApplicationUser>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(object), StatusCodes.Status500InternalServerError)]
         public async Task<IEnumerable<ApplicationUser>> GetAll(string role)
         {
             var users = await _context.ApplicationUsers.OrderByDescending(x => x.CreatedAt).ToListAsync();
@@ -63,6 +66,9 @@ namespace ECommerce.Api.Controllers
         /// <param name="userId">User ID</param>
         /// <returns></returns>
         [HttpGet("info/{userId}")]
+        [ProducesResponseType(typeof(ApplicationUser), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(object), StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(object), StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<ApplicationUser>> Get(string userId)
         {
             var user = await _context.ApplicationUsers.FindAsync(userId);
@@ -82,6 +88,9 @@ namespace ECommerce.Api.Controllers
         /// <param name="user">ApplicationUser Object</param>
         /// <returns></returns>
         [HttpPut]
+        [ProducesResponseType(typeof(object), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(object), StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(object), StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult> Update(ApplicationUser user)
         {
             var userFromDb = await _context.ApplicationUsers.AsNoTracking().FirstOrDefaultAsync(x => x.Id == user.Id);

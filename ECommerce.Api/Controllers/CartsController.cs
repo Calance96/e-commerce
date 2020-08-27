@@ -5,6 +5,7 @@ using System.Net;
 using System.Threading.Tasks;
 using ECommerce.DataAccess;
 using ECommerce.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -30,6 +31,8 @@ namespace ECommerce.Api.Controllers
         /// <param name="userId">User ID</param>
         /// <returns></returns>
         [HttpGet("{userId}")]
+        [ProducesResponseType(typeof(IEnumerable<CartItem>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(object), StatusCodes.Status500InternalServerError)]
         public async Task<IEnumerable<CartItem>> GetAll(string userId)
         {
             return await _context.CartItems
@@ -45,6 +48,8 @@ namespace ECommerce.Api.Controllers
         /// <param name="userId">User ID</param>
         /// <returns></returns>
         [HttpGet("count/{userId}")]
+        [ProducesResponseType(typeof(Int32), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(object), StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<Int32>> GetCount(string userId)
         {
             var IsUserExist = _context.ApplicationUsers.Any(u => u.Id == userId);
@@ -70,6 +75,9 @@ namespace ECommerce.Api.Controllers
         /// <param name="productId">Product ID</param>
         /// <returns></returns>
         [HttpGet("{userId}/{productId}")]
+        [ProducesResponseType(typeof(CartItem), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(object), StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(object), StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<CartItem>> GetCartItemBasedOnUserIdAndProductId(string userId, long productId)
         {
             CartItem cartItemFromDb = await _context.CartItems
@@ -90,6 +98,9 @@ namespace ECommerce.Api.Controllers
         /// <param name="cartId"></param>
         /// <returns></returns>
         [HttpGet("details/{cartId}")]
+        [ProducesResponseType(typeof(CartItem), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(object), StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(object), StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<CartItem>> GetCartItemBasedOnCartId(long cartId)
         {
             CartItem cartItemFromDb = await _context.CartItems
@@ -110,6 +121,8 @@ namespace ECommerce.Api.Controllers
         /// <param name="cartItem">Cart Item ID</param>
         /// <returns></returns>
         [HttpPost]
+        [ProducesResponseType(typeof(object), StatusCodes.Status204NoContent)]
+        [ProducesResponseType(typeof(object), StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult> Add(CartItem cartItem)
         {
             try
@@ -133,6 +146,9 @@ namespace ECommerce.Api.Controllers
         /// <param name="cartItem">Cart Item Object</param>
         /// <returns></returns>
         [HttpPut("{id}")]
+        [ProducesResponseType(typeof(object), StatusCodes.Status204NoContent)]
+        [ProducesResponseType(typeof(object), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(object), StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> Update(long id, CartItem cartItem)
         {
             if (id != cartItem.Id)
@@ -144,7 +160,7 @@ namespace ECommerce.Api.Controllers
             {
                 _context.Entry(cartItem).State = EntityState.Modified;
                 await _context.SaveChangesAsync();
-            } 
+            }
             catch (Exception ex)
             {
                 _logger.LogWarning(ex, "User {userId} update product {productId} in cart failed", cartItem.UserId, cartItem.ProductId);
@@ -160,6 +176,9 @@ namespace ECommerce.Api.Controllers
         /// <param name="id">Cart Item ID</param>
         /// <returns></returns>
         [HttpDelete("{id}")]
+        [ProducesResponseType(typeof(object), StatusCodes.Status204NoContent)]
+        [ProducesResponseType(typeof(object), StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(object), StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> Delete(long id)
         {
             var cartItemToDelete = await _context.CartItems.FindAsync(id);

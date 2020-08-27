@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using ECommerce.DataAccess;
 using ECommerce.Models;
 using ECommerce.Utility;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -30,6 +31,8 @@ namespace ECommerce.Api.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
+        [ProducesResponseType(typeof(List<Category>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(object), StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<List<Category>>> GetAll()
         {
             return await _context.Categories.AsNoTracking().OrderBy(x => x.Name).ToListAsync();
@@ -41,6 +44,9 @@ namespace ECommerce.Api.Controllers
         /// <param name="id">Category ID</param>
         /// <returns></returns>
         [HttpGet("{id}")]
+        [ProducesResponseType(typeof(Category), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(object), StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(object), StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<Category>> Get(long id)
         {
             var category = await _context.Categories.FindAsync(id);
@@ -60,6 +66,8 @@ namespace ECommerce.Api.Controllers
         /// <param name="category">Category Object</param>
         /// <returns></returns>
         [HttpPost]
+        [ProducesResponseType(typeof(bool), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(object), StatusCodes.Status500InternalServerError)]
         public async Task<Boolean> Add(Category category)
         {
             var existingCategory = await _context.Categories.FirstOrDefaultAsync(c => c.Name.ToLower() == category.Name.Trim().ToLower());
@@ -92,6 +100,9 @@ namespace ECommerce.Api.Controllers
         /// <param name="category">Category Object</param>
         /// <returns></returns>
         [HttpPut("{id}")]
+        [ProducesResponseType(typeof(bool), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(object), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(object), StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<Boolean>> Update(long id, Category category)
         {
             if (id != category.Id)
@@ -141,6 +152,9 @@ namespace ECommerce.Api.Controllers
         /// <param name="userId">User ID</param>
         /// <returns></returns>
         [HttpDelete("{userId}/{id}")]
+        [ProducesResponseType(typeof(object), StatusCodes.Status204NoContent)]
+        [ProducesResponseType(typeof(object), StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(object), StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> Delete(long id, string userId)
         {
             var categoryToDelete = await _context.Categories.FindAsync(id);
