@@ -37,7 +37,7 @@ steps:
     SwaggerURL: '$(Build.Repository.LocalPath)/ECommerce.Api/swagger.json'
     Namespace: 'ECommerce.Api.Client'
     AddServiceClientCredentials: false
-    OpenAPIv3: false
+    OpenAPIv3: true
 
 - task: DotNetCoreCLI@2
   displayName: 'dotnet publish'
