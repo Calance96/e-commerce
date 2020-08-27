@@ -34,7 +34,7 @@ steps:
 
 - task: AutorestNuGetPackageGenerator@1
   inputs:
-    SwaggerURL: 'ECommerce.Api/swagger.json'
+    SwaggerURL: '$(Build.Repository.LocalPath)/ECommerce.Api/swagger.json'
     Namespace: 'ECommerce.Api.Client'
     AddServiceClientCredentials: false
     OpenAPIv3: false
