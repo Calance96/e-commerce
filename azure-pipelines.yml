@@ -32,6 +32,13 @@ steps:
     projects: '$(solution)'
     arguments: '--configuration $(buildConfiguration) --no-restore'
 
+- task: AutorestNuGetPackageGenerator@1
+  inputs:
+    SwaggerURL: 'ECommerce.Api/swagger.json'
+    Namespace: 'ECommerce.Api.Client'
+    AddServiceClientCredentials: false
+    OpenAPIv3: false
+
 - task: DotNetCoreCLI@2
   displayName: 'dotnet publish'
   inputs:
@@ -45,3 +52,5 @@ steps:
     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
     ArtifactName: 'drop'
     publishLocation: 'Container'
+  
+
