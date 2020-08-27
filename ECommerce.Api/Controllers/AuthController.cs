@@ -89,7 +89,7 @@ namespace ECommerce.Api.Controllers
                 ApplicationUser = user,
                 StatusCode = statusCode,
                 Message = messages
-            }; ;
+            };
         }
 
         /// <summary>
