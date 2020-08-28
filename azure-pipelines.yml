@@ -51,7 +51,7 @@ steps:
     publishWebProjects: false
     projects: |
               '$(csproject)'
-              '!**/$(restClientPackageName).csproj'
+              '!**/*Client*.csproj'
     arguments: '--configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)'
 
 
