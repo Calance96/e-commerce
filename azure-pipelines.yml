@@ -14,43 +14,53 @@ variables:
   csproject: '**/*.csproj'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
+  restClientPackageName: 'ECommerce.Rest.Client.Api'
 
 steps:
 - task: NuGetToolInstaller@1
 
-- task: DotNetCoreCLI@2
-  displayName: 'dotnet restore'
+- task: CmdLine@2
   inputs:
-    command: 'restore'
-    projects: '$(solution)'
-    feedsToUse: 'select'
+    script: 'java -jar tools\swagger-codegen-cli-3.0.21.jar generate -i ECommerce.Api\Swagger.json -l csharp -o $(restClientPackageName) -DpackageName=$(restClientPackageName)'
+    workingDirectory: '$(Build.Repository.LocalPath)'
 
-- task: DotNetCoreCLI@2
-  displayName: 'dotnet build w/o restore'
+- task: VSBuild@1
   inputs:
-    command: 'build'
-    projects: '$(solution)'
-    arguments: '--configuration $(buildConfiguration) --no-restore'
-
-- task: AutorestNuGetPackageGenerator@1
-  inputs:
-    SwaggerURL: '$(Build.Repository.LocalPath)/ECommerce.Api/swagger.json'
-    Namespace: 'ECommerce.Api.Client'
-    AddServiceClientCredentials: false
-    OpenAPIv3: true
+    solution: '**\*.sln'
+    msbuildArgs: '/p:OutputPath="$(Build.artifactStagingDirectory)"'
+    platform: '$(buildPlatform)'
+    configuration: '$(buildConfiguration)'
+    restoreNugetPackages: true
 
 - task: DotNetCoreCLI@2
   displayName: 'dotnet publish'
   inputs:
     command: 'publish'
     publishWebProjects: false
-    projects: '$(csproject)'
+    projects: '$(csproject);!**/$(restClientPackageName).csproj'
     arguments: '--configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)'
+
+- task: NuGetCommand@2
+  inputs:
+    command: 'pack'
+    packagesToPack: '**/$(restClientPackageName).csproj'
+    versioningScheme: 'byPrereleaseNumber'
+    majorVersion: '1'
+    minorVersion: '0'
+    patchVersion: '0'
+    verbosityPack: 'Normal'
 
 - task: PublishBuildArtifacts@1
   inputs:
     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
     ArtifactName: 'drop'
     publishLocation: 'Container'
+
+- task: NuGetCommand@2
+  inputs:
+    command: 'push'
+    packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
+    nuGetFeedType: 'internal'
+    publishVstsFeed: '46a4dd82-34fb-4605-9cd7-d70020e50202/c82446dc-a554-4e59-b571-ce7f95e14cd7'
   
 
