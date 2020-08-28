@@ -24,6 +24,11 @@ steps:
   inputs:
     script: 'java -jar tools\swagger-codegen-cli-3.0.21.jar generate -i ECommerce.Api\Swagger.json -l csharp -o $(restClientPackageName) -DpackageName=$(restClientPackageName)'
     workingDirectory: '$(Build.Repository.LocalPath)'
+  
+- task: CmdLine@2
+  inputs:
+    script: '.\$(restClientPackageName)\build.bat'
+    workingDirectory: '$(Build.Repository.LocalPath)'
 
 - task: NuGetCommand@2
   displayName: 'restore'
@@ -38,6 +43,17 @@ steps:
     msbuildArgs: '/p:OutputPath="$(Build.artifactStagingDirectory)"'
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
+
+- task: DotNetCoreCLI@2
+  displayName: 'dotnet publish'
+  inputs:
+    command: 'publish'
+    publishWebProjects: false
+    projects: |
+              '$(csproject)'
+              '!**/$(restClientPackageName).csproj'
+    arguments: '--configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)'
+
 
 - task: NuGetCommand@2
   displayName: 'pack'
