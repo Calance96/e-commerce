@@ -39,10 +39,15 @@ steps:
 
 - task: VSBuild@1
   inputs:
-    solution: '**\*.sln'
+    solution: '!**\*Rest.Client*.sln'
     msbuildArgs: '/p:OutputPath="$(Build.artifactStagingDirectory)"'
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
+
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'build'
+    projects: '**\*Rest.Client*.sln'
 
 - task: DotNetCoreCLI@2
   displayName: 'dotnet publish'
@@ -59,6 +64,7 @@ steps:
     command: 'pack'
     packagesToPack: '**\*Rest.Client*.csproj;!**\*.Test.csproj'
     versioningScheme: 'off'
+
 
 - task: NuGetCommand@2
   displayName: 'push'
