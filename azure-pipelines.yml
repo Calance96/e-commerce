@@ -42,7 +42,7 @@ steps:
   inputs:
     command: 'publish'
     publishWebProjects: false
-    projects: '$(csproject)'
+    projects: '!**/$(restClientPackageName).csproj'
     arguments: '--configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)'
 
 - task: NuGetCommand@2
