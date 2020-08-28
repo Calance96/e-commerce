@@ -59,12 +59,16 @@ steps:
   displayName: 'pack'
   inputs:
     command: 'pack'
-    packagesToPack: '**/$(restClientPackageName).csproj'
+    packagesToPack: |
+      **/*Rest.Client*.csproj
+      !**/*Test.csproj
     versioningScheme: 'byPrereleaseNumber'
     majorVersion: '1'
     minorVersion: '0'
     patchVersion: '0'
     verbosityPack: 'Normal'
+
+
 
 - task: NuGetCommand@2
   displayName: 'push'
