@@ -20,11 +20,13 @@ steps:
 - task: NuGetToolInstaller@1
 
 - task: CmdLine@2
+  displayName: 'swagger-codegen'
   inputs:
     script: 'java -jar tools\swagger-codegen-cli-3.0.21.jar generate -i ECommerce.Api\Swagger.json -l csharp -o $(restClientPackageName) -DpackageName=$(restClientPackageName)'
     workingDirectory: '$(Build.Repository.LocalPath)'
 
 - task: NuGetCommand@2
+  displayName: 'restore'
   inputs:
     command: 'restore'
     restoreSolution: '**/*.sln'
@@ -37,15 +39,8 @@ steps:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
 
-- task: DotNetCoreCLI@2
-  displayName: 'dotnet publish'
-  inputs:
-    command: 'publish'
-    publishWebProjects: false
-    projects: '!**/$(restClientPackageName).csproj'
-    arguments: '--configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)'
-
 - task: NuGetCommand@2
+  displayName: 'pack'
   inputs:
     command: 'pack'
     packagesToPack: '**/$(restClientPackageName).csproj'
@@ -55,13 +50,8 @@ steps:
     patchVersion: '0'
     verbosityPack: 'Normal'
 
-- task: PublishBuildArtifacts@1
-  inputs:
-    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-    ArtifactName: 'drop'
-    publishLocation: 'Container'
-
 - task: NuGetCommand@2
+  displayName: 'push'
   inputs:
     command: 'push'
     packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
