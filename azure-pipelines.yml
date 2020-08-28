@@ -54,18 +54,11 @@ steps:
       !**\*Rest.Client*.csproj
     arguments: '--configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)'
 
-
 - task: NuGetCommand@2
-  displayName: 'pack'
   inputs:
     command: 'pack'
-    arguments: '$(Build.ArtifactStagingDirectory)\$(restClientPackageName)\src\$(restClientPackageName)\*.csproj'
-    versioningScheme: 'byPrereleaseNumber'
-    majorVersion: '1'
-    minorVersion: '0'
-    patchVersion: '0'
-    verbosityPack: 'Normal'
-
+    packagesToPack: '**\*Rest.Client*.csproj;!**\*.Test.csproj'
+    versioningScheme: 'off'
 
 - task: NuGetCommand@2
   displayName: 'push'
