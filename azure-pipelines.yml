@@ -22,7 +22,7 @@ steps:
 - task: CmdLine@2
   displayName: 'swagger-codegen'
   inputs:
-    script: 'java -jar tools\swagger-codegen-cli-3.0.21.jar generate -i ECommerce.Api\Swagger.json -l csharp -o -DpackageName=$(restClientPackageName)'
+    script: 'java -jar tools\swagger-codegen-cli-3.0.21.jar generate -i ECommerce.Api\Swagger.json -l csharp -o $(restClientPackageName) -DpackageName=$(restClientPackageName)'
     workingDirectory: '$(Build.Repository.LocalPath)'
   
 - task: CmdLine@2
