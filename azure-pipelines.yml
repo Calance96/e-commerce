@@ -39,7 +39,7 @@ steps:
 
 - task: VSBuild@1
   inputs:
-    solution: '!**\*Rest.Client*.sln'
+    solution: '$(solution)'
     msbuildArgs: '/p:OutputPath="$(Build.artifactStagingDirectory)"'
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
@@ -47,9 +47,9 @@ steps:
 - task: DotNetCoreCLI@2
   inputs:
     command: 'build'
-    projects: '**\*Rest.Client*.sln'
+    projects: '**\*Rest.Client*.csproj'
     arguments: '--configuration $(buildConfiguration)'
-
+  
 - task: DotNetCoreCLI@2
   displayName: 'dotnet publish'
   inputs:
