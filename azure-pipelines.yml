@@ -59,15 +59,12 @@ steps:
   displayName: 'pack'
   inputs:
     command: 'pack'
-    packagesToPack: |
-      **/*Rest.Client*.csproj
-      !**/*Test.csproj
+    arguments: '$(Build.ArtifactStagingDirectory)\$(restClientPackageName)\src\$(restClientPackageName)\*.csproj'
     versioningScheme: 'byPrereleaseNumber'
     majorVersion: '1'
     minorVersion: '0'
     patchVersion: '0'
     verbosityPack: 'Normal'
-
 
 
 - task: NuGetCommand@2
