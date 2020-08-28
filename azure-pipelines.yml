@@ -27,7 +27,7 @@ steps:
   
 - task: CmdLine@2
   inputs:
-    script: '\$(restClientPackageName)\build.bat'
+    script: 'bash .\$(restClientPackageName)\build.bat'
     workingDirectory: '$(Build.Repository.LocalPath)'
 
 - task: NuGetCommand@2
