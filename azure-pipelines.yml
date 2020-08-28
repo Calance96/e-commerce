@@ -48,6 +48,7 @@ steps:
   inputs:
     command: 'build'
     projects: '**\*Rest.Client*.sln'
+    arguments: '--configuration $(buildConfiguration)'
 
 - task: DotNetCoreCLI@2
   displayName: 'dotnet publish'
