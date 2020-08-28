@@ -1,0 +1,55 @@
+trigger:
+- master
+
+pool:
+  vmImage: 'windows-latest'
+
+variables:
+  solution: '**/*.sln'
+  csproject: '**/*.csproj'
+  buildPlatform: 'Any CPU'
+  buildConfiguration: 'Release'
+  restClientPackageName: 'ECommerce.Rest.Client.Api'
+
+steps:
+- task: NuGetToolInstaller@1
+
+# For swagger-codegen
+- task: CmdLine@2
+  displayName: 'swagger-codegen'
+  inputs:
+    script: 'java -jar tools\swagger-codegen-cli-3.0.21.jar generate -i ECommerce.Api\Swagger.json -l csharp -o $(restClientPackageName) -DpackageName=$(restClientPackageName)'
+    workingDirectory: '$(Build.Repository.LocalPath)'
+  
+# For swagger-codegen
+- task: CmdLine@2
+  inputs:
+    script: 'build.bat'
+    workingDirectory: '$(Build.Repository.LocalPath)\$(restClientPackageName)' 
+
+# For swagger-codegen
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'build'
+    projects: '**\*Rest.Client*.csproj'
+    arguments: '--configuration $(buildConfiguration)'
+
+# For swagger-codegen
+- task: NuGetCommand@2
+  inputs:
+    command: 'pack'
+    packagesToPack: '**\*Rest.Client*.csproj;!**\*.Test.csproj'
+    versioningScheme: 'byPrereleaseNumber'
+    majorVersion: '1'
+    minorVersion: '0'
+    patchVersion: '0'
+    packTimezone: 'local'
+
+- task: NuGetCommand@2
+  displayName: 'push'
+  inputs:
+    command: 'push'
+    packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
+    nuGetFeedType: 'internal'
+    publishVstsFeed: '46a4dd82-34fb-4605-9cd7-d70020e50202/c82446dc-a554-4e59-b571-ce7f95e14cd7'
+  
