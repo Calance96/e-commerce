@@ -1,3 +1,5 @@
+name: $(Date:yyyyMMdd)$(Rev:.r)
+
 trigger:
 - master
 
@@ -46,11 +48,7 @@ steps:
   inputs:
     command: 'pack'
     packagesToPack: '**\*Rest.Client*.csproj;!**\*.Test.csproj'
-    versioningScheme: 'byPrereleaseNumber'
-    majorVersion: '1'
-    minorVersion: '0'
-    patchVersion: '0'
-    packTimezone: 'local'
+    versioningScheme: 'byBuildNumber'
 
 - task: NuGetCommand@2
   displayName: 'push'
