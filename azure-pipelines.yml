@@ -24,13 +24,18 @@ steps:
     script: 'java -jar tools\swagger-codegen-cli-3.0.21.jar generate -i ECommerce.Api\Swagger.json -l csharp -o $(restClientPackageName) -DpackageName=$(restClientPackageName)'
     workingDirectory: '$(Build.Repository.LocalPath)'
 
+- task: NuGetCommand@2
+  inputs:
+    command: 'restore'
+    restoreSolution: '**/*.sln'
+    feedsToUse: 'select'
+
 - task: VSBuild@1
   inputs:
     solution: '**\*.sln'
     msbuildArgs: '/p:OutputPath="$(Build.artifactStagingDirectory)"'
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
-    restoreNugetPackages: true
 
 - task: DotNetCoreCLI@2
   displayName: 'dotnet publish'
