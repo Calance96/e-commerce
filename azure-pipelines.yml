@@ -22,13 +22,13 @@ steps:
 - task: CmdLine@2
   displayName: 'swagger-codegen'
   inputs:
-    script: 'java -jar tools\swagger-codegen-cli-3.0.21.jar generate -i ECommerce.Api\Swagger.json -l csharp -o $(restClientPackageName) -DpackageName=$(restClientPackageName)'
+    script: 'java -jar tools\swagger-codegen-cli-3.0.21.jar generate -i ECommerce.Api\Swagger.json -l csharp -o -DpackageName=$(restClientPackageName)'
     workingDirectory: '$(Build.Repository.LocalPath)'
   
 - task: CmdLine@2
   inputs:
-    script: 'bash .\$(restClientPackageName)\build.bat'
-    workingDirectory: '$(Build.Repository.LocalPath)'
+    script: 'build.bat'
+    workingDirectory: '$(Build.Repository.LocalPath)\$(restClientPackageName)' 
 
 - task: NuGetCommand@2
   displayName: 'restore'
