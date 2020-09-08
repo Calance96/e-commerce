@@ -14,7 +14,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace ECommerce.Api.Controllers
 {
@@ -50,6 +50,7 @@ namespace ECommerce.Api.Controllers
         /// is included to indicate the failure reason.
         /// </returns>
         [HttpPost("login")]
+        [SwaggerOperation("Login")]
         [ProducesResponseType(typeof(AuthResult), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(object), StatusCodes.Status500InternalServerError)]
         public async Task<AuthResult> Login(LoginViewModel loginInput)
@@ -103,6 +104,7 @@ namespace ECommerce.Api.Controllers
         /// code to indicate success or failure.
         /// </returns>
         [HttpPost("register")]
+        [SwaggerOperation("Register")]
         [ProducesResponseType(typeof(AuthResult), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(object), StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<AuthResult>> Register(RegisterViewModel registerInput)
@@ -175,6 +177,7 @@ namespace ECommerce.Api.Controllers
         /// Returns boolean to indicate success or failure.
         /// </returns>
         [HttpPost("password_change")]
+        [SwaggerOperation("ChangePassword")]
         [ProducesResponseType(typeof(bool), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(object), StatusCodes.Status500InternalServerError)]
         public async Task<Boolean> ChangePassword(ChangePasswordModel input)

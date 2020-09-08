@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace ECommerce.Api.Controllers
 {
@@ -32,6 +33,7 @@ namespace ECommerce.Api.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
+        [SwaggerOperation("GetAll")]
         [ProducesResponseType(typeof(IEnumerable<ProductViewModel>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(object), StatusCodes.Status500InternalServerError)]
         public async Task<IEnumerable<ProductViewModel>> GetAll()
@@ -71,6 +73,7 @@ namespace ECommerce.Api.Controllers
         /// <param name="id">Product ID</param>
         /// <returns></returns>
         [HttpGet("{id}")]
+        [SwaggerOperation("Get")]
         [ProducesResponseType(typeof(ProductViewModel), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(object), StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(object), StatusCodes.Status500InternalServerError)]
@@ -110,6 +113,7 @@ namespace ECommerce.Api.Controllers
         /// <param name="productVM">ProductViewModel Object</param>
         /// <returns></returns>
         [HttpPost]
+        [SwaggerOperation("Add")]
         [ProducesResponseType(typeof(object), StatusCodes.Status204NoContent)]
         [ProducesResponseType(typeof(object), StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult> Add(ProductViewModel productVM)
@@ -145,6 +149,7 @@ namespace ECommerce.Api.Controllers
         /// <param name="productVM">ProductViewModel Object</param>
         /// <returns></returns>
         [HttpPut("{id}")]
+        [SwaggerOperation("Update")]
         [ProducesResponseType(typeof(object), StatusCodes.Status204NoContent)]
         [ProducesResponseType(typeof(object), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(object), StatusCodes.Status404NotFound)]
@@ -212,6 +217,7 @@ namespace ECommerce.Api.Controllers
         /// <param name="userId">User ID</param>
         /// <returns></returns>
         [HttpDelete("{userId}/{id}")]
+        [SwaggerOperation("Delete")]
         [ProducesResponseType(typeof(object), StatusCodes.Status204NoContent)]
         [ProducesResponseType(typeof(object), StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(object), StatusCodes.Status500InternalServerError)]
