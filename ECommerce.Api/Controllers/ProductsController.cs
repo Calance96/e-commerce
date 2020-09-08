@@ -33,7 +33,7 @@ namespace ECommerce.Api.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        [SwaggerOperation("GetAll")]
+        [SwaggerOperation(OperationId = "GetAll")]
         [ProducesResponseType(typeof(IEnumerable<ProductViewModel>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(object), StatusCodes.Status500InternalServerError)]
         public async Task<IEnumerable<ProductViewModel>> GetAll()
@@ -73,7 +73,7 @@ namespace ECommerce.Api.Controllers
         /// <param name="id">Product ID</param>
         /// <returns></returns>
         [HttpGet("{id}")]
-        [SwaggerOperation("Get")]
+        [SwaggerOperation(OperationId = "Get")]
         [ProducesResponseType(typeof(ProductViewModel), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(object), StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(object), StatusCodes.Status500InternalServerError)]
@@ -113,7 +113,7 @@ namespace ECommerce.Api.Controllers
         /// <param name="productVM">ProductViewModel Object</param>
         /// <returns></returns>
         [HttpPost]
-        [SwaggerOperation("Add")]
+        [SwaggerOperation(OperationId = "Add")]
         [ProducesResponseType(typeof(object), StatusCodes.Status204NoContent)]
         [ProducesResponseType(typeof(object), StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult> Add(ProductViewModel productVM)
@@ -149,7 +149,7 @@ namespace ECommerce.Api.Controllers
         /// <param name="productVM">ProductViewModel Object</param>
         /// <returns></returns>
         [HttpPut("{id}")]
-        [SwaggerOperation("Update")]
+        [SwaggerOperation(OperationId = "Update")]
         [ProducesResponseType(typeof(object), StatusCodes.Status204NoContent)]
         [ProducesResponseType(typeof(object), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(object), StatusCodes.Status404NotFound)]
@@ -217,7 +217,7 @@ namespace ECommerce.Api.Controllers
         /// <param name="userId">User ID</param>
         /// <returns></returns>
         [HttpDelete("{userId}/{id}")]
-        [SwaggerOperation("Delete")]
+        [SwaggerOperation(OperationId = "Delete")]
         [ProducesResponseType(typeof(object), StatusCodes.Status204NoContent)]
         [ProducesResponseType(typeof(object), StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(object), StatusCodes.Status500InternalServerError)]

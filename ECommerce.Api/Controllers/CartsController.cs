@@ -32,7 +32,7 @@ namespace ECommerce.Api.Controllers
         /// <param name="userId">User ID</param>
         /// <returns></returns>
         [HttpGet("{userId}")]
-        [SwaggerOperation("GetAll")]
+        [SwaggerOperation(OperationId = "GetAll")]
         [ProducesResponseType(typeof(IEnumerable<CartItem>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(object), StatusCodes.Status500InternalServerError)]
         public async Task<IEnumerable<CartItem>> GetAll(string userId)
@@ -50,7 +50,7 @@ namespace ECommerce.Api.Controllers
         /// <param name="userId">User ID</param>
         /// <returns></returns>
         [HttpGet("count/{userId}")]
-        [SwaggerOperation("GetCount")]
+        [SwaggerOperation(OperationId = "GetCount")]
         [ProducesResponseType(typeof(Int32), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(object), StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<Int32>> GetCount(string userId)
@@ -78,7 +78,7 @@ namespace ECommerce.Api.Controllers
         /// <param name="productId">Product ID</param>
         /// <returns></returns>
         [HttpGet("{userId}/{productId}")]
-        [SwaggerOperation("GetCartItemBasedOnUserIdAndProductId")]
+        [SwaggerOperation(OperationId = "GetCartItemBasedOnUserIdAndProductId")]
         [ProducesResponseType(typeof(CartItem), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(object), StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(object), StatusCodes.Status500InternalServerError)]
@@ -102,7 +102,7 @@ namespace ECommerce.Api.Controllers
         /// <param name="cartId"></param>
         /// <returns></returns>
         [HttpGet("details/{cartId}")]
-        [SwaggerOperation("GetCartItemBasedOnCartId")]
+        [SwaggerOperation(OperationId = "GetCartItemBasedOnCartId")]
         [ProducesResponseType(typeof(CartItem), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(object), StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(object), StatusCodes.Status500InternalServerError)]
@@ -126,7 +126,7 @@ namespace ECommerce.Api.Controllers
         /// <param name="cartItem">Cart Item ID</param>
         /// <returns></returns>
         [HttpPost]
-        [SwaggerOperation("Add")]
+        [SwaggerOperation(OperationId = "Add")]
         [ProducesResponseType(typeof(object), StatusCodes.Status204NoContent)]
         [ProducesResponseType(typeof(object), StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult> Add(CartItem cartItem)
@@ -152,7 +152,7 @@ namespace ECommerce.Api.Controllers
         /// <param name="cartItem">Cart Item Object</param>
         /// <returns></returns>
         [HttpPut("{id}")]
-        [SwaggerOperation("Update")]
+        [SwaggerOperation(OperationId = "Update")]
         [ProducesResponseType(typeof(object), StatusCodes.Status204NoContent)]
         [ProducesResponseType(typeof(object), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(object), StatusCodes.Status500InternalServerError)]
@@ -183,7 +183,7 @@ namespace ECommerce.Api.Controllers
         /// <param name="id">Cart Item ID</param>
         /// <returns></returns>
         [HttpDelete("{id}")]
-        [SwaggerOperation("Delete")]
+        [SwaggerOperation(OperationId = "Delete")]
         [ProducesResponseType(typeof(object), StatusCodes.Status204NoContent)]
         [ProducesResponseType(typeof(object), StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(object), StatusCodes.Status500InternalServerError)]

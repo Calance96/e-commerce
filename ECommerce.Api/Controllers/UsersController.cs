@@ -33,7 +33,7 @@ namespace ECommerce.Api.Controllers
         /// <param name="role">Role string, e.g. Admin, Customer</param>
         /// <returns></returns>
         [HttpGet("{role}")]
-        [SwaggerOperation("GetAll")]
+        [SwaggerOperation(OperationId = "GetAll")]
         [ProducesResponseType(typeof(IEnumerable<ApplicationUser>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(object), StatusCodes.Status500InternalServerError)]
         public async Task<IEnumerable<ApplicationUser>> GetAll(string role)
@@ -68,7 +68,7 @@ namespace ECommerce.Api.Controllers
         /// <param name="userId">User ID</param>
         /// <returns></returns>
         [HttpGet("info/{userId}")]
-        [SwaggerOperation("Get")]
+        [SwaggerOperation(OperationId = "Get")]
         [ProducesResponseType(typeof(ApplicationUser), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(object), StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(object), StatusCodes.Status500InternalServerError)]
@@ -91,7 +91,7 @@ namespace ECommerce.Api.Controllers
         /// <param name="user">ApplicationUser Object</param>
         /// <returns></returns>
         [HttpPut]
-        [SwaggerOperation("Update")]
+        [SwaggerOperation(OperationId = "Update")]
         [ProducesResponseType(typeof(object), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(object), StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(object), StatusCodes.Status500InternalServerError)]

@@ -36,7 +36,7 @@ namespace ECommerce.Api.Controllers
         /// <param name="status">Order status, e.g. Approved, Processing, Shipped, Complete, Cancelled</param>
         /// <returns></returns>
         [HttpGet("{status}")]
-        [SwaggerOperation("GetAllOrdersOfStatus")]
+        [SwaggerOperation(OperationId = "GetAllOrdersOfStatus")]
         [ProducesResponseType(typeof(IEnumerable<Order>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(object), StatusCodes.Status500InternalServerError)]
         public async Task<IEnumerable<Order>> GetAllOrdersOfStatus(string status)
@@ -56,7 +56,7 @@ namespace ECommerce.Api.Controllers
         /// <param name="status">Order status, e.g. Approved, Processing, Shipped, Complete, Cancelled</param>
         /// <returns></returns>
         [HttpGet("user/{userId}/{status}")]
-        [SwaggerOperation("GetAllOrdersForUserById")]
+        [SwaggerOperation(OperationId = "GetAllOrdersForUserById")]
         [ProducesResponseType(typeof(IEnumerable<Order>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(object), StatusCodes.Status500InternalServerError)]
         public async Task<IEnumerable<Order>> GetAllOrdersForUserById(string userId, string status)
@@ -101,7 +101,7 @@ namespace ECommerce.Api.Controllers
         /// <param name="orderId">Order ID</param>
         /// <returns></returns>
         [HttpGet("summary/{orderId}")]
-        [SwaggerOperation("GetOrderById")]
+        [SwaggerOperation(OperationId = "GetOrderById")]
         [ProducesResponseType(typeof(Order), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(object), StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(object), StatusCodes.Status500InternalServerError)]
@@ -124,7 +124,7 @@ namespace ECommerce.Api.Controllers
         /// <param name="orderId">Order ID</param>
         /// <returns></returns>
         [HttpGet("details/{orderId}")]
-        [SwaggerOperation("GetOrderDetailsByOrderId")]
+        [SwaggerOperation(OperationId = "GetOrderDetailsByOrderId")]
         [ProducesResponseType(typeof(OrderDetailsVM), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(object), StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(object), StatusCodes.Status500InternalServerError)]
@@ -157,7 +157,7 @@ namespace ECommerce.Api.Controllers
         /// <param name="shoppingCart">Shopping Cart Object</param>
         /// <returns></returns>
         [HttpPost]
-        [SwaggerOperation("Create")]
+        [SwaggerOperation(OperationId = "Create")]
         [ProducesResponseType(typeof(Order), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(object), StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<Order>> Create(ShoppingCartVM shoppingCart)
@@ -208,7 +208,7 @@ namespace ECommerce.Api.Controllers
         /// <param name="order"></param>
         /// <returns></returns>
         [HttpPut("{orderId}")]
-        [SwaggerOperation("Update")]
+        [SwaggerOperation(OperationId = "Update")]
         [ProducesResponseType(typeof(object), StatusCodes.Status204NoContent)]
         [ProducesResponseType(typeof(object), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(object), StatusCodes.Status404NotFound)]

@@ -50,7 +50,7 @@ namespace ECommerce.Api.Controllers
         /// is included to indicate the failure reason.
         /// </returns>
         [HttpPost("login")]
-        [SwaggerOperation("Login")]
+        [SwaggerOperation(OperationId = "Login")]
         [ProducesResponseType(typeof(AuthResult), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(object), StatusCodes.Status500InternalServerError)]
         public async Task<AuthResult> Login(LoginViewModel loginInput)
@@ -104,7 +104,7 @@ namespace ECommerce.Api.Controllers
         /// code to indicate success or failure.
         /// </returns>
         [HttpPost("register")]
-        [SwaggerOperation("Register")]
+        [SwaggerOperation(OperationId = "Register")]
         [ProducesResponseType(typeof(AuthResult), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(object), StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<AuthResult>> Register(RegisterViewModel registerInput)
@@ -177,7 +177,7 @@ namespace ECommerce.Api.Controllers
         /// Returns boolean to indicate success or failure.
         /// </returns>
         [HttpPost("password_change")]
-        [SwaggerOperation("ChangePassword")]
+        [SwaggerOperation(OperationId = "ChangePassword")]
         [ProducesResponseType(typeof(bool), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(object), StatusCodes.Status500InternalServerError)]
         public async Task<Boolean> ChangePassword(ChangePasswordModel input)
