@@ -39,26 +39,6 @@ namespace ECommerce.Api.Api
     {
         #region Synchronous Operations
         /// <summary>
-        /// Verify the combination of email and password to grant user access to use E-Mall.
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="body">Provides the necessary email and password combination for authentication (optional)</param>
-        /// <returns>AuthResult</returns>
-        AuthResult ApiAuthLoginPost (LoginViewModel body = null);
-        /// <summary>
-        /// Verify the combination of email and password to grant user access to use E-Mall.
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="body">Provides the necessary email and password combination for authentication (optional)</param>
-        /// <returns>ApiResponse of AuthResult</returns>
-        ApiResponse<AuthResult> ApiAuthLoginPostWithHttpInfo (LoginViewModel body = null);
-        /// <summary>
         /// Accepts a combination of user ID, current password and new password for password change.
         /// </summary>
         /// <remarks>
@@ -67,7 +47,7 @@ namespace ECommerce.Api.Api
         /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="body"> (optional)</param>
         /// <returns>bool?</returns>
-        bool? ApiAuthPasswordChangePost (ChangePasswordModel body = null);
+        bool? ChangePassword (ChangePasswordModel body = null);
         /// <summary>
         /// Accepts a combination of user ID, current password and new password for password change.
         /// </summary>
@@ -77,7 +57,27 @@ namespace ECommerce.Api.Api
         /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="body"> (optional)</param>
         /// <returns>ApiResponse of bool?</returns>
-        ApiResponse<bool?> ApiAuthPasswordChangePostWithHttpInfo (ChangePasswordModel body = null);
+        ApiResponse<bool?> ChangePasswordWithHttpInfo (ChangePasswordModel body = null);
+        /// <summary>
+        /// Verify the combination of email and password to grant user access to use E-Mall.
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="body">Provides the necessary email and password combination for authentication (optional)</param>
+        /// <returns>AuthResult</returns>
+        AuthResult Login (LoginViewModel body = null);
+        /// <summary>
+        /// Verify the combination of email and password to grant user access to use E-Mall.
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="body">Provides the necessary email and password combination for authentication (optional)</param>
+        /// <returns>ApiResponse of AuthResult</returns>
+        ApiResponse<AuthResult> LoginWithHttpInfo (LoginViewModel body = null);
         /// <summary>
         /// Take input from user to register a new account
         /// </summary>
@@ -87,7 +87,7 @@ namespace ECommerce.Api.Api
         /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="body">Provide necessary information for registering a new user in the database (optional)</param>
         /// <returns>AuthResult</returns>
-        AuthResult ApiAuthRegisterPost (RegisterViewModel body = null);
+        AuthResult Register (RegisterViewModel body = null);
         /// <summary>
         /// Take input from user to register a new account
         /// </summary>
@@ -97,29 +97,9 @@ namespace ECommerce.Api.Api
         /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="body">Provide necessary information for registering a new user in the database (optional)</param>
         /// <returns>ApiResponse of AuthResult</returns>
-        ApiResponse<AuthResult> ApiAuthRegisterPostWithHttpInfo (RegisterViewModel body = null);
+        ApiResponse<AuthResult> RegisterWithHttpInfo (RegisterViewModel body = null);
         #endregion Synchronous Operations
         #region Asynchronous Operations
-        /// <summary>
-        /// Verify the combination of email and password to grant user access to use E-Mall.
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="body">Provides the necessary email and password combination for authentication (optional)</param>
-        /// <returns>Task of AuthResult</returns>
-        System.Threading.Tasks.Task<AuthResult> ApiAuthLoginPostAsync (LoginViewModel body = null);
-        /// <summary>
-        /// Verify the combination of email and password to grant user access to use E-Mall.
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="body">Provides the necessary email and password combination for authentication (optional)</param>
-        /// <returns>Task of ApiResponse (AuthResult)</returns>
-        System.Threading.Tasks.Task<ApiResponse<AuthResult>> ApiAuthLoginPostAsyncWithHttpInfo (LoginViewModel body = null);
         /// <summary>
         /// Accepts a combination of user ID, current password and new password for password change.
         /// </summary>
@@ -129,7 +109,7 @@ namespace ECommerce.Api.Api
         /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="body"> (optional)</param>
         /// <returns>Task of bool?</returns>
-        System.Threading.Tasks.Task<bool?> ApiAuthPasswordChangePostAsync (ChangePasswordModel body = null);
+        System.Threading.Tasks.Task<bool?> ChangePasswordAsync (ChangePasswordModel body = null);
         /// <summary>
         /// Accepts a combination of user ID, current password and new password for password change.
         /// </summary>
@@ -139,7 +119,27 @@ namespace ECommerce.Api.Api
         /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="body"> (optional)</param>
         /// <returns>Task of ApiResponse (bool?)</returns>
-        System.Threading.Tasks.Task<ApiResponse<bool?>> ApiAuthPasswordChangePostAsyncWithHttpInfo (ChangePasswordModel body = null);
+        System.Threading.Tasks.Task<ApiResponse<bool?>> ChangePasswordAsyncWithHttpInfo (ChangePasswordModel body = null);
+        /// <summary>
+        /// Verify the combination of email and password to grant user access to use E-Mall.
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="body">Provides the necessary email and password combination for authentication (optional)</param>
+        /// <returns>Task of AuthResult</returns>
+        System.Threading.Tasks.Task<AuthResult> LoginAsync (LoginViewModel body = null);
+        /// <summary>
+        /// Verify the combination of email and password to grant user access to use E-Mall.
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="body">Provides the necessary email and password combination for authentication (optional)</param>
+        /// <returns>Task of ApiResponse (AuthResult)</returns>
+        System.Threading.Tasks.Task<ApiResponse<AuthResult>> LoginAsyncWithHttpInfo (LoginViewModel body = null);
         /// <summary>
         /// Take input from user to register a new account
         /// </summary>
@@ -149,7 +149,7 @@ namespace ECommerce.Api.Api
         /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="body">Provide necessary information for registering a new user in the database (optional)</param>
         /// <returns>Task of AuthResult</returns>
-        System.Threading.Tasks.Task<AuthResult> ApiAuthRegisterPostAsync (RegisterViewModel body = null);
+        System.Threading.Tasks.Task<AuthResult> RegisterAsync (RegisterViewModel body = null);
         /// <summary>
         /// Take input from user to register a new account
         /// </summary>
@@ -159,7 +159,7 @@ namespace ECommerce.Api.Api
         /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="body">Provide necessary information for registering a new user in the database (optional)</param>
         /// <returns>Task of ApiResponse (AuthResult)</returns>
-        System.Threading.Tasks.Task<ApiResponse<AuthResult>> ApiAuthRegisterPostAsyncWithHttpInfo (RegisterViewModel body = null);
+        System.Threading.Tasks.Task<ApiResponse<AuthResult>> RegisterAsyncWithHttpInfo (RegisterViewModel body = null);
         #endregion Asynchronous Operations
     }
     /// <summary>
@@ -258,142 +258,14 @@ namespace ECommerce.Api.Api
             this.Configuration.AddDefaultHeader(key, value);
         }
         /// <summary>
-        /// Verify the combination of email and password to grant user access to use E-Mall. 
-        /// </summary>
-        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="body">Provides the necessary email and password combination for authentication (optional)</param>
-        /// <returns>AuthResult</returns>
-        public AuthResult ApiAuthLoginPost (LoginViewModel body = null)
-        {
-             ApiResponse<AuthResult> localVarResponse = ApiAuthLoginPostWithHttpInfo(body);
-             return localVarResponse.Data;
-        }
-        /// <summary>
-        /// Verify the combination of email and password to grant user access to use E-Mall. 
-        /// </summary>
-        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="body">Provides the necessary email and password combination for authentication (optional)</param>
-        /// <returns>ApiResponse of AuthResult</returns>
-        public ApiResponse< AuthResult > ApiAuthLoginPostWithHttpInfo (LoginViewModel body = null)
-        {
-            var localVarPath = "/api/Auth/login";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-                "application/json", 
-                "text/json", 
-                "application/_*+json"
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "text/plain",
-                "application/json",
-                "text/json"
-            };
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null)
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-            if (body != null && body.GetType() != typeof(byte[]))
-            {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(body); // http body (model) parameter
-            }
-            else
-            {
-                localVarPostBody = body; // byte array
-            }
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("ApiAuthLoginPost", localVarResponse);
-                if (exception != null) throw exception;
-            }
-            return new ApiResponse<AuthResult>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
-                (AuthResult) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(AuthResult)));
-        }
-        /// <summary>
-        /// Verify the combination of email and password to grant user access to use E-Mall. 
-        /// </summary>
-        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="body">Provides the necessary email and password combination for authentication (optional)</param>
-        /// <returns>Task of AuthResult</returns>
-        public async System.Threading.Tasks.Task<AuthResult> ApiAuthLoginPostAsync (LoginViewModel body = null)
-        {
-             ApiResponse<AuthResult> localVarResponse = await ApiAuthLoginPostAsyncWithHttpInfo(body);
-             return localVarResponse.Data;
-        }
-        /// <summary>
-        /// Verify the combination of email and password to grant user access to use E-Mall. 
-        /// </summary>
-        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="body">Provides the necessary email and password combination for authentication (optional)</param>
-        /// <returns>Task of ApiResponse (AuthResult)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<AuthResult>> ApiAuthLoginPostAsyncWithHttpInfo (LoginViewModel body = null)
-        {
-            var localVarPath = "/api/Auth/login";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-                "application/json", 
-                "text/json", 
-                "application/_*+json"
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "text/plain",
-                "application/json",
-                "text/json"
-            };
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null)
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-            if (body != null && body.GetType() != typeof(byte[]))
-            {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(body); // http body (model) parameter
-            }
-            else
-            {
-                localVarPostBody = body; // byte array
-            }
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("ApiAuthLoginPost", localVarResponse);
-                if (exception != null) throw exception;
-            }
-            return new ApiResponse<AuthResult>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
-                (AuthResult) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(AuthResult)));
-        }
-        /// <summary>
         /// Accepts a combination of user ID, current password and new password for password change. 
         /// </summary>
         /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="body"> (optional)</param>
         /// <returns>bool?</returns>
-        public bool? ApiAuthPasswordChangePost (ChangePasswordModel body = null)
+        public bool? ChangePassword (ChangePasswordModel body = null)
         {
-             ApiResponse<bool?> localVarResponse = ApiAuthPasswordChangePostWithHttpInfo(body);
+             ApiResponse<bool?> localVarResponse = ChangePasswordWithHttpInfo(body);
              return localVarResponse.Data;
         }
         /// <summary>
@@ -402,7 +274,7 @@ namespace ECommerce.Api.Api
         /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="body"> (optional)</param>
         /// <returns>ApiResponse of bool?</returns>
-        public ApiResponse< bool? > ApiAuthPasswordChangePostWithHttpInfo (ChangePasswordModel body = null)
+        public ApiResponse< bool? > ChangePasswordWithHttpInfo (ChangePasswordModel body = null)
         {
             var localVarPath = "/api/Auth/password_change";
             var localVarPathParams = new Dictionary<String, String>();
@@ -442,7 +314,7 @@ namespace ECommerce.Api.Api
             int localVarStatusCode = (int) localVarResponse.StatusCode;
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("ApiAuthPasswordChangePost", localVarResponse);
+                Exception exception = ExceptionFactory("ChangePassword", localVarResponse);
                 if (exception != null) throw exception;
             }
             return new ApiResponse<bool?>(localVarStatusCode,
@@ -455,9 +327,9 @@ namespace ECommerce.Api.Api
         /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="body"> (optional)</param>
         /// <returns>Task of bool?</returns>
-        public async System.Threading.Tasks.Task<bool?> ApiAuthPasswordChangePostAsync (ChangePasswordModel body = null)
+        public async System.Threading.Tasks.Task<bool?> ChangePasswordAsync (ChangePasswordModel body = null)
         {
-             ApiResponse<bool?> localVarResponse = await ApiAuthPasswordChangePostAsyncWithHttpInfo(body);
+             ApiResponse<bool?> localVarResponse = await ChangePasswordAsyncWithHttpInfo(body);
              return localVarResponse.Data;
         }
         /// <summary>
@@ -466,7 +338,7 @@ namespace ECommerce.Api.Api
         /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="body"> (optional)</param>
         /// <returns>Task of ApiResponse (bool?)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<bool?>> ApiAuthPasswordChangePostAsyncWithHttpInfo (ChangePasswordModel body = null)
+        public async System.Threading.Tasks.Task<ApiResponse<bool?>> ChangePasswordAsyncWithHttpInfo (ChangePasswordModel body = null)
         {
             var localVarPath = "/api/Auth/password_change";
             var localVarPathParams = new Dictionary<String, String>();
@@ -506,7 +378,7 @@ namespace ECommerce.Api.Api
             int localVarStatusCode = (int) localVarResponse.StatusCode;
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("ApiAuthPasswordChangePost", localVarResponse);
+                Exception exception = ExceptionFactory("ChangePassword", localVarResponse);
                 if (exception != null) throw exception;
             }
             return new ApiResponse<bool?>(localVarStatusCode,
@@ -514,14 +386,142 @@ namespace ECommerce.Api.Api
                 (bool?) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(bool?)));
         }
         /// <summary>
+        /// Verify the combination of email and password to grant user access to use E-Mall. 
+        /// </summary>
+        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="body">Provides the necessary email and password combination for authentication (optional)</param>
+        /// <returns>AuthResult</returns>
+        public AuthResult Login (LoginViewModel body = null)
+        {
+             ApiResponse<AuthResult> localVarResponse = LoginWithHttpInfo(body);
+             return localVarResponse.Data;
+        }
+        /// <summary>
+        /// Verify the combination of email and password to grant user access to use E-Mall. 
+        /// </summary>
+        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="body">Provides the necessary email and password combination for authentication (optional)</param>
+        /// <returns>ApiResponse of AuthResult</returns>
+        public ApiResponse< AuthResult > LoginWithHttpInfo (LoginViewModel body = null)
+        {
+            var localVarPath = "/api/Auth/login";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+                "application/json", 
+                "text/json", 
+                "application/_*+json"
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "text/plain",
+                "application/json",
+                "text/json"
+            };
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null)
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            if (body != null && body.GetType() != typeof(byte[]))
+            {
+                localVarPostBody = this.Configuration.ApiClient.Serialize(body); // http body (model) parameter
+            }
+            else
+            {
+                localVarPostBody = body; // byte array
+            }
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("Login", localVarResponse);
+                if (exception != null) throw exception;
+            }
+            return new ApiResponse<AuthResult>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
+                (AuthResult) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(AuthResult)));
+        }
+        /// <summary>
+        /// Verify the combination of email and password to grant user access to use E-Mall. 
+        /// </summary>
+        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="body">Provides the necessary email and password combination for authentication (optional)</param>
+        /// <returns>Task of AuthResult</returns>
+        public async System.Threading.Tasks.Task<AuthResult> LoginAsync (LoginViewModel body = null)
+        {
+             ApiResponse<AuthResult> localVarResponse = await LoginAsyncWithHttpInfo(body);
+             return localVarResponse.Data;
+        }
+        /// <summary>
+        /// Verify the combination of email and password to grant user access to use E-Mall. 
+        /// </summary>
+        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="body">Provides the necessary email and password combination for authentication (optional)</param>
+        /// <returns>Task of ApiResponse (AuthResult)</returns>
+        public async System.Threading.Tasks.Task<ApiResponse<AuthResult>> LoginAsyncWithHttpInfo (LoginViewModel body = null)
+        {
+            var localVarPath = "/api/Auth/login";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+                "application/json", 
+                "text/json", 
+                "application/_*+json"
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "text/plain",
+                "application/json",
+                "text/json"
+            };
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null)
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            if (body != null && body.GetType() != typeof(byte[]))
+            {
+                localVarPostBody = this.Configuration.ApiClient.Serialize(body); // http body (model) parameter
+            }
+            else
+            {
+                localVarPostBody = body; // byte array
+            }
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("Login", localVarResponse);
+                if (exception != null) throw exception;
+            }
+            return new ApiResponse<AuthResult>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
+                (AuthResult) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(AuthResult)));
+        }
+        /// <summary>
         /// Take input from user to register a new account 
         /// </summary>
         /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="body">Provide necessary information for registering a new user in the database (optional)</param>
         /// <returns>AuthResult</returns>
-        public AuthResult ApiAuthRegisterPost (RegisterViewModel body = null)
+        public AuthResult Register (RegisterViewModel body = null)
         {
-             ApiResponse<AuthResult> localVarResponse = ApiAuthRegisterPostWithHttpInfo(body);
+             ApiResponse<AuthResult> localVarResponse = RegisterWithHttpInfo(body);
              return localVarResponse.Data;
         }
         /// <summary>
@@ -530,7 +530,7 @@ namespace ECommerce.Api.Api
         /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="body">Provide necessary information for registering a new user in the database (optional)</param>
         /// <returns>ApiResponse of AuthResult</returns>
-        public ApiResponse< AuthResult > ApiAuthRegisterPostWithHttpInfo (RegisterViewModel body = null)
+        public ApiResponse< AuthResult > RegisterWithHttpInfo (RegisterViewModel body = null)
         {
             var localVarPath = "/api/Auth/register";
             var localVarPathParams = new Dictionary<String, String>();
@@ -570,7 +570,7 @@ namespace ECommerce.Api.Api
             int localVarStatusCode = (int) localVarResponse.StatusCode;
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("ApiAuthRegisterPost", localVarResponse);
+                Exception exception = ExceptionFactory("Register", localVarResponse);
                 if (exception != null) throw exception;
             }
             return new ApiResponse<AuthResult>(localVarStatusCode,
@@ -583,9 +583,9 @@ namespace ECommerce.Api.Api
         /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="body">Provide necessary information for registering a new user in the database (optional)</param>
         /// <returns>Task of AuthResult</returns>
-        public async System.Threading.Tasks.Task<AuthResult> ApiAuthRegisterPostAsync (RegisterViewModel body = null)
+        public async System.Threading.Tasks.Task<AuthResult> RegisterAsync (RegisterViewModel body = null)
         {
-             ApiResponse<AuthResult> localVarResponse = await ApiAuthRegisterPostAsyncWithHttpInfo(body);
+             ApiResponse<AuthResult> localVarResponse = await RegisterAsyncWithHttpInfo(body);
              return localVarResponse.Data;
         }
         /// <summary>
@@ -594,7 +594,7 @@ namespace ECommerce.Api.Api
         /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="body">Provide necessary information for registering a new user in the database (optional)</param>
         /// <returns>Task of ApiResponse (AuthResult)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<AuthResult>> ApiAuthRegisterPostAsyncWithHttpInfo (RegisterViewModel body = null)
+        public async System.Threading.Tasks.Task<ApiResponse<AuthResult>> RegisterAsyncWithHttpInfo (RegisterViewModel body = null)
         {
             var localVarPath = "/api/Auth/register";
             var localVarPathParams = new Dictionary<String, String>();
@@ -634,7 +634,7 @@ namespace ECommerce.Api.Api
             int localVarStatusCode = (int) localVarResponse.StatusCode;
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("ApiAuthRegisterPost", localVarResponse);
+                Exception exception = ExceptionFactory("Register", localVarResponse);
                 if (exception != null) throw exception;
             }
             return new ApiResponse<AuthResult>(localVarStatusCode,
@@ -661,88 +661,6 @@ namespace ECommerce.Api.Api
     {
         #region Synchronous Operations
         /// <summary>
-        /// Retrive the total number of items in a user&#x27;s shopping cart.
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userId">User ID</param>
-        /// <returns>int?</returns>
-        int? ApiCartsCountUserIdGet (string userId);
-        /// <summary>
-        /// Retrive the total number of items in a user&#x27;s shopping cart.
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userId">User ID</param>
-        /// <returns>ApiResponse of int?</returns>
-        ApiResponse<int?> ApiCartsCountUserIdGetWithHttpInfo (string userId);
-        /// <summary>
-        /// Retrieve the details of a specific cart item based on cart item ID.
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="cartId"></param>
-        /// <returns>CartItem</returns>
-        CartItem ApiCartsDetailsCartIdGet (long? cartId);
-        /// <summary>
-        /// Retrieve the details of a specific cart item based on cart item ID.
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="cartId"></param>
-        /// <returns>ApiResponse of CartItem</returns>
-        ApiResponse<CartItem> ApiCartsDetailsCartIdGetWithHttpInfo (long? cartId);
-        /// <summary>
-        /// Remove an item from user&#x27;s shopping cart.
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="id">Cart Item ID</param>
-        /// <returns>Object</returns>
-        Object ApiCartsIdDelete (long? id);
-        /// <summary>
-        /// Remove an item from user&#x27;s shopping cart.
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="id">Cart Item ID</param>
-        /// <returns>ApiResponse of Object</returns>
-        ApiResponse<Object> ApiCartsIdDeleteWithHttpInfo (long? id);
-        /// <summary>
-        /// Update an item (e.g. count) in user&#x27;s shopping cart.
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="id">Cart Item ID</param>
-        /// <param name="body">Cart Item Object (optional)</param>
-        /// <returns>Object</returns>
-        Object ApiCartsIdPut (long? id, CartItem body = null);
-        /// <summary>
-        /// Update an item (e.g. count) in user&#x27;s shopping cart.
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="id">Cart Item ID</param>
-        /// <param name="body">Cart Item Object (optional)</param>
-        /// <returns>ApiResponse of Object</returns>
-        ApiResponse<Object> ApiCartsIdPutWithHttpInfo (long? id, CartItem body = null);
-        /// <summary>
         /// Add an item to a user&#x27;s shopping cart.
         /// </summary>
         /// <remarks>
@@ -751,7 +669,7 @@ namespace ECommerce.Api.Api
         /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="body">Cart Item ID (optional)</param>
         /// <returns>Object</returns>
-        Object ApiCartsPost (CartItem body = null);
+        Object Add (CartItem body = null);
         /// <summary>
         /// Add an item to a user&#x27;s shopping cart.
         /// </summary>
@@ -761,7 +679,27 @@ namespace ECommerce.Api.Api
         /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="body">Cart Item ID (optional)</param>
         /// <returns>ApiResponse of Object</returns>
-        ApiResponse<Object> ApiCartsPostWithHttpInfo (CartItem body = null);
+        ApiResponse<Object> AddWithHttpInfo (CartItem body = null);
+        /// <summary>
+        /// Remove an item from user&#x27;s shopping cart.
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id">Cart Item ID</param>
+        /// <returns>Object</returns>
+        Object Delete (long? id);
+        /// <summary>
+        /// Remove an item from user&#x27;s shopping cart.
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id">Cart Item ID</param>
+        /// <returns>ApiResponse of Object</returns>
+        ApiResponse<Object> DeleteWithHttpInfo (long? id);
         /// <summary>
         /// Retrieve all the items in the shopping cart of a specific user.
         /// </summary>
@@ -771,7 +709,7 @@ namespace ECommerce.Api.Api
         /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId">User ID</param>
         /// <returns>List&lt;CartItem&gt;</returns>
-        List<CartItem> ApiCartsUserIdGet (string userId);
+        List<CartItem> GetAll (string userId);
         /// <summary>
         /// Retrieve all the items in the shopping cart of a specific user.
         /// </summary>
@@ -781,7 +719,27 @@ namespace ECommerce.Api.Api
         /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId">User ID</param>
         /// <returns>ApiResponse of List&lt;CartItem&gt;</returns>
-        ApiResponse<List<CartItem>> ApiCartsUserIdGetWithHttpInfo (string userId);
+        ApiResponse<List<CartItem>> GetAllWithHttpInfo (string userId);
+        /// <summary>
+        /// Retrieve the details of a specific cart item based on cart item ID.
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="cartId"></param>
+        /// <returns>CartItem</returns>
+        CartItem GetCartItemBasedOnCartId (long? cartId);
+        /// <summary>
+        /// Retrieve the details of a specific cart item based on cart item ID.
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="cartId"></param>
+        /// <returns>ApiResponse of CartItem</returns>
+        ApiResponse<CartItem> GetCartItemBasedOnCartIdWithHttpInfo (long? cartId);
         /// <summary>
         /// Retrieve the details of a specific cart item based on user ID and product ID.
         /// </summary>
@@ -792,7 +750,7 @@ namespace ECommerce.Api.Api
         /// <param name="userId">User ID</param>
         /// <param name="productId">Product ID</param>
         /// <returns>CartItem</returns>
-        CartItem ApiCartsUserIdProductIdGet (string userId, long? productId);
+        CartItem GetCartItemBasedOnUserIdAndProductId (string userId, long? productId);
         /// <summary>
         /// Retrieve the details of a specific cart item based on user ID and product ID.
         /// </summary>
@@ -803,92 +761,52 @@ namespace ECommerce.Api.Api
         /// <param name="userId">User ID</param>
         /// <param name="productId">Product ID</param>
         /// <returns>ApiResponse of CartItem</returns>
-        ApiResponse<CartItem> ApiCartsUserIdProductIdGetWithHttpInfo (string userId, long? productId);
+        ApiResponse<CartItem> GetCartItemBasedOnUserIdAndProductIdWithHttpInfo (string userId, long? productId);
+        /// <summary>
+        /// Retrive the total number of items in a user&#x27;s shopping cart.
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userId">User ID</param>
+        /// <returns>int?</returns>
+        int? GetCount (string userId);
+        /// <summary>
+        /// Retrive the total number of items in a user&#x27;s shopping cart.
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userId">User ID</param>
+        /// <returns>ApiResponse of int?</returns>
+        ApiResponse<int?> GetCountWithHttpInfo (string userId);
+        /// <summary>
+        /// Update an item (e.g. count) in user&#x27;s shopping cart.
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id">Cart Item ID</param>
+        /// <param name="body">Cart Item Object (optional)</param>
+        /// <returns>Object</returns>
+        Object Update (long? id, CartItem body = null);
+        /// <summary>
+        /// Update an item (e.g. count) in user&#x27;s shopping cart.
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id">Cart Item ID</param>
+        /// <param name="body">Cart Item Object (optional)</param>
+        /// <returns>ApiResponse of Object</returns>
+        ApiResponse<Object> UpdateWithHttpInfo (long? id, CartItem body = null);
         #endregion Synchronous Operations
         #region Asynchronous Operations
         /// <summary>
-        /// Retrive the total number of items in a user&#x27;s shopping cart.
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userId">User ID</param>
-        /// <returns>Task of int?</returns>
-        System.Threading.Tasks.Task<int?> ApiCartsCountUserIdGetAsync (string userId);
-        /// <summary>
-        /// Retrive the total number of items in a user&#x27;s shopping cart.
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userId">User ID</param>
-        /// <returns>Task of ApiResponse (int?)</returns>
-        System.Threading.Tasks.Task<ApiResponse<int?>> ApiCartsCountUserIdGetAsyncWithHttpInfo (string userId);
-        /// <summary>
-        /// Retrieve the details of a specific cart item based on cart item ID.
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="cartId"></param>
-        /// <returns>Task of CartItem</returns>
-        System.Threading.Tasks.Task<CartItem> ApiCartsDetailsCartIdGetAsync (long? cartId);
-        /// <summary>
-        /// Retrieve the details of a specific cart item based on cart item ID.
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="cartId"></param>
-        /// <returns>Task of ApiResponse (CartItem)</returns>
-        System.Threading.Tasks.Task<ApiResponse<CartItem>> ApiCartsDetailsCartIdGetAsyncWithHttpInfo (long? cartId);
-        /// <summary>
-        /// Remove an item from user&#x27;s shopping cart.
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="id">Cart Item ID</param>
-        /// <returns>Task of Object</returns>
-        System.Threading.Tasks.Task<Object> ApiCartsIdDeleteAsync (long? id);
-        /// <summary>
-        /// Remove an item from user&#x27;s shopping cart.
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="id">Cart Item ID</param>
-        /// <returns>Task of ApiResponse (Object)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> ApiCartsIdDeleteAsyncWithHttpInfo (long? id);
-        /// <summary>
-        /// Update an item (e.g. count) in user&#x27;s shopping cart.
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="id">Cart Item ID</param>
-        /// <param name="body">Cart Item Object (optional)</param>
-        /// <returns>Task of Object</returns>
-        System.Threading.Tasks.Task<Object> ApiCartsIdPutAsync (long? id, CartItem body = null);
-        /// <summary>
-        /// Update an item (e.g. count) in user&#x27;s shopping cart.
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="id">Cart Item ID</param>
-        /// <param name="body">Cart Item Object (optional)</param>
-        /// <returns>Task of ApiResponse (Object)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> ApiCartsIdPutAsyncWithHttpInfo (long? id, CartItem body = null);
-        /// <summary>
         /// Add an item to a user&#x27;s shopping cart.
         /// </summary>
         /// <remarks>
@@ -897,7 +815,7 @@ namespace ECommerce.Api.Api
         /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="body">Cart Item ID (optional)</param>
         /// <returns>Task of Object</returns>
-        System.Threading.Tasks.Task<Object> ApiCartsPostAsync (CartItem body = null);
+        System.Threading.Tasks.Task<Object> AddAsync (CartItem body = null);
         /// <summary>
         /// Add an item to a user&#x27;s shopping cart.
         /// </summary>
@@ -907,7 +825,27 @@ namespace ECommerce.Api.Api
         /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="body">Cart Item ID (optional)</param>
         /// <returns>Task of ApiResponse (Object)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> ApiCartsPostAsyncWithHttpInfo (CartItem body = null);
+        System.Threading.Tasks.Task<ApiResponse<Object>> AddAsyncWithHttpInfo (CartItem body = null);
+        /// <summary>
+        /// Remove an item from user&#x27;s shopping cart.
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id">Cart Item ID</param>
+        /// <returns>Task of Object</returns>
+        System.Threading.Tasks.Task<Object> DeleteAsync (long? id);
+        /// <summary>
+        /// Remove an item from user&#x27;s shopping cart.
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id">Cart Item ID</param>
+        /// <returns>Task of ApiResponse (Object)</returns>
+        System.Threading.Tasks.Task<ApiResponse<Object>> DeleteAsyncWithHttpInfo (long? id);
         /// <summary>
         /// Retrieve all the items in the shopping cart of a specific user.
         /// </summary>
@@ -917,7 +855,7 @@ namespace ECommerce.Api.Api
         /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId">User ID</param>
         /// <returns>Task of List&lt;CartItem&gt;</returns>
-        System.Threading.Tasks.Task<List<CartItem>> ApiCartsUserIdGetAsync (string userId);
+        System.Threading.Tasks.Task<List<CartItem>> GetAllAsync (string userId);
         /// <summary>
         /// Retrieve all the items in the shopping cart of a specific user.
         /// </summary>
@@ -927,7 +865,27 @@ namespace ECommerce.Api.Api
         /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId">User ID</param>
         /// <returns>Task of ApiResponse (List&lt;CartItem&gt;)</returns>
-        System.Threading.Tasks.Task<ApiResponse<List<CartItem>>> ApiCartsUserIdGetAsyncWithHttpInfo (string userId);
+        System.Threading.Tasks.Task<ApiResponse<List<CartItem>>> GetAllAsyncWithHttpInfo (string userId);
+        /// <summary>
+        /// Retrieve the details of a specific cart item based on cart item ID.
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="cartId"></param>
+        /// <returns>Task of CartItem</returns>
+        System.Threading.Tasks.Task<CartItem> GetCartItemBasedOnCartIdAsync (long? cartId);
+        /// <summary>
+        /// Retrieve the details of a specific cart item based on cart item ID.
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="cartId"></param>
+        /// <returns>Task of ApiResponse (CartItem)</returns>
+        System.Threading.Tasks.Task<ApiResponse<CartItem>> GetCartItemBasedOnCartIdAsyncWithHttpInfo (long? cartId);
         /// <summary>
         /// Retrieve the details of a specific cart item based on user ID and product ID.
         /// </summary>
@@ -938,7 +896,7 @@ namespace ECommerce.Api.Api
         /// <param name="userId">User ID</param>
         /// <param name="productId">Product ID</param>
         /// <returns>Task of CartItem</returns>
-        System.Threading.Tasks.Task<CartItem> ApiCartsUserIdProductIdGetAsync (string userId, long? productId);
+        System.Threading.Tasks.Task<CartItem> GetCartItemBasedOnUserIdAndProductIdAsync (string userId, long? productId);
         /// <summary>
         /// Retrieve the details of a specific cart item based on user ID and product ID.
         /// </summary>
@@ -949,7 +907,49 @@ namespace ECommerce.Api.Api
         /// <param name="userId">User ID</param>
         /// <param name="productId">Product ID</param>
         /// <returns>Task of ApiResponse (CartItem)</returns>
-        System.Threading.Tasks.Task<ApiResponse<CartItem>> ApiCartsUserIdProductIdGetAsyncWithHttpInfo (string userId, long? productId);
+        System.Threading.Tasks.Task<ApiResponse<CartItem>> GetCartItemBasedOnUserIdAndProductIdAsyncWithHttpInfo (string userId, long? productId);
+        /// <summary>
+        /// Retrive the total number of items in a user&#x27;s shopping cart.
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userId">User ID</param>
+        /// <returns>Task of int?</returns>
+        System.Threading.Tasks.Task<int?> GetCountAsync (string userId);
+        /// <summary>
+        /// Retrive the total number of items in a user&#x27;s shopping cart.
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userId">User ID</param>
+        /// <returns>Task of ApiResponse (int?)</returns>
+        System.Threading.Tasks.Task<ApiResponse<int?>> GetCountAsyncWithHttpInfo (string userId);
+        /// <summary>
+        /// Update an item (e.g. count) in user&#x27;s shopping cart.
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id">Cart Item ID</param>
+        /// <param name="body">Cart Item Object (optional)</param>
+        /// <returns>Task of Object</returns>
+        System.Threading.Tasks.Task<Object> UpdateAsync (long? id, CartItem body = null);
+        /// <summary>
+        /// Update an item (e.g. count) in user&#x27;s shopping cart.
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id">Cart Item ID</param>
+        /// <param name="body">Cart Item Object (optional)</param>
+        /// <returns>Task of ApiResponse (Object)</returns>
+        System.Threading.Tasks.Task<ApiResponse<Object>> UpdateAsyncWithHttpInfo (long? id, CartItem body = null);
         #endregion Asynchronous Operations
     }
     /// <summary>
@@ -1048,496 +1048,14 @@ namespace ECommerce.Api.Api
             this.Configuration.AddDefaultHeader(key, value);
         }
         /// <summary>
-        /// Retrive the total number of items in a user&#x27;s shopping cart. 
-        /// </summary>
-        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userId">User ID</param>
-        /// <returns>int?</returns>
-        public int? ApiCartsCountUserIdGet (string userId)
-        {
-             ApiResponse<int?> localVarResponse = ApiCartsCountUserIdGetWithHttpInfo(userId);
-             return localVarResponse.Data;
-        }
-        /// <summary>
-        /// Retrive the total number of items in a user&#x27;s shopping cart. 
-        /// </summary>
-        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userId">User ID</param>
-        /// <returns>ApiResponse of int?</returns>
-        public ApiResponse< int? > ApiCartsCountUserIdGetWithHttpInfo (string userId)
-        {
-            // verify the required parameter 'userId' is set
-            if (userId == null)
-                throw new ApiException(400, "Missing required parameter 'userId' when calling CartsApi->ApiCartsCountUserIdGet");
-            var localVarPath = "/api/Carts/count/{userId}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "text/plain",
-                "application/json",
-                "text/json"
-            };
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null)
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-            if (userId != null) localVarPathParams.Add("userId", this.Configuration.ApiClient.ParameterToString(userId)); // path parameter
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("ApiCartsCountUserIdGet", localVarResponse);
-                if (exception != null) throw exception;
-            }
-            return new ApiResponse<int?>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
-                (int?) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(int?)));
-        }
-        /// <summary>
-        /// Retrive the total number of items in a user&#x27;s shopping cart. 
-        /// </summary>
-        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userId">User ID</param>
-        /// <returns>Task of int?</returns>
-        public async System.Threading.Tasks.Task<int?> ApiCartsCountUserIdGetAsync (string userId)
-        {
-             ApiResponse<int?> localVarResponse = await ApiCartsCountUserIdGetAsyncWithHttpInfo(userId);
-             return localVarResponse.Data;
-        }
-        /// <summary>
-        /// Retrive the total number of items in a user&#x27;s shopping cart. 
-        /// </summary>
-        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userId">User ID</param>
-        /// <returns>Task of ApiResponse (int?)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<int?>> ApiCartsCountUserIdGetAsyncWithHttpInfo (string userId)
-        {
-            // verify the required parameter 'userId' is set
-            if (userId == null)
-                throw new ApiException(400, "Missing required parameter 'userId' when calling CartsApi->ApiCartsCountUserIdGet");
-            var localVarPath = "/api/Carts/count/{userId}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "text/plain",
-                "application/json",
-                "text/json"
-            };
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null)
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-            if (userId != null) localVarPathParams.Add("userId", this.Configuration.ApiClient.ParameterToString(userId)); // path parameter
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("ApiCartsCountUserIdGet", localVarResponse);
-                if (exception != null) throw exception;
-            }
-            return new ApiResponse<int?>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
-                (int?) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(int?)));
-        }
-        /// <summary>
-        /// Retrieve the details of a specific cart item based on cart item ID. 
-        /// </summary>
-        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="cartId"></param>
-        /// <returns>CartItem</returns>
-        public CartItem ApiCartsDetailsCartIdGet (long? cartId)
-        {
-             ApiResponse<CartItem> localVarResponse = ApiCartsDetailsCartIdGetWithHttpInfo(cartId);
-             return localVarResponse.Data;
-        }
-        /// <summary>
-        /// Retrieve the details of a specific cart item based on cart item ID. 
-        /// </summary>
-        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="cartId"></param>
-        /// <returns>ApiResponse of CartItem</returns>
-        public ApiResponse< CartItem > ApiCartsDetailsCartIdGetWithHttpInfo (long? cartId)
-        {
-            // verify the required parameter 'cartId' is set
-            if (cartId == null)
-                throw new ApiException(400, "Missing required parameter 'cartId' when calling CartsApi->ApiCartsDetailsCartIdGet");
-            var localVarPath = "/api/Carts/details/{cartId}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "text/plain",
-                "application/json",
-                "text/json"
-            };
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null)
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-            if (cartId != null) localVarPathParams.Add("cartId", this.Configuration.ApiClient.ParameterToString(cartId)); // path parameter
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("ApiCartsDetailsCartIdGet", localVarResponse);
-                if (exception != null) throw exception;
-            }
-            return new ApiResponse<CartItem>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
-                (CartItem) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(CartItem)));
-        }
-        /// <summary>
-        /// Retrieve the details of a specific cart item based on cart item ID. 
-        /// </summary>
-        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="cartId"></param>
-        /// <returns>Task of CartItem</returns>
-        public async System.Threading.Tasks.Task<CartItem> ApiCartsDetailsCartIdGetAsync (long? cartId)
-        {
-             ApiResponse<CartItem> localVarResponse = await ApiCartsDetailsCartIdGetAsyncWithHttpInfo(cartId);
-             return localVarResponse.Data;
-        }
-        /// <summary>
-        /// Retrieve the details of a specific cart item based on cart item ID. 
-        /// </summary>
-        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="cartId"></param>
-        /// <returns>Task of ApiResponse (CartItem)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<CartItem>> ApiCartsDetailsCartIdGetAsyncWithHttpInfo (long? cartId)
-        {
-            // verify the required parameter 'cartId' is set
-            if (cartId == null)
-                throw new ApiException(400, "Missing required parameter 'cartId' when calling CartsApi->ApiCartsDetailsCartIdGet");
-            var localVarPath = "/api/Carts/details/{cartId}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "text/plain",
-                "application/json",
-                "text/json"
-            };
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null)
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-            if (cartId != null) localVarPathParams.Add("cartId", this.Configuration.ApiClient.ParameterToString(cartId)); // path parameter
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("ApiCartsDetailsCartIdGet", localVarResponse);
-                if (exception != null) throw exception;
-            }
-            return new ApiResponse<CartItem>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
-                (CartItem) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(CartItem)));
-        }
-        /// <summary>
-        /// Remove an item from user&#x27;s shopping cart. 
-        /// </summary>
-        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="id">Cart Item ID</param>
-        /// <returns>Object</returns>
-        public Object ApiCartsIdDelete (long? id)
-        {
-             ApiResponse<Object> localVarResponse = ApiCartsIdDeleteWithHttpInfo(id);
-             return localVarResponse.Data;
-        }
-        /// <summary>
-        /// Remove an item from user&#x27;s shopping cart. 
-        /// </summary>
-        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="id">Cart Item ID</param>
-        /// <returns>ApiResponse of Object</returns>
-        public ApiResponse< Object > ApiCartsIdDeleteWithHttpInfo (long? id)
-        {
-            // verify the required parameter 'id' is set
-            if (id == null)
-                throw new ApiException(400, "Missing required parameter 'id' when calling CartsApi->ApiCartsIdDelete");
-            var localVarPath = "/api/Carts/{id}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "text/plain",
-                "application/json",
-                "text/json"
-            };
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null)
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-            if (id != null) localVarPathParams.Add("id", this.Configuration.ApiClient.ParameterToString(id)); // path parameter
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("ApiCartsIdDelete", localVarResponse);
-                if (exception != null) throw exception;
-            }
-            return new ApiResponse<Object>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
-                (Object) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Object)));
-        }
-        /// <summary>
-        /// Remove an item from user&#x27;s shopping cart. 
-        /// </summary>
-        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="id">Cart Item ID</param>
-        /// <returns>Task of Object</returns>
-        public async System.Threading.Tasks.Task<Object> ApiCartsIdDeleteAsync (long? id)
-        {
-             ApiResponse<Object> localVarResponse = await ApiCartsIdDeleteAsyncWithHttpInfo(id);
-             return localVarResponse.Data;
-        }
-        /// <summary>
-        /// Remove an item from user&#x27;s shopping cart. 
-        /// </summary>
-        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="id">Cart Item ID</param>
-        /// <returns>Task of ApiResponse (Object)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Object>> ApiCartsIdDeleteAsyncWithHttpInfo (long? id)
-        {
-            // verify the required parameter 'id' is set
-            if (id == null)
-                throw new ApiException(400, "Missing required parameter 'id' when calling CartsApi->ApiCartsIdDelete");
-            var localVarPath = "/api/Carts/{id}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "text/plain",
-                "application/json",
-                "text/json"
-            };
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null)
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-            if (id != null) localVarPathParams.Add("id", this.Configuration.ApiClient.ParameterToString(id)); // path parameter
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("ApiCartsIdDelete", localVarResponse);
-                if (exception != null) throw exception;
-            }
-            return new ApiResponse<Object>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
-                (Object) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Object)));
-        }
-        /// <summary>
-        /// Update an item (e.g. count) in user&#x27;s shopping cart. 
-        /// </summary>
-        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="id">Cart Item ID</param>
-        /// <param name="body">Cart Item Object (optional)</param>
-        /// <returns>Object</returns>
-        public Object ApiCartsIdPut (long? id, CartItem body = null)
-        {
-             ApiResponse<Object> localVarResponse = ApiCartsIdPutWithHttpInfo(id, body);
-             return localVarResponse.Data;
-        }
-        /// <summary>
-        /// Update an item (e.g. count) in user&#x27;s shopping cart. 
-        /// </summary>
-        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="id">Cart Item ID</param>
-        /// <param name="body">Cart Item Object (optional)</param>
-        /// <returns>ApiResponse of Object</returns>
-        public ApiResponse< Object > ApiCartsIdPutWithHttpInfo (long? id, CartItem body = null)
-        {
-            // verify the required parameter 'id' is set
-            if (id == null)
-                throw new ApiException(400, "Missing required parameter 'id' when calling CartsApi->ApiCartsIdPut");
-            var localVarPath = "/api/Carts/{id}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-                "application/json", 
-                "text/json", 
-                "application/_*+json"
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "text/plain",
-                "application/json",
-                "text/json"
-            };
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null)
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-            if (id != null) localVarPathParams.Add("id", this.Configuration.ApiClient.ParameterToString(id)); // path parameter
-            if (body != null && body.GetType() != typeof(byte[]))
-            {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(body); // http body (model) parameter
-            }
-            else
-            {
-                localVarPostBody = body; // byte array
-            }
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.PUT, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("ApiCartsIdPut", localVarResponse);
-                if (exception != null) throw exception;
-            }
-            return new ApiResponse<Object>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
-                (Object) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Object)));
-        }
-        /// <summary>
-        /// Update an item (e.g. count) in user&#x27;s shopping cart. 
-        /// </summary>
-        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="id">Cart Item ID</param>
-        /// <param name="body">Cart Item Object (optional)</param>
-        /// <returns>Task of Object</returns>
-        public async System.Threading.Tasks.Task<Object> ApiCartsIdPutAsync (long? id, CartItem body = null)
-        {
-             ApiResponse<Object> localVarResponse = await ApiCartsIdPutAsyncWithHttpInfo(id, body);
-             return localVarResponse.Data;
-        }
-        /// <summary>
-        /// Update an item (e.g. count) in user&#x27;s shopping cart. 
-        /// </summary>
-        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="id">Cart Item ID</param>
-        /// <param name="body">Cart Item Object (optional)</param>
-        /// <returns>Task of ApiResponse (Object)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Object>> ApiCartsIdPutAsyncWithHttpInfo (long? id, CartItem body = null)
-        {
-            // verify the required parameter 'id' is set
-            if (id == null)
-                throw new ApiException(400, "Missing required parameter 'id' when calling CartsApi->ApiCartsIdPut");
-            var localVarPath = "/api/Carts/{id}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-                "application/json", 
-                "text/json", 
-                "application/_*+json"
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "text/plain",
-                "application/json",
-                "text/json"
-            };
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null)
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-            if (id != null) localVarPathParams.Add("id", this.Configuration.ApiClient.ParameterToString(id)); // path parameter
-            if (body != null && body.GetType() != typeof(byte[]))
-            {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(body); // http body (model) parameter
-            }
-            else
-            {
-                localVarPostBody = body; // byte array
-            }
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.PUT, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("ApiCartsIdPut", localVarResponse);
-                if (exception != null) throw exception;
-            }
-            return new ApiResponse<Object>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
-                (Object) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Object)));
-        }
-        /// <summary>
         /// Add an item to a user&#x27;s shopping cart. 
         /// </summary>
         /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="body">Cart Item ID (optional)</param>
         /// <returns>Object</returns>
-        public Object ApiCartsPost (CartItem body = null)
+        public Object Add (CartItem body = null)
         {
-             ApiResponse<Object> localVarResponse = ApiCartsPostWithHttpInfo(body);
+             ApiResponse<Object> localVarResponse = AddWithHttpInfo(body);
              return localVarResponse.Data;
         }
         /// <summary>
@@ -1546,7 +1064,7 @@ namespace ECommerce.Api.Api
         /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="body">Cart Item ID (optional)</param>
         /// <returns>ApiResponse of Object</returns>
-        public ApiResponse< Object > ApiCartsPostWithHttpInfo (CartItem body = null)
+        public ApiResponse< Object > AddWithHttpInfo (CartItem body = null)
         {
             var localVarPath = "/api/Carts";
             var localVarPathParams = new Dictionary<String, String>();
@@ -1586,7 +1104,7 @@ namespace ECommerce.Api.Api
             int localVarStatusCode = (int) localVarResponse.StatusCode;
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("ApiCartsPost", localVarResponse);
+                Exception exception = ExceptionFactory("Add", localVarResponse);
                 if (exception != null) throw exception;
             }
             return new ApiResponse<Object>(localVarStatusCode,
@@ -1599,9 +1117,9 @@ namespace ECommerce.Api.Api
         /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="body">Cart Item ID (optional)</param>
         /// <returns>Task of Object</returns>
-        public async System.Threading.Tasks.Task<Object> ApiCartsPostAsync (CartItem body = null)
+        public async System.Threading.Tasks.Task<Object> AddAsync (CartItem body = null)
         {
-             ApiResponse<Object> localVarResponse = await ApiCartsPostAsyncWithHttpInfo(body);
+             ApiResponse<Object> localVarResponse = await AddAsyncWithHttpInfo(body);
              return localVarResponse.Data;
         }
         /// <summary>
@@ -1610,7 +1128,7 @@ namespace ECommerce.Api.Api
         /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="body">Cart Item ID (optional)</param>
         /// <returns>Task of ApiResponse (Object)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Object>> ApiCartsPostAsyncWithHttpInfo (CartItem body = null)
+        public async System.Threading.Tasks.Task<ApiResponse<Object>> AddAsyncWithHttpInfo (CartItem body = null)
         {
             var localVarPath = "/api/Carts";
             var localVarPathParams = new Dictionary<String, String>();
@@ -1650,7 +1168,121 @@ namespace ECommerce.Api.Api
             int localVarStatusCode = (int) localVarResponse.StatusCode;
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("ApiCartsPost", localVarResponse);
+                Exception exception = ExceptionFactory("Add", localVarResponse);
+                if (exception != null) throw exception;
+            }
+            return new ApiResponse<Object>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
+                (Object) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Object)));
+        }
+        /// <summary>
+        /// Remove an item from user&#x27;s shopping cart. 
+        /// </summary>
+        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id">Cart Item ID</param>
+        /// <returns>Object</returns>
+        public Object Delete (long? id)
+        {
+             ApiResponse<Object> localVarResponse = DeleteWithHttpInfo(id);
+             return localVarResponse.Data;
+        }
+        /// <summary>
+        /// Remove an item from user&#x27;s shopping cart. 
+        /// </summary>
+        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id">Cart Item ID</param>
+        /// <returns>ApiResponse of Object</returns>
+        public ApiResponse< Object > DeleteWithHttpInfo (long? id)
+        {
+            // verify the required parameter 'id' is set
+            if (id == null)
+                throw new ApiException(400, "Missing required parameter 'id' when calling CartsApi->Delete");
+            var localVarPath = "/api/Carts/{id}";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "text/plain",
+                "application/json",
+                "text/json"
+            };
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null)
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            if (id != null) localVarPathParams.Add("id", this.Configuration.ApiClient.ParameterToString(id)); // path parameter
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("Delete", localVarResponse);
+                if (exception != null) throw exception;
+            }
+            return new ApiResponse<Object>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
+                (Object) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Object)));
+        }
+        /// <summary>
+        /// Remove an item from user&#x27;s shopping cart. 
+        /// </summary>
+        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id">Cart Item ID</param>
+        /// <returns>Task of Object</returns>
+        public async System.Threading.Tasks.Task<Object> DeleteAsync (long? id)
+        {
+             ApiResponse<Object> localVarResponse = await DeleteAsyncWithHttpInfo(id);
+             return localVarResponse.Data;
+        }
+        /// <summary>
+        /// Remove an item from user&#x27;s shopping cart. 
+        /// </summary>
+        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id">Cart Item ID</param>
+        /// <returns>Task of ApiResponse (Object)</returns>
+        public async System.Threading.Tasks.Task<ApiResponse<Object>> DeleteAsyncWithHttpInfo (long? id)
+        {
+            // verify the required parameter 'id' is set
+            if (id == null)
+                throw new ApiException(400, "Missing required parameter 'id' when calling CartsApi->Delete");
+            var localVarPath = "/api/Carts/{id}";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "text/plain",
+                "application/json",
+                "text/json"
+            };
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null)
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            if (id != null) localVarPathParams.Add("id", this.Configuration.ApiClient.ParameterToString(id)); // path parameter
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("Delete", localVarResponse);
                 if (exception != null) throw exception;
             }
             return new ApiResponse<Object>(localVarStatusCode,
@@ -1663,9 +1295,9 @@ namespace ECommerce.Api.Api
         /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId">User ID</param>
         /// <returns>List&lt;CartItem&gt;</returns>
-        public List<CartItem> ApiCartsUserIdGet (string userId)
+        public List<CartItem> GetAll (string userId)
         {
-             ApiResponse<List<CartItem>> localVarResponse = ApiCartsUserIdGetWithHttpInfo(userId);
+             ApiResponse<List<CartItem>> localVarResponse = GetAllWithHttpInfo(userId);
              return localVarResponse.Data;
         }
         /// <summary>
@@ -1674,11 +1306,11 @@ namespace ECommerce.Api.Api
         /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId">User ID</param>
         /// <returns>ApiResponse of List&lt;CartItem&gt;</returns>
-        public ApiResponse< List<CartItem> > ApiCartsUserIdGetWithHttpInfo (string userId)
+        public ApiResponse< List<CartItem> > GetAllWithHttpInfo (string userId)
         {
             // verify the required parameter 'userId' is set
             if (userId == null)
-                throw new ApiException(400, "Missing required parameter 'userId' when calling CartsApi->ApiCartsUserIdGet");
+                throw new ApiException(400, "Missing required parameter 'userId' when calling CartsApi->GetAll");
             var localVarPath = "/api/Carts/{userId}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
@@ -1707,7 +1339,7 @@ namespace ECommerce.Api.Api
             int localVarStatusCode = (int) localVarResponse.StatusCode;
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("ApiCartsUserIdGet", localVarResponse);
+                Exception exception = ExceptionFactory("GetAll", localVarResponse);
                 if (exception != null) throw exception;
             }
             return new ApiResponse<List<CartItem>>(localVarStatusCode,
@@ -1720,9 +1352,9 @@ namespace ECommerce.Api.Api
         /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId">User ID</param>
         /// <returns>Task of List&lt;CartItem&gt;</returns>
-        public async System.Threading.Tasks.Task<List<CartItem>> ApiCartsUserIdGetAsync (string userId)
+        public async System.Threading.Tasks.Task<List<CartItem>> GetAllAsync (string userId)
         {
-             ApiResponse<List<CartItem>> localVarResponse = await ApiCartsUserIdGetAsyncWithHttpInfo(userId);
+             ApiResponse<List<CartItem>> localVarResponse = await GetAllAsyncWithHttpInfo(userId);
              return localVarResponse.Data;
         }
         /// <summary>
@@ -1731,11 +1363,11 @@ namespace ECommerce.Api.Api
         /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId">User ID</param>
         /// <returns>Task of ApiResponse (List&lt;CartItem&gt;)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<List<CartItem>>> ApiCartsUserIdGetAsyncWithHttpInfo (string userId)
+        public async System.Threading.Tasks.Task<ApiResponse<List<CartItem>>> GetAllAsyncWithHttpInfo (string userId)
         {
             // verify the required parameter 'userId' is set
             if (userId == null)
-                throw new ApiException(400, "Missing required parameter 'userId' when calling CartsApi->ApiCartsUserIdGet");
+                throw new ApiException(400, "Missing required parameter 'userId' when calling CartsApi->GetAll");
             var localVarPath = "/api/Carts/{userId}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
@@ -1764,12 +1396,126 @@ namespace ECommerce.Api.Api
             int localVarStatusCode = (int) localVarResponse.StatusCode;
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("ApiCartsUserIdGet", localVarResponse);
+                Exception exception = ExceptionFactory("GetAll", localVarResponse);
                 if (exception != null) throw exception;
             }
             return new ApiResponse<List<CartItem>>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
                 (List<CartItem>) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(List<CartItem>)));
+        }
+        /// <summary>
+        /// Retrieve the details of a specific cart item based on cart item ID. 
+        /// </summary>
+        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="cartId"></param>
+        /// <returns>CartItem</returns>
+        public CartItem GetCartItemBasedOnCartId (long? cartId)
+        {
+             ApiResponse<CartItem> localVarResponse = GetCartItemBasedOnCartIdWithHttpInfo(cartId);
+             return localVarResponse.Data;
+        }
+        /// <summary>
+        /// Retrieve the details of a specific cart item based on cart item ID. 
+        /// </summary>
+        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="cartId"></param>
+        /// <returns>ApiResponse of CartItem</returns>
+        public ApiResponse< CartItem > GetCartItemBasedOnCartIdWithHttpInfo (long? cartId)
+        {
+            // verify the required parameter 'cartId' is set
+            if (cartId == null)
+                throw new ApiException(400, "Missing required parameter 'cartId' when calling CartsApi->GetCartItemBasedOnCartId");
+            var localVarPath = "/api/Carts/details/{cartId}";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "text/plain",
+                "application/json",
+                "text/json"
+            };
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null)
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            if (cartId != null) localVarPathParams.Add("cartId", this.Configuration.ApiClient.ParameterToString(cartId)); // path parameter
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("GetCartItemBasedOnCartId", localVarResponse);
+                if (exception != null) throw exception;
+            }
+            return new ApiResponse<CartItem>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
+                (CartItem) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(CartItem)));
+        }
+        /// <summary>
+        /// Retrieve the details of a specific cart item based on cart item ID. 
+        /// </summary>
+        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="cartId"></param>
+        /// <returns>Task of CartItem</returns>
+        public async System.Threading.Tasks.Task<CartItem> GetCartItemBasedOnCartIdAsync (long? cartId)
+        {
+             ApiResponse<CartItem> localVarResponse = await GetCartItemBasedOnCartIdAsyncWithHttpInfo(cartId);
+             return localVarResponse.Data;
+        }
+        /// <summary>
+        /// Retrieve the details of a specific cart item based on cart item ID. 
+        /// </summary>
+        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="cartId"></param>
+        /// <returns>Task of ApiResponse (CartItem)</returns>
+        public async System.Threading.Tasks.Task<ApiResponse<CartItem>> GetCartItemBasedOnCartIdAsyncWithHttpInfo (long? cartId)
+        {
+            // verify the required parameter 'cartId' is set
+            if (cartId == null)
+                throw new ApiException(400, "Missing required parameter 'cartId' when calling CartsApi->GetCartItemBasedOnCartId");
+            var localVarPath = "/api/Carts/details/{cartId}";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "text/plain",
+                "application/json",
+                "text/json"
+            };
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null)
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            if (cartId != null) localVarPathParams.Add("cartId", this.Configuration.ApiClient.ParameterToString(cartId)); // path parameter
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("GetCartItemBasedOnCartId", localVarResponse);
+                if (exception != null) throw exception;
+            }
+            return new ApiResponse<CartItem>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
+                (CartItem) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(CartItem)));
         }
         /// <summary>
         /// Retrieve the details of a specific cart item based on user ID and product ID. 
@@ -1778,9 +1524,9 @@ namespace ECommerce.Api.Api
         /// <param name="userId">User ID</param>
         /// <param name="productId">Product ID</param>
         /// <returns>CartItem</returns>
-        public CartItem ApiCartsUserIdProductIdGet (string userId, long? productId)
+        public CartItem GetCartItemBasedOnUserIdAndProductId (string userId, long? productId)
         {
-             ApiResponse<CartItem> localVarResponse = ApiCartsUserIdProductIdGetWithHttpInfo(userId, productId);
+             ApiResponse<CartItem> localVarResponse = GetCartItemBasedOnUserIdAndProductIdWithHttpInfo(userId, productId);
              return localVarResponse.Data;
         }
         /// <summary>
@@ -1790,14 +1536,14 @@ namespace ECommerce.Api.Api
         /// <param name="userId">User ID</param>
         /// <param name="productId">Product ID</param>
         /// <returns>ApiResponse of CartItem</returns>
-        public ApiResponse< CartItem > ApiCartsUserIdProductIdGetWithHttpInfo (string userId, long? productId)
+        public ApiResponse< CartItem > GetCartItemBasedOnUserIdAndProductIdWithHttpInfo (string userId, long? productId)
         {
             // verify the required parameter 'userId' is set
             if (userId == null)
-                throw new ApiException(400, "Missing required parameter 'userId' when calling CartsApi->ApiCartsUserIdProductIdGet");
+                throw new ApiException(400, "Missing required parameter 'userId' when calling CartsApi->GetCartItemBasedOnUserIdAndProductId");
             // verify the required parameter 'productId' is set
             if (productId == null)
-                throw new ApiException(400, "Missing required parameter 'productId' when calling CartsApi->ApiCartsUserIdProductIdGet");
+                throw new ApiException(400, "Missing required parameter 'productId' when calling CartsApi->GetCartItemBasedOnUserIdAndProductId");
             var localVarPath = "/api/Carts/{userId}/{productId}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
@@ -1827,7 +1573,7 @@ namespace ECommerce.Api.Api
             int localVarStatusCode = (int) localVarResponse.StatusCode;
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("ApiCartsUserIdProductIdGet", localVarResponse);
+                Exception exception = ExceptionFactory("GetCartItemBasedOnUserIdAndProductId", localVarResponse);
                 if (exception != null) throw exception;
             }
             return new ApiResponse<CartItem>(localVarStatusCode,
@@ -1841,9 +1587,9 @@ namespace ECommerce.Api.Api
         /// <param name="userId">User ID</param>
         /// <param name="productId">Product ID</param>
         /// <returns>Task of CartItem</returns>
-        public async System.Threading.Tasks.Task<CartItem> ApiCartsUserIdProductIdGetAsync (string userId, long? productId)
+        public async System.Threading.Tasks.Task<CartItem> GetCartItemBasedOnUserIdAndProductIdAsync (string userId, long? productId)
         {
-             ApiResponse<CartItem> localVarResponse = await ApiCartsUserIdProductIdGetAsyncWithHttpInfo(userId, productId);
+             ApiResponse<CartItem> localVarResponse = await GetCartItemBasedOnUserIdAndProductIdAsyncWithHttpInfo(userId, productId);
              return localVarResponse.Data;
         }
         /// <summary>
@@ -1853,14 +1599,14 @@ namespace ECommerce.Api.Api
         /// <param name="userId">User ID</param>
         /// <param name="productId">Product ID</param>
         /// <returns>Task of ApiResponse (CartItem)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<CartItem>> ApiCartsUserIdProductIdGetAsyncWithHttpInfo (string userId, long? productId)
+        public async System.Threading.Tasks.Task<ApiResponse<CartItem>> GetCartItemBasedOnUserIdAndProductIdAsyncWithHttpInfo (string userId, long? productId)
         {
             // verify the required parameter 'userId' is set
             if (userId == null)
-                throw new ApiException(400, "Missing required parameter 'userId' when calling CartsApi->ApiCartsUserIdProductIdGet");
+                throw new ApiException(400, "Missing required parameter 'userId' when calling CartsApi->GetCartItemBasedOnUserIdAndProductId");
             // verify the required parameter 'productId' is set
             if (productId == null)
-                throw new ApiException(400, "Missing required parameter 'productId' when calling CartsApi->ApiCartsUserIdProductIdGet");
+                throw new ApiException(400, "Missing required parameter 'productId' when calling CartsApi->GetCartItemBasedOnUserIdAndProductId");
             var localVarPath = "/api/Carts/{userId}/{productId}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
@@ -1890,12 +1636,266 @@ namespace ECommerce.Api.Api
             int localVarStatusCode = (int) localVarResponse.StatusCode;
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("ApiCartsUserIdProductIdGet", localVarResponse);
+                Exception exception = ExceptionFactory("GetCartItemBasedOnUserIdAndProductId", localVarResponse);
                 if (exception != null) throw exception;
             }
             return new ApiResponse<CartItem>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
                 (CartItem) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(CartItem)));
+        }
+        /// <summary>
+        /// Retrive the total number of items in a user&#x27;s shopping cart. 
+        /// </summary>
+        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userId">User ID</param>
+        /// <returns>int?</returns>
+        public int? GetCount (string userId)
+        {
+             ApiResponse<int?> localVarResponse = GetCountWithHttpInfo(userId);
+             return localVarResponse.Data;
+        }
+        /// <summary>
+        /// Retrive the total number of items in a user&#x27;s shopping cart. 
+        /// </summary>
+        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userId">User ID</param>
+        /// <returns>ApiResponse of int?</returns>
+        public ApiResponse< int? > GetCountWithHttpInfo (string userId)
+        {
+            // verify the required parameter 'userId' is set
+            if (userId == null)
+                throw new ApiException(400, "Missing required parameter 'userId' when calling CartsApi->GetCount");
+            var localVarPath = "/api/Carts/count/{userId}";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "text/plain",
+                "application/json",
+                "text/json"
+            };
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null)
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            if (userId != null) localVarPathParams.Add("userId", this.Configuration.ApiClient.ParameterToString(userId)); // path parameter
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("GetCount", localVarResponse);
+                if (exception != null) throw exception;
+            }
+            return new ApiResponse<int?>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
+                (int?) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(int?)));
+        }
+        /// <summary>
+        /// Retrive the total number of items in a user&#x27;s shopping cart. 
+        /// </summary>
+        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userId">User ID</param>
+        /// <returns>Task of int?</returns>
+        public async System.Threading.Tasks.Task<int?> GetCountAsync (string userId)
+        {
+             ApiResponse<int?> localVarResponse = await GetCountAsyncWithHttpInfo(userId);
+             return localVarResponse.Data;
+        }
+        /// <summary>
+        /// Retrive the total number of items in a user&#x27;s shopping cart. 
+        /// </summary>
+        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userId">User ID</param>
+        /// <returns>Task of ApiResponse (int?)</returns>
+        public async System.Threading.Tasks.Task<ApiResponse<int?>> GetCountAsyncWithHttpInfo (string userId)
+        {
+            // verify the required parameter 'userId' is set
+            if (userId == null)
+                throw new ApiException(400, "Missing required parameter 'userId' when calling CartsApi->GetCount");
+            var localVarPath = "/api/Carts/count/{userId}";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "text/plain",
+                "application/json",
+                "text/json"
+            };
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null)
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            if (userId != null) localVarPathParams.Add("userId", this.Configuration.ApiClient.ParameterToString(userId)); // path parameter
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("GetCount", localVarResponse);
+                if (exception != null) throw exception;
+            }
+            return new ApiResponse<int?>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
+                (int?) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(int?)));
+        }
+        /// <summary>
+        /// Update an item (e.g. count) in user&#x27;s shopping cart. 
+        /// </summary>
+        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id">Cart Item ID</param>
+        /// <param name="body">Cart Item Object (optional)</param>
+        /// <returns>Object</returns>
+        public Object Update (long? id, CartItem body = null)
+        {
+             ApiResponse<Object> localVarResponse = UpdateWithHttpInfo(id, body);
+             return localVarResponse.Data;
+        }
+        /// <summary>
+        /// Update an item (e.g. count) in user&#x27;s shopping cart. 
+        /// </summary>
+        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id">Cart Item ID</param>
+        /// <param name="body">Cart Item Object (optional)</param>
+        /// <returns>ApiResponse of Object</returns>
+        public ApiResponse< Object > UpdateWithHttpInfo (long? id, CartItem body = null)
+        {
+            // verify the required parameter 'id' is set
+            if (id == null)
+                throw new ApiException(400, "Missing required parameter 'id' when calling CartsApi->Update");
+            var localVarPath = "/api/Carts/{id}";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+                "application/json", 
+                "text/json", 
+                "application/_*+json"
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "text/plain",
+                "application/json",
+                "text/json"
+            };
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null)
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            if (id != null) localVarPathParams.Add("id", this.Configuration.ApiClient.ParameterToString(id)); // path parameter
+            if (body != null && body.GetType() != typeof(byte[]))
+            {
+                localVarPostBody = this.Configuration.ApiClient.Serialize(body); // http body (model) parameter
+            }
+            else
+            {
+                localVarPostBody = body; // byte array
+            }
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+                Method.PUT, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("Update", localVarResponse);
+                if (exception != null) throw exception;
+            }
+            return new ApiResponse<Object>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
+                (Object) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Object)));
+        }
+        /// <summary>
+        /// Update an item (e.g. count) in user&#x27;s shopping cart. 
+        /// </summary>
+        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id">Cart Item ID</param>
+        /// <param name="body">Cart Item Object (optional)</param>
+        /// <returns>Task of Object</returns>
+        public async System.Threading.Tasks.Task<Object> UpdateAsync (long? id, CartItem body = null)
+        {
+             ApiResponse<Object> localVarResponse = await UpdateAsyncWithHttpInfo(id, body);
+             return localVarResponse.Data;
+        }
+        /// <summary>
+        /// Update an item (e.g. count) in user&#x27;s shopping cart. 
+        /// </summary>
+        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id">Cart Item ID</param>
+        /// <param name="body">Cart Item Object (optional)</param>
+        /// <returns>Task of ApiResponse (Object)</returns>
+        public async System.Threading.Tasks.Task<ApiResponse<Object>> UpdateAsyncWithHttpInfo (long? id, CartItem body = null)
+        {
+            // verify the required parameter 'id' is set
+            if (id == null)
+                throw new ApiException(400, "Missing required parameter 'id' when calling CartsApi->Update");
+            var localVarPath = "/api/Carts/{id}";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+                "application/json", 
+                "text/json", 
+                "application/_*+json"
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "text/plain",
+                "application/json",
+                "text/json"
+            };
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null)
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            if (id != null) localVarPathParams.Add("id", this.Configuration.ApiClient.ParameterToString(id)); // path parameter
+            if (body != null && body.GetType() != typeof(byte[]))
+            {
+                localVarPostBody = this.Configuration.ApiClient.Serialize(body); // http body (model) parameter
+            }
+            else
+            {
+                localVarPostBody = body; // byte array
+            }
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.PUT, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("Update", localVarResponse);
+                if (exception != null) throw exception;
+            }
+            return new ApiResponse<Object>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
+                (Object) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Object)));
         }
     }
 }
@@ -1917,66 +1917,6 @@ namespace ECommerce.Api.Api
     {
         #region Synchronous Operations
         /// <summary>
-        /// Retrieve all existing categories in the database.
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <returns>List&lt;Category&gt;</returns>
-        List<Category> ApiCategoriesGet ();
-        /// <summary>
-        /// Retrieve all existing categories in the database.
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <returns>ApiResponse of List&lt;Category&gt;</returns>
-        ApiResponse<List<Category>> ApiCategoriesGetWithHttpInfo ();
-        /// <summary>
-        /// Retrieve a specific category.
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="id">Category ID</param>
-        /// <returns>Category</returns>
-        Category ApiCategoriesIdGet (long? id);
-        /// <summary>
-        /// Retrieve a specific category.
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="id">Category ID</param>
-        /// <returns>ApiResponse of Category</returns>
-        ApiResponse<Category> ApiCategoriesIdGetWithHttpInfo (long? id);
-        /// <summary>
-        /// Update an existing category in the database. This checks for duplicate category name.
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="id">Category ID</param>
-        /// <param name="body">Category Object (optional)</param>
-        /// <returns>bool?</returns>
-        bool? ApiCategoriesIdPut (long? id, Category body = null);
-        /// <summary>
-        /// Update an existing category in the database. This checks for duplicate category name.
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="id">Category ID</param>
-        /// <param name="body">Category Object (optional)</param>
-        /// <returns>ApiResponse of bool?</returns>
-        ApiResponse<bool?> ApiCategoriesIdPutWithHttpInfo (long? id, Category body = null);
-        /// <summary>
         /// Add a new category to the database. This checks for duplicate category name.
         /// </summary>
         /// <remarks>
@@ -1985,7 +1925,7 @@ namespace ECommerce.Api.Api
         /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="body">Category Object (optional)</param>
         /// <returns>bool?</returns>
-        bool? ApiCategoriesPost (Category body = null);
+        bool? Add (Category body = null);
         /// <summary>
         /// Add a new category to the database. This checks for duplicate category name.
         /// </summary>
@@ -1995,7 +1935,7 @@ namespace ECommerce.Api.Api
         /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="body">Category Object (optional)</param>
         /// <returns>ApiResponse of bool?</returns>
-        ApiResponse<bool?> ApiCategoriesPostWithHttpInfo (Category body = null);
+        ApiResponse<bool?> AddWithHttpInfo (Category body = null);
         /// <summary>
         /// Remove an existing category from database.
         /// </summary>
@@ -2006,7 +1946,7 @@ namespace ECommerce.Api.Api
         /// <param name="id">Category ID</param>
         /// <param name="userId">User ID</param>
         /// <returns>Object</returns>
-        Object ApiCategoriesUserIdIdDelete (long? id, string userId);
+        Object Delete (long? id, string userId);
         /// <summary>
         /// Remove an existing category from database.
         /// </summary>
@@ -2017,70 +1957,70 @@ namespace ECommerce.Api.Api
         /// <param name="id">Category ID</param>
         /// <param name="userId">User ID</param>
         /// <returns>ApiResponse of Object</returns>
-        ApiResponse<Object> ApiCategoriesUserIdIdDeleteWithHttpInfo (long? id, string userId);
+        ApiResponse<Object> DeleteWithHttpInfo (long? id, string userId);
+        /// <summary>
+        /// Retrieve a specific category.
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id">Category ID</param>
+        /// <returns>Category</returns>
+        Category Get (long? id);
+        /// <summary>
+        /// Retrieve a specific category.
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id">Category ID</param>
+        /// <returns>ApiResponse of Category</returns>
+        ApiResponse<Category> GetWithHttpInfo (long? id);
+        /// <summary>
+        /// Retrieve all existing categories in the database.
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <returns>List&lt;Category&gt;</returns>
+        List<Category> GetAll ();
+        /// <summary>
+        /// Retrieve all existing categories in the database.
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <returns>ApiResponse of List&lt;Category&gt;</returns>
+        ApiResponse<List<Category>> GetAllWithHttpInfo ();
+        /// <summary>
+        /// Update an existing category in the database. This checks for duplicate category name.
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id">Category ID</param>
+        /// <param name="body">Category Object (optional)</param>
+        /// <returns>bool?</returns>
+        bool? Update (long? id, Category body = null);
+        /// <summary>
+        /// Update an existing category in the database. This checks for duplicate category name.
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id">Category ID</param>
+        /// <param name="body">Category Object (optional)</param>
+        /// <returns>ApiResponse of bool?</returns>
+        ApiResponse<bool?> UpdateWithHttpInfo (long? id, Category body = null);
         #endregion Synchronous Operations
         #region Asynchronous Operations
         /// <summary>
-        /// Retrieve all existing categories in the database.
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <returns>Task of List&lt;Category&gt;</returns>
-        System.Threading.Tasks.Task<List<Category>> ApiCategoriesGetAsync ();
-        /// <summary>
-        /// Retrieve all existing categories in the database.
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <returns>Task of ApiResponse (List&lt;Category&gt;)</returns>
-        System.Threading.Tasks.Task<ApiResponse<List<Category>>> ApiCategoriesGetAsyncWithHttpInfo ();
-        /// <summary>
-        /// Retrieve a specific category.
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="id">Category ID</param>
-        /// <returns>Task of Category</returns>
-        System.Threading.Tasks.Task<Category> ApiCategoriesIdGetAsync (long? id);
-        /// <summary>
-        /// Retrieve a specific category.
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="id">Category ID</param>
-        /// <returns>Task of ApiResponse (Category)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Category>> ApiCategoriesIdGetAsyncWithHttpInfo (long? id);
-        /// <summary>
-        /// Update an existing category in the database. This checks for duplicate category name.
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="id">Category ID</param>
-        /// <param name="body">Category Object (optional)</param>
-        /// <returns>Task of bool?</returns>
-        System.Threading.Tasks.Task<bool?> ApiCategoriesIdPutAsync (long? id, Category body = null);
-        /// <summary>
-        /// Update an existing category in the database. This checks for duplicate category name.
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="id">Category ID</param>
-        /// <param name="body">Category Object (optional)</param>
-        /// <returns>Task of ApiResponse (bool?)</returns>
-        System.Threading.Tasks.Task<ApiResponse<bool?>> ApiCategoriesIdPutAsyncWithHttpInfo (long? id, Category body = null);
-        /// <summary>
         /// Add a new category to the database. This checks for duplicate category name.
         /// </summary>
         /// <remarks>
@@ -2089,7 +2029,7 @@ namespace ECommerce.Api.Api
         /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="body">Category Object (optional)</param>
         /// <returns>Task of bool?</returns>
-        System.Threading.Tasks.Task<bool?> ApiCategoriesPostAsync (Category body = null);
+        System.Threading.Tasks.Task<bool?> AddAsync (Category body = null);
         /// <summary>
         /// Add a new category to the database. This checks for duplicate category name.
         /// </summary>
@@ -2099,7 +2039,7 @@ namespace ECommerce.Api.Api
         /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="body">Category Object (optional)</param>
         /// <returns>Task of ApiResponse (bool?)</returns>
-        System.Threading.Tasks.Task<ApiResponse<bool?>> ApiCategoriesPostAsyncWithHttpInfo (Category body = null);
+        System.Threading.Tasks.Task<ApiResponse<bool?>> AddAsyncWithHttpInfo (Category body = null);
         /// <summary>
         /// Remove an existing category from database.
         /// </summary>
@@ -2110,7 +2050,7 @@ namespace ECommerce.Api.Api
         /// <param name="id">Category ID</param>
         /// <param name="userId">User ID</param>
         /// <returns>Task of Object</returns>
-        System.Threading.Tasks.Task<Object> ApiCategoriesUserIdIdDeleteAsync (long? id, string userId);
+        System.Threading.Tasks.Task<Object> DeleteAsync (long? id, string userId);
         /// <summary>
         /// Remove an existing category from database.
         /// </summary>
@@ -2121,7 +2061,67 @@ namespace ECommerce.Api.Api
         /// <param name="id">Category ID</param>
         /// <param name="userId">User ID</param>
         /// <returns>Task of ApiResponse (Object)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> ApiCategoriesUserIdIdDeleteAsyncWithHttpInfo (long? id, string userId);
+        System.Threading.Tasks.Task<ApiResponse<Object>> DeleteAsyncWithHttpInfo (long? id, string userId);
+        /// <summary>
+        /// Retrieve a specific category.
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id">Category ID</param>
+        /// <returns>Task of Category</returns>
+        System.Threading.Tasks.Task<Category> GetAsync (long? id);
+        /// <summary>
+        /// Retrieve a specific category.
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id">Category ID</param>
+        /// <returns>Task of ApiResponse (Category)</returns>
+        System.Threading.Tasks.Task<ApiResponse<Category>> GetAsyncWithHttpInfo (long? id);
+        /// <summary>
+        /// Retrieve all existing categories in the database.
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <returns>Task of List&lt;Category&gt;</returns>
+        System.Threading.Tasks.Task<List<Category>> GetAllAsync ();
+        /// <summary>
+        /// Retrieve all existing categories in the database.
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <returns>Task of ApiResponse (List&lt;Category&gt;)</returns>
+        System.Threading.Tasks.Task<ApiResponse<List<Category>>> GetAllAsyncWithHttpInfo ();
+        /// <summary>
+        /// Update an existing category in the database. This checks for duplicate category name.
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id">Category ID</param>
+        /// <param name="body">Category Object (optional)</param>
+        /// <returns>Task of bool?</returns>
+        System.Threading.Tasks.Task<bool?> UpdateAsync (long? id, Category body = null);
+        /// <summary>
+        /// Update an existing category in the database. This checks for duplicate category name.
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id">Category ID</param>
+        /// <param name="body">Category Object (optional)</param>
+        /// <returns>Task of ApiResponse (bool?)</returns>
+        System.Threading.Tasks.Task<ApiResponse<bool?>> UpdateAsyncWithHttpInfo (long? id, Category body = null);
         #endregion Asynchronous Operations
     }
     /// <summary>
@@ -2220,370 +2220,14 @@ namespace ECommerce.Api.Api
             this.Configuration.AddDefaultHeader(key, value);
         }
         /// <summary>
-        /// Retrieve all existing categories in the database. 
-        /// </summary>
-        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <returns>List&lt;Category&gt;</returns>
-        public List<Category> ApiCategoriesGet ()
-        {
-             ApiResponse<List<Category>> localVarResponse = ApiCategoriesGetWithHttpInfo();
-             return localVarResponse.Data;
-        }
-        /// <summary>
-        /// Retrieve all existing categories in the database. 
-        /// </summary>
-        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <returns>ApiResponse of List&lt;Category&gt;</returns>
-        public ApiResponse< List<Category> > ApiCategoriesGetWithHttpInfo ()
-        {
-            var localVarPath = "/api/Categories";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "text/plain",
-                "application/json",
-                "text/json"
-            };
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null)
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("ApiCategoriesGet", localVarResponse);
-                if (exception != null) throw exception;
-            }
-            return new ApiResponse<List<Category>>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
-                (List<Category>) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(List<Category>)));
-        }
-        /// <summary>
-        /// Retrieve all existing categories in the database. 
-        /// </summary>
-        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <returns>Task of List&lt;Category&gt;</returns>
-        public async System.Threading.Tasks.Task<List<Category>> ApiCategoriesGetAsync ()
-        {
-             ApiResponse<List<Category>> localVarResponse = await ApiCategoriesGetAsyncWithHttpInfo();
-             return localVarResponse.Data;
-        }
-        /// <summary>
-        /// Retrieve all existing categories in the database. 
-        /// </summary>
-        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <returns>Task of ApiResponse (List&lt;Category&gt;)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<List<Category>>> ApiCategoriesGetAsyncWithHttpInfo ()
-        {
-            var localVarPath = "/api/Categories";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "text/plain",
-                "application/json",
-                "text/json"
-            };
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null)
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("ApiCategoriesGet", localVarResponse);
-                if (exception != null) throw exception;
-            }
-            return new ApiResponse<List<Category>>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
-                (List<Category>) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(List<Category>)));
-        }
-        /// <summary>
-        /// Retrieve a specific category. 
-        /// </summary>
-        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="id">Category ID</param>
-        /// <returns>Category</returns>
-        public Category ApiCategoriesIdGet (long? id)
-        {
-             ApiResponse<Category> localVarResponse = ApiCategoriesIdGetWithHttpInfo(id);
-             return localVarResponse.Data;
-        }
-        /// <summary>
-        /// Retrieve a specific category. 
-        /// </summary>
-        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="id">Category ID</param>
-        /// <returns>ApiResponse of Category</returns>
-        public ApiResponse< Category > ApiCategoriesIdGetWithHttpInfo (long? id)
-        {
-            // verify the required parameter 'id' is set
-            if (id == null)
-                throw new ApiException(400, "Missing required parameter 'id' when calling CategoriesApi->ApiCategoriesIdGet");
-            var localVarPath = "/api/Categories/{id}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "text/plain",
-                "application/json",
-                "text/json"
-            };
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null)
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-            if (id != null) localVarPathParams.Add("id", this.Configuration.ApiClient.ParameterToString(id)); // path parameter
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("ApiCategoriesIdGet", localVarResponse);
-                if (exception != null) throw exception;
-            }
-            return new ApiResponse<Category>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
-                (Category) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Category)));
-        }
-        /// <summary>
-        /// Retrieve a specific category. 
-        /// </summary>
-        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="id">Category ID</param>
-        /// <returns>Task of Category</returns>
-        public async System.Threading.Tasks.Task<Category> ApiCategoriesIdGetAsync (long? id)
-        {
-             ApiResponse<Category> localVarResponse = await ApiCategoriesIdGetAsyncWithHttpInfo(id);
-             return localVarResponse.Data;
-        }
-        /// <summary>
-        /// Retrieve a specific category. 
-        /// </summary>
-        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="id">Category ID</param>
-        /// <returns>Task of ApiResponse (Category)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Category>> ApiCategoriesIdGetAsyncWithHttpInfo (long? id)
-        {
-            // verify the required parameter 'id' is set
-            if (id == null)
-                throw new ApiException(400, "Missing required parameter 'id' when calling CategoriesApi->ApiCategoriesIdGet");
-            var localVarPath = "/api/Categories/{id}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "text/plain",
-                "application/json",
-                "text/json"
-            };
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null)
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-            if (id != null) localVarPathParams.Add("id", this.Configuration.ApiClient.ParameterToString(id)); // path parameter
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("ApiCategoriesIdGet", localVarResponse);
-                if (exception != null) throw exception;
-            }
-            return new ApiResponse<Category>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
-                (Category) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Category)));
-        }
-        /// <summary>
-        /// Update an existing category in the database. This checks for duplicate category name. 
-        /// </summary>
-        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="id">Category ID</param>
-        /// <param name="body">Category Object (optional)</param>
-        /// <returns>bool?</returns>
-        public bool? ApiCategoriesIdPut (long? id, Category body = null)
-        {
-             ApiResponse<bool?> localVarResponse = ApiCategoriesIdPutWithHttpInfo(id, body);
-             return localVarResponse.Data;
-        }
-        /// <summary>
-        /// Update an existing category in the database. This checks for duplicate category name. 
-        /// </summary>
-        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="id">Category ID</param>
-        /// <param name="body">Category Object (optional)</param>
-        /// <returns>ApiResponse of bool?</returns>
-        public ApiResponse< bool? > ApiCategoriesIdPutWithHttpInfo (long? id, Category body = null)
-        {
-            // verify the required parameter 'id' is set
-            if (id == null)
-                throw new ApiException(400, "Missing required parameter 'id' when calling CategoriesApi->ApiCategoriesIdPut");
-            var localVarPath = "/api/Categories/{id}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-                "application/json", 
-                "text/json", 
-                "application/_*+json"
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "text/plain",
-                "application/json",
-                "text/json"
-            };
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null)
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-            if (id != null) localVarPathParams.Add("id", this.Configuration.ApiClient.ParameterToString(id)); // path parameter
-            if (body != null && body.GetType() != typeof(byte[]))
-            {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(body); // http body (model) parameter
-            }
-            else
-            {
-                localVarPostBody = body; // byte array
-            }
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.PUT, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("ApiCategoriesIdPut", localVarResponse);
-                if (exception != null) throw exception;
-            }
-            return new ApiResponse<bool?>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
-                (bool?) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(bool?)));
-        }
-        /// <summary>
-        /// Update an existing category in the database. This checks for duplicate category name. 
-        /// </summary>
-        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="id">Category ID</param>
-        /// <param name="body">Category Object (optional)</param>
-        /// <returns>Task of bool?</returns>
-        public async System.Threading.Tasks.Task<bool?> ApiCategoriesIdPutAsync (long? id, Category body = null)
-        {
-             ApiResponse<bool?> localVarResponse = await ApiCategoriesIdPutAsyncWithHttpInfo(id, body);
-             return localVarResponse.Data;
-        }
-        /// <summary>
-        /// Update an existing category in the database. This checks for duplicate category name. 
-        /// </summary>
-        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="id">Category ID</param>
-        /// <param name="body">Category Object (optional)</param>
-        /// <returns>Task of ApiResponse (bool?)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<bool?>> ApiCategoriesIdPutAsyncWithHttpInfo (long? id, Category body = null)
-        {
-            // verify the required parameter 'id' is set
-            if (id == null)
-                throw new ApiException(400, "Missing required parameter 'id' when calling CategoriesApi->ApiCategoriesIdPut");
-            var localVarPath = "/api/Categories/{id}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-                "application/json", 
-                "text/json", 
-                "application/_*+json"
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "text/plain",
-                "application/json",
-                "text/json"
-            };
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null)
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-            if (id != null) localVarPathParams.Add("id", this.Configuration.ApiClient.ParameterToString(id)); // path parameter
-            if (body != null && body.GetType() != typeof(byte[]))
-            {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(body); // http body (model) parameter
-            }
-            else
-            {
-                localVarPostBody = body; // byte array
-            }
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.PUT, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("ApiCategoriesIdPut", localVarResponse);
-                if (exception != null) throw exception;
-            }
-            return new ApiResponse<bool?>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
-                (bool?) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(bool?)));
-        }
-        /// <summary>
         /// Add a new category to the database. This checks for duplicate category name. 
         /// </summary>
         /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="body">Category Object (optional)</param>
         /// <returns>bool?</returns>
-        public bool? ApiCategoriesPost (Category body = null)
+        public bool? Add (Category body = null)
         {
-             ApiResponse<bool?> localVarResponse = ApiCategoriesPostWithHttpInfo(body);
+             ApiResponse<bool?> localVarResponse = AddWithHttpInfo(body);
              return localVarResponse.Data;
         }
         /// <summary>
@@ -2592,7 +2236,7 @@ namespace ECommerce.Api.Api
         /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="body">Category Object (optional)</param>
         /// <returns>ApiResponse of bool?</returns>
-        public ApiResponse< bool? > ApiCategoriesPostWithHttpInfo (Category body = null)
+        public ApiResponse< bool? > AddWithHttpInfo (Category body = null)
         {
             var localVarPath = "/api/Categories";
             var localVarPathParams = new Dictionary<String, String>();
@@ -2632,7 +2276,7 @@ namespace ECommerce.Api.Api
             int localVarStatusCode = (int) localVarResponse.StatusCode;
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("ApiCategoriesPost", localVarResponse);
+                Exception exception = ExceptionFactory("Add", localVarResponse);
                 if (exception != null) throw exception;
             }
             return new ApiResponse<bool?>(localVarStatusCode,
@@ -2645,9 +2289,9 @@ namespace ECommerce.Api.Api
         /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="body">Category Object (optional)</param>
         /// <returns>Task of bool?</returns>
-        public async System.Threading.Tasks.Task<bool?> ApiCategoriesPostAsync (Category body = null)
+        public async System.Threading.Tasks.Task<bool?> AddAsync (Category body = null)
         {
-             ApiResponse<bool?> localVarResponse = await ApiCategoriesPostAsyncWithHttpInfo(body);
+             ApiResponse<bool?> localVarResponse = await AddAsyncWithHttpInfo(body);
              return localVarResponse.Data;
         }
         /// <summary>
@@ -2656,7 +2300,7 @@ namespace ECommerce.Api.Api
         /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="body">Category Object (optional)</param>
         /// <returns>Task of ApiResponse (bool?)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<bool?>> ApiCategoriesPostAsyncWithHttpInfo (Category body = null)
+        public async System.Threading.Tasks.Task<ApiResponse<bool?>> AddAsyncWithHttpInfo (Category body = null)
         {
             var localVarPath = "/api/Categories";
             var localVarPathParams = new Dictionary<String, String>();
@@ -2696,7 +2340,7 @@ namespace ECommerce.Api.Api
             int localVarStatusCode = (int) localVarResponse.StatusCode;
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("ApiCategoriesPost", localVarResponse);
+                Exception exception = ExceptionFactory("Add", localVarResponse);
                 if (exception != null) throw exception;
             }
             return new ApiResponse<bool?>(localVarStatusCode,
@@ -2710,9 +2354,9 @@ namespace ECommerce.Api.Api
         /// <param name="id">Category ID</param>
         /// <param name="userId">User ID</param>
         /// <returns>Object</returns>
-        public Object ApiCategoriesUserIdIdDelete (long? id, string userId)
+        public Object Delete (long? id, string userId)
         {
-             ApiResponse<Object> localVarResponse = ApiCategoriesUserIdIdDeleteWithHttpInfo(id, userId);
+             ApiResponse<Object> localVarResponse = DeleteWithHttpInfo(id, userId);
              return localVarResponse.Data;
         }
         /// <summary>
@@ -2722,14 +2366,14 @@ namespace ECommerce.Api.Api
         /// <param name="id">Category ID</param>
         /// <param name="userId">User ID</param>
         /// <returns>ApiResponse of Object</returns>
-        public ApiResponse< Object > ApiCategoriesUserIdIdDeleteWithHttpInfo (long? id, string userId)
+        public ApiResponse< Object > DeleteWithHttpInfo (long? id, string userId)
         {
             // verify the required parameter 'id' is set
             if (id == null)
-                throw new ApiException(400, "Missing required parameter 'id' when calling CategoriesApi->ApiCategoriesUserIdIdDelete");
+                throw new ApiException(400, "Missing required parameter 'id' when calling CategoriesApi->Delete");
             // verify the required parameter 'userId' is set
             if (userId == null)
-                throw new ApiException(400, "Missing required parameter 'userId' when calling CategoriesApi->ApiCategoriesUserIdIdDelete");
+                throw new ApiException(400, "Missing required parameter 'userId' when calling CategoriesApi->Delete");
             var localVarPath = "/api/Categories/{userId}/{id}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
@@ -2759,7 +2403,7 @@ namespace ECommerce.Api.Api
             int localVarStatusCode = (int) localVarResponse.StatusCode;
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("ApiCategoriesUserIdIdDelete", localVarResponse);
+                Exception exception = ExceptionFactory("Delete", localVarResponse);
                 if (exception != null) throw exception;
             }
             return new ApiResponse<Object>(localVarStatusCode,
@@ -2773,9 +2417,9 @@ namespace ECommerce.Api.Api
         /// <param name="id">Category ID</param>
         /// <param name="userId">User ID</param>
         /// <returns>Task of Object</returns>
-        public async System.Threading.Tasks.Task<Object> ApiCategoriesUserIdIdDeleteAsync (long? id, string userId)
+        public async System.Threading.Tasks.Task<Object> DeleteAsync (long? id, string userId)
         {
-             ApiResponse<Object> localVarResponse = await ApiCategoriesUserIdIdDeleteAsyncWithHttpInfo(id, userId);
+             ApiResponse<Object> localVarResponse = await DeleteAsyncWithHttpInfo(id, userId);
              return localVarResponse.Data;
         }
         /// <summary>
@@ -2785,14 +2429,14 @@ namespace ECommerce.Api.Api
         /// <param name="id">Category ID</param>
         /// <param name="userId">User ID</param>
         /// <returns>Task of ApiResponse (Object)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Object>> ApiCategoriesUserIdIdDeleteAsyncWithHttpInfo (long? id, string userId)
+        public async System.Threading.Tasks.Task<ApiResponse<Object>> DeleteAsyncWithHttpInfo (long? id, string userId)
         {
             // verify the required parameter 'id' is set
             if (id == null)
-                throw new ApiException(400, "Missing required parameter 'id' when calling CategoriesApi->ApiCategoriesUserIdIdDelete");
+                throw new ApiException(400, "Missing required parameter 'id' when calling CategoriesApi->Delete");
             // verify the required parameter 'userId' is set
             if (userId == null)
-                throw new ApiException(400, "Missing required parameter 'userId' when calling CategoriesApi->ApiCategoriesUserIdIdDelete");
+                throw new ApiException(400, "Missing required parameter 'userId' when calling CategoriesApi->Delete");
             var localVarPath = "/api/Categories/{userId}/{id}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
@@ -2822,12 +2466,368 @@ namespace ECommerce.Api.Api
             int localVarStatusCode = (int) localVarResponse.StatusCode;
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("ApiCategoriesUserIdIdDelete", localVarResponse);
+                Exception exception = ExceptionFactory("Delete", localVarResponse);
                 if (exception != null) throw exception;
             }
             return new ApiResponse<Object>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
                 (Object) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Object)));
+        }
+        /// <summary>
+        /// Retrieve a specific category. 
+        /// </summary>
+        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id">Category ID</param>
+        /// <returns>Category</returns>
+        public Category Get (long? id)
+        {
+             ApiResponse<Category> localVarResponse = GetWithHttpInfo(id);
+             return localVarResponse.Data;
+        }
+        /// <summary>
+        /// Retrieve a specific category. 
+        /// </summary>
+        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id">Category ID</param>
+        /// <returns>ApiResponse of Category</returns>
+        public ApiResponse< Category > GetWithHttpInfo (long? id)
+        {
+            // verify the required parameter 'id' is set
+            if (id == null)
+                throw new ApiException(400, "Missing required parameter 'id' when calling CategoriesApi->Get");
+            var localVarPath = "/api/Categories/{id}";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "text/plain",
+                "application/json",
+                "text/json"
+            };
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null)
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            if (id != null) localVarPathParams.Add("id", this.Configuration.ApiClient.ParameterToString(id)); // path parameter
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("Get", localVarResponse);
+                if (exception != null) throw exception;
+            }
+            return new ApiResponse<Category>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
+                (Category) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Category)));
+        }
+        /// <summary>
+        /// Retrieve a specific category. 
+        /// </summary>
+        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id">Category ID</param>
+        /// <returns>Task of Category</returns>
+        public async System.Threading.Tasks.Task<Category> GetAsync (long? id)
+        {
+             ApiResponse<Category> localVarResponse = await GetAsyncWithHttpInfo(id);
+             return localVarResponse.Data;
+        }
+        /// <summary>
+        /// Retrieve a specific category. 
+        /// </summary>
+        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id">Category ID</param>
+        /// <returns>Task of ApiResponse (Category)</returns>
+        public async System.Threading.Tasks.Task<ApiResponse<Category>> GetAsyncWithHttpInfo (long? id)
+        {
+            // verify the required parameter 'id' is set
+            if (id == null)
+                throw new ApiException(400, "Missing required parameter 'id' when calling CategoriesApi->Get");
+            var localVarPath = "/api/Categories/{id}";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "text/plain",
+                "application/json",
+                "text/json"
+            };
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null)
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            if (id != null) localVarPathParams.Add("id", this.Configuration.ApiClient.ParameterToString(id)); // path parameter
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("Get", localVarResponse);
+                if (exception != null) throw exception;
+            }
+            return new ApiResponse<Category>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
+                (Category) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Category)));
+        }
+        /// <summary>
+        /// Retrieve all existing categories in the database. 
+        /// </summary>
+        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <returns>List&lt;Category&gt;</returns>
+        public List<Category> GetAll ()
+        {
+             ApiResponse<List<Category>> localVarResponse = GetAllWithHttpInfo();
+             return localVarResponse.Data;
+        }
+        /// <summary>
+        /// Retrieve all existing categories in the database. 
+        /// </summary>
+        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <returns>ApiResponse of List&lt;Category&gt;</returns>
+        public ApiResponse< List<Category> > GetAllWithHttpInfo ()
+        {
+            var localVarPath = "/api/Categories";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "text/plain",
+                "application/json",
+                "text/json"
+            };
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null)
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("GetAll", localVarResponse);
+                if (exception != null) throw exception;
+            }
+            return new ApiResponse<List<Category>>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
+                (List<Category>) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(List<Category>)));
+        }
+        /// <summary>
+        /// Retrieve all existing categories in the database. 
+        /// </summary>
+        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <returns>Task of List&lt;Category&gt;</returns>
+        public async System.Threading.Tasks.Task<List<Category>> GetAllAsync ()
+        {
+             ApiResponse<List<Category>> localVarResponse = await GetAllAsyncWithHttpInfo();
+             return localVarResponse.Data;
+        }
+        /// <summary>
+        /// Retrieve all existing categories in the database. 
+        /// </summary>
+        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <returns>Task of ApiResponse (List&lt;Category&gt;)</returns>
+        public async System.Threading.Tasks.Task<ApiResponse<List<Category>>> GetAllAsyncWithHttpInfo ()
+        {
+            var localVarPath = "/api/Categories";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "text/plain",
+                "application/json",
+                "text/json"
+            };
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null)
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("GetAll", localVarResponse);
+                if (exception != null) throw exception;
+            }
+            return new ApiResponse<List<Category>>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
+                (List<Category>) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(List<Category>)));
+        }
+        /// <summary>
+        /// Update an existing category in the database. This checks for duplicate category name. 
+        /// </summary>
+        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id">Category ID</param>
+        /// <param name="body">Category Object (optional)</param>
+        /// <returns>bool?</returns>
+        public bool? Update (long? id, Category body = null)
+        {
+             ApiResponse<bool?> localVarResponse = UpdateWithHttpInfo(id, body);
+             return localVarResponse.Data;
+        }
+        /// <summary>
+        /// Update an existing category in the database. This checks for duplicate category name. 
+        /// </summary>
+        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id">Category ID</param>
+        /// <param name="body">Category Object (optional)</param>
+        /// <returns>ApiResponse of bool?</returns>
+        public ApiResponse< bool? > UpdateWithHttpInfo (long? id, Category body = null)
+        {
+            // verify the required parameter 'id' is set
+            if (id == null)
+                throw new ApiException(400, "Missing required parameter 'id' when calling CategoriesApi->Update");
+            var localVarPath = "/api/Categories/{id}";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+                "application/json", 
+                "text/json", 
+                "application/_*+json"
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "text/plain",
+                "application/json",
+                "text/json"
+            };
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null)
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            if (id != null) localVarPathParams.Add("id", this.Configuration.ApiClient.ParameterToString(id)); // path parameter
+            if (body != null && body.GetType() != typeof(byte[]))
+            {
+                localVarPostBody = this.Configuration.ApiClient.Serialize(body); // http body (model) parameter
+            }
+            else
+            {
+                localVarPostBody = body; // byte array
+            }
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+                Method.PUT, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("Update", localVarResponse);
+                if (exception != null) throw exception;
+            }
+            return new ApiResponse<bool?>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
+                (bool?) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(bool?)));
+        }
+        /// <summary>
+        /// Update an existing category in the database. This checks for duplicate category name. 
+        /// </summary>
+        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id">Category ID</param>
+        /// <param name="body">Category Object (optional)</param>
+        /// <returns>Task of bool?</returns>
+        public async System.Threading.Tasks.Task<bool?> UpdateAsync (long? id, Category body = null)
+        {
+             ApiResponse<bool?> localVarResponse = await UpdateAsyncWithHttpInfo(id, body);
+             return localVarResponse.Data;
+        }
+        /// <summary>
+        /// Update an existing category in the database. This checks for duplicate category name. 
+        /// </summary>
+        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id">Category ID</param>
+        /// <param name="body">Category Object (optional)</param>
+        /// <returns>Task of ApiResponse (bool?)</returns>
+        public async System.Threading.Tasks.Task<ApiResponse<bool?>> UpdateAsyncWithHttpInfo (long? id, Category body = null)
+        {
+            // verify the required parameter 'id' is set
+            if (id == null)
+                throw new ApiException(400, "Missing required parameter 'id' when calling CategoriesApi->Update");
+            var localVarPath = "/api/Categories/{id}";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+                "application/json", 
+                "text/json", 
+                "application/_*+json"
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "text/plain",
+                "application/json",
+                "text/json"
+            };
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null)
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            if (id != null) localVarPathParams.Add("id", this.Configuration.ApiClient.ParameterToString(id)); // path parameter
+            if (body != null && body.GetType() != typeof(byte[]))
+            {
+                localVarPostBody = this.Configuration.ApiClient.Serialize(body); // http body (model) parameter
+            }
+            else
+            {
+                localVarPostBody = body; // byte array
+            }
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.PUT, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("Update", localVarResponse);
+                if (exception != null) throw exception;
+            }
+            return new ApiResponse<bool?>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
+                (bool?) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(bool?)));
         }
     }
 }
@@ -2849,6 +2849,88 @@ namespace ECommerce.Api.Api
     {
         #region Synchronous Operations
         /// <summary>
+        /// Create an order from a user&#x27;s shopping cart upon place order.
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="body">Shopping Cart Object (optional)</param>
+        /// <returns>Order</returns>
+        Order Create (ShoppingCartVM body = null);
+        /// <summary>
+        /// Create an order from a user&#x27;s shopping cart upon place order.
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="body">Shopping Cart Object (optional)</param>
+        /// <returns>ApiResponse of Order</returns>
+        ApiResponse<Order> CreateWithHttpInfo (ShoppingCartVM body = null);
+        /// <summary>
+        /// Get all orders of a specific status for a specific user.
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userId">User ID</param>
+        /// <param name="status">Order status, e.g. Approved, Processing, Shipped, Complete, Cancelled</param>
+        /// <returns>List&lt;Order&gt;</returns>
+        List<Order> GetAllOrdersForUserById (string userId, string status);
+        /// <summary>
+        /// Get all orders of a specific status for a specific user.
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userId">User ID</param>
+        /// <param name="status">Order status, e.g. Approved, Processing, Shipped, Complete, Cancelled</param>
+        /// <returns>ApiResponse of List&lt;Order&gt;</returns>
+        ApiResponse<List<Order>> GetAllOrdersForUserByIdWithHttpInfo (string userId, string status);
+        /// <summary>
+        /// Get all orders of a specific status.
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="status">Order status, e.g. Approved, Processing, Shipped, Complete, Cancelled</param>
+        /// <returns>List&lt;Order&gt;</returns>
+        List<Order> GetAllOrdersOfStatus (string status);
+        /// <summary>
+        /// Get all orders of a specific status.
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="status">Order status, e.g. Approved, Processing, Shipped, Complete, Cancelled</param>
+        /// <returns>ApiResponse of List&lt;Order&gt;</returns>
+        ApiResponse<List<Order>> GetAllOrdersOfStatusWithHttpInfo (string status);
+        /// <summary>
+        /// Retrieve a specific order.
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="orderId">Order ID</param>
+        /// <returns>Order</returns>
+        Order GetOrderById (long? orderId);
+        /// <summary>
+        /// Retrieve a specific order.
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="orderId">Order ID</param>
+        /// <returns>ApiResponse of Order</returns>
+        ApiResponse<Order> GetOrderByIdWithHttpInfo (long? orderId);
+        /// <summary>
         /// Retrieve a specific order and its order items.
         /// </summary>
         /// <remarks>
@@ -2857,7 +2939,7 @@ namespace ECommerce.Api.Api
         /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="orderId">Order ID</param>
         /// <returns>OrderDetailsVM</returns>
-        OrderDetailsVM ApiOrdersDetailsOrderIdGet (long? orderId);
+        OrderDetailsVM GetOrderDetailsByOrderId (long? orderId);
         /// <summary>
         /// Retrieve a specific order and its order items.
         /// </summary>
@@ -2867,7 +2949,7 @@ namespace ECommerce.Api.Api
         /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="orderId">Order ID</param>
         /// <returns>ApiResponse of OrderDetailsVM</returns>
-        ApiResponse<OrderDetailsVM> ApiOrdersDetailsOrderIdGetWithHttpInfo (long? orderId);
+        ApiResponse<OrderDetailsVM> GetOrderDetailsByOrderIdWithHttpInfo (long? orderId);
         /// <summary>
         /// Update an existing order.
         /// </summary>
@@ -2878,7 +2960,7 @@ namespace ECommerce.Api.Api
         /// <param name="orderId"></param>
         /// <param name="body"> (optional)</param>
         /// <returns>Object</returns>
-        Object ApiOrdersOrderIdPut (long? orderId, Order body = null);
+        Object Update (long? orderId, Order body = null);
         /// <summary>
         /// Update an existing order.
         /// </summary>
@@ -2889,91 +2971,91 @@ namespace ECommerce.Api.Api
         /// <param name="orderId"></param>
         /// <param name="body"> (optional)</param>
         /// <returns>ApiResponse of Object</returns>
-        ApiResponse<Object> ApiOrdersOrderIdPutWithHttpInfo (long? orderId, Order body = null);
-        /// <summary>
-        /// Create an order from a user&#x27;s shopping cart upon place order.
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="body">Shopping Cart Object (optional)</param>
-        /// <returns>Order</returns>
-        Order ApiOrdersPost (ShoppingCartVM body = null);
-        /// <summary>
-        /// Create an order from a user&#x27;s shopping cart upon place order.
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="body">Shopping Cart Object (optional)</param>
-        /// <returns>ApiResponse of Order</returns>
-        ApiResponse<Order> ApiOrdersPostWithHttpInfo (ShoppingCartVM body = null);
-        /// <summary>
-        /// Get all orders of a specific status.
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="status">Order status, e.g. Approved, Processing, Shipped, Complete, Cancelled</param>
-        /// <returns>List&lt;Order&gt;</returns>
-        List<Order> ApiOrdersStatusGet (string status);
-        /// <summary>
-        /// Get all orders of a specific status.
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="status">Order status, e.g. Approved, Processing, Shipped, Complete, Cancelled</param>
-        /// <returns>ApiResponse of List&lt;Order&gt;</returns>
-        ApiResponse<List<Order>> ApiOrdersStatusGetWithHttpInfo (string status);
-        /// <summary>
-        /// Retrieve a specific order.
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orderId">Order ID</param>
-        /// <returns>Order</returns>
-        Order ApiOrdersSummaryOrderIdGet (long? orderId);
-        /// <summary>
-        /// Retrieve a specific order.
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orderId">Order ID</param>
-        /// <returns>ApiResponse of Order</returns>
-        ApiResponse<Order> ApiOrdersSummaryOrderIdGetWithHttpInfo (long? orderId);
-        /// <summary>
-        /// Get all orders of a specific status for a specific user.
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userId">User ID</param>
-        /// <param name="status">Order status, e.g. Approved, Processing, Shipped, Complete, Cancelled</param>
-        /// <returns>List&lt;Order&gt;</returns>
-        List<Order> ApiOrdersUserUserIdStatusGet (string userId, string status);
-        /// <summary>
-        /// Get all orders of a specific status for a specific user.
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userId">User ID</param>
-        /// <param name="status">Order status, e.g. Approved, Processing, Shipped, Complete, Cancelled</param>
-        /// <returns>ApiResponse of List&lt;Order&gt;</returns>
-        ApiResponse<List<Order>> ApiOrdersUserUserIdStatusGetWithHttpInfo (string userId, string status);
+        ApiResponse<Object> UpdateWithHttpInfo (long? orderId, Order body = null);
         #endregion Synchronous Operations
         #region Asynchronous Operations
+        /// <summary>
+        /// Create an order from a user&#x27;s shopping cart upon place order.
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="body">Shopping Cart Object (optional)</param>
+        /// <returns>Task of Order</returns>
+        System.Threading.Tasks.Task<Order> CreateAsync (ShoppingCartVM body = null);
+        /// <summary>
+        /// Create an order from a user&#x27;s shopping cart upon place order.
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="body">Shopping Cart Object (optional)</param>
+        /// <returns>Task of ApiResponse (Order)</returns>
+        System.Threading.Tasks.Task<ApiResponse<Order>> CreateAsyncWithHttpInfo (ShoppingCartVM body = null);
+        /// <summary>
+        /// Get all orders of a specific status for a specific user.
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userId">User ID</param>
+        /// <param name="status">Order status, e.g. Approved, Processing, Shipped, Complete, Cancelled</param>
+        /// <returns>Task of List&lt;Order&gt;</returns>
+        System.Threading.Tasks.Task<List<Order>> GetAllOrdersForUserByIdAsync (string userId, string status);
+        /// <summary>
+        /// Get all orders of a specific status for a specific user.
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userId">User ID</param>
+        /// <param name="status">Order status, e.g. Approved, Processing, Shipped, Complete, Cancelled</param>
+        /// <returns>Task of ApiResponse (List&lt;Order&gt;)</returns>
+        System.Threading.Tasks.Task<ApiResponse<List<Order>>> GetAllOrdersForUserByIdAsyncWithHttpInfo (string userId, string status);
+        /// <summary>
+        /// Get all orders of a specific status.
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="status">Order status, e.g. Approved, Processing, Shipped, Complete, Cancelled</param>
+        /// <returns>Task of List&lt;Order&gt;</returns>
+        System.Threading.Tasks.Task<List<Order>> GetAllOrdersOfStatusAsync (string status);
+        /// <summary>
+        /// Get all orders of a specific status.
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="status">Order status, e.g. Approved, Processing, Shipped, Complete, Cancelled</param>
+        /// <returns>Task of ApiResponse (List&lt;Order&gt;)</returns>
+        System.Threading.Tasks.Task<ApiResponse<List<Order>>> GetAllOrdersOfStatusAsyncWithHttpInfo (string status);
+        /// <summary>
+        /// Retrieve a specific order.
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="orderId">Order ID</param>
+        /// <returns>Task of Order</returns>
+        System.Threading.Tasks.Task<Order> GetOrderByIdAsync (long? orderId);
+        /// <summary>
+        /// Retrieve a specific order.
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="orderId">Order ID</param>
+        /// <returns>Task of ApiResponse (Order)</returns>
+        System.Threading.Tasks.Task<ApiResponse<Order>> GetOrderByIdAsyncWithHttpInfo (long? orderId);
         /// <summary>
         /// Retrieve a specific order and its order items.
         /// </summary>
@@ -2983,7 +3065,7 @@ namespace ECommerce.Api.Api
         /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="orderId">Order ID</param>
         /// <returns>Task of OrderDetailsVM</returns>
-        System.Threading.Tasks.Task<OrderDetailsVM> ApiOrdersDetailsOrderIdGetAsync (long? orderId);
+        System.Threading.Tasks.Task<OrderDetailsVM> GetOrderDetailsByOrderIdAsync (long? orderId);
         /// <summary>
         /// Retrieve a specific order and its order items.
         /// </summary>
@@ -2993,7 +3075,7 @@ namespace ECommerce.Api.Api
         /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="orderId">Order ID</param>
         /// <returns>Task of ApiResponse (OrderDetailsVM)</returns>
-        System.Threading.Tasks.Task<ApiResponse<OrderDetailsVM>> ApiOrdersDetailsOrderIdGetAsyncWithHttpInfo (long? orderId);
+        System.Threading.Tasks.Task<ApiResponse<OrderDetailsVM>> GetOrderDetailsByOrderIdAsyncWithHttpInfo (long? orderId);
         /// <summary>
         /// Update an existing order.
         /// </summary>
@@ -3004,7 +3086,7 @@ namespace ECommerce.Api.Api
         /// <param name="orderId"></param>
         /// <param name="body"> (optional)</param>
         /// <returns>Task of Object</returns>
-        System.Threading.Tasks.Task<Object> ApiOrdersOrderIdPutAsync (long? orderId, Order body = null);
+        System.Threading.Tasks.Task<Object> UpdateAsync (long? orderId, Order body = null);
         /// <summary>
         /// Update an existing order.
         /// </summary>
@@ -3015,89 +3097,7 @@ namespace ECommerce.Api.Api
         /// <param name="orderId"></param>
         /// <param name="body"> (optional)</param>
         /// <returns>Task of ApiResponse (Object)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> ApiOrdersOrderIdPutAsyncWithHttpInfo (long? orderId, Order body = null);
-        /// <summary>
-        /// Create an order from a user&#x27;s shopping cart upon place order.
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="body">Shopping Cart Object (optional)</param>
-        /// <returns>Task of Order</returns>
-        System.Threading.Tasks.Task<Order> ApiOrdersPostAsync (ShoppingCartVM body = null);
-        /// <summary>
-        /// Create an order from a user&#x27;s shopping cart upon place order.
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="body">Shopping Cart Object (optional)</param>
-        /// <returns>Task of ApiResponse (Order)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Order>> ApiOrdersPostAsyncWithHttpInfo (ShoppingCartVM body = null);
-        /// <summary>
-        /// Get all orders of a specific status.
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="status">Order status, e.g. Approved, Processing, Shipped, Complete, Cancelled</param>
-        /// <returns>Task of List&lt;Order&gt;</returns>
-        System.Threading.Tasks.Task<List<Order>> ApiOrdersStatusGetAsync (string status);
-        /// <summary>
-        /// Get all orders of a specific status.
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="status">Order status, e.g. Approved, Processing, Shipped, Complete, Cancelled</param>
-        /// <returns>Task of ApiResponse (List&lt;Order&gt;)</returns>
-        System.Threading.Tasks.Task<ApiResponse<List<Order>>> ApiOrdersStatusGetAsyncWithHttpInfo (string status);
-        /// <summary>
-        /// Retrieve a specific order.
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orderId">Order ID</param>
-        /// <returns>Task of Order</returns>
-        System.Threading.Tasks.Task<Order> ApiOrdersSummaryOrderIdGetAsync (long? orderId);
-        /// <summary>
-        /// Retrieve a specific order.
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orderId">Order ID</param>
-        /// <returns>Task of ApiResponse (Order)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Order>> ApiOrdersSummaryOrderIdGetAsyncWithHttpInfo (long? orderId);
-        /// <summary>
-        /// Get all orders of a specific status for a specific user.
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userId">User ID</param>
-        /// <param name="status">Order status, e.g. Approved, Processing, Shipped, Complete, Cancelled</param>
-        /// <returns>Task of List&lt;Order&gt;</returns>
-        System.Threading.Tasks.Task<List<Order>> ApiOrdersUserUserIdStatusGetAsync (string userId, string status);
-        /// <summary>
-        /// Get all orders of a specific status for a specific user.
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userId">User ID</param>
-        /// <param name="status">Order status, e.g. Approved, Processing, Shipped, Complete, Cancelled</param>
-        /// <returns>Task of ApiResponse (List&lt;Order&gt;)</returns>
-        System.Threading.Tasks.Task<ApiResponse<List<Order>>> ApiOrdersUserUserIdStatusGetAsyncWithHttpInfo (string userId, string status);
+        System.Threading.Tasks.Task<ApiResponse<Object>> UpdateAsyncWithHttpInfo (long? orderId, Order body = null);
         #endregion Asynchronous Operations
     }
     /// <summary>
@@ -3196,14 +3196,496 @@ namespace ECommerce.Api.Api
             this.Configuration.AddDefaultHeader(key, value);
         }
         /// <summary>
+        /// Create an order from a user&#x27;s shopping cart upon place order. 
+        /// </summary>
+        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="body">Shopping Cart Object (optional)</param>
+        /// <returns>Order</returns>
+        public Order Create (ShoppingCartVM body = null)
+        {
+             ApiResponse<Order> localVarResponse = CreateWithHttpInfo(body);
+             return localVarResponse.Data;
+        }
+        /// <summary>
+        /// Create an order from a user&#x27;s shopping cart upon place order. 
+        /// </summary>
+        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="body">Shopping Cart Object (optional)</param>
+        /// <returns>ApiResponse of Order</returns>
+        public ApiResponse< Order > CreateWithHttpInfo (ShoppingCartVM body = null)
+        {
+            var localVarPath = "/api/Orders";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+                "application/json", 
+                "text/json", 
+                "application/_*+json"
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "text/plain",
+                "application/json",
+                "text/json"
+            };
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null)
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            if (body != null && body.GetType() != typeof(byte[]))
+            {
+                localVarPostBody = this.Configuration.ApiClient.Serialize(body); // http body (model) parameter
+            }
+            else
+            {
+                localVarPostBody = body; // byte array
+            }
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("Create", localVarResponse);
+                if (exception != null) throw exception;
+            }
+            return new ApiResponse<Order>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
+                (Order) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Order)));
+        }
+        /// <summary>
+        /// Create an order from a user&#x27;s shopping cart upon place order. 
+        /// </summary>
+        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="body">Shopping Cart Object (optional)</param>
+        /// <returns>Task of Order</returns>
+        public async System.Threading.Tasks.Task<Order> CreateAsync (ShoppingCartVM body = null)
+        {
+             ApiResponse<Order> localVarResponse = await CreateAsyncWithHttpInfo(body);
+             return localVarResponse.Data;
+        }
+        /// <summary>
+        /// Create an order from a user&#x27;s shopping cart upon place order. 
+        /// </summary>
+        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="body">Shopping Cart Object (optional)</param>
+        /// <returns>Task of ApiResponse (Order)</returns>
+        public async System.Threading.Tasks.Task<ApiResponse<Order>> CreateAsyncWithHttpInfo (ShoppingCartVM body = null)
+        {
+            var localVarPath = "/api/Orders";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+                "application/json", 
+                "text/json", 
+                "application/_*+json"
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "text/plain",
+                "application/json",
+                "text/json"
+            };
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null)
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            if (body != null && body.GetType() != typeof(byte[]))
+            {
+                localVarPostBody = this.Configuration.ApiClient.Serialize(body); // http body (model) parameter
+            }
+            else
+            {
+                localVarPostBody = body; // byte array
+            }
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("Create", localVarResponse);
+                if (exception != null) throw exception;
+            }
+            return new ApiResponse<Order>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
+                (Order) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Order)));
+        }
+        /// <summary>
+        /// Get all orders of a specific status for a specific user. 
+        /// </summary>
+        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userId">User ID</param>
+        /// <param name="status">Order status, e.g. Approved, Processing, Shipped, Complete, Cancelled</param>
+        /// <returns>List&lt;Order&gt;</returns>
+        public List<Order> GetAllOrdersForUserById (string userId, string status)
+        {
+             ApiResponse<List<Order>> localVarResponse = GetAllOrdersForUserByIdWithHttpInfo(userId, status);
+             return localVarResponse.Data;
+        }
+        /// <summary>
+        /// Get all orders of a specific status for a specific user. 
+        /// </summary>
+        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userId">User ID</param>
+        /// <param name="status">Order status, e.g. Approved, Processing, Shipped, Complete, Cancelled</param>
+        /// <returns>ApiResponse of List&lt;Order&gt;</returns>
+        public ApiResponse< List<Order> > GetAllOrdersForUserByIdWithHttpInfo (string userId, string status)
+        {
+            // verify the required parameter 'userId' is set
+            if (userId == null)
+                throw new ApiException(400, "Missing required parameter 'userId' when calling OrdersApi->GetAllOrdersForUserById");
+            // verify the required parameter 'status' is set
+            if (status == null)
+                throw new ApiException(400, "Missing required parameter 'status' when calling OrdersApi->GetAllOrdersForUserById");
+            var localVarPath = "/api/Orders/user/{userId}/{status}";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "text/plain",
+                "application/json",
+                "text/json"
+            };
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null)
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            if (userId != null) localVarPathParams.Add("userId", this.Configuration.ApiClient.ParameterToString(userId)); // path parameter
+            if (status != null) localVarPathParams.Add("status", this.Configuration.ApiClient.ParameterToString(status)); // path parameter
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("GetAllOrdersForUserById", localVarResponse);
+                if (exception != null) throw exception;
+            }
+            return new ApiResponse<List<Order>>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
+                (List<Order>) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(List<Order>)));
+        }
+        /// <summary>
+        /// Get all orders of a specific status for a specific user. 
+        /// </summary>
+        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userId">User ID</param>
+        /// <param name="status">Order status, e.g. Approved, Processing, Shipped, Complete, Cancelled</param>
+        /// <returns>Task of List&lt;Order&gt;</returns>
+        public async System.Threading.Tasks.Task<List<Order>> GetAllOrdersForUserByIdAsync (string userId, string status)
+        {
+             ApiResponse<List<Order>> localVarResponse = await GetAllOrdersForUserByIdAsyncWithHttpInfo(userId, status);
+             return localVarResponse.Data;
+        }
+        /// <summary>
+        /// Get all orders of a specific status for a specific user. 
+        /// </summary>
+        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userId">User ID</param>
+        /// <param name="status">Order status, e.g. Approved, Processing, Shipped, Complete, Cancelled</param>
+        /// <returns>Task of ApiResponse (List&lt;Order&gt;)</returns>
+        public async System.Threading.Tasks.Task<ApiResponse<List<Order>>> GetAllOrdersForUserByIdAsyncWithHttpInfo (string userId, string status)
+        {
+            // verify the required parameter 'userId' is set
+            if (userId == null)
+                throw new ApiException(400, "Missing required parameter 'userId' when calling OrdersApi->GetAllOrdersForUserById");
+            // verify the required parameter 'status' is set
+            if (status == null)
+                throw new ApiException(400, "Missing required parameter 'status' when calling OrdersApi->GetAllOrdersForUserById");
+            var localVarPath = "/api/Orders/user/{userId}/{status}";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "text/plain",
+                "application/json",
+                "text/json"
+            };
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null)
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            if (userId != null) localVarPathParams.Add("userId", this.Configuration.ApiClient.ParameterToString(userId)); // path parameter
+            if (status != null) localVarPathParams.Add("status", this.Configuration.ApiClient.ParameterToString(status)); // path parameter
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("GetAllOrdersForUserById", localVarResponse);
+                if (exception != null) throw exception;
+            }
+            return new ApiResponse<List<Order>>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
+                (List<Order>) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(List<Order>)));
+        }
+        /// <summary>
+        /// Get all orders of a specific status. 
+        /// </summary>
+        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="status">Order status, e.g. Approved, Processing, Shipped, Complete, Cancelled</param>
+        /// <returns>List&lt;Order&gt;</returns>
+        public List<Order> GetAllOrdersOfStatus (string status)
+        {
+             ApiResponse<List<Order>> localVarResponse = GetAllOrdersOfStatusWithHttpInfo(status);
+             return localVarResponse.Data;
+        }
+        /// <summary>
+        /// Get all orders of a specific status. 
+        /// </summary>
+        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="status">Order status, e.g. Approved, Processing, Shipped, Complete, Cancelled</param>
+        /// <returns>ApiResponse of List&lt;Order&gt;</returns>
+        public ApiResponse< List<Order> > GetAllOrdersOfStatusWithHttpInfo (string status)
+        {
+            // verify the required parameter 'status' is set
+            if (status == null)
+                throw new ApiException(400, "Missing required parameter 'status' when calling OrdersApi->GetAllOrdersOfStatus");
+            var localVarPath = "/api/Orders/{status}";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "text/plain",
+                "application/json",
+                "text/json"
+            };
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null)
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            if (status != null) localVarPathParams.Add("status", this.Configuration.ApiClient.ParameterToString(status)); // path parameter
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("GetAllOrdersOfStatus", localVarResponse);
+                if (exception != null) throw exception;
+            }
+            return new ApiResponse<List<Order>>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
+                (List<Order>) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(List<Order>)));
+        }
+        /// <summary>
+        /// Get all orders of a specific status. 
+        /// </summary>
+        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="status">Order status, e.g. Approved, Processing, Shipped, Complete, Cancelled</param>
+        /// <returns>Task of List&lt;Order&gt;</returns>
+        public async System.Threading.Tasks.Task<List<Order>> GetAllOrdersOfStatusAsync (string status)
+        {
+             ApiResponse<List<Order>> localVarResponse = await GetAllOrdersOfStatusAsyncWithHttpInfo(status);
+             return localVarResponse.Data;
+        }
+        /// <summary>
+        /// Get all orders of a specific status. 
+        /// </summary>
+        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="status">Order status, e.g. Approved, Processing, Shipped, Complete, Cancelled</param>
+        /// <returns>Task of ApiResponse (List&lt;Order&gt;)</returns>
+        public async System.Threading.Tasks.Task<ApiResponse<List<Order>>> GetAllOrdersOfStatusAsyncWithHttpInfo (string status)
+        {
+            // verify the required parameter 'status' is set
+            if (status == null)
+                throw new ApiException(400, "Missing required parameter 'status' when calling OrdersApi->GetAllOrdersOfStatus");
+            var localVarPath = "/api/Orders/{status}";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "text/plain",
+                "application/json",
+                "text/json"
+            };
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null)
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            if (status != null) localVarPathParams.Add("status", this.Configuration.ApiClient.ParameterToString(status)); // path parameter
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("GetAllOrdersOfStatus", localVarResponse);
+                if (exception != null) throw exception;
+            }
+            return new ApiResponse<List<Order>>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
+                (List<Order>) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(List<Order>)));
+        }
+        /// <summary>
+        /// Retrieve a specific order. 
+        /// </summary>
+        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="orderId">Order ID</param>
+        /// <returns>Order</returns>
+        public Order GetOrderById (long? orderId)
+        {
+             ApiResponse<Order> localVarResponse = GetOrderByIdWithHttpInfo(orderId);
+             return localVarResponse.Data;
+        }
+        /// <summary>
+        /// Retrieve a specific order. 
+        /// </summary>
+        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="orderId">Order ID</param>
+        /// <returns>ApiResponse of Order</returns>
+        public ApiResponse< Order > GetOrderByIdWithHttpInfo (long? orderId)
+        {
+            // verify the required parameter 'orderId' is set
+            if (orderId == null)
+                throw new ApiException(400, "Missing required parameter 'orderId' when calling OrdersApi->GetOrderById");
+            var localVarPath = "/api/Orders/summary/{orderId}";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "text/plain",
+                "application/json",
+                "text/json"
+            };
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null)
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            if (orderId != null) localVarPathParams.Add("orderId", this.Configuration.ApiClient.ParameterToString(orderId)); // path parameter
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("GetOrderById", localVarResponse);
+                if (exception != null) throw exception;
+            }
+            return new ApiResponse<Order>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
+                (Order) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Order)));
+        }
+        /// <summary>
+        /// Retrieve a specific order. 
+        /// </summary>
+        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="orderId">Order ID</param>
+        /// <returns>Task of Order</returns>
+        public async System.Threading.Tasks.Task<Order> GetOrderByIdAsync (long? orderId)
+        {
+             ApiResponse<Order> localVarResponse = await GetOrderByIdAsyncWithHttpInfo(orderId);
+             return localVarResponse.Data;
+        }
+        /// <summary>
+        /// Retrieve a specific order. 
+        /// </summary>
+        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="orderId">Order ID</param>
+        /// <returns>Task of ApiResponse (Order)</returns>
+        public async System.Threading.Tasks.Task<ApiResponse<Order>> GetOrderByIdAsyncWithHttpInfo (long? orderId)
+        {
+            // verify the required parameter 'orderId' is set
+            if (orderId == null)
+                throw new ApiException(400, "Missing required parameter 'orderId' when calling OrdersApi->GetOrderById");
+            var localVarPath = "/api/Orders/summary/{orderId}";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "text/plain",
+                "application/json",
+                "text/json"
+            };
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null)
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            if (orderId != null) localVarPathParams.Add("orderId", this.Configuration.ApiClient.ParameterToString(orderId)); // path parameter
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("GetOrderById", localVarResponse);
+                if (exception != null) throw exception;
+            }
+            return new ApiResponse<Order>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
+                (Order) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Order)));
+        }
+        /// <summary>
         /// Retrieve a specific order and its order items. 
         /// </summary>
         /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="orderId">Order ID</param>
         /// <returns>OrderDetailsVM</returns>
-        public OrderDetailsVM ApiOrdersDetailsOrderIdGet (long? orderId)
+        public OrderDetailsVM GetOrderDetailsByOrderId (long? orderId)
         {
-             ApiResponse<OrderDetailsVM> localVarResponse = ApiOrdersDetailsOrderIdGetWithHttpInfo(orderId);
+             ApiResponse<OrderDetailsVM> localVarResponse = GetOrderDetailsByOrderIdWithHttpInfo(orderId);
              return localVarResponse.Data;
         }
         /// <summary>
@@ -3212,11 +3694,11 @@ namespace ECommerce.Api.Api
         /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="orderId">Order ID</param>
         /// <returns>ApiResponse of OrderDetailsVM</returns>
-        public ApiResponse< OrderDetailsVM > ApiOrdersDetailsOrderIdGetWithHttpInfo (long? orderId)
+        public ApiResponse< OrderDetailsVM > GetOrderDetailsByOrderIdWithHttpInfo (long? orderId)
         {
             // verify the required parameter 'orderId' is set
             if (orderId == null)
-                throw new ApiException(400, "Missing required parameter 'orderId' when calling OrdersApi->ApiOrdersDetailsOrderIdGet");
+                throw new ApiException(400, "Missing required parameter 'orderId' when calling OrdersApi->GetOrderDetailsByOrderId");
             var localVarPath = "/api/Orders/details/{orderId}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
@@ -3245,7 +3727,7 @@ namespace ECommerce.Api.Api
             int localVarStatusCode = (int) localVarResponse.StatusCode;
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("ApiOrdersDetailsOrderIdGet", localVarResponse);
+                Exception exception = ExceptionFactory("GetOrderDetailsByOrderId", localVarResponse);
                 if (exception != null) throw exception;
             }
             return new ApiResponse<OrderDetailsVM>(localVarStatusCode,
@@ -3258,9 +3740,9 @@ namespace ECommerce.Api.Api
         /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="orderId">Order ID</param>
         /// <returns>Task of OrderDetailsVM</returns>
-        public async System.Threading.Tasks.Task<OrderDetailsVM> ApiOrdersDetailsOrderIdGetAsync (long? orderId)
+        public async System.Threading.Tasks.Task<OrderDetailsVM> GetOrderDetailsByOrderIdAsync (long? orderId)
         {
-             ApiResponse<OrderDetailsVM> localVarResponse = await ApiOrdersDetailsOrderIdGetAsyncWithHttpInfo(orderId);
+             ApiResponse<OrderDetailsVM> localVarResponse = await GetOrderDetailsByOrderIdAsyncWithHttpInfo(orderId);
              return localVarResponse.Data;
         }
         /// <summary>
@@ -3269,11 +3751,11 @@ namespace ECommerce.Api.Api
         /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="orderId">Order ID</param>
         /// <returns>Task of ApiResponse (OrderDetailsVM)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<OrderDetailsVM>> ApiOrdersDetailsOrderIdGetAsyncWithHttpInfo (long? orderId)
+        public async System.Threading.Tasks.Task<ApiResponse<OrderDetailsVM>> GetOrderDetailsByOrderIdAsyncWithHttpInfo (long? orderId)
         {
             // verify the required parameter 'orderId' is set
             if (orderId == null)
-                throw new ApiException(400, "Missing required parameter 'orderId' when calling OrdersApi->ApiOrdersDetailsOrderIdGet");
+                throw new ApiException(400, "Missing required parameter 'orderId' when calling OrdersApi->GetOrderDetailsByOrderId");
             var localVarPath = "/api/Orders/details/{orderId}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
@@ -3302,7 +3784,7 @@ namespace ECommerce.Api.Api
             int localVarStatusCode = (int) localVarResponse.StatusCode;
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("ApiOrdersDetailsOrderIdGet", localVarResponse);
+                Exception exception = ExceptionFactory("GetOrderDetailsByOrderId", localVarResponse);
                 if (exception != null) throw exception;
             }
             return new ApiResponse<OrderDetailsVM>(localVarStatusCode,
@@ -3316,9 +3798,9 @@ namespace ECommerce.Api.Api
         /// <param name="orderId"></param>
         /// <param name="body"> (optional)</param>
         /// <returns>Object</returns>
-        public Object ApiOrdersOrderIdPut (long? orderId, Order body = null)
+        public Object Update (long? orderId, Order body = null)
         {
-             ApiResponse<Object> localVarResponse = ApiOrdersOrderIdPutWithHttpInfo(orderId, body);
+             ApiResponse<Object> localVarResponse = UpdateWithHttpInfo(orderId, body);
              return localVarResponse.Data;
         }
         /// <summary>
@@ -3328,11 +3810,11 @@ namespace ECommerce.Api.Api
         /// <param name="orderId"></param>
         /// <param name="body"> (optional)</param>
         /// <returns>ApiResponse of Object</returns>
-        public ApiResponse< Object > ApiOrdersOrderIdPutWithHttpInfo (long? orderId, Order body = null)
+        public ApiResponse< Object > UpdateWithHttpInfo (long? orderId, Order body = null)
         {
             // verify the required parameter 'orderId' is set
             if (orderId == null)
-                throw new ApiException(400, "Missing required parameter 'orderId' when calling OrdersApi->ApiOrdersOrderIdPut");
+                throw new ApiException(400, "Missing required parameter 'orderId' when calling OrdersApi->Update");
             var localVarPath = "/api/Orders/{orderId}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
@@ -3372,7 +3854,7 @@ namespace ECommerce.Api.Api
             int localVarStatusCode = (int) localVarResponse.StatusCode;
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("ApiOrdersOrderIdPut", localVarResponse);
+                Exception exception = ExceptionFactory("Update", localVarResponse);
                 if (exception != null) throw exception;
             }
             return new ApiResponse<Object>(localVarStatusCode,
@@ -3386,9 +3868,9 @@ namespace ECommerce.Api.Api
         /// <param name="orderId"></param>
         /// <param name="body"> (optional)</param>
         /// <returns>Task of Object</returns>
-        public async System.Threading.Tasks.Task<Object> ApiOrdersOrderIdPutAsync (long? orderId, Order body = null)
+        public async System.Threading.Tasks.Task<Object> UpdateAsync (long? orderId, Order body = null)
         {
-             ApiResponse<Object> localVarResponse = await ApiOrdersOrderIdPutAsyncWithHttpInfo(orderId, body);
+             ApiResponse<Object> localVarResponse = await UpdateAsyncWithHttpInfo(orderId, body);
              return localVarResponse.Data;
         }
         /// <summary>
@@ -3398,11 +3880,11 @@ namespace ECommerce.Api.Api
         /// <param name="orderId"></param>
         /// <param name="body"> (optional)</param>
         /// <returns>Task of ApiResponse (Object)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Object>> ApiOrdersOrderIdPutAsyncWithHttpInfo (long? orderId, Order body = null)
+        public async System.Threading.Tasks.Task<ApiResponse<Object>> UpdateAsyncWithHttpInfo (long? orderId, Order body = null)
         {
             // verify the required parameter 'orderId' is set
             if (orderId == null)
-                throw new ApiException(400, "Missing required parameter 'orderId' when calling OrdersApi->ApiOrdersOrderIdPut");
+                throw new ApiException(400, "Missing required parameter 'orderId' when calling OrdersApi->Update");
             var localVarPath = "/api/Orders/{orderId}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
@@ -3442,494 +3924,12 @@ namespace ECommerce.Api.Api
             int localVarStatusCode = (int) localVarResponse.StatusCode;
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("ApiOrdersOrderIdPut", localVarResponse);
+                Exception exception = ExceptionFactory("Update", localVarResponse);
                 if (exception != null) throw exception;
             }
             return new ApiResponse<Object>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
                 (Object) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Object)));
-        }
-        /// <summary>
-        /// Create an order from a user&#x27;s shopping cart upon place order. 
-        /// </summary>
-        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="body">Shopping Cart Object (optional)</param>
-        /// <returns>Order</returns>
-        public Order ApiOrdersPost (ShoppingCartVM body = null)
-        {
-             ApiResponse<Order> localVarResponse = ApiOrdersPostWithHttpInfo(body);
-             return localVarResponse.Data;
-        }
-        /// <summary>
-        /// Create an order from a user&#x27;s shopping cart upon place order. 
-        /// </summary>
-        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="body">Shopping Cart Object (optional)</param>
-        /// <returns>ApiResponse of Order</returns>
-        public ApiResponse< Order > ApiOrdersPostWithHttpInfo (ShoppingCartVM body = null)
-        {
-            var localVarPath = "/api/Orders";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-                "application/json", 
-                "text/json", 
-                "application/_*+json"
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "text/plain",
-                "application/json",
-                "text/json"
-            };
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null)
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-            if (body != null && body.GetType() != typeof(byte[]))
-            {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(body); // http body (model) parameter
-            }
-            else
-            {
-                localVarPostBody = body; // byte array
-            }
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("ApiOrdersPost", localVarResponse);
-                if (exception != null) throw exception;
-            }
-            return new ApiResponse<Order>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
-                (Order) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Order)));
-        }
-        /// <summary>
-        /// Create an order from a user&#x27;s shopping cart upon place order. 
-        /// </summary>
-        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="body">Shopping Cart Object (optional)</param>
-        /// <returns>Task of Order</returns>
-        public async System.Threading.Tasks.Task<Order> ApiOrdersPostAsync (ShoppingCartVM body = null)
-        {
-             ApiResponse<Order> localVarResponse = await ApiOrdersPostAsyncWithHttpInfo(body);
-             return localVarResponse.Data;
-        }
-        /// <summary>
-        /// Create an order from a user&#x27;s shopping cart upon place order. 
-        /// </summary>
-        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="body">Shopping Cart Object (optional)</param>
-        /// <returns>Task of ApiResponse (Order)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Order>> ApiOrdersPostAsyncWithHttpInfo (ShoppingCartVM body = null)
-        {
-            var localVarPath = "/api/Orders";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-                "application/json", 
-                "text/json", 
-                "application/_*+json"
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "text/plain",
-                "application/json",
-                "text/json"
-            };
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null)
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-            if (body != null && body.GetType() != typeof(byte[]))
-            {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(body); // http body (model) parameter
-            }
-            else
-            {
-                localVarPostBody = body; // byte array
-            }
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("ApiOrdersPost", localVarResponse);
-                if (exception != null) throw exception;
-            }
-            return new ApiResponse<Order>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
-                (Order) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Order)));
-        }
-        /// <summary>
-        /// Get all orders of a specific status. 
-        /// </summary>
-        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="status">Order status, e.g. Approved, Processing, Shipped, Complete, Cancelled</param>
-        /// <returns>List&lt;Order&gt;</returns>
-        public List<Order> ApiOrdersStatusGet (string status)
-        {
-             ApiResponse<List<Order>> localVarResponse = ApiOrdersStatusGetWithHttpInfo(status);
-             return localVarResponse.Data;
-        }
-        /// <summary>
-        /// Get all orders of a specific status. 
-        /// </summary>
-        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="status">Order status, e.g. Approved, Processing, Shipped, Complete, Cancelled</param>
-        /// <returns>ApiResponse of List&lt;Order&gt;</returns>
-        public ApiResponse< List<Order> > ApiOrdersStatusGetWithHttpInfo (string status)
-        {
-            // verify the required parameter 'status' is set
-            if (status == null)
-                throw new ApiException(400, "Missing required parameter 'status' when calling OrdersApi->ApiOrdersStatusGet");
-            var localVarPath = "/api/Orders/{status}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "text/plain",
-                "application/json",
-                "text/json"
-            };
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null)
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-            if (status != null) localVarPathParams.Add("status", this.Configuration.ApiClient.ParameterToString(status)); // path parameter
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("ApiOrdersStatusGet", localVarResponse);
-                if (exception != null) throw exception;
-            }
-            return new ApiResponse<List<Order>>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
-                (List<Order>) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(List<Order>)));
-        }
-        /// <summary>
-        /// Get all orders of a specific status. 
-        /// </summary>
-        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="status">Order status, e.g. Approved, Processing, Shipped, Complete, Cancelled</param>
-        /// <returns>Task of List&lt;Order&gt;</returns>
-        public async System.Threading.Tasks.Task<List<Order>> ApiOrdersStatusGetAsync (string status)
-        {
-             ApiResponse<List<Order>> localVarResponse = await ApiOrdersStatusGetAsyncWithHttpInfo(status);
-             return localVarResponse.Data;
-        }
-        /// <summary>
-        /// Get all orders of a specific status. 
-        /// </summary>
-        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="status">Order status, e.g. Approved, Processing, Shipped, Complete, Cancelled</param>
-        /// <returns>Task of ApiResponse (List&lt;Order&gt;)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<List<Order>>> ApiOrdersStatusGetAsyncWithHttpInfo (string status)
-        {
-            // verify the required parameter 'status' is set
-            if (status == null)
-                throw new ApiException(400, "Missing required parameter 'status' when calling OrdersApi->ApiOrdersStatusGet");
-            var localVarPath = "/api/Orders/{status}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "text/plain",
-                "application/json",
-                "text/json"
-            };
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null)
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-            if (status != null) localVarPathParams.Add("status", this.Configuration.ApiClient.ParameterToString(status)); // path parameter
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("ApiOrdersStatusGet", localVarResponse);
-                if (exception != null) throw exception;
-            }
-            return new ApiResponse<List<Order>>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
-                (List<Order>) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(List<Order>)));
-        }
-        /// <summary>
-        /// Retrieve a specific order. 
-        /// </summary>
-        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orderId">Order ID</param>
-        /// <returns>Order</returns>
-        public Order ApiOrdersSummaryOrderIdGet (long? orderId)
-        {
-             ApiResponse<Order> localVarResponse = ApiOrdersSummaryOrderIdGetWithHttpInfo(orderId);
-             return localVarResponse.Data;
-        }
-        /// <summary>
-        /// Retrieve a specific order. 
-        /// </summary>
-        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orderId">Order ID</param>
-        /// <returns>ApiResponse of Order</returns>
-        public ApiResponse< Order > ApiOrdersSummaryOrderIdGetWithHttpInfo (long? orderId)
-        {
-            // verify the required parameter 'orderId' is set
-            if (orderId == null)
-                throw new ApiException(400, "Missing required parameter 'orderId' when calling OrdersApi->ApiOrdersSummaryOrderIdGet");
-            var localVarPath = "/api/Orders/summary/{orderId}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "text/plain",
-                "application/json",
-                "text/json"
-            };
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null)
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-            if (orderId != null) localVarPathParams.Add("orderId", this.Configuration.ApiClient.ParameterToString(orderId)); // path parameter
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("ApiOrdersSummaryOrderIdGet", localVarResponse);
-                if (exception != null) throw exception;
-            }
-            return new ApiResponse<Order>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
-                (Order) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Order)));
-        }
-        /// <summary>
-        /// Retrieve a specific order. 
-        /// </summary>
-        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orderId">Order ID</param>
-        /// <returns>Task of Order</returns>
-        public async System.Threading.Tasks.Task<Order> ApiOrdersSummaryOrderIdGetAsync (long? orderId)
-        {
-             ApiResponse<Order> localVarResponse = await ApiOrdersSummaryOrderIdGetAsyncWithHttpInfo(orderId);
-             return localVarResponse.Data;
-        }
-        /// <summary>
-        /// Retrieve a specific order. 
-        /// </summary>
-        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="orderId">Order ID</param>
-        /// <returns>Task of ApiResponse (Order)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Order>> ApiOrdersSummaryOrderIdGetAsyncWithHttpInfo (long? orderId)
-        {
-            // verify the required parameter 'orderId' is set
-            if (orderId == null)
-                throw new ApiException(400, "Missing required parameter 'orderId' when calling OrdersApi->ApiOrdersSummaryOrderIdGet");
-            var localVarPath = "/api/Orders/summary/{orderId}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "text/plain",
-                "application/json",
-                "text/json"
-            };
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null)
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-            if (orderId != null) localVarPathParams.Add("orderId", this.Configuration.ApiClient.ParameterToString(orderId)); // path parameter
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("ApiOrdersSummaryOrderIdGet", localVarResponse);
-                if (exception != null) throw exception;
-            }
-            return new ApiResponse<Order>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
-                (Order) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Order)));
-        }
-        /// <summary>
-        /// Get all orders of a specific status for a specific user. 
-        /// </summary>
-        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userId">User ID</param>
-        /// <param name="status">Order status, e.g. Approved, Processing, Shipped, Complete, Cancelled</param>
-        /// <returns>List&lt;Order&gt;</returns>
-        public List<Order> ApiOrdersUserUserIdStatusGet (string userId, string status)
-        {
-             ApiResponse<List<Order>> localVarResponse = ApiOrdersUserUserIdStatusGetWithHttpInfo(userId, status);
-             return localVarResponse.Data;
-        }
-        /// <summary>
-        /// Get all orders of a specific status for a specific user. 
-        /// </summary>
-        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userId">User ID</param>
-        /// <param name="status">Order status, e.g. Approved, Processing, Shipped, Complete, Cancelled</param>
-        /// <returns>ApiResponse of List&lt;Order&gt;</returns>
-        public ApiResponse< List<Order> > ApiOrdersUserUserIdStatusGetWithHttpInfo (string userId, string status)
-        {
-            // verify the required parameter 'userId' is set
-            if (userId == null)
-                throw new ApiException(400, "Missing required parameter 'userId' when calling OrdersApi->ApiOrdersUserUserIdStatusGet");
-            // verify the required parameter 'status' is set
-            if (status == null)
-                throw new ApiException(400, "Missing required parameter 'status' when calling OrdersApi->ApiOrdersUserUserIdStatusGet");
-            var localVarPath = "/api/Orders/user/{userId}/{status}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "text/plain",
-                "application/json",
-                "text/json"
-            };
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null)
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-            if (userId != null) localVarPathParams.Add("userId", this.Configuration.ApiClient.ParameterToString(userId)); // path parameter
-            if (status != null) localVarPathParams.Add("status", this.Configuration.ApiClient.ParameterToString(status)); // path parameter
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("ApiOrdersUserUserIdStatusGet", localVarResponse);
-                if (exception != null) throw exception;
-            }
-            return new ApiResponse<List<Order>>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
-                (List<Order>) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(List<Order>)));
-        }
-        /// <summary>
-        /// Get all orders of a specific status for a specific user. 
-        /// </summary>
-        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userId">User ID</param>
-        /// <param name="status">Order status, e.g. Approved, Processing, Shipped, Complete, Cancelled</param>
-        /// <returns>Task of List&lt;Order&gt;</returns>
-        public async System.Threading.Tasks.Task<List<Order>> ApiOrdersUserUserIdStatusGetAsync (string userId, string status)
-        {
-             ApiResponse<List<Order>> localVarResponse = await ApiOrdersUserUserIdStatusGetAsyncWithHttpInfo(userId, status);
-             return localVarResponse.Data;
-        }
-        /// <summary>
-        /// Get all orders of a specific status for a specific user. 
-        /// </summary>
-        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userId">User ID</param>
-        /// <param name="status">Order status, e.g. Approved, Processing, Shipped, Complete, Cancelled</param>
-        /// <returns>Task of ApiResponse (List&lt;Order&gt;)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<List<Order>>> ApiOrdersUserUserIdStatusGetAsyncWithHttpInfo (string userId, string status)
-        {
-            // verify the required parameter 'userId' is set
-            if (userId == null)
-                throw new ApiException(400, "Missing required parameter 'userId' when calling OrdersApi->ApiOrdersUserUserIdStatusGet");
-            // verify the required parameter 'status' is set
-            if (status == null)
-                throw new ApiException(400, "Missing required parameter 'status' when calling OrdersApi->ApiOrdersUserUserIdStatusGet");
-            var localVarPath = "/api/Orders/user/{userId}/{status}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "text/plain",
-                "application/json",
-                "text/json"
-            };
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null)
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-            if (userId != null) localVarPathParams.Add("userId", this.Configuration.ApiClient.ParameterToString(userId)); // path parameter
-            if (status != null) localVarPathParams.Add("status", this.Configuration.ApiClient.ParameterToString(status)); // path parameter
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("ApiOrdersUserUserIdStatusGet", localVarResponse);
-                if (exception != null) throw exception;
-            }
-            return new ApiResponse<List<Order>>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
-                (List<Order>) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(List<Order>)));
         }
     }
 }
@@ -3951,23 +3951,47 @@ namespace ECommerce.Api.Api
     {
         #region Synchronous Operations
         /// <summary>
-        /// Get all products from the database.
+        /// Add a new product to the database.
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <returns>List&lt;ProductViewModel&gt;</returns>
-        List<ProductViewModel> ApiProductsGet ();
+        /// <param name="body">ProductViewModel Object (optional)</param>
+        /// <returns>Object</returns>
+        Object Add (ProductViewModel body = null);
         /// <summary>
-        /// Get all products from the database.
+        /// Add a new product to the database.
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <returns>ApiResponse of List&lt;ProductViewModel&gt;</returns>
-        ApiResponse<List<ProductViewModel>> ApiProductsGetWithHttpInfo ();
+        /// <param name="body">ProductViewModel Object (optional)</param>
+        /// <returns>ApiResponse of Object</returns>
+        ApiResponse<Object> AddWithHttpInfo (ProductViewModel body = null);
+        /// <summary>
+        /// Mark a product as not available instead of truly deleting it.
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id">Product ID</param>
+        /// <param name="userId">User ID</param>
+        /// <returns>Object</returns>
+        Object Delete (long? id, string userId);
+        /// <summary>
+        /// Mark a product as not available instead of truly deleting it.
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id">Product ID</param>
+        /// <param name="userId">User ID</param>
+        /// <returns>ApiResponse of Object</returns>
+        ApiResponse<Object> DeleteWithHttpInfo (long? id, string userId);
         /// <summary>
         /// Get a specific product from the database.
         /// </summary>
@@ -3977,7 +4001,7 @@ namespace ECommerce.Api.Api
         /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">Product ID</param>
         /// <returns>ProductViewModel</returns>
-        ProductViewModel ApiProductsIdGet (long? id);
+        ProductViewModel Get (long? id);
         /// <summary>
         /// Get a specific product from the database.
         /// </summary>
@@ -3987,7 +4011,25 @@ namespace ECommerce.Api.Api
         /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">Product ID</param>
         /// <returns>ApiResponse of ProductViewModel</returns>
-        ApiResponse<ProductViewModel> ApiProductsIdGetWithHttpInfo (long? id);
+        ApiResponse<ProductViewModel> GetWithHttpInfo (long? id);
+        /// <summary>
+        /// Get all products from the database.
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <returns>List&lt;ProductViewModel&gt;</returns>
+        List<ProductViewModel> GetAll ();
+        /// <summary>
+        /// Get all products from the database.
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <returns>ApiResponse of List&lt;ProductViewModel&gt;</returns>
+        ApiResponse<List<ProductViewModel>> GetAllWithHttpInfo ();
         /// <summary>
         /// Update an existing product in the database.
         /// </summary>
@@ -3998,7 +4040,7 @@ namespace ECommerce.Api.Api
         /// <param name="id">Product ID</param>
         /// <param name="body">ProductViewModel Object (optional)</param>
         /// <returns>Object</returns>
-        Object ApiProductsIdPut (long? id, ProductViewModel body = null);
+        Object Update (long? id, ProductViewModel body = null);
         /// <summary>
         /// Update an existing product in the database.
         /// </summary>
@@ -4009,69 +4051,51 @@ namespace ECommerce.Api.Api
         /// <param name="id">Product ID</param>
         /// <param name="body">ProductViewModel Object (optional)</param>
         /// <returns>ApiResponse of Object</returns>
-        ApiResponse<Object> ApiProductsIdPutWithHttpInfo (long? id, ProductViewModel body = null);
-        /// <summary>
-        /// Add a new product to the database.
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="body">ProductViewModel Object (optional)</param>
-        /// <returns>Object</returns>
-        Object ApiProductsPost (ProductViewModel body = null);
-        /// <summary>
-        /// Add a new product to the database.
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="body">ProductViewModel Object (optional)</param>
-        /// <returns>ApiResponse of Object</returns>
-        ApiResponse<Object> ApiProductsPostWithHttpInfo (ProductViewModel body = null);
-        /// <summary>
-        /// Mark a product as not available instead of truly deleting it.
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="id">Product ID</param>
-        /// <param name="userId">User ID</param>
-        /// <returns>Object</returns>
-        Object ApiProductsUserIdIdDelete (long? id, string userId);
-        /// <summary>
-        /// Mark a product as not available instead of truly deleting it.
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="id">Product ID</param>
-        /// <param name="userId">User ID</param>
-        /// <returns>ApiResponse of Object</returns>
-        ApiResponse<Object> ApiProductsUserIdIdDeleteWithHttpInfo (long? id, string userId);
+        ApiResponse<Object> UpdateWithHttpInfo (long? id, ProductViewModel body = null);
         #endregion Synchronous Operations
         #region Asynchronous Operations
         /// <summary>
-        /// Get all products from the database.
+        /// Add a new product to the database.
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <returns>Task of List&lt;ProductViewModel&gt;</returns>
-        System.Threading.Tasks.Task<List<ProductViewModel>> ApiProductsGetAsync ();
+        /// <param name="body">ProductViewModel Object (optional)</param>
+        /// <returns>Task of Object</returns>
+        System.Threading.Tasks.Task<Object> AddAsync (ProductViewModel body = null);
         /// <summary>
-        /// Get all products from the database.
+        /// Add a new product to the database.
         /// </summary>
         /// <remarks>
         /// 
         /// </remarks>
         /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <returns>Task of ApiResponse (List&lt;ProductViewModel&gt;)</returns>
-        System.Threading.Tasks.Task<ApiResponse<List<ProductViewModel>>> ApiProductsGetAsyncWithHttpInfo ();
+        /// <param name="body">ProductViewModel Object (optional)</param>
+        /// <returns>Task of ApiResponse (Object)</returns>
+        System.Threading.Tasks.Task<ApiResponse<Object>> AddAsyncWithHttpInfo (ProductViewModel body = null);
+        /// <summary>
+        /// Mark a product as not available instead of truly deleting it.
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id">Product ID</param>
+        /// <param name="userId">User ID</param>
+        /// <returns>Task of Object</returns>
+        System.Threading.Tasks.Task<Object> DeleteAsync (long? id, string userId);
+        /// <summary>
+        /// Mark a product as not available instead of truly deleting it.
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id">Product ID</param>
+        /// <param name="userId">User ID</param>
+        /// <returns>Task of ApiResponse (Object)</returns>
+        System.Threading.Tasks.Task<ApiResponse<Object>> DeleteAsyncWithHttpInfo (long? id, string userId);
         /// <summary>
         /// Get a specific product from the database.
         /// </summary>
@@ -4081,7 +4105,7 @@ namespace ECommerce.Api.Api
         /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">Product ID</param>
         /// <returns>Task of ProductViewModel</returns>
-        System.Threading.Tasks.Task<ProductViewModel> ApiProductsIdGetAsync (long? id);
+        System.Threading.Tasks.Task<ProductViewModel> GetAsync (long? id);
         /// <summary>
         /// Get a specific product from the database.
         /// </summary>
@@ -4091,7 +4115,25 @@ namespace ECommerce.Api.Api
         /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">Product ID</param>
         /// <returns>Task of ApiResponse (ProductViewModel)</returns>
-        System.Threading.Tasks.Task<ApiResponse<ProductViewModel>> ApiProductsIdGetAsyncWithHttpInfo (long? id);
+        System.Threading.Tasks.Task<ApiResponse<ProductViewModel>> GetAsyncWithHttpInfo (long? id);
+        /// <summary>
+        /// Get all products from the database.
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <returns>Task of List&lt;ProductViewModel&gt;</returns>
+        System.Threading.Tasks.Task<List<ProductViewModel>> GetAllAsync ();
+        /// <summary>
+        /// Get all products from the database.
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <returns>Task of ApiResponse (List&lt;ProductViewModel&gt;)</returns>
+        System.Threading.Tasks.Task<ApiResponse<List<ProductViewModel>>> GetAllAsyncWithHttpInfo ();
         /// <summary>
         /// Update an existing product in the database.
         /// </summary>
@@ -4102,7 +4144,7 @@ namespace ECommerce.Api.Api
         /// <param name="id">Product ID</param>
         /// <param name="body">ProductViewModel Object (optional)</param>
         /// <returns>Task of Object</returns>
-        System.Threading.Tasks.Task<Object> ApiProductsIdPutAsync (long? id, ProductViewModel body = null);
+        System.Threading.Tasks.Task<Object> UpdateAsync (long? id, ProductViewModel body = null);
         /// <summary>
         /// Update an existing product in the database.
         /// </summary>
@@ -4113,49 +4155,7 @@ namespace ECommerce.Api.Api
         /// <param name="id">Product ID</param>
         /// <param name="body">ProductViewModel Object (optional)</param>
         /// <returns>Task of ApiResponse (Object)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> ApiProductsIdPutAsyncWithHttpInfo (long? id, ProductViewModel body = null);
-        /// <summary>
-        /// Add a new product to the database.
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="body">ProductViewModel Object (optional)</param>
-        /// <returns>Task of Object</returns>
-        System.Threading.Tasks.Task<Object> ApiProductsPostAsync (ProductViewModel body = null);
-        /// <summary>
-        /// Add a new product to the database.
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="body">ProductViewModel Object (optional)</param>
-        /// <returns>Task of ApiResponse (Object)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> ApiProductsPostAsyncWithHttpInfo (ProductViewModel body = null);
-        /// <summary>
-        /// Mark a product as not available instead of truly deleting it.
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="id">Product ID</param>
-        /// <param name="userId">User ID</param>
-        /// <returns>Task of Object</returns>
-        System.Threading.Tasks.Task<Object> ApiProductsUserIdIdDeleteAsync (long? id, string userId);
-        /// <summary>
-        /// Mark a product as not available instead of truly deleting it.
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="id">Product ID</param>
-        /// <param name="userId">User ID</param>
-        /// <returns>Task of ApiResponse (Object)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> ApiProductsUserIdIdDeleteAsyncWithHttpInfo (long? id, string userId);
+        System.Threading.Tasks.Task<ApiResponse<Object>> UpdateAsyncWithHttpInfo (long? id, ProductViewModel body = null);
         #endregion Asynchronous Operations
     }
     /// <summary>
@@ -4254,21 +4254,23 @@ namespace ECommerce.Api.Api
             this.Configuration.AddDefaultHeader(key, value);
         }
         /// <summary>
-        /// Get all products from the database. 
+        /// Add a new product to the database. 
         /// </summary>
         /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <returns>List&lt;ProductViewModel&gt;</returns>
-        public List<ProductViewModel> ApiProductsGet ()
+        /// <param name="body">ProductViewModel Object (optional)</param>
+        /// <returns>Object</returns>
+        public Object Add (ProductViewModel body = null)
         {
-             ApiResponse<List<ProductViewModel>> localVarResponse = ApiProductsGetWithHttpInfo();
+             ApiResponse<Object> localVarResponse = AddWithHttpInfo(body);
              return localVarResponse.Data;
         }
         /// <summary>
-        /// Get all products from the database. 
+        /// Add a new product to the database. 
         /// </summary>
         /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <returns>ApiResponse of List&lt;ProductViewModel&gt;</returns>
-        public ApiResponse< List<ProductViewModel> > ApiProductsGetWithHttpInfo ()
+        /// <param name="body">ProductViewModel Object (optional)</param>
+        /// <returns>ApiResponse of Object</returns>
+        public ApiResponse< Object > AddWithHttpInfo (ProductViewModel body = null)
         {
             var localVarPath = "/api/Products";
             var localVarPathParams = new Dictionary<String, String>();
@@ -4279,6 +4281,9 @@ namespace ECommerce.Api.Api
             Object localVarPostBody = null;
             // to determine the Content-Type header
             String[] localVarHttpContentTypes = new String[] {
+                "application/json", 
+                "text/json", 
+                "application/_*+json"
             };
             String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
             // to determine the Accept header
@@ -4290,38 +4295,120 @@ namespace ECommerce.Api.Api
             String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            if (body != null && body.GetType() != typeof(byte[]))
+            {
+                localVarPostBody = this.Configuration.ApiClient.Serialize(body); // http body (model) parameter
+            }
+            else
+            {
+                localVarPostBody = body; // byte array
+            }
             // make the HTTP request
             IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
             int localVarStatusCode = (int) localVarResponse.StatusCode;
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("ApiProductsGet", localVarResponse);
+                Exception exception = ExceptionFactory("Add", localVarResponse);
                 if (exception != null) throw exception;
             }
-            return new ApiResponse<List<ProductViewModel>>(localVarStatusCode,
+            return new ApiResponse<Object>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
-                (List<ProductViewModel>) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(List<ProductViewModel>)));
+                (Object) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Object)));
         }
         /// <summary>
-        /// Get all products from the database. 
+        /// Add a new product to the database. 
         /// </summary>
         /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <returns>Task of List&lt;ProductViewModel&gt;</returns>
-        public async System.Threading.Tasks.Task<List<ProductViewModel>> ApiProductsGetAsync ()
+        /// <param name="body">ProductViewModel Object (optional)</param>
+        /// <returns>Task of Object</returns>
+        public async System.Threading.Tasks.Task<Object> AddAsync (ProductViewModel body = null)
         {
-             ApiResponse<List<ProductViewModel>> localVarResponse = await ApiProductsGetAsyncWithHttpInfo();
+             ApiResponse<Object> localVarResponse = await AddAsyncWithHttpInfo(body);
              return localVarResponse.Data;
         }
         /// <summary>
-        /// Get all products from the database. 
+        /// Add a new product to the database. 
         /// </summary>
         /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <returns>Task of ApiResponse (List&lt;ProductViewModel&gt;)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<List<ProductViewModel>>> ApiProductsGetAsyncWithHttpInfo ()
+        /// <param name="body">ProductViewModel Object (optional)</param>
+        /// <returns>Task of ApiResponse (Object)</returns>
+        public async System.Threading.Tasks.Task<ApiResponse<Object>> AddAsyncWithHttpInfo (ProductViewModel body = null)
         {
             var localVarPath = "/api/Products";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+                "application/json", 
+                "text/json", 
+                "application/_*+json"
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "text/plain",
+                "application/json",
+                "text/json"
+            };
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null)
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            if (body != null && body.GetType() != typeof(byte[]))
+            {
+                localVarPostBody = this.Configuration.ApiClient.Serialize(body); // http body (model) parameter
+            }
+            else
+            {
+                localVarPostBody = body; // byte array
+            }
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("Add", localVarResponse);
+                if (exception != null) throw exception;
+            }
+            return new ApiResponse<Object>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
+                (Object) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Object)));
+        }
+        /// <summary>
+        /// Mark a product as not available instead of truly deleting it. 
+        /// </summary>
+        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id">Product ID</param>
+        /// <param name="userId">User ID</param>
+        /// <returns>Object</returns>
+        public Object Delete (long? id, string userId)
+        {
+             ApiResponse<Object> localVarResponse = DeleteWithHttpInfo(id, userId);
+             return localVarResponse.Data;
+        }
+        /// <summary>
+        /// Mark a product as not available instead of truly deleting it. 
+        /// </summary>
+        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id">Product ID</param>
+        /// <param name="userId">User ID</param>
+        /// <returns>ApiResponse of Object</returns>
+        public ApiResponse< Object > DeleteWithHttpInfo (long? id, string userId)
+        {
+            // verify the required parameter 'id' is set
+            if (id == null)
+                throw new ApiException(400, "Missing required parameter 'id' when calling ProductsApi->Delete");
+            // verify the required parameter 'userId' is set
+            if (userId == null)
+                throw new ApiException(400, "Missing required parameter 'userId' when calling ProductsApi->Delete");
+            var localVarPath = "/api/Products/{userId}/{id}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
             var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
@@ -4341,19 +4428,84 @@ namespace ECommerce.Api.Api
             String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            if (id != null) localVarPathParams.Add("id", this.Configuration.ApiClient.ParameterToString(id)); // path parameter
+            if (userId != null) localVarPathParams.Add("userId", this.Configuration.ApiClient.ParameterToString(userId)); // path parameter
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
             int localVarStatusCode = (int) localVarResponse.StatusCode;
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("ApiProductsGet", localVarResponse);
+                Exception exception = ExceptionFactory("Delete", localVarResponse);
                 if (exception != null) throw exception;
             }
-            return new ApiResponse<List<ProductViewModel>>(localVarStatusCode,
+            return new ApiResponse<Object>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
-                (List<ProductViewModel>) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(List<ProductViewModel>)));
+                (Object) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Object)));
+        }
+        /// <summary>
+        /// Mark a product as not available instead of truly deleting it. 
+        /// </summary>
+        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id">Product ID</param>
+        /// <param name="userId">User ID</param>
+        /// <returns>Task of Object</returns>
+        public async System.Threading.Tasks.Task<Object> DeleteAsync (long? id, string userId)
+        {
+             ApiResponse<Object> localVarResponse = await DeleteAsyncWithHttpInfo(id, userId);
+             return localVarResponse.Data;
+        }
+        /// <summary>
+        /// Mark a product as not available instead of truly deleting it. 
+        /// </summary>
+        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id">Product ID</param>
+        /// <param name="userId">User ID</param>
+        /// <returns>Task of ApiResponse (Object)</returns>
+        public async System.Threading.Tasks.Task<ApiResponse<Object>> DeleteAsyncWithHttpInfo (long? id, string userId)
+        {
+            // verify the required parameter 'id' is set
+            if (id == null)
+                throw new ApiException(400, "Missing required parameter 'id' when calling ProductsApi->Delete");
+            // verify the required parameter 'userId' is set
+            if (userId == null)
+                throw new ApiException(400, "Missing required parameter 'userId' when calling ProductsApi->Delete");
+            var localVarPath = "/api/Products/{userId}/{id}";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "text/plain",
+                "application/json",
+                "text/json"
+            };
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null)
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            if (id != null) localVarPathParams.Add("id", this.Configuration.ApiClient.ParameterToString(id)); // path parameter
+            if (userId != null) localVarPathParams.Add("userId", this.Configuration.ApiClient.ParameterToString(userId)); // path parameter
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("Delete", localVarResponse);
+                if (exception != null) throw exception;
+            }
+            return new ApiResponse<Object>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
+                (Object) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Object)));
         }
         /// <summary>
         /// Get a specific product from the database. 
@@ -4361,9 +4513,9 @@ namespace ECommerce.Api.Api
         /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">Product ID</param>
         /// <returns>ProductViewModel</returns>
-        public ProductViewModel ApiProductsIdGet (long? id)
+        public ProductViewModel Get (long? id)
         {
-             ApiResponse<ProductViewModel> localVarResponse = ApiProductsIdGetWithHttpInfo(id);
+             ApiResponse<ProductViewModel> localVarResponse = GetWithHttpInfo(id);
              return localVarResponse.Data;
         }
         /// <summary>
@@ -4372,11 +4524,11 @@ namespace ECommerce.Api.Api
         /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">Product ID</param>
         /// <returns>ApiResponse of ProductViewModel</returns>
-        public ApiResponse< ProductViewModel > ApiProductsIdGetWithHttpInfo (long? id)
+        public ApiResponse< ProductViewModel > GetWithHttpInfo (long? id)
         {
             // verify the required parameter 'id' is set
             if (id == null)
-                throw new ApiException(400, "Missing required parameter 'id' when calling ProductsApi->ApiProductsIdGet");
+                throw new ApiException(400, "Missing required parameter 'id' when calling ProductsApi->Get");
             var localVarPath = "/api/Products/{id}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
@@ -4405,7 +4557,7 @@ namespace ECommerce.Api.Api
             int localVarStatusCode = (int) localVarResponse.StatusCode;
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("ApiProductsIdGet", localVarResponse);
+                Exception exception = ExceptionFactory("Get", localVarResponse);
                 if (exception != null) throw exception;
             }
             return new ApiResponse<ProductViewModel>(localVarStatusCode,
@@ -4418,9 +4570,9 @@ namespace ECommerce.Api.Api
         /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">Product ID</param>
         /// <returns>Task of ProductViewModel</returns>
-        public async System.Threading.Tasks.Task<ProductViewModel> ApiProductsIdGetAsync (long? id)
+        public async System.Threading.Tasks.Task<ProductViewModel> GetAsync (long? id)
         {
-             ApiResponse<ProductViewModel> localVarResponse = await ApiProductsIdGetAsyncWithHttpInfo(id);
+             ApiResponse<ProductViewModel> localVarResponse = await GetAsyncWithHttpInfo(id);
              return localVarResponse.Data;
         }
         /// <summary>
@@ -4429,11 +4581,11 @@ namespace ECommerce.Api.Api
         /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">Product ID</param>
         /// <returns>Task of ApiResponse (ProductViewModel)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<ProductViewModel>> ApiProductsIdGetAsyncWithHttpInfo (long? id)
+        public async System.Threading.Tasks.Task<ApiResponse<ProductViewModel>> GetAsyncWithHttpInfo (long? id)
         {
             // verify the required parameter 'id' is set
             if (id == null)
-                throw new ApiException(400, "Missing required parameter 'id' when calling ProductsApi->ApiProductsIdGet");
+                throw new ApiException(400, "Missing required parameter 'id' when calling ProductsApi->Get");
             var localVarPath = "/api/Products/{id}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
@@ -4462,7 +4614,7 @@ namespace ECommerce.Api.Api
             int localVarStatusCode = (int) localVarResponse.StatusCode;
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("ApiProductsIdGet", localVarResponse);
+                Exception exception = ExceptionFactory("Get", localVarResponse);
                 if (exception != null) throw exception;
             }
             return new ApiResponse<ProductViewModel>(localVarStatusCode,
@@ -4470,15 +4622,117 @@ namespace ECommerce.Api.Api
                 (ProductViewModel) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(ProductViewModel)));
         }
         /// <summary>
+        /// Get all products from the database. 
+        /// </summary>
+        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <returns>List&lt;ProductViewModel&gt;</returns>
+        public List<ProductViewModel> GetAll ()
+        {
+             ApiResponse<List<ProductViewModel>> localVarResponse = GetAllWithHttpInfo();
+             return localVarResponse.Data;
+        }
+        /// <summary>
+        /// Get all products from the database. 
+        /// </summary>
+        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <returns>ApiResponse of List&lt;ProductViewModel&gt;</returns>
+        public ApiResponse< List<ProductViewModel> > GetAllWithHttpInfo ()
+        {
+            var localVarPath = "/api/Products";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "text/plain",
+                "application/json",
+                "text/json"
+            };
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null)
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("GetAll", localVarResponse);
+                if (exception != null) throw exception;
+            }
+            return new ApiResponse<List<ProductViewModel>>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
+                (List<ProductViewModel>) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(List<ProductViewModel>)));
+        }
+        /// <summary>
+        /// Get all products from the database. 
+        /// </summary>
+        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <returns>Task of List&lt;ProductViewModel&gt;</returns>
+        public async System.Threading.Tasks.Task<List<ProductViewModel>> GetAllAsync ()
+        {
+             ApiResponse<List<ProductViewModel>> localVarResponse = await GetAllAsyncWithHttpInfo();
+             return localVarResponse.Data;
+        }
+        /// <summary>
+        /// Get all products from the database. 
+        /// </summary>
+        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <returns>Task of ApiResponse (List&lt;ProductViewModel&gt;)</returns>
+        public async System.Threading.Tasks.Task<ApiResponse<List<ProductViewModel>>> GetAllAsyncWithHttpInfo ()
+        {
+            var localVarPath = "/api/Products";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "text/plain",
+                "application/json",
+                "text/json"
+            };
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null)
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("GetAll", localVarResponse);
+                if (exception != null) throw exception;
+            }
+            return new ApiResponse<List<ProductViewModel>>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
+                (List<ProductViewModel>) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(List<ProductViewModel>)));
+        }
+        /// <summary>
         /// Update an existing product in the database. 
         /// </summary>
         /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">Product ID</param>
         /// <param name="body">ProductViewModel Object (optional)</param>
         /// <returns>Object</returns>
-        public Object ApiProductsIdPut (long? id, ProductViewModel body = null)
+        public Object Update (long? id, ProductViewModel body = null)
         {
-             ApiResponse<Object> localVarResponse = ApiProductsIdPutWithHttpInfo(id, body);
+             ApiResponse<Object> localVarResponse = UpdateWithHttpInfo(id, body);
              return localVarResponse.Data;
         }
         /// <summary>
@@ -4488,11 +4742,11 @@ namespace ECommerce.Api.Api
         /// <param name="id">Product ID</param>
         /// <param name="body">ProductViewModel Object (optional)</param>
         /// <returns>ApiResponse of Object</returns>
-        public ApiResponse< Object > ApiProductsIdPutWithHttpInfo (long? id, ProductViewModel body = null)
+        public ApiResponse< Object > UpdateWithHttpInfo (long? id, ProductViewModel body = null)
         {
             // verify the required parameter 'id' is set
             if (id == null)
-                throw new ApiException(400, "Missing required parameter 'id' when calling ProductsApi->ApiProductsIdPut");
+                throw new ApiException(400, "Missing required parameter 'id' when calling ProductsApi->Update");
             var localVarPath = "/api/Products/{id}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
@@ -4532,7 +4786,7 @@ namespace ECommerce.Api.Api
             int localVarStatusCode = (int) localVarResponse.StatusCode;
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("ApiProductsIdPut", localVarResponse);
+                Exception exception = ExceptionFactory("Update", localVarResponse);
                 if (exception != null) throw exception;
             }
             return new ApiResponse<Object>(localVarStatusCode,
@@ -4546,9 +4800,9 @@ namespace ECommerce.Api.Api
         /// <param name="id">Product ID</param>
         /// <param name="body">ProductViewModel Object (optional)</param>
         /// <returns>Task of Object</returns>
-        public async System.Threading.Tasks.Task<Object> ApiProductsIdPutAsync (long? id, ProductViewModel body = null)
+        public async System.Threading.Tasks.Task<Object> UpdateAsync (long? id, ProductViewModel body = null)
         {
-             ApiResponse<Object> localVarResponse = await ApiProductsIdPutAsyncWithHttpInfo(id, body);
+             ApiResponse<Object> localVarResponse = await UpdateAsyncWithHttpInfo(id, body);
              return localVarResponse.Data;
         }
         /// <summary>
@@ -4558,11 +4812,11 @@ namespace ECommerce.Api.Api
         /// <param name="id">Product ID</param>
         /// <param name="body">ProductViewModel Object (optional)</param>
         /// <returns>Task of ApiResponse (Object)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Object>> ApiProductsIdPutAsyncWithHttpInfo (long? id, ProductViewModel body = null)
+        public async System.Threading.Tasks.Task<ApiResponse<Object>> UpdateAsyncWithHttpInfo (long? id, ProductViewModel body = null)
         {
             // verify the required parameter 'id' is set
             if (id == null)
-                throw new ApiException(400, "Missing required parameter 'id' when calling ProductsApi->ApiProductsIdPut");
+                throw new ApiException(400, "Missing required parameter 'id' when calling ProductsApi->Update");
             var localVarPath = "/api/Products/{id}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
@@ -4602,261 +4856,7 @@ namespace ECommerce.Api.Api
             int localVarStatusCode = (int) localVarResponse.StatusCode;
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("ApiProductsIdPut", localVarResponse);
-                if (exception != null) throw exception;
-            }
-            return new ApiResponse<Object>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
-                (Object) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Object)));
-        }
-        /// <summary>
-        /// Add a new product to the database. 
-        /// </summary>
-        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="body">ProductViewModel Object (optional)</param>
-        /// <returns>Object</returns>
-        public Object ApiProductsPost (ProductViewModel body = null)
-        {
-             ApiResponse<Object> localVarResponse = ApiProductsPostWithHttpInfo(body);
-             return localVarResponse.Data;
-        }
-        /// <summary>
-        /// Add a new product to the database. 
-        /// </summary>
-        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="body">ProductViewModel Object (optional)</param>
-        /// <returns>ApiResponse of Object</returns>
-        public ApiResponse< Object > ApiProductsPostWithHttpInfo (ProductViewModel body = null)
-        {
-            var localVarPath = "/api/Products";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-                "application/json", 
-                "text/json", 
-                "application/_*+json"
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "text/plain",
-                "application/json",
-                "text/json"
-            };
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null)
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-            if (body != null && body.GetType() != typeof(byte[]))
-            {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(body); // http body (model) parameter
-            }
-            else
-            {
-                localVarPostBody = body; // byte array
-            }
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("ApiProductsPost", localVarResponse);
-                if (exception != null) throw exception;
-            }
-            return new ApiResponse<Object>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
-                (Object) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Object)));
-        }
-        /// <summary>
-        /// Add a new product to the database. 
-        /// </summary>
-        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="body">ProductViewModel Object (optional)</param>
-        /// <returns>Task of Object</returns>
-        public async System.Threading.Tasks.Task<Object> ApiProductsPostAsync (ProductViewModel body = null)
-        {
-             ApiResponse<Object> localVarResponse = await ApiProductsPostAsyncWithHttpInfo(body);
-             return localVarResponse.Data;
-        }
-        /// <summary>
-        /// Add a new product to the database. 
-        /// </summary>
-        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="body">ProductViewModel Object (optional)</param>
-        /// <returns>Task of ApiResponse (Object)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Object>> ApiProductsPostAsyncWithHttpInfo (ProductViewModel body = null)
-        {
-            var localVarPath = "/api/Products";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-                "application/json", 
-                "text/json", 
-                "application/_*+json"
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "text/plain",
-                "application/json",
-                "text/json"
-            };
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null)
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-            if (body != null && body.GetType() != typeof(byte[]))
-            {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(body); // http body (model) parameter
-            }
-            else
-            {
-                localVarPostBody = body; // byte array
-            }
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("ApiProductsPost", localVarResponse);
-                if (exception != null) throw exception;
-            }
-            return new ApiResponse<Object>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
-                (Object) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Object)));
-        }
-        /// <summary>
-        /// Mark a product as not available instead of truly deleting it. 
-        /// </summary>
-        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="id">Product ID</param>
-        /// <param name="userId">User ID</param>
-        /// <returns>Object</returns>
-        public Object ApiProductsUserIdIdDelete (long? id, string userId)
-        {
-             ApiResponse<Object> localVarResponse = ApiProductsUserIdIdDeleteWithHttpInfo(id, userId);
-             return localVarResponse.Data;
-        }
-        /// <summary>
-        /// Mark a product as not available instead of truly deleting it. 
-        /// </summary>
-        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="id">Product ID</param>
-        /// <param name="userId">User ID</param>
-        /// <returns>ApiResponse of Object</returns>
-        public ApiResponse< Object > ApiProductsUserIdIdDeleteWithHttpInfo (long? id, string userId)
-        {
-            // verify the required parameter 'id' is set
-            if (id == null)
-                throw new ApiException(400, "Missing required parameter 'id' when calling ProductsApi->ApiProductsUserIdIdDelete");
-            // verify the required parameter 'userId' is set
-            if (userId == null)
-                throw new ApiException(400, "Missing required parameter 'userId' when calling ProductsApi->ApiProductsUserIdIdDelete");
-            var localVarPath = "/api/Products/{userId}/{id}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "text/plain",
-                "application/json",
-                "text/json"
-            };
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null)
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-            if (id != null) localVarPathParams.Add("id", this.Configuration.ApiClient.ParameterToString(id)); // path parameter
-            if (userId != null) localVarPathParams.Add("userId", this.Configuration.ApiClient.ParameterToString(userId)); // path parameter
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("ApiProductsUserIdIdDelete", localVarResponse);
-                if (exception != null) throw exception;
-            }
-            return new ApiResponse<Object>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
-                (Object) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Object)));
-        }
-        /// <summary>
-        /// Mark a product as not available instead of truly deleting it. 
-        /// </summary>
-        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="id">Product ID</param>
-        /// <param name="userId">User ID</param>
-        /// <returns>Task of Object</returns>
-        public async System.Threading.Tasks.Task<Object> ApiProductsUserIdIdDeleteAsync (long? id, string userId)
-        {
-             ApiResponse<Object> localVarResponse = await ApiProductsUserIdIdDeleteAsyncWithHttpInfo(id, userId);
-             return localVarResponse.Data;
-        }
-        /// <summary>
-        /// Mark a product as not available instead of truly deleting it. 
-        /// </summary>
-        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="id">Product ID</param>
-        /// <param name="userId">User ID</param>
-        /// <returns>Task of ApiResponse (Object)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Object>> ApiProductsUserIdIdDeleteAsyncWithHttpInfo (long? id, string userId)
-        {
-            // verify the required parameter 'id' is set
-            if (id == null)
-                throw new ApiException(400, "Missing required parameter 'id' when calling ProductsApi->ApiProductsUserIdIdDelete");
-            // verify the required parameter 'userId' is set
-            if (userId == null)
-                throw new ApiException(400, "Missing required parameter 'userId' when calling ProductsApi->ApiProductsUserIdIdDelete");
-            var localVarPath = "/api/Products/{userId}/{id}";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "text/plain",
-                "application/json",
-                "text/json"
-            };
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null)
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-            if (id != null) localVarPathParams.Add("id", this.Configuration.ApiClient.ParameterToString(id)); // path parameter
-            if (userId != null) localVarPathParams.Add("userId", this.Configuration.ApiClient.ParameterToString(userId)); // path parameter
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("ApiProductsUserIdIdDelete", localVarResponse);
+                Exception exception = ExceptionFactory("Update", localVarResponse);
                 if (exception != null) throw exception;
             }
             return new ApiResponse<Object>(localVarStatusCode,
@@ -4890,7 +4890,7 @@ namespace ECommerce.Api.Api
         /// </remarks>
         /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <returns>string</returns>
-        string ApiStatusGet ();
+        string Index ();
         /// <summary>
         /// Just to check if the API server is up.
         /// </summary>
@@ -4899,7 +4899,7 @@ namespace ECommerce.Api.Api
         /// </remarks>
         /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <returns>ApiResponse of string</returns>
-        ApiResponse<string> ApiStatusGetWithHttpInfo ();
+        ApiResponse<string> IndexWithHttpInfo ();
         #endregion Synchronous Operations
         #region Asynchronous Operations
         /// <summary>
@@ -4910,7 +4910,7 @@ namespace ECommerce.Api.Api
         /// </remarks>
         /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <returns>Task of string</returns>
-        System.Threading.Tasks.Task<string> ApiStatusGetAsync ();
+        System.Threading.Tasks.Task<string> IndexAsync ();
         /// <summary>
         /// Just to check if the API server is up.
         /// </summary>
@@ -4919,7 +4919,7 @@ namespace ECommerce.Api.Api
         /// </remarks>
         /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <returns>Task of ApiResponse (string)</returns>
-        System.Threading.Tasks.Task<ApiResponse<string>> ApiStatusGetAsyncWithHttpInfo ();
+        System.Threading.Tasks.Task<ApiResponse<string>> IndexAsyncWithHttpInfo ();
         #endregion Asynchronous Operations
     }
     /// <summary>
@@ -5022,9 +5022,9 @@ namespace ECommerce.Api.Api
         /// </summary>
         /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <returns>string</returns>
-        public string ApiStatusGet ()
+        public string Index ()
         {
-             ApiResponse<string> localVarResponse = ApiStatusGetWithHttpInfo();
+             ApiResponse<string> localVarResponse = IndexWithHttpInfo();
              return localVarResponse.Data;
         }
         /// <summary>
@@ -5032,7 +5032,7 @@ namespace ECommerce.Api.Api
         /// </summary>
         /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <returns>ApiResponse of string</returns>
-        public ApiResponse< string > ApiStatusGetWithHttpInfo ()
+        public ApiResponse< string > IndexWithHttpInfo ()
         {
             var localVarPath = "/api/Status";
             var localVarPathParams = new Dictionary<String, String>();
@@ -5061,7 +5061,7 @@ namespace ECommerce.Api.Api
             int localVarStatusCode = (int) localVarResponse.StatusCode;
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("ApiStatusGet", localVarResponse);
+                Exception exception = ExceptionFactory("Index", localVarResponse);
                 if (exception != null) throw exception;
             }
             return new ApiResponse<string>(localVarStatusCode,
@@ -5073,9 +5073,9 @@ namespace ECommerce.Api.Api
         /// </summary>
         /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <returns>Task of string</returns>
-        public async System.Threading.Tasks.Task<string> ApiStatusGetAsync ()
+        public async System.Threading.Tasks.Task<string> IndexAsync ()
         {
-             ApiResponse<string> localVarResponse = await ApiStatusGetAsyncWithHttpInfo();
+             ApiResponse<string> localVarResponse = await IndexAsyncWithHttpInfo();
              return localVarResponse.Data;
         }
         /// <summary>
@@ -5083,7 +5083,7 @@ namespace ECommerce.Api.Api
         /// </summary>
         /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <returns>Task of ApiResponse (string)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<string>> ApiStatusGetAsyncWithHttpInfo ()
+        public async System.Threading.Tasks.Task<ApiResponse<string>> IndexAsyncWithHttpInfo ()
         {
             var localVarPath = "/api/Status";
             var localVarPathParams = new Dictionary<String, String>();
@@ -5112,7 +5112,7 @@ namespace ECommerce.Api.Api
             int localVarStatusCode = (int) localVarResponse.StatusCode;
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("ApiStatusGet", localVarResponse);
+                Exception exception = ExceptionFactory("Index", localVarResponse);
                 if (exception != null) throw exception;
             }
             return new ApiResponse<string>(localVarStatusCode,
@@ -5147,7 +5147,7 @@ namespace ECommerce.Api.Api
         /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId">User ID</param>
         /// <returns>ApplicationUser</returns>
-        ApplicationUser ApiUsersInfoUserIdGet (string userId);
+        ApplicationUser Get (string userId);
         /// <summary>
         /// Get the details of a specific user.
         /// </summary>
@@ -5157,27 +5157,7 @@ namespace ECommerce.Api.Api
         /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId">User ID</param>
         /// <returns>ApiResponse of ApplicationUser</returns>
-        ApiResponse<ApplicationUser> ApiUsersInfoUserIdGetWithHttpInfo (string userId);
-        /// <summary>
-        /// Update an existing user in the database.
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="body">ApplicationUser Object (optional)</param>
-        /// <returns>Object</returns>
-        Object ApiUsersPut (ApplicationUser body = null);
-        /// <summary>
-        /// Update an existing user in the database.
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="body">ApplicationUser Object (optional)</param>
-        /// <returns>ApiResponse of Object</returns>
-        ApiResponse<Object> ApiUsersPutWithHttpInfo (ApplicationUser body = null);
+        ApiResponse<ApplicationUser> GetWithHttpInfo (string userId);
         /// <summary>
         /// Retrieve all users from the database based on role.
         /// </summary>
@@ -5187,7 +5167,7 @@ namespace ECommerce.Api.Api
         /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="role">Role string, e.g. Admin, Customer</param>
         /// <returns>List&lt;ApplicationUser&gt;</returns>
-        List<ApplicationUser> ApiUsersRoleGet (string role);
+        List<ApplicationUser> GetAll (string role);
         /// <summary>
         /// Retrieve all users from the database based on role.
         /// </summary>
@@ -5197,7 +5177,27 @@ namespace ECommerce.Api.Api
         /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="role">Role string, e.g. Admin, Customer</param>
         /// <returns>ApiResponse of List&lt;ApplicationUser&gt;</returns>
-        ApiResponse<List<ApplicationUser>> ApiUsersRoleGetWithHttpInfo (string role);
+        ApiResponse<List<ApplicationUser>> GetAllWithHttpInfo (string role);
+        /// <summary>
+        /// Update an existing user in the database.
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="body">ApplicationUser Object (optional)</param>
+        /// <returns>Object</returns>
+        Object Update (ApplicationUser body = null);
+        /// <summary>
+        /// Update an existing user in the database.
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="body">ApplicationUser Object (optional)</param>
+        /// <returns>ApiResponse of Object</returns>
+        ApiResponse<Object> UpdateWithHttpInfo (ApplicationUser body = null);
         #endregion Synchronous Operations
         #region Asynchronous Operations
         /// <summary>
@@ -5209,7 +5209,7 @@ namespace ECommerce.Api.Api
         /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId">User ID</param>
         /// <returns>Task of ApplicationUser</returns>
-        System.Threading.Tasks.Task<ApplicationUser> ApiUsersInfoUserIdGetAsync (string userId);
+        System.Threading.Tasks.Task<ApplicationUser> GetAsync (string userId);
         /// <summary>
         /// Get the details of a specific user.
         /// </summary>
@@ -5219,27 +5219,7 @@ namespace ECommerce.Api.Api
         /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId">User ID</param>
         /// <returns>Task of ApiResponse (ApplicationUser)</returns>
-        System.Threading.Tasks.Task<ApiResponse<ApplicationUser>> ApiUsersInfoUserIdGetAsyncWithHttpInfo (string userId);
-        /// <summary>
-        /// Update an existing user in the database.
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="body">ApplicationUser Object (optional)</param>
-        /// <returns>Task of Object</returns>
-        System.Threading.Tasks.Task<Object> ApiUsersPutAsync (ApplicationUser body = null);
-        /// <summary>
-        /// Update an existing user in the database.
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="body">ApplicationUser Object (optional)</param>
-        /// <returns>Task of ApiResponse (Object)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> ApiUsersPutAsyncWithHttpInfo (ApplicationUser body = null);
+        System.Threading.Tasks.Task<ApiResponse<ApplicationUser>> GetAsyncWithHttpInfo (string userId);
         /// <summary>
         /// Retrieve all users from the database based on role.
         /// </summary>
@@ -5249,7 +5229,7 @@ namespace ECommerce.Api.Api
         /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="role">Role string, e.g. Admin, Customer</param>
         /// <returns>Task of List&lt;ApplicationUser&gt;</returns>
-        System.Threading.Tasks.Task<List<ApplicationUser>> ApiUsersRoleGetAsync (string role);
+        System.Threading.Tasks.Task<List<ApplicationUser>> GetAllAsync (string role);
         /// <summary>
         /// Retrieve all users from the database based on role.
         /// </summary>
@@ -5259,7 +5239,27 @@ namespace ECommerce.Api.Api
         /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="role">Role string, e.g. Admin, Customer</param>
         /// <returns>Task of ApiResponse (List&lt;ApplicationUser&gt;)</returns>
-        System.Threading.Tasks.Task<ApiResponse<List<ApplicationUser>>> ApiUsersRoleGetAsyncWithHttpInfo (string role);
+        System.Threading.Tasks.Task<ApiResponse<List<ApplicationUser>>> GetAllAsyncWithHttpInfo (string role);
+        /// <summary>
+        /// Update an existing user in the database.
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="body">ApplicationUser Object (optional)</param>
+        /// <returns>Task of Object</returns>
+        System.Threading.Tasks.Task<Object> UpdateAsync (ApplicationUser body = null);
+        /// <summary>
+        /// Update an existing user in the database.
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="body">ApplicationUser Object (optional)</param>
+        /// <returns>Task of ApiResponse (Object)</returns>
+        System.Threading.Tasks.Task<ApiResponse<Object>> UpdateAsyncWithHttpInfo (ApplicationUser body = null);
         #endregion Asynchronous Operations
     }
     /// <summary>
@@ -5363,9 +5363,9 @@ namespace ECommerce.Api.Api
         /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId">User ID</param>
         /// <returns>ApplicationUser</returns>
-        public ApplicationUser ApiUsersInfoUserIdGet (string userId)
+        public ApplicationUser Get (string userId)
         {
-             ApiResponse<ApplicationUser> localVarResponse = ApiUsersInfoUserIdGetWithHttpInfo(userId);
+             ApiResponse<ApplicationUser> localVarResponse = GetWithHttpInfo(userId);
              return localVarResponse.Data;
         }
         /// <summary>
@@ -5374,11 +5374,11 @@ namespace ECommerce.Api.Api
         /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId">User ID</param>
         /// <returns>ApiResponse of ApplicationUser</returns>
-        public ApiResponse< ApplicationUser > ApiUsersInfoUserIdGetWithHttpInfo (string userId)
+        public ApiResponse< ApplicationUser > GetWithHttpInfo (string userId)
         {
             // verify the required parameter 'userId' is set
             if (userId == null)
-                throw new ApiException(400, "Missing required parameter 'userId' when calling UsersApi->ApiUsersInfoUserIdGet");
+                throw new ApiException(400, "Missing required parameter 'userId' when calling UsersApi->Get");
             var localVarPath = "/api/Users/info/{userId}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
@@ -5407,7 +5407,7 @@ namespace ECommerce.Api.Api
             int localVarStatusCode = (int) localVarResponse.StatusCode;
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("ApiUsersInfoUserIdGet", localVarResponse);
+                Exception exception = ExceptionFactory("Get", localVarResponse);
                 if (exception != null) throw exception;
             }
             return new ApiResponse<ApplicationUser>(localVarStatusCode,
@@ -5420,9 +5420,9 @@ namespace ECommerce.Api.Api
         /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId">User ID</param>
         /// <returns>Task of ApplicationUser</returns>
-        public async System.Threading.Tasks.Task<ApplicationUser> ApiUsersInfoUserIdGetAsync (string userId)
+        public async System.Threading.Tasks.Task<ApplicationUser> GetAsync (string userId)
         {
-             ApiResponse<ApplicationUser> localVarResponse = await ApiUsersInfoUserIdGetAsyncWithHttpInfo(userId);
+             ApiResponse<ApplicationUser> localVarResponse = await GetAsyncWithHttpInfo(userId);
              return localVarResponse.Data;
         }
         /// <summary>
@@ -5431,11 +5431,11 @@ namespace ECommerce.Api.Api
         /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId">User ID</param>
         /// <returns>Task of ApiResponse (ApplicationUser)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<ApplicationUser>> ApiUsersInfoUserIdGetAsyncWithHttpInfo (string userId)
+        public async System.Threading.Tasks.Task<ApiResponse<ApplicationUser>> GetAsyncWithHttpInfo (string userId)
         {
             // verify the required parameter 'userId' is set
             if (userId == null)
-                throw new ApiException(400, "Missing required parameter 'userId' when calling UsersApi->ApiUsersInfoUserIdGet");
+                throw new ApiException(400, "Missing required parameter 'userId' when calling UsersApi->Get");
             var localVarPath = "/api/Users/info/{userId}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
@@ -5464,7 +5464,7 @@ namespace ECommerce.Api.Api
             int localVarStatusCode = (int) localVarResponse.StatusCode;
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("ApiUsersInfoUserIdGet", localVarResponse);
+                Exception exception = ExceptionFactory("Get", localVarResponse);
                 if (exception != null) throw exception;
             }
             return new ApiResponse<ApplicationUser>(localVarStatusCode,
@@ -5472,142 +5472,14 @@ namespace ECommerce.Api.Api
                 (ApplicationUser) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(ApplicationUser)));
         }
         /// <summary>
-        /// Update an existing user in the database. 
-        /// </summary>
-        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="body">ApplicationUser Object (optional)</param>
-        /// <returns>Object</returns>
-        public Object ApiUsersPut (ApplicationUser body = null)
-        {
-             ApiResponse<Object> localVarResponse = ApiUsersPutWithHttpInfo(body);
-             return localVarResponse.Data;
-        }
-        /// <summary>
-        /// Update an existing user in the database. 
-        /// </summary>
-        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="body">ApplicationUser Object (optional)</param>
-        /// <returns>ApiResponse of Object</returns>
-        public ApiResponse< Object > ApiUsersPutWithHttpInfo (ApplicationUser body = null)
-        {
-            var localVarPath = "/api/Users";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-                "application/json", 
-                "text/json", 
-                "application/_*+json"
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "text/plain",
-                "application/json",
-                "text/json"
-            };
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null)
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-            if (body != null && body.GetType() != typeof(byte[]))
-            {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(body); // http body (model) parameter
-            }
-            else
-            {
-                localVarPostBody = body; // byte array
-            }
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
-                Method.PUT, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("ApiUsersPut", localVarResponse);
-                if (exception != null) throw exception;
-            }
-            return new ApiResponse<Object>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
-                (Object) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Object)));
-        }
-        /// <summary>
-        /// Update an existing user in the database. 
-        /// </summary>
-        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="body">ApplicationUser Object (optional)</param>
-        /// <returns>Task of Object</returns>
-        public async System.Threading.Tasks.Task<Object> ApiUsersPutAsync (ApplicationUser body = null)
-        {
-             ApiResponse<Object> localVarResponse = await ApiUsersPutAsyncWithHttpInfo(body);
-             return localVarResponse.Data;
-        }
-        /// <summary>
-        /// Update an existing user in the database. 
-        /// </summary>
-        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="body">ApplicationUser Object (optional)</param>
-        /// <returns>Task of ApiResponse (Object)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Object>> ApiUsersPutAsyncWithHttpInfo (ApplicationUser body = null)
-        {
-            var localVarPath = "/api/Users";
-            var localVarPathParams = new Dictionary<String, String>();
-            var localVarQueryParams = new List<KeyValuePair<String, String>>();
-            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
-            var localVarFormParams = new Dictionary<String, String>();
-            var localVarFileParams = new Dictionary<String, FileParameter>();
-            Object localVarPostBody = null;
-            // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[] {
-                "application/json", 
-                "text/json", 
-                "application/_*+json"
-            };
-            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
-            // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[] {
-                "text/plain",
-                "application/json",
-                "text/json"
-            };
-            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
-            if (localVarHttpHeaderAccept != null)
-                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
-            if (body != null && body.GetType() != typeof(byte[]))
-            {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(body); // http body (model) parameter
-            }
-            else
-            {
-                localVarPostBody = body; // byte array
-            }
-            // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.PUT, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
-                localVarPathParams, localVarHttpContentType);
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
-            if (ExceptionFactory != null)
-            {
-                Exception exception = ExceptionFactory("ApiUsersPut", localVarResponse);
-                if (exception != null) throw exception;
-            }
-            return new ApiResponse<Object>(localVarStatusCode,
-                localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
-                (Object) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Object)));
-        }
-        /// <summary>
         /// Retrieve all users from the database based on role. 
         /// </summary>
         /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="role">Role string, e.g. Admin, Customer</param>
         /// <returns>List&lt;ApplicationUser&gt;</returns>
-        public List<ApplicationUser> ApiUsersRoleGet (string role)
+        public List<ApplicationUser> GetAll (string role)
         {
-             ApiResponse<List<ApplicationUser>> localVarResponse = ApiUsersRoleGetWithHttpInfo(role);
+             ApiResponse<List<ApplicationUser>> localVarResponse = GetAllWithHttpInfo(role);
              return localVarResponse.Data;
         }
         /// <summary>
@@ -5616,11 +5488,11 @@ namespace ECommerce.Api.Api
         /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="role">Role string, e.g. Admin, Customer</param>
         /// <returns>ApiResponse of List&lt;ApplicationUser&gt;</returns>
-        public ApiResponse< List<ApplicationUser> > ApiUsersRoleGetWithHttpInfo (string role)
+        public ApiResponse< List<ApplicationUser> > GetAllWithHttpInfo (string role)
         {
             // verify the required parameter 'role' is set
             if (role == null)
-                throw new ApiException(400, "Missing required parameter 'role' when calling UsersApi->ApiUsersRoleGet");
+                throw new ApiException(400, "Missing required parameter 'role' when calling UsersApi->GetAll");
             var localVarPath = "/api/Users/{role}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
@@ -5649,7 +5521,7 @@ namespace ECommerce.Api.Api
             int localVarStatusCode = (int) localVarResponse.StatusCode;
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("ApiUsersRoleGet", localVarResponse);
+                Exception exception = ExceptionFactory("GetAll", localVarResponse);
                 if (exception != null) throw exception;
             }
             return new ApiResponse<List<ApplicationUser>>(localVarStatusCode,
@@ -5662,9 +5534,9 @@ namespace ECommerce.Api.Api
         /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="role">Role string, e.g. Admin, Customer</param>
         /// <returns>Task of List&lt;ApplicationUser&gt;</returns>
-        public async System.Threading.Tasks.Task<List<ApplicationUser>> ApiUsersRoleGetAsync (string role)
+        public async System.Threading.Tasks.Task<List<ApplicationUser>> GetAllAsync (string role)
         {
-             ApiResponse<List<ApplicationUser>> localVarResponse = await ApiUsersRoleGetAsyncWithHttpInfo(role);
+             ApiResponse<List<ApplicationUser>> localVarResponse = await GetAllAsyncWithHttpInfo(role);
              return localVarResponse.Data;
         }
         /// <summary>
@@ -5673,11 +5545,11 @@ namespace ECommerce.Api.Api
         /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="role">Role string, e.g. Admin, Customer</param>
         /// <returns>Task of ApiResponse (List&lt;ApplicationUser&gt;)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<List<ApplicationUser>>> ApiUsersRoleGetAsyncWithHttpInfo (string role)
+        public async System.Threading.Tasks.Task<ApiResponse<List<ApplicationUser>>> GetAllAsyncWithHttpInfo (string role)
         {
             // verify the required parameter 'role' is set
             if (role == null)
-                throw new ApiException(400, "Missing required parameter 'role' when calling UsersApi->ApiUsersRoleGet");
+                throw new ApiException(400, "Missing required parameter 'role' when calling UsersApi->GetAll");
             var localVarPath = "/api/Users/{role}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new List<KeyValuePair<String, String>>();
@@ -5706,12 +5578,140 @@ namespace ECommerce.Api.Api
             int localVarStatusCode = (int) localVarResponse.StatusCode;
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("ApiUsersRoleGet", localVarResponse);
+                Exception exception = ExceptionFactory("GetAll", localVarResponse);
                 if (exception != null) throw exception;
             }
             return new ApiResponse<List<ApplicationUser>>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
                 (List<ApplicationUser>) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(List<ApplicationUser>)));
+        }
+        /// <summary>
+        /// Update an existing user in the database. 
+        /// </summary>
+        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="body">ApplicationUser Object (optional)</param>
+        /// <returns>Object</returns>
+        public Object Update (ApplicationUser body = null)
+        {
+             ApiResponse<Object> localVarResponse = UpdateWithHttpInfo(body);
+             return localVarResponse.Data;
+        }
+        /// <summary>
+        /// Update an existing user in the database. 
+        /// </summary>
+        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="body">ApplicationUser Object (optional)</param>
+        /// <returns>ApiResponse of Object</returns>
+        public ApiResponse< Object > UpdateWithHttpInfo (ApplicationUser body = null)
+        {
+            var localVarPath = "/api/Users";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+                "application/json", 
+                "text/json", 
+                "application/_*+json"
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "text/plain",
+                "application/json",
+                "text/json"
+            };
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null)
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            if (body != null && body.GetType() != typeof(byte[]))
+            {
+                localVarPostBody = this.Configuration.ApiClient.Serialize(body); // http body (model) parameter
+            }
+            else
+            {
+                localVarPostBody = body; // byte array
+            }
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+                Method.PUT, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("Update", localVarResponse);
+                if (exception != null) throw exception;
+            }
+            return new ApiResponse<Object>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
+                (Object) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Object)));
+        }
+        /// <summary>
+        /// Update an existing user in the database. 
+        /// </summary>
+        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="body">ApplicationUser Object (optional)</param>
+        /// <returns>Task of Object</returns>
+        public async System.Threading.Tasks.Task<Object> UpdateAsync (ApplicationUser body = null)
+        {
+             ApiResponse<Object> localVarResponse = await UpdateAsyncWithHttpInfo(body);
+             return localVarResponse.Data;
+        }
+        /// <summary>
+        /// Update an existing user in the database. 
+        /// </summary>
+        /// <exception cref="ECommerce.Api.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="body">ApplicationUser Object (optional)</param>
+        /// <returns>Task of ApiResponse (Object)</returns>
+        public async System.Threading.Tasks.Task<ApiResponse<Object>> UpdateAsyncWithHttpInfo (ApplicationUser body = null)
+        {
+            var localVarPath = "/api/Users";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+                "application/json", 
+                "text/json", 
+                "application/_*+json"
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "text/plain",
+                "application/json",
+                "text/json"
+            };
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null)
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            if (body != null && body.GetType() != typeof(byte[]))
+            {
+                localVarPostBody = this.Configuration.ApiClient.Serialize(body); // http body (model) parameter
+            }
+            else
+            {
+                localVarPostBody = body; // byte array
+            }
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.PUT, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("Update", localVarResponse);
+                if (exception != null) throw exception;
+            }
+            return new ApiResponse<Object>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => string.Join(",", x.Value)),
+                (Object) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(Object)));
         }
     }
 }

@@ -59,7 +59,7 @@ namespace ECommerce.Api
                     Title = "E-Mall API", 
                     Description = "A simple Web API build based on ASP.NET Core 3.1"
                 });
-
+                setupAction.CustomOperationIds(e => e.ActionDescriptor.RouteValues["action"]);
                 // Set the comments path for the Swagger JSON and UI.
                 var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);

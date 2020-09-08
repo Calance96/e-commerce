@@ -12,6 +12,7 @@
           "Auth"
         ],
         "summary": "Verify the combination of email and password to grant user access to use E-Mall.",
+        "operationId": "Login",
         "requestBody": {
           "description": "Provides the necessary email and password combination for authentication",
           "content": {
@@ -85,6 +86,7 @@
           "Auth"
         ],
         "summary": "Take input from user to register a new account",
+        "operationId": "Register",
         "requestBody": {
           "description": "Provide necessary information for registering a new user in the database",
           "content": {
@@ -158,6 +160,7 @@
           "Auth"
         ],
         "summary": "Accepts a combination of user ID, current password and new password for password change.",
+        "operationId": "ChangePassword",
         "requestBody": {
           "description": "",
           "content": {
@@ -231,6 +234,7 @@
           "Carts"
         ],
         "summary": "Retrieve all the items in the shopping cart of a specific user.",
+        "operationId": "GetAll",
         "parameters": [
           {
             "name": "userId",
@@ -306,6 +310,7 @@
           "Carts"
         ],
         "summary": "Retrive the total number of items in a user's shopping cart.",
+        "operationId": "GetCount",
         "parameters": [
           {
             "name": "userId",
@@ -375,6 +380,7 @@
           "Carts"
         ],
         "summary": "Retrieve the details of a specific cart item based on user ID and product ID.",
+        "operationId": "GetCartItemBasedOnUserIdAndProductId",
         "parameters": [
           {
             "name": "userId",
@@ -475,6 +481,7 @@
           "Carts"
         ],
         "summary": "Retrieve the details of a specific cart item based on cart item ID.",
+        "operationId": "GetCartItemBasedOnCartId",
         "parameters": [
           {
             "name": "cartId",
@@ -564,6 +571,7 @@
           "Carts"
         ],
         "summary": "Add an item to a user's shopping cart.",
+        "operationId": "Add",
         "requestBody": {
           "description": "Cart Item ID",
           "content": {
@@ -640,6 +648,7 @@
           "Carts"
         ],
         "summary": "Update an item (e.g. count) in user's shopping cart.",
+        "operationId": "Update",
         "parameters": [
           {
             "name": "id",
@@ -750,6 +759,7 @@
           "Carts"
         ],
         "summary": "Remove an item from user's shopping cart.",
+        "operationId": "Delete",
         "parameters": [
           {
             "name": "id",
@@ -842,6 +852,7 @@
           "Categories"
         ],
         "summary": "Retrieve all existing categories in the database.",
+        "operationId": "GetAll",
         "responses": {
           "200": {
             "description": "Success",
@@ -902,6 +913,7 @@
           "Categories"
         ],
         "summary": "Add a new category to the database. This checks for duplicate category name.",
+        "operationId": "Add",
         "requestBody": {
           "description": "Category Object",
           "content": {
@@ -975,6 +987,7 @@
           "Categories"
         ],
         "summary": "Retrieve a specific category.",
+        "operationId": "Get",
         "parameters": [
           {
             "name": "id",
@@ -1062,6 +1075,7 @@
           "Categories"
         ],
         "summary": "Update an existing category in the database. This checks for duplicate category name.",
+        "operationId": "Update",
         "parameters": [
           {
             "name": "id",
@@ -1171,6 +1185,7 @@
           "Categories"
         ],
         "summary": "Remove an existing category from database.",
+        "operationId": "Delete",
         "parameters": [
           {
             "name": "id",
@@ -1274,6 +1289,7 @@
           "Orders"
         ],
         "summary": "Get all orders of a specific status.",
+        "operationId": "GetAllOrdersOfStatus",
         "parameters": [
           {
             "name": "status",
@@ -1349,6 +1365,7 @@
           "Orders"
         ],
         "summary": "Get all orders of a specific status for a specific user.",
+        "operationId": "GetAllOrdersForUserById",
         "parameters": [
           {
             "name": "userId",
@@ -1435,6 +1452,7 @@
           "Orders"
         ],
         "summary": "Retrieve a specific order.",
+        "operationId": "GetOrderById",
         "parameters": [
           {
             "name": "orderId",
@@ -1524,6 +1542,7 @@
           "Orders"
         ],
         "summary": "Retrieve a specific order and its order items.",
+        "operationId": "GetOrderDetailsByOrderId",
         "parameters": [
           {
             "name": "orderId",
@@ -1613,6 +1632,7 @@
           "Orders"
         ],
         "summary": "Create an order from a user's shopping cart upon place order.",
+        "operationId": "Create",
         "requestBody": {
           "description": "Shopping Cart Object",
           "content": {
@@ -1686,6 +1706,7 @@
           "Orders"
         ],
         "summary": "Update an existing order.",
+        "operationId": "Update",
         "parameters": [
           {
             "name": "orderId",
@@ -1821,6 +1842,7 @@
           "Products"
         ],
         "summary": "Get all products from the database.",
+        "operationId": "GetAll",
         "responses": {
           "200": {
             "description": "Success",
@@ -1881,6 +1903,7 @@
           "Products"
         ],
         "summary": "Add a new product to the database.",
+        "operationId": "Add",
         "requestBody": {
           "description": "ProductViewModel Object",
           "content": {
@@ -1957,6 +1980,7 @@
           "Products"
         ],
         "summary": "Get a specific product from the database.",
+        "operationId": "Get",
         "parameters": [
           {
             "name": "id",
@@ -2044,6 +2068,7 @@
           "Products"
         ],
         "summary": "Update an existing product in the database.",
+        "operationId": "Update",
         "parameters": [
           {
             "name": "id",
@@ -2179,6 +2204,7 @@
           "Products"
         ],
         "summary": "Mark a product as not available instead of truly deleting it.",
+        "operationId": "Delete",
         "parameters": [
           {
             "name": "id",
@@ -2282,6 +2308,7 @@
           "Status"
         ],
         "summary": "Just to check if the API server is up.",
+        "operationId": "Index",
         "responses": {
           "200": {
             "description": "Success",
@@ -2335,6 +2362,7 @@
           "Users"
         ],
         "summary": "Retrieve all users from the database based on role.",
+        "operationId": "GetAll",
         "parameters": [
           {
             "name": "role",
@@ -2410,6 +2438,7 @@
           "Users"
         ],
         "summary": "Get the details of a specific user.",
+        "operationId": "Get",
         "parameters": [
           {
             "name": "userId",
@@ -2499,6 +2528,7 @@
           "Users"
         ],
         "summary": "Update an existing user in the database.",
+        "operationId": "Update",
         "requestBody": {
           "description": "ApplicationUser Object",
           "content": {
