@@ -115,7 +115,11 @@
                 {
                     <tr>
                         <td>
-                            @order.Id
+                            @order.Id  
+                            @if (order.OrderDate.Date == DateTime.Today)
+                            { 
+                                <span class="badge badge-success">New</span> 
+                            }
                         </td>
                         <td>
                             @order.Name

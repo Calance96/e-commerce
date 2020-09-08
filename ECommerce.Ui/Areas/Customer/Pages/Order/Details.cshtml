@@ -175,7 +175,7 @@
 </form>
 
 @section Scripts {
-    @if (Model.OrderDetails.Order.OrderStatus == SD.OrderStatus.SHIPPED)
+    @if (!string.IsNullOrEmpty(Model.OrderDetails.Order.OrderStatus) && Model.OrderDetails.Order.OrderStatus == SD.OrderStatus.SHIPPED)
     {
         <script>
             function showConfirmationDialog(action) {

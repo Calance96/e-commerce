@@ -156,36 +156,42 @@ namespace ECommerce.Api.Controllers
         [ProducesResponseType(typeof(object), StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<Order>> Create(ShoppingCartVM shoppingCart)
         {
-            try
+            using (var transaction = await _context.Database.BeginTransactionAsync())
             {
-                var newOrder = shoppingCart.Order;
-                await _context.Orders.AddAsync(newOrder);
-                await _context.SaveChangesAsync();
-
-                foreach (var item in shoppingCart.CartItems)
+                try
                 {
-                    OrderItem orderItem = new OrderItem
+                    var newOrder = shoppingCart.Order;
+                    await _context.Orders.AddAsync(newOrder);
+                    await _context.SaveChangesAsync();
+
+                    foreach (var item in shoppingCart.CartItems)
                     {
-                        OrderId = newOrder.Id,
-                        ProductId = item.ProductId,
-                        Quantity = item.Quantity,
-                        Price = item.Price
-                    };
-                    await _context.OrderItems.AddAsync(orderItem);
+                        OrderItem orderItem = new OrderItem
+                        {
+                            OrderId = newOrder.Id,
+                            ProductId = item.ProductId,
+                            Quantity = item.Quantity,
+                            Price = item.Price
+                        };
+                        await _context.OrderItems.AddAsync(orderItem);
+                    }
+
+
+                    IEnumerable<CartItem> cartItems = await _context.CartItems
+                        .Where(x => x.UserId == shoppingCart.Order.UserId)
+                        .ToListAsync();
+                    _context.RemoveRange(cartItems);
+
+                    await _context.SaveChangesAsync();
+                    await transaction.CommitAsync();
+
+                    return newOrder;
                 }
-
-
-                IEnumerable<CartItem> cartItems = await _context.CartItems
-                    .Where(x => x.UserId == shoppingCart.Order.UserId)
-                    .ToListAsync();
-                _context.RemoveRange(cartItems);
-                await _context.SaveChangesAsync();
-                return newOrder;
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Error occurred while creating order for user {UserId}", shoppingCart.Order.UserId);
-                return StatusCode(Convert.ToInt32(HttpStatusCode.InternalServerError));
+                catch (Exception ex)
+                {
+                    _logger.LogError(ex, "Error occurred while creating order for user {UserId}", shoppingCart.Order.UserId);
+                    return StatusCode(Convert.ToInt32(HttpStatusCode.InternalServerError));
+                }
             }
         }
 
