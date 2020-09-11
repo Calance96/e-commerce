@@ -47,7 +47,7 @@ steps:
   displayName: 'dotnet pack'
   inputs:
     command: 'pack'
-    packagesToPack: '**/*.csproj'
+    packagesToPack: '**\*.csproj;!**\*Api.csproj;!**\*Ui.csproj;'
     versioningScheme: 'byBuildNumber'
 
 - task: DotNetCoreCLI@2
