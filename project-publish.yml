@@ -1,3 +1,5 @@
+name: $(Year:yyyy).$(Month).$(DayOfMonth)$(Rev:.r)
+
 trigger:
 - master
 
@@ -40,3 +42,19 @@ steps:
     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
     ArtifactName: 'drop'
     publishLocation: 'Container'
+
+- task: DotNetCoreCLI@2
+  displayName: 'dotnet pack'
+  inputs:
+    command: 'pack'
+    packagesToPack: '**/*.csproj'
+    versioningScheme: 'byBuildNumber'
+
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'push'
+    packagesToPush: '$(Build.ArtifactStagingDirectory)/*.nupkg'
+    nuGetFeedType: 'internal'
+    publishVstsFeed: '46a4dd82-34fb-4605-9cd7-d70020e50202/c82446dc-a554-4e59-b571-ce7f95e14cd7'
+
+
