@@ -34,7 +34,9 @@ steps:
   inputs:
     command: 'publish'
     publishWebProjects: false
-    projects: '$(csproject)'
+    projects: |
+      **\*Api.csproj
+      **\*Ui.csproj
     arguments: '--configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)'
 
 - task: PublishBuildArtifacts@1
@@ -51,6 +53,7 @@ steps:
     versioningScheme: 'byBuildNumber'
 
 - task: DotNetCoreCLI@2
+  displayName: 'push nupkg'
   inputs:
     command: 'push'
     packagesToPush: '$(Build.ArtifactStagingDirectory)/*.nupkg'
