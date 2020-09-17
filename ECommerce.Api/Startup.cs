@@ -18,6 +18,10 @@ using Serilog;
 using Microsoft.OpenApi.Models;
 using System.Reflection;
 using System.IO;
+using Microsoft.OpenApi;
+using Microsoft.OpenApi.Extensions;
+using RestSharp.Serializers;
+using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace ECommerce.Api
 {
@@ -50,20 +54,20 @@ namespace ECommerce.Api
 
             services.AddControllers();
             services.AddScoped<IDbInitializer, DbInitializer>();
-
-
-            services.AddSwaggerGen(setupAction =>
+            
+            services.AddSwaggerGen(swaggerGenOptions =>
             {
-                setupAction.SwaggerDoc("v1", new OpenApiInfo { 
+                swaggerGenOptions.SwaggerDoc("v1", new OpenApiInfo { 
                     Version = "v1", 
                     Title = "E-Mall API", 
                     Description = "A simple Web API build based on ASP.NET Core 3.1"
                 });
-                setupAction.CustomOperationIds(e => e.ActionDescriptor.RouteValues["action"]);
+                swaggerGenOptions.CustomOperationIds(e => e.ActionDescriptor.RouteValues["action"]);
+                swaggerGenOptions.DocumentFilter<GenerateJsonFilter>();
                 // Set the comments path for the Swagger JSON and UI.
                 var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
-                setupAction.IncludeXmlComments(xmlPath);
+                swaggerGenOptions.IncludeXmlComments(xmlPath);
             });
         }
 
@@ -94,6 +98,33 @@ namespace ECommerce.Api
             {
                 endpoints.MapControllers();
             });
+        }
+    }
+    
+    public class GenerateJsonFilter : IDocumentFilter
+    {
+        private readonly IWebHostEnvironment _environment;
+
+        public GenerateJsonFilter(IWebHostEnvironment environment)
+        {
+            _environment = environment;
+        }
+        
+        public void Apply(OpenApiDocument swaggerDoc, DocumentFilterContext context)
+        {
+            GenerateJson(swaggerDoc);
+        }
+
+        private void GenerateJson(OpenApiDocument swaggerDoc)
+        {
+            var filePath = Path.Combine(_environment.ContentRootPath, "Swagger.json");
+            var jsonContent = swaggerDoc.SerializeAsJson(OpenApiSpecVersion.OpenApi3_0);
+
+            if (!File.Exists(filePath) ||
+                string.Compare(File.ReadAllText(filePath), jsonContent, StringComparison.OrdinalIgnoreCase) != 0)
+            {
+                File.WriteAllText(filePath, jsonContent);
+            }
         }
     }
 }
