@@ -15,19 +15,19 @@ variables:
 steps:
 - task: NuGetToolInstaller@1
 
-- task: DotNetCoreCLI@2
-  displayName: 'dotnet restore'
-  inputs:
-    command: 'restore'
-    projects: '$(solution)'
-    feedsToUse: 'select'
+#- task: DotNetCoreCLI@2
+#  displayName: 'dotnet restore'
+#  inputs:
+#    command: 'restore'
+#    projects: '$(solution)'
+#    feedsToUse: 'select'
 
-- task: DotNetCoreCLI@2
-  displayName: 'dotnet build w/o restore'
-  inputs:
-    command: 'build'
-    projects: '$(solution)'
-    arguments: '--configuration $(buildConfiguration) --no-restore'
+#- task: DotNetCoreCLI@2
+#  displayName: 'dotnet build w/o restore'
+#  inputs:
+#    command: 'build'
+#    projects: '$(solution)'
+#    arguments: '--configuration $(buildConfiguration) --no-restore'
 
 - task: DotNetCoreCLI@2
   displayName: 'dotnet publish'
