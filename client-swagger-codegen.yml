@@ -19,6 +19,7 @@ steps:
   parameters: 
     apiVersions: ["v1", "v2"]
     workingDirectory: '$(Build.Repository.LocalPath)'
+    restClientPackageName: '$(restClientPackageName)'
 
 - task: NuGetToolInstaller@1
 
