@@ -6,19 +6,13 @@ trigger:
 pool:
   vmImage: 'windows-latest'
 
-parameters:
-  - name: 'apiVersion'
-    type: 'string'
-    values:
-    - 'v1'
-    - 'v2'
-
 variables:
   solution: '**/*.sln'
   csproject: '**/*.csproj'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
   restClientPackageName: 'ECommerce.Rest.Client.Api'
+  apiVersionSuffixes: '(v1 v2)'
 
 steps:
 - task: NuGetToolInstaller@1
@@ -27,7 +21,7 @@ steps:
 - task: CmdLine@2
   displayName: 'swagger-codegen'
   inputs:
-    script: 'java -jar tools\swagger-codegen-cli-3.0.21.jar generate -i ECommerce.Api\Swagger${{ parameters.apiVersion }}.json -l csharp -o $(restClientPackageName) -DpackageName=$(restClientPackageName).${{ parameters.apiVersion }}'
+    script: 'for %x in $(apiVersionSuffixes) do java -jar tools\swagger-codegen-cli-3.0.21.jar generate -i ECommerce.Api\Swagger%x.json -l csharp -o $(restClientPackageName) -DpackageName=$(restClientPackageName).%x'
     workingDirectory: '$(Build.Repository.LocalPath)'
   
 # For swagger-codegen
