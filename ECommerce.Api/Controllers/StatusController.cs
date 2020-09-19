@@ -9,6 +9,7 @@ using Swashbuckle.AspNetCore.Annotations;
 namespace ECommerce.Api.Controllers
 {
     [ApiController]
+    [ApiVersion("2.0")]
     [Route("api/[controller]")]
     public class StatusController : Controller
     {

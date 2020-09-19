@@ -11,6 +11,8 @@
 
   <ItemGroup>
     <PackageReference Include="JsonSubTypes" Version="1.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning" Version="4.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning.ApiExplorer" Version="4.1.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.3" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.3">
       <PrivateAssets>all</PrivateAssets>
@@ -38,12 +40,6 @@
 
   <ItemGroup>
     <Folder Include="Logs\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Update="Swagger.json">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Content>
   </ItemGroup>
 
 

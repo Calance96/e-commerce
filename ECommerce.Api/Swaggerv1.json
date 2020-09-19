@@ -1,8 +1,7 @@
 {
   "openapi": "3.0.1",
   "info": {
-    "title": "E-Mall API",
-    "description": "A simple Web API build based on ASP.NET Core 3.1",
+    "title": "E-Mall API v1",
     "version": "v1"
   },
   "paths": {
@@ -13,6 +12,16 @@
         ],
         "summary": "Verify the combination of email and password to grant user access to use E-Mall.",
         "operationId": "Login",
+        "parameters": [
+          {
+            "name": "api-version",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "default": "1.0"
+            }
+          }
+        ],
         "requestBody": {
           "description": "Provides the necessary email and password combination for authentication",
           "content": {
@@ -87,6 +96,16 @@
         ],
         "summary": "Take input from user to register a new account",
         "operationId": "Register",
+        "parameters": [
+          {
+            "name": "api-version",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "default": "1.0"
+            }
+          }
+        ],
         "requestBody": {
           "description": "Provide necessary information for registering a new user in the database",
           "content": {
@@ -161,6 +180,16 @@
         ],
         "summary": "Accepts a combination of user ID, current password and new password for password change.",
         "operationId": "ChangePassword",
+        "parameters": [
+          {
+            "name": "api-version",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "default": "1.0"
+            }
+          }
+        ],
         "requestBody": {
           "description": "",
           "content": {
@@ -246,6 +275,14 @@
               "description": "User ID",
               "nullable": true
             }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "default": "1.0"
+            }
           }
         ],
         "responses": {
@@ -321,6 +358,14 @@
               "type": "string",
               "description": "User ID",
               "nullable": true
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "default": "1.0"
             }
           }
         ],
@@ -402,6 +447,14 @@
               "type": "integer",
               "description": "Product ID",
               "format": "int64"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "default": "1.0"
             }
           }
         ],
@@ -493,6 +546,14 @@
               "description": "",
               "format": "int64"
             }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "default": "1.0"
+            }
           }
         ],
         "responses": {
@@ -572,6 +633,16 @@
         ],
         "summary": "Add an item to a user's shopping cart.",
         "operationId": "Add",
+        "parameters": [
+          {
+            "name": "api-version",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "default": "1.0"
+            }
+          }
+        ],
         "requestBody": {
           "description": "Cart Item ID",
           "content": {
@@ -659,6 +730,14 @@
               "type": "integer",
               "description": "Cart Item ID",
               "format": "int64"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "default": "1.0"
             }
           }
         ],
@@ -771,6 +850,14 @@
               "description": "Cart Item ID",
               "format": "int64"
             }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "default": "1.0"
+            }
           }
         ],
         "responses": {
@@ -853,6 +940,16 @@
         ],
         "summary": "Retrieve all existing categories in the database.",
         "operationId": "GetAll",
+        "parameters": [
+          {
+            "name": "api-version",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "default": "1.0"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "Success",
@@ -914,6 +1011,16 @@
         ],
         "summary": "Add a new category to the database. This checks for duplicate category name.",
         "operationId": "Add",
+        "parameters": [
+          {
+            "name": "api-version",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "default": "1.0"
+            }
+          }
+        ],
         "requestBody": {
           "description": "Category Object",
           "content": {
@@ -998,6 +1105,14 @@
               "type": "integer",
               "description": "Category ID",
               "format": "int64"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "default": "1.0"
             }
           }
         ],
@@ -1086,6 +1201,14 @@
               "type": "integer",
               "description": "Category ID",
               "format": "int64"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "default": "1.0"
             }
           }
         ],
@@ -1208,6 +1331,14 @@
               "description": "User ID",
               "nullable": true
             }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "default": "1.0"
+            }
           }
         ],
         "responses": {
@@ -1301,6 +1432,14 @@
               "description": "Order status, e.g. Approved, Processing, Shipped, Complete, Cancelled",
               "nullable": true
             }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "default": "1.0"
+            }
           }
         ],
         "responses": {
@@ -1388,6 +1527,14 @@
               "description": "Order status, e.g. Approved, Processing, Shipped, Complete, Cancelled",
               "nullable": true
             }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "default": "1.0"
+            }
           }
         ],
         "responses": {
@@ -1463,6 +1610,14 @@
               "type": "integer",
               "description": "Order ID",
               "format": "int64"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "default": "1.0"
             }
           }
         ],
@@ -1554,6 +1709,14 @@
               "description": "Order ID",
               "format": "int64"
             }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "default": "1.0"
+            }
           }
         ],
         "responses": {
@@ -1633,6 +1796,16 @@
         ],
         "summary": "Create an order from a user's shopping cart upon place order.",
         "operationId": "Create",
+        "parameters": [
+          {
+            "name": "api-version",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "default": "1.0"
+            }
+          }
+        ],
         "requestBody": {
           "description": "Shopping Cart Object",
           "content": {
@@ -1717,6 +1890,14 @@
               "type": "integer",
               "description": "",
               "format": "int64"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "default": "1.0"
             }
           }
         ],
@@ -1843,6 +2024,16 @@
         ],
         "summary": "Get all products from the database.",
         "operationId": "GetAll",
+        "parameters": [
+          {
+            "name": "api-version",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "default": "1.0"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "Success",
@@ -1904,6 +2095,16 @@
         ],
         "summary": "Add a new product to the database.",
         "operationId": "Add",
+        "parameters": [
+          {
+            "name": "api-version",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "default": "1.0"
+            }
+          }
+        ],
         "requestBody": {
           "description": "ProductViewModel Object",
           "content": {
@@ -1992,6 +2193,14 @@
               "description": "Product ID",
               "format": "int64"
             }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "default": "1.0"
+            }
           }
         ],
         "responses": {
@@ -2079,6 +2288,14 @@
               "type": "integer",
               "description": "Product ID",
               "format": "int64"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "default": "1.0"
             }
           }
         ],
@@ -2227,6 +2444,14 @@
               "description": "User ID",
               "nullable": true
             }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "default": "1.0"
+            }
           }
         ],
         "responses": {
@@ -2302,60 +2527,6 @@
         }
       }
     },
-    "/api/Status": {
-      "get": {
-        "tags": [
-          "Status"
-        ],
-        "summary": "Just to check if the API server is up.",
-        "operationId": "Index",
-        "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "type": "string"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "type": "string"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Server Error",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": false
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": false
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": false
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/api/Users/{role}": {
       "get": {
         "tags": [
@@ -2373,6 +2544,14 @@
               "type": "string",
               "description": "Role string, e.g. Admin, Customer",
               "nullable": true
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "default": "1.0"
             }
           }
         ],
@@ -2449,6 +2628,14 @@
               "type": "string",
               "description": "User ID",
               "nullable": true
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "default": "1.0"
             }
           }
         ],
@@ -2529,6 +2716,16 @@
         ],
         "summary": "Update an existing user in the database.",
         "operationId": "Update",
+        "parameters": [
+          {
+            "name": "api-version",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "default": "1.0"
+            }
+          }
+        ],
         "requestBody": {
           "description": "ApplicationUser Object",
           "content": {
