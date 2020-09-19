@@ -13,21 +13,12 @@ variables:
   buildConfiguration: 'Release'
   restClientPackageName: 'ECommerce.Rest.Client.Api'
 
-parameters:
-- name: 'param'
-  type: object
-  default: 
-  - v1
-  - v2
-
 steps:
 # For swagger-codegen
-- ${{ each p in parameters.param}}
-  - task: CmdLine@2
-    displayName: 'swagger-codegen'
-    inputs:
-      script: 'java -jar tools\swagger-codegen-cli-3.0.21.jar generate -i ECommerce.Api\Swagger${{ p }}.json -l csharp -o $(restClientPackageName).${{ p }} -DpackageName=$(restClientPackageName).${{ p }}'
-      workingDirectory: '$(Build.Repository.LocalPath)'
+- template: azure-pipelines.yml
+  parameters: 
+    apiVersions: ["v1", "v2"]
+    workingDirectory: '$(Build.Repository.LocalPath)'
 
 - task: NuGetToolInstaller@1
 
