@@ -112,7 +112,8 @@ namespace ECommerce.Api
         
         public void Apply(OpenApiDocument swaggerDoc, DocumentFilterContext context)
         {
-            GenerateJson(swaggerDoc);
+            if (_environment.IsDevelopment())
+                GenerateJson(swaggerDoc);
         }
 
         private void GenerateJson(OpenApiDocument swaggerDoc)
