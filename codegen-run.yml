@@ -11,7 +11,7 @@ parameters:
 steps:
   - ${{ each version in parameters.apiVersions  }}:
     - task: CmdLine@2
-      displayName: 'loop'
+      displayName: 'Generate Client Library ${{ version }} '
       inputs:
         script: 'java -jar tools\swagger-codegen-cli-3.0.21.jar generate -i ECommerce.Api\Swagger${{ version }}.json -l csharp -o ${{ parameters.restClientPackageName }}.${{ version}} -DpackageName=${{ parameters.restClientPackageName }}.${{ version }}'
         workingDirectory: '${{ parameters.workingDirectory }}'
