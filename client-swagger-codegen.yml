@@ -15,7 +15,7 @@ variables:
 
 steps:
 # For swagger-codegen
-- template: azure-pipelines.yml
+- template: codegen-run.yml
   parameters: 
     apiVersions: ["v1", "v2"]
     workingDirectory: '$(Build.Repository.LocalPath)'
@@ -23,14 +23,8 @@ steps:
 
 - task: NuGetToolInstaller@1
 
-# For swagger-codegen
-#- task: CmdLine@2
-#  inputs:
-#    script: 'build.bat'
-#    workingDirectory: '$(Build.Repository.LocalPath)\$(restClientPackageName)' 
-
 - task: NuGetCommand@2
-  displayName: 'restore'
+  displayName: 'dotnet restore'
   inputs:
     command: 'restore'
     restoreSolution: '**/*.sln'
@@ -38,6 +32,7 @@ steps:
 
 # For swagger-codegen
 - task: DotNetCoreCLI@2
+  displayName: 'dotnet build'
   inputs:
     command: 'build'
     projects: '**\*Rest.Client*.csproj'
@@ -45,13 +40,14 @@ steps:
 
 # For swagger-codegen
 - task: NuGetCommand@2
+  displayName: 'dotnet pack'
   inputs:
     command: 'pack'
     packagesToPack: '**\*Rest.Client*.csproj;!**\*.Test.csproj'
     versioningScheme: 'byBuildNumber'
 
 - task: NuGetCommand@2
-  displayName: 'push'
+  displayName: 'nuget push'
   inputs:
     command: 'push'
     packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
