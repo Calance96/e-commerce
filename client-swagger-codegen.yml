@@ -39,7 +39,7 @@ steps:
     projects: |
       **/*Rest.Client*.csproj
       !**/*.Test.csproj
-    arguments: '--configuration $(buildConfiguration) --no-restore'
+    arguments: '--configuration $(buildConfiguration)'
 
 # For swagger-codegen
 - task: NuGetCommand@2
