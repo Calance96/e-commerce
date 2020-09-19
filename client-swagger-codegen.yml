@@ -24,10 +24,10 @@ steps:
 - task: NuGetToolInstaller@1
 
 # For swagger-codegen
-- task: CmdLine@2
-  inputs:
-    script: 'build.bat'
-    workingDirectory: '$(Build.Repository.LocalPath)\$(restClientPackageName)' 
+#- task: CmdLine@2
+#  inputs:
+#    script: 'build.bat'
+#    workingDirectory: '$(Build.Repository.LocalPath)\$(restClientPackageName)' 
 
 - task: NuGetCommand@2
   displayName: 'restore'
