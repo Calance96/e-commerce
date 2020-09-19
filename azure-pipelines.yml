@@ -6,14 +6,12 @@
 parameters:
   apiVersions: []
   workingDirectory: ''
-
-variables:
-  restClientPackageName: 'ECommerce.Rest.Client.Api'
+  restClientPackageName: ''
 
 steps:
   - ${{ each version in parameters.apiVersions  }}:
     - task: CmdLine@2
       displayName: 'loop'
       inputs:
-        script: 'java -jar tools\swagger-codegen-cli-3.0.21.jar generate -i ECommerce.Api\Swagger${{ version }}.json -l csharp -o $(restClientPackageName).${{ version}} -DpackageName=$(restClientPackageName).${{ version }}'
+        script: 'java -jar tools\swagger-codegen-cli-3.0.21.jar generate -i ECommerce.Api\Swagger${{ version }}.json -l csharp -o ${{ parameters.restClientPackageName }}.${{ version}} -DpackageName=${{ parameters.restClientPackageName }}.${{ version }}'
         workingDirectory: '${{ parameters.workingDirectory }}'
