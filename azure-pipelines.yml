@@ -1,0 +1,17 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+parameters:
+  apiVersions: []
+  workingDirectory: ''
+
+
+steps:
+  - ${{ each version in parameters.apiVersions  }}:
+    - task: CmdLine@2
+      displayName: 'loop'
+      inputs:
+        script: 'java -jar tools\swagger-codegen-cli-3.0.21.jar generate -i ECommerce.Api\Swagger${{ version }}.json -l csharp -o $(restClientPackageName).${{ version}} -DpackageName=$(restClientPackageName).${{ version }}'
+        workingDirectory: '${{ parameters.workingDirectory }}'
