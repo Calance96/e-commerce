@@ -23,19 +23,14 @@ steps:
 
 - task: NuGetToolInstaller@1
 
-- task: NuGetCommand@2
-  displayName: 'dotnet restore'
-  inputs:
-    command: 'restore'
-    restoreSolution: '**/*.sln'
-    feedsToUse: 'select'
-
 # For swagger-codegen
 - task: DotNetCoreCLI@2
   displayName: 'dotnet build'
   inputs:
     command: 'build'
-    projects: '**\*Rest.Client*.csproj'
+    projects: |
+      **/*Rest.Client*.csproj
+      !**/*.Test.csproj
     arguments: '--configuration $(buildConfiguration)'
 
 # For swagger-codegen
@@ -43,7 +38,7 @@ steps:
   displayName: 'dotnet pack'
   inputs:
     command: 'pack'
-    packagesToPack: '**\*Rest.Client*.csproj;!**\*.Test.csproj'
+    packagesToPack: '**/*Rest.Client*.csproj;!**/*.Test.csproj'
     versioningScheme: 'byBuildNumber'
 
 - task: NuGetCommand@2
