@@ -23,12 +23,10 @@ steps:
 
 - task: NuGetToolInstaller@1
 
-- task: DotNetCoreCLI@2
+- task: NuGetCommand@2
   inputs:
     command: 'restore'
-    projects: |
-      **/*Rest.Client*.csproj
-      !**/*.Test.csproj
+    restoreSolution: '**/*Rest.Client*.sln'
     feedsToUse: 'select'
 
 # For swagger-codegen
