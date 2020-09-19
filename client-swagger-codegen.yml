@@ -6,6 +6,13 @@ trigger:
 pool:
   vmImage: 'windows-latest'
 
+parameters:
+  - name: 'apiVersion'
+    type: 'string'
+    values:
+    - 'v1'
+    - 'v2'
+
 variables:
   solution: '**/*.sln'
   csproject: '**/*.csproj'
@@ -20,7 +27,7 @@ steps:
 - task: CmdLine@2
   displayName: 'swagger-codegen'
   inputs:
-    script: 'java -jar tools\swagger-codegen-cli-3.0.21.jar generate -i ECommerce.Api\Swagger.json -l csharp -o $(restClientPackageName) -DpackageName=$(restClientPackageName)'
+    script: 'java -jar tools\swagger-codegen-cli-3.0.21.jar generate -i ECommerce.Api\Swagger${{ parameters.apiVersion }}.json -l csharp -o $(restClientPackageName) -DpackageName=$(restClientPackageName).${{ parameters.apiVersion }}'
     workingDirectory: '$(Build.Repository.LocalPath)'
   
 # For swagger-codegen
