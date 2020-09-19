@@ -12,18 +12,18 @@ variables:
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
   restClientPackageName: 'ECommerce.Rest.Client.Api'
-  apiVersionSuffixes: '(v1 v2)'
+  apiVersionList: 'v1 v2'
 
 steps:
-- task: NuGetToolInstaller@1
-
 # For swagger-codegen
 - task: CmdLine@2
   displayName: 'swagger-codegen'
   inputs:
-    script: 'for %x in $(apiVersionSuffixes) do (java -jar tools\swagger-codegen-cli-3.0.21.jar generate -i ECommerce.Api\Swagger%x.json -l csharp -o $(restClientPackageName) -DpackageName=$(restClientPackageName).%x)'
+    script: 'for %x in ($(apiVersionList)) do java -jar tools\swagger-codegen-cli-3.0.21.jar generate -i ECommerce.Api\Swagger%x.json -l csharp -o $(restClientPackageName).%x -DpackageName=$(restClientPackageName).%x'
     workingDirectory: '$(Build.Repository.LocalPath)'
-  
+
+- task: NuGetToolInstaller@1
+
 # For swagger-codegen
 - task: CmdLine@2
   inputs:
