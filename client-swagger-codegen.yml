@@ -23,6 +23,14 @@ steps:
 
 - task: NuGetToolInstaller@1
 
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'restore'
+    projects: |
+      **/*Rest.Client*.csproj
+      !**/*.Test.csproj
+    feedsToUse: 'select'
+
 # For swagger-codegen
 - task: DotNetCoreCLI@2
   displayName: 'dotnet build'
@@ -31,7 +39,7 @@ steps:
     projects: |
       **/*Rest.Client*.csproj
       !**/*.Test.csproj
-    arguments: '--configuration $(buildConfiguration)'
+    arguments: '--configuration $(buildConfiguration) --no-restore'
 
 # For swagger-codegen
 - task: NuGetCommand@2
