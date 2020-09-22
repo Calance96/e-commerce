@@ -31,7 +31,7 @@ namespace ECommerce.Api.SwaggerConfigs
             }
 
             options.DocumentFilter<GenerateJsonFilter>();
-            options.OperationFilter<ApiVersionProcessor>();
+            options.OperationFilter<ApiVersionOperationFilter>();
             options.CustomOperationIds(apiDescription => apiDescription.ActionDescriptor.RouteValues["action"]);
 
             // Set the comments path for the Swagger JSON and UI.

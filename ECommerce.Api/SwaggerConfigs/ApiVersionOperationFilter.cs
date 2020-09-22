@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace ECommerce.Api.SwaggerConfigs
 {
-    public class ApiVersionProcessor : IOperationFilter
+    public class ApiVersionOperationFilter : IOperationFilter
     {
         public void Apply(OpenApiOperation operation, OperationFilterContext context)
         {
@@ -17,11 +17,13 @@ namespace ECommerce.Api.SwaggerConfigs
                 return;
 
             var apiVersionParam = operation.Parameters.FirstOrDefault(p => p.Name == "api-version");
-            var apiVersionDescription = context.ApiDescription.ParameterDescriptions.FirstOrDefault(p => p.Name == "api-version");
+            var apiVersionParamDescription = context.ApiDescription.ParameterDescriptions.FirstOrDefault(p => p.Name == "api-version");
 
-            if (apiVersionParam.Schema.Default == null && apiVersionDescription.DefaultValue != null)
-            {
-                apiVersionParam.Schema.Default = new OpenApiString(apiVersionDescription.DefaultValue.ToString()); 
+            if (apiVersionParam != null) {
+                if (apiVersionParam.Schema.Default == null && apiVersionParamDescription.DefaultValue != null)
+                {
+                    apiVersionParam.Schema.Default = OpenApiAnyFactory.CreateFor(apiVersionParam.Schema, apiVersionParamDescription.DefaultValue);
+                }
             }
         }
     }
