@@ -50,11 +50,11 @@ namespace ECommerce.IdentityServer
                     RequirePkce = true,
                     RedirectUris =
                     {
-                        "https://localhost:44394/signin-oidc"
+                        "https://cal-shop.azurewebsites.net/signin-oidc"
                     },
                     PostLogoutRedirectUris =
                     {
-                        "https://localhost:44394/signout-callback-oidc"
+                        "https://cal-shop.azurewebsites.net/signout-callback-oidc"
                     },
                     AllowedScopes =
                     {
