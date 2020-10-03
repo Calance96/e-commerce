@@ -63,7 +63,7 @@ namespace ECommerce.Ui
             })
             .AddOpenIdConnect(OpenIdConnectDefaults.AuthenticationScheme, options =>
             {
-                options.Authority = "https://localhost:50001/";
+                options.Authority = Configuration["IdentityProvider:Authority"];
                 options.RequireHttpsMetadata = true;
 
                 options.ClientId = "ecommerce-client";
