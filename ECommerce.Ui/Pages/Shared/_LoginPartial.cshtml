@@ -1,44 +1,20 @@
-﻿@using System.Security.Claims 
+﻿@using System.Security.Claims
 @using Microsoft.AspNetCore.Http
 @using ECommerce.Utility
 @using ECommerce.Ui.Services
-@inject IHttpContextAccessor HttpContextAccessor
-@inject CartService CartService
 
 <ul class="navbar-nav">
-    @if (HttpContextAccessor.HttpContext.User.Identity.IsAuthenticated)
+    @if (User.Identity.IsAuthenticated)
     {
-
-        var count = HttpContextAccessor.HttpContext.Session.GetInt32(SD.CART_SESSION_KEY);
-        if (count == null)
-        {
-            count = await CartService.GetItemsCount(User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier).Value);
-        }
-
         @if (User.IsInRole(SD.ROLE_CUSTOMER))
         {
             <li style="color:white;">
-                <a asp-area="Customer" asp-page="/ShoppingCart/Index" class="nav-link">
-                    <i class="fas fa-shopping-cart"></i> &nbsp;
-                    @if (@count > 0)
-                    {
-                        <span>(@count)</span>
-                    }
-
-                </a>
+                <vc:cart-icon></vc:cart-icon>
             </li>
         }
         <li class="nav-item">
             <a class="nav-link" style="cursor:pointer">
-                @User.Identity.Name
-                @if (User.IsInRole(SD.ROLE_ADMIN))
-                {
-                    <span>(Admin)</span>
-                }
-                else
-                {
-                    <span>(Customer)</span>
-                }
+                <partial name="_NameRolePartial" />
             </a>
         </li>
         <li class="nav-item">
@@ -49,11 +25,14 @@
     }
     else
     {
+        @*<li class="nav-item">
+                <a class="nav-link" asp-area="Account" asp-page="/Register">Register</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" asp-area="Account" asp-page="/Login">Login</a>
+            </li>*@
         <li class="nav-item">
-            <a class="nav-link" asp-area="Account" asp-page="/Register">Register</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" asp-area="Account" asp-page="/Login">Login</a>
+            <a class="nav-link" asp-area="Account" asp-page="/Login">Login / Register</a>
         </li>
     }
 </ul>

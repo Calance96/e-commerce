@@ -5,7 +5,7 @@
     "version": "v1"
   },
   "paths": {
-    "/api/Auth/login": {
+    "/api/Auth/Login": {
       "post": {
         "tags": [
           "Auth"
@@ -89,7 +89,7 @@
         }
       }
     },
-    "/api/Auth/register": {
+    "/api/Auth/Register": {
       "post": {
         "tags": [
           "Auth"
@@ -173,7 +173,7 @@
         }
       }
     },
-    "/api/Auth/password_change": {
+    "/api/Auth/ChangePassword": {
       "post": {
         "tags": [
           "Auth"
@@ -187,6 +187,16 @@
             "schema": {
               "type": "string",
               "default": "1.0"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Access token",
+            "required": true,
+            "schema": {
+              "type": "String",
+              "default": "Bearer "
             }
           }
         ],
@@ -253,8 +263,19 @@
                 }
               }
             }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
           }
-        }
+        },
+        "security": [
+          {
+            "Bearer": [ ]
+          }
+        ]
       }
     },
     "/api/Carts/{userId}": {
@@ -283,6 +304,16 @@
               "type": "string",
               "default": "1.0"
             }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Access token",
+            "required": true,
+            "schema": {
+              "type": "String",
+              "default": "Bearer "
+            }
           }
         ],
         "responses": {
@@ -337,11 +368,22 @@
                 }
               }
             }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
           }
-        }
+        },
+        "security": [
+          {
+            "Bearer": [ ]
+          }
+        ]
       }
     },
-    "/api/Carts/count/{userId}": {
+    "/api/Carts/Count/{userId}": {
       "get": {
         "tags": [
           "Carts"
@@ -367,6 +409,16 @@
               "type": "string",
               "default": "1.0"
             }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Access token",
+            "required": true,
+            "schema": {
+              "type": "String",
+              "default": "Bearer "
+            }
           }
         ],
         "responses": {
@@ -415,8 +467,19 @@
                 }
               }
             }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
           }
-        }
+        },
+        "security": [
+          {
+            "Bearer": [ ]
+          }
+        ]
       }
     },
     "/api/Carts/{userId}/{productId}": {
@@ -456,6 +519,16 @@
               "type": "string",
               "default": "1.0"
             }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Access token",
+            "required": true,
+            "schema": {
+              "type": "String",
+              "default": "Bearer "
+            }
           }
         ],
         "responses": {
@@ -524,11 +597,22 @@
                 }
               }
             }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
           }
-        }
+        },
+        "security": [
+          {
+            "Bearer": [ ]
+          }
+        ]
       }
     },
-    "/api/Carts/details/{cartId}": {
+    "/api/Carts/Details/{cartId}": {
       "get": {
         "tags": [
           "Carts"
@@ -554,6 +638,16 @@
               "type": "string",
               "default": "1.0"
             }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Access token",
+            "required": true,
+            "schema": {
+              "type": "String",
+              "default": "Bearer "
+            }
           }
         ],
         "responses": {
@@ -622,8 +716,19 @@
                 }
               }
             }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
           }
-        }
+        },
+        "security": [
+          {
+            "Bearer": [ ]
+          }
+        ]
       }
     },
     "/api/Carts": {
@@ -640,6 +745,16 @@
             "schema": {
               "type": "string",
               "default": "1.0"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Access token",
+            "required": true,
+            "schema": {
+              "type": "String",
+              "default": "Bearer "
             }
           }
         ],
@@ -709,8 +824,19 @@
                 }
               }
             }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
           }
-        }
+        },
+        "security": [
+          {
+            "Bearer": [ ]
+          }
+        ]
       }
     },
     "/api/Carts/{id}": {
@@ -738,6 +864,16 @@
             "schema": {
               "type": "string",
               "default": "1.0"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Access token",
+            "required": true,
+            "schema": {
+              "type": "String",
+              "default": "Bearer "
             }
           }
         ],
@@ -830,8 +966,19 @@
                 }
               }
             }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
           }
-        }
+        },
+        "security": [
+          {
+            "Bearer": [ ]
+          }
+        ]
       },
       "delete": {
         "tags": [
@@ -857,6 +1004,16 @@
             "schema": {
               "type": "string",
               "default": "1.0"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Access token",
+            "required": true,
+            "schema": {
+              "type": "String",
+              "default": "Bearer "
             }
           }
         ],
@@ -929,8 +1086,19 @@
                 }
               }
             }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
           }
-        }
+        },
+        "security": [
+          {
+            "Bearer": [ ]
+          }
+        ]
       }
     },
     "/api/Categories": {
@@ -1019,6 +1187,16 @@
               "type": "string",
               "default": "1.0"
             }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Access token",
+            "required": true,
+            "schema": {
+              "type": "String",
+              "default": "Bearer "
+            }
           }
         ],
         "requestBody": {
@@ -1084,8 +1262,19 @@
                 }
               }
             }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
           }
-        }
+        },
+        "security": [
+          {
+            "Bearer": [ ]
+          }
+        ]
       }
     },
     "/api/Categories/{id}": {
@@ -1113,6 +1302,16 @@
             "schema": {
               "type": "string",
               "default": "1.0"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Access token",
+            "required": true,
+            "schema": {
+              "type": "String",
+              "default": "Bearer "
             }
           }
         ],
@@ -1182,8 +1381,19 @@
                 }
               }
             }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
           }
-        }
+        },
+        "security": [
+          {
+            "Bearer": [ ]
+          }
+        ]
       },
       "put": {
         "tags": [
@@ -1209,6 +1419,16 @@
             "schema": {
               "type": "string",
               "default": "1.0"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Access token",
+            "required": true,
+            "schema": {
+              "type": "String",
+              "default": "Bearer "
             }
           }
         ],
@@ -1298,8 +1518,19 @@
                 }
               }
             }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
           }
-        }
+        },
+        "security": [
+          {
+            "Bearer": [ ]
+          }
+        ]
       }
     },
     "/api/Categories/{userId}/{id}": {
@@ -1338,6 +1569,16 @@
             "schema": {
               "type": "string",
               "default": "1.0"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Access token",
+            "required": true,
+            "schema": {
+              "type": "String",
+              "default": "Bearer "
             }
           }
         ],
@@ -1410,8 +1651,19 @@
                 }
               }
             }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
           }
-        }
+        },
+        "security": [
+          {
+            "Bearer": [ ]
+          }
+        ]
       }
     },
     "/api/Orders/{status}": {
@@ -1439,6 +1691,16 @@
             "schema": {
               "type": "string",
               "default": "1.0"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Access token",
+            "required": true,
+            "schema": {
+              "type": "String",
+              "default": "Bearer "
             }
           }
         ],
@@ -1494,11 +1756,22 @@
                 }
               }
             }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
           }
-        }
+        },
+        "security": [
+          {
+            "Bearer": [ ]
+          }
+        ]
       }
     },
-    "/api/Orders/user/{userId}/{status}": {
+    "/api/Orders/User/{userId}/{status}": {
       "get": {
         "tags": [
           "Orders"
@@ -1535,6 +1808,16 @@
               "type": "string",
               "default": "1.0"
             }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Access token",
+            "required": true,
+            "schema": {
+              "type": "String",
+              "default": "Bearer "
+            }
           }
         ],
         "responses": {
@@ -1589,11 +1872,22 @@
                 }
               }
             }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
           }
-        }
+        },
+        "security": [
+          {
+            "Bearer": [ ]
+          }
+        ]
       }
     },
-    "/api/Orders/summary/{orderId}": {
+    "/api/Orders/Summary/{orderId}": {
       "get": {
         "tags": [
           "Orders"
@@ -1619,6 +1913,16 @@
               "type": "string",
               "default": "1.0"
             }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Access token",
+            "required": true,
+            "schema": {
+              "type": "String",
+              "default": "Bearer "
+            }
           }
         ],
         "responses": {
@@ -1687,11 +1991,22 @@
                 }
               }
             }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
           }
-        }
+        },
+        "security": [
+          {
+            "Bearer": [ ]
+          }
+        ]
       }
     },
-    "/api/Orders/details/{orderId}": {
+    "/api/Orders/Details/{orderId}": {
       "get": {
         "tags": [
           "Orders"
@@ -1717,6 +2032,16 @@
               "type": "string",
               "default": "1.0"
             }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Access token",
+            "required": true,
+            "schema": {
+              "type": "String",
+              "default": "Bearer "
+            }
           }
         ],
         "responses": {
@@ -1785,8 +2110,19 @@
                 }
               }
             }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
           }
-        }
+        },
+        "security": [
+          {
+            "Bearer": [ ]
+          }
+        ]
       }
     },
     "/api/Orders": {
@@ -1803,6 +2139,16 @@
             "schema": {
               "type": "string",
               "default": "1.0"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Access token",
+            "required": true,
+            "schema": {
+              "type": "String",
+              "default": "Bearer "
             }
           }
         ],
@@ -1869,8 +2215,19 @@
                 }
               }
             }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
           }
-        }
+        },
+        "security": [
+          {
+            "Bearer": [ ]
+          }
+        ]
       }
     },
     "/api/Orders/{orderId}": {
@@ -1898,6 +2255,16 @@
             "schema": {
               "type": "string",
               "default": "1.0"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Access token",
+            "required": true,
+            "schema": {
+              "type": "String",
+              "default": "Bearer "
             }
           }
         ],
@@ -2013,8 +2380,19 @@
                 }
               }
             }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
           }
-        }
+        },
+        "security": [
+          {
+            "Bearer": [ ]
+          }
+        ]
       }
     },
     "/api/Products": {
@@ -2103,6 +2481,16 @@
               "type": "string",
               "default": "1.0"
             }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Access token",
+            "required": true,
+            "schema": {
+              "type": "String",
+              "default": "Bearer "
+            }
           }
         ],
         "requestBody": {
@@ -2171,8 +2559,19 @@
                 }
               }
             }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
           }
-        }
+        },
+        "security": [
+          {
+            "Bearer": [ ]
+          }
+        ]
       }
     },
     "/api/Products/{id}": {
@@ -2297,6 +2696,16 @@
               "type": "string",
               "default": "1.0"
             }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Access token",
+            "required": true,
+            "schema": {
+              "type": "String",
+              "default": "Bearer "
+            }
           }
         ],
         "requestBody": {
@@ -2411,8 +2820,19 @@
                 }
               }
             }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
           }
-        }
+        },
+        "security": [
+          {
+            "Bearer": [ ]
+          }
+        ]
       }
     },
     "/api/Products/{userId}/{id}": {
@@ -2451,6 +2871,16 @@
             "schema": {
               "type": "string",
               "default": "1.0"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Access token",
+            "required": true,
+            "schema": {
+              "type": "String",
+              "default": "Bearer "
             }
           }
         ],
@@ -2523,8 +2953,19 @@
                 }
               }
             }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
           }
-        }
+        },
+        "security": [
+          {
+            "Bearer": [ ]
+          }
+        ]
       }
     },
     "/api/Users/{role}": {
@@ -2552,6 +2993,16 @@
             "schema": {
               "type": "string",
               "default": "1.0"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Access token",
+            "required": true,
+            "schema": {
+              "type": "String",
+              "default": "Bearer "
             }
           }
         ],
@@ -2607,11 +3058,22 @@
                 }
               }
             }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
           }
-        }
+        },
+        "security": [
+          {
+            "Bearer": [ ]
+          }
+        ]
       }
     },
-    "/api/Users/info/{userId}": {
+    "/api/Users/Info/{userId}": {
       "get": {
         "tags": [
           "Users"
@@ -2636,6 +3098,16 @@
             "schema": {
               "type": "string",
               "default": "1.0"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Access token",
+            "required": true,
+            "schema": {
+              "type": "String",
+              "default": "Bearer "
             }
           }
         ],
@@ -2705,8 +3177,19 @@
                 }
               }
             }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
           }
-        }
+        },
+        "security": [
+          {
+            "Bearer": [ ]
+          }
+        ]
       }
     },
     "/api/Users": {
@@ -2723,6 +3206,16 @@
             "schema": {
               "type": "string",
               "default": "1.0"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Access token",
+            "required": true,
+            "schema": {
+              "type": "String",
+              "default": "Bearer "
             }
           }
         ],
@@ -2815,8 +3308,19 @@
                 }
               }
             }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
           }
-        }
+        },
+        "security": [
+          {
+            "Bearer": [ ]
+          }
+        ]
       }
     }
   },

@@ -53,7 +53,7 @@ namespace ECommerce.Ui.Services
         public async Task<Boolean> ChangePassword(ChangePasswordModel changePasswordInput)
         {
             var data = new StringContent(JsonSerializer.Serialize<ChangePasswordModel>(changePasswordInput), Encoding.UTF8, SD.CONTENT_JSON);
-            var response = await _httpClient.PostAsync($"{_route}/password_change", data);
+            var response = await _httpClient.PostAsync($"{_route}/ChangePassword", data);
 
             response.EnsureSuccessStatusCode();
 

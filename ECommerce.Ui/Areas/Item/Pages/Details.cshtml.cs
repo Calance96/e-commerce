@@ -59,9 +59,8 @@ namespace ECommerce.Ui.Areas.Item.Pages
                 if (!productVM.Product.IsAvailable)                                // to modify the HTML and add
                     return RedirectToPage();                                       // unavailable item to cart
 
-                var claimsIdentity = (ClaimsIdentity)User.Identity;
-                var currentUserId = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
-                CartItem.UserId = currentUserId.Value;
+                var currentUserId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+                CartItem.UserId = currentUserId;
 
                 CartItem cartItemFromDb = await _cartService.GetCartItemByUserIdAndProductId(CartItem);
                 bool addToCartSuccess = false;
@@ -78,7 +77,7 @@ namespace ECommerce.Ui.Areas.Item.Pages
 
                 if (addToCartSuccess)
                 {
-                    var cartItemsCount = await _cartService.GetItemsCount(currentUserId.Value);
+                    var cartItemsCount = await _cartService.GetItemsCount(currentUserId);
                     HttpContext.Session.SetInt32(SD.CART_SESSION_KEY, cartItemsCount);
                     SuccessMessage = "Item added to cart successfully!";
                 } 

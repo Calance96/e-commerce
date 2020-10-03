@@ -30,14 +30,15 @@
             <div class="card-body">
                 <div class="container rounded p-2">
                     <div class="row">
-                        <div class="col-12 col-md-8">
+                        <div class="col-12 col-md-8 mb-3">
                             <div class="row pl-2">
-                                <h5 class="pb-2">RM @Model.CartItem.Product.Price</h5>
+                                <h3 class="pb-2 font-weight-bolder">RM @Model.CartItem.Product.Price</h3>
                             </div>
-                            <div class="row pl-2">
-                                <label asp-for="CartItem.Product.Description"></label>:
+                            <div class="row pl-2 font-weight-bold">
+                                <label class="h4" asp-for="CartItem.Product.Description"></label>
                             </div>
-                            <div class="row text-secondary pl-2" style="white-space:pre-line; text-align: justify; text-justify: inter-word;">
+                            <hr />
+                            <div class="row pl-2 text-" style="white-space:pre-line; text-align: justify; text-justify: inter-word;">
                                 <p>@Html.Raw(Model.CartItem.Product.Description)</p>
                             </div>
                             <div class="row pl-2 mt-3">

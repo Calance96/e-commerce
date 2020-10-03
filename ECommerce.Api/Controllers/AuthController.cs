@@ -9,6 +9,8 @@ using ECommerce.Models;
 using ECommerce.Models.DTO;
 using ECommerce.Models.ViewModels;
 using ECommerce.Utility;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -20,6 +22,7 @@ namespace ECommerce.Api.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class AuthController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -49,7 +52,8 @@ namespace ECommerce.Api.Controllers
         /// successful, a user is included for creation of claims. Otherwise, an error message
         /// is included to indicate the failure reason.
         /// </returns>
-        [HttpPost("login")]
+        [HttpPost("Login")]
+        [AllowAnonymous]
         [SwaggerOperation(OperationId = "Login")]
         [ProducesResponseType(typeof(AuthResult), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(object), StatusCodes.Status500InternalServerError)]
@@ -103,7 +107,8 @@ namespace ECommerce.Api.Controllers
         /// Similarly return an authentication result object that contains a status 
         /// code to indicate success or failure.
         /// </returns>
-        [HttpPost("register")]
+        [HttpPost("Register")]
+        [AllowAnonymous]
         [SwaggerOperation(OperationId = "Register")]
         [ProducesResponseType(typeof(AuthResult), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(object), StatusCodes.Status500InternalServerError)]
@@ -176,7 +181,7 @@ namespace ECommerce.Api.Controllers
         /// <returns>
         /// Returns boolean to indicate success or failure.
         /// </returns>
-        [HttpPost("password_change")]
+        [HttpPost("ChangePassword")]
         [SwaggerOperation(OperationId = "ChangePassword")]
         [ProducesResponseType(typeof(bool), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(object), StatusCodes.Status500InternalServerError)]

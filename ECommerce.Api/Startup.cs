@@ -20,6 +20,9 @@ using ECommerce.Api.SwaggerConfigs;
 using Microsoft.Extensions.Options;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
+using ECommerce.Api.Authorization;
 
 namespace ECommerce.Api
 {
@@ -34,6 +37,28 @@ namespace ECommerce.Api
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddAuthentication(options =>
+                {
+                    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                })
+                .AddJwtBearer(options =>
+                {
+                    options.Authority = Configuration["IdentityProvider:Authority"];
+                    options.RequireHttpsMetadata = true;
+                    options.Audience = "main_api";
+                    options.SaveToken = true;
+                    options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+                    {
+                        ValidateIssuer = true,
+                        ValidateAudience = false,
+                        ValidateIssuerSigningKey = false,
+                        ValidIssuer = Configuration["IdentityProvider:Authority"],
+                        ValidAudience = "main_api",
+                    };
+                });
+            services.AddAuthorization();
+
             services.AddDbContext<ApplicationDbContext>(options =>
             {
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
@@ -51,6 +76,7 @@ namespace ECommerce.Api
                 .AddDefaultTokenProviders();
 
             services.AddControllers();
+
             services.AddScoped<IDbInitializer, DbInitializer>();
 
             services.AddApiVersioning(options =>
@@ -85,14 +111,16 @@ namespace ECommerce.Api
                     setupAction.SwaggerEndpoint($"/swagger/{desc.GroupName}/swagger.json", $"E-Mall API {desc.GroupName}");
 
                 setupAction.RoutePrefix = string.Empty;
-                
+
             });
 
             app.UseSerilogRequestLogging(); // Serilog middleware to know what requests the app is handling
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
+
             dbInitializer.Initialize();
             app.UseEndpoints(endpoints =>
             {

@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using ECommerce.DataAccess;
 using ECommerce.Models;
 using ECommerce.Utility;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -16,6 +18,7 @@ namespace ECommerce.Api.Controllers
 {
     [ApiController]
     [Route("/api/[controller]")]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class CategoriesController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -32,6 +35,7 @@ namespace ECommerce.Api.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
+        [AllowAnonymous]
         [SwaggerOperation(OperationId = "GetAll")]
         [ProducesResponseType(typeof(List<Category>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(object), StatusCodes.Status500InternalServerError)]

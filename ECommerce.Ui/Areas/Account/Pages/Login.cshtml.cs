@@ -7,7 +7,10 @@ using ECommerce.Models;
 using ECommerce.Models.ViewModels;
 using ECommerce.Ui.Services;
 using ECommerce.Utility;
+using IdentityModel;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -34,6 +37,11 @@ namespace ECommerce.Ui.Areas.Account.Pages
         [TempData]
         public string LoginMessage { get; set; }
 
+        public async Task OnGetAsync()
+        {
+            await HttpContext.ChallengeAsync(OpenIdConnectDefaults.AuthenticationScheme, new AuthenticationProperties { RedirectUri = Url.Content("~/") });
+        }
+
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
             returnUrl ??= Url.Content("~/");
@@ -54,7 +62,7 @@ namespace ECommerce.Ui.Areas.Account.Pages
                         var claims = new List<Claim>
                         {
                             new Claim(ClaimTypes.NameIdentifier, authResult.ApplicationUser.Id),
-                            new Claim(ClaimTypes.Name, authResult.ApplicationUser.Name),
+                            new Claim(JwtClaimTypes.GivenName, authResult.ApplicationUser.Name),
                             new Claim(ClaimTypes.Email, authResult.ApplicationUser.Email),
                             new Claim(ClaimTypes.Role, authResult.ApplicationUser.Role),
                             new Claim(ClaimTypes.MobilePhone, authResult.ApplicationUser.PhoneNumber),
@@ -62,7 +70,7 @@ namespace ECommerce.Ui.Areas.Account.Pages
 
                         var claimsIdentity = new ClaimsIdentity(claims, "Password");
                         var claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
-                        await HttpContext.SignInAsync(IdentityConstants.ApplicationScheme, new ClaimsPrincipal(claimsIdentity), new AuthenticationProperties
+                        await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity), new AuthenticationProperties
                         {
                             IsPersistent = Input.RememberMe,
                             RedirectUri = returnUrl

@@ -7,18 +7,19 @@ using ECommerce.DataAccess;
 using ECommerce.Models;
 using ECommerce.Models.ViewModels;
 using ECommerce.Utility;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Swashbuckle.AspNetCore.Annotations;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
 namespace ECommerce.Api.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class OrdersController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -55,7 +56,7 @@ namespace ECommerce.Api.Controllers
         /// <param name="userId">User ID</param>
         /// <param name="status">Order status, e.g. Approved, Processing, Shipped, Complete, Cancelled</param>
         /// <returns></returns>
-        [HttpGet("user/{userId}/{status}")]
+        [HttpGet("User/{userId}/{status}")]
         [SwaggerOperation(OperationId = "GetAllOrdersForUserById")]
         [ProducesResponseType(typeof(IEnumerable<Order>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(object), StatusCodes.Status500InternalServerError)]
@@ -100,7 +101,7 @@ namespace ECommerce.Api.Controllers
         /// </summary>
         /// <param name="orderId">Order ID</param>
         /// <returns></returns>
-        [HttpGet("summary/{orderId}")]
+        [HttpGet("Summary/{orderId}")]
         [SwaggerOperation(OperationId = "GetOrderById")]
         [ProducesResponseType(typeof(Order), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(object), StatusCodes.Status404NotFound)]
@@ -123,7 +124,7 @@ namespace ECommerce.Api.Controllers
         /// </summary>
         /// <param name="orderId">Order ID</param>
         /// <returns></returns>
-        [HttpGet("details/{orderId}")]
+        [HttpGet("Details/{orderId}")]
         [SwaggerOperation(OperationId = "GetOrderDetailsByOrderId")]
         [ProducesResponseType(typeof(OrderDetailsVM), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(object), StatusCodes.Status404NotFound)]

@@ -30,8 +30,7 @@ namespace ECommerce.Ui.Areas.Customer.Pages.Order
 
         public async Task OnGet(string searchString, string status, int? pageIndex)
         {
-            var claimsIdentity = (ClaimsIdentity)User.Identity;
-            var userId = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier).Value;
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
 
             StatusFilter = status?.Trim() ?? "All";
 

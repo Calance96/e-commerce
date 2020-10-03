@@ -39,8 +39,7 @@ namespace ECommerce.Ui.Areas.Customer.Pages.ShoppingCart
         /* This is going to display all the items in a customer's shopping cart */
         public async Task OnGetAsync()
         {
-            var claimsIdentity = (ClaimsIdentity)User.Identity;
-            var userId = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier).Value;
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
 
             ShoppingCartVM = new ShoppingCartVM
             {
@@ -102,8 +101,7 @@ namespace ECommerce.Ui.Areas.Customer.Pages.ShoppingCart
 
             if (deleteCartSuccess)
             {
-                var claimsIdentity = (ClaimsIdentity)User.Identity;
-                var userId = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier).Value;
+                var userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
 
                 HttpContext.Session.SetInt32(SD.CART_SESSION_KEY, await _cartService.GetItemsCount(userId));
             } 

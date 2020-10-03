@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using ECommerce.DataAccess;
 using ECommerce.Models;
 using ECommerce.Utility;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -16,6 +18,7 @@ namespace ECommerce.Api.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class UsersController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -67,7 +70,7 @@ namespace ECommerce.Api.Controllers
         /// </summary>
         /// <param name="userId">User ID</param>
         /// <returns></returns>
-        [HttpGet("info/{userId}")]
+        [HttpGet("Info/{userId}")]
         [SwaggerOperation(OperationId = "Get")]
         [ProducesResponseType(typeof(ApplicationUser), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(object), StatusCodes.Status404NotFound)]

@@ -1,12 +1,13 @@
-using System;
-using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
-using ECommerce.Models;
+using IdentityModel;
 using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore.Internal;
 
 namespace ECommerce.Ui.Areas.Account.Pages
 {
@@ -15,8 +16,15 @@ namespace ECommerce.Ui.Areas.Account.Pages
         public async Task<IActionResult> OnPostAsync()
         {
             HttpContext.Session.Clear();
-            await HttpContext.SignOutAsync(IdentityConstants.ApplicationScheme);
-            return RedirectToPage("./Login");
+
+            // There is no sid for local login
+            if (HttpContext.User.Claims.FirstOrDefault(c => c.Type == JwtClaimTypes.SessionId) == null)
+            {
+                await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+                return LocalRedirect("/");
+            }
+
+            return SignOut(CookieAuthenticationDefaults.AuthenticationScheme, OpenIdConnectDefaults.AuthenticationScheme);
         }
     }
 }

@@ -1,0 +1,11 @@
+﻿@using ECommerce.Utility
+
+@User.FindFirst(IdentityModel.JwtClaimTypes.GivenName).Value
+@if (User.IsInRole(SD.ROLE_ADMIN))
+{
+    <span>(Admin)</span>
+}
+else
+{
+    <span>(Customer)</span>
+}

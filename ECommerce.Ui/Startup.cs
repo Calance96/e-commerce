@@ -1,15 +1,22 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
+using System.Net.Http.Headers;
+using System.Security.Policy;
+using System.Threading.Tasks;
 using ECommerce.Ui.Services;
 using ECommerce.Utility;
+using IdentityModel;
+using IdentityModel.Client;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Protocols.OpenIdConnect;
+using Newtonsoft.Json;
 using Stripe;
 
 namespace ECommerce.Ui
@@ -25,6 +32,8 @@ namespace ECommerce.Ui
 
         public void ConfigureServices(IServiceCollection services)
         {
+            var isIdentityServerEnabled = Convert.ToBoolean(Configuration["IdentityProvider:IsEnabled"]);
+
             services.AddHttpContextAccessor();
             services.AddSession(configs =>
             {
@@ -33,30 +42,85 @@ namespace ECommerce.Ui
                 configs.Cookie.IsEssential = true;
             });
 
-            services.AddAuthentication(IdentityConstants.ApplicationScheme)
-            .AddCookie(IdentityConstants.ApplicationScheme, configs =>
+            services.AddAuthentication(options =>
             {
-                configs.Cookie.Name = "EMall";
-                configs.LoginPath = "/Account/Login";
-                configs.LogoutPath = "/Account/Logout";
-                configs.AccessDeniedPath = "/AccessDenied";
-                configs.SlidingExpiration = true;
-                configs.ExpireTimeSpan = TimeSpan.FromHours(24);
-                configs.EventsType = typeof(CustomCookieAuthenticationEvents);
+                options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = isIdentityServerEnabled ? OpenIdConnectDefaults.AuthenticationScheme : CookieAuthenticationDefaults.AuthenticationScheme;
+            })
+            .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, options =>
+            {
+                options.AccessDeniedPath = "/AccessDenied";
+
+                if (!isIdentityServerEnabled)
+                {
+                    options.Cookie.Name = "EMall";
+                    options.LoginPath = "/Account/Login";
+                    options.LogoutPath = "/Account/Logout";
+                    options.SlidingExpiration = true;
+                    options.ExpireTimeSpan = TimeSpan.FromHours(24);
+                    options.EventsType = typeof(CustomCookieAuthenticationEvents);
+                }
+            })
+            .AddOpenIdConnect(OpenIdConnectDefaults.AuthenticationScheme, options =>
+            {
+                options.Authority = "https://localhost:50001/";
+                options.RequireHttpsMetadata = true;
+
+                options.ClientId = "ecommerce-client";
+                options.ClientSecret = "secret";
+
+                options.ResponseType = OpenIdConnectResponseType.Code;
+                options.UsePkce = true;
+                options.SignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                options.CallbackPath = "/signin-oidc";
+                options.SignedOutRedirectUri = "/index";
+
+                options.Scope.Add("main_api");
+                options.Scope.Add("offline_access");
+
+                options.GetClaimsFromUserInfoEndpoint = true;
+                options.SaveTokens = true;
+
+                options.ClaimActions.MapUniqueJsonKey(JwtClaimTypes.Role, JwtClaimTypes.Role);
+                options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+                {
+                    NameClaimType = JwtClaimTypes.Name,
+                    RoleClaimType = JwtClaimTypes.Role
+                };
+
+                options.Events = new OpenIdConnectEvents
+                {
+                    OnAccessDenied = (ctx) =>
+                    {
+                        ctx.HandleResponse();
+                        ctx.Response.Redirect("/", true);
+                        return Task.CompletedTask;
+                    }
+                };
             });
+
             services.AddAuthorization(options =>
             {
-                options.AddPolicy(SD.Policy.ADMIN_ONLY, policy => policy.RequireRole(SD.ROLE_ADMIN));
-                options.AddPolicy(SD.Policy.CUSTOMER_ONLY, policy => policy.RequireRole(SD.ROLE_CUSTOMER));
+                options.AddPolicy(SD.Policy.ADMIN_ONLY, policy => policy.RequireAuthenticatedUser().RequireRole(SD.ROLE_ADMIN));
+                options.AddPolicy(SD.Policy.CUSTOMER_ONLY, policy => policy.RequireAuthenticatedUser().RequireRole(SD.ROLE_CUSTOMER));
                 options.AddPolicy(SD.Policy.AUTHENTICATED_ONLY, policy => policy.RequireAuthenticatedUser());
             });
             services.AddScoped<CustomCookieAuthenticationEvents>();
 
-            services.AddHttpClient("api", config =>
+            services.AddHttpClient("api", async (serviceProvider, client) =>
             {
-                config.BaseAddress = new Uri(Configuration["APIServer:BaseAddress"]);
-                config.DefaultRequestHeaders.Add("Accept", "application/json");
+                client.BaseAddress = new Uri(Configuration["APIServer:BaseAddress"]);
+                client.DefaultRequestHeaders.Add("Accept", "application/json");
+
+                var httpContextAccessor = serviceProvider.GetRequiredService<IHttpContextAccessor>();
+                var token = await httpContextAccessor.HttpContext.GetTokenAsync("access_token");
+
+                if (token != null)
+                {
+                    client.DefaultRequestHeaders.Add("Authorization", $"Bearer {token}");
+                }
             });
+
             services.AddScoped<AuthService>();
             services.AddScoped<CartService>();
             services.AddScoped<CategoryService>();
@@ -69,15 +133,9 @@ namespace ECommerce.Ui
                 .AddRazorRuntimeCompilation()
                 .AddRazorPagesOptions(options =>
                 {
-                    options.Conventions.AuthorizeAreaFolder("Admin", "/Category", SD.Policy.ADMIN_ONLY);
-                    options.Conventions.AuthorizeAreaFolder("Admin", "/Management", SD.Policy.ADMIN_ONLY);
-                    options.Conventions.AuthorizeAreaFolder("Admin", "/Order", SD.Policy.ADMIN_ONLY);
-                    options.Conventions.AuthorizeAreaFolder("Admin", "/Product", SD.Policy.ADMIN_ONLY);
-
-                    options.Conventions.AuthorizeAreaPage("Customer", "/Order", SD.Policy.CUSTOMER_ONLY);
-                    options.Conventions.AuthorizeAreaPage("Customer", "/ShoppingCart", SD.Policy.CUSTOMER_ONLY);
-
-                    options.Conventions.AuthorizeAreaPage("Item", "/Details", SD.Policy.AUTHENTICATED_ONLY);
+                    options.Conventions.AuthorizeAreaFolder("Admin", "/", SD.Policy.ADMIN_ONLY);
+                    options.Conventions.AuthorizeAreaFolder("Customer", "/", SD.Policy.CUSTOMER_ONLY);
+                    options.Conventions.AuthorizeAreaFolder("Item", "/", SD.Policy.AUTHENTICATED_ONLY);
                     options.Conventions.AuthorizeAreaFolder("Account", "/Profile", SD.Policy.AUTHENTICATED_ONLY);
                 })
                 .AddSessionStateTempDataProvider();

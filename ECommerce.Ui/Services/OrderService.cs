@@ -41,6 +41,7 @@ namespace ECommerce.Ui.Services
 
         public async Task<IEnumerable<Order>> GetAllOrdersForUserId(string userId, string status)
         {
+            Console.WriteLine($"Token: {_httpClient.DefaultRequestHeaders.Authorization}");
             var response = await _httpClient.GetAsync($"{_route}/user/{userId}/{status}");
             IEnumerable<Order> orders = Enumerable.Empty<Order>();
 

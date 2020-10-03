@@ -55,3 +55,26 @@
         </div>
     </div>
 </div>
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+
+    @if (TempData["RegisterSuccessMessage"] != null)
+    {
+        <script async>
+            $(document).ready(() => {
+                Swal.fire({
+                    icon: "success",
+                    title: "E-Mall",
+                    text: "@(TempData["RegisterSuccessMessage"])"
+                }).then((result) => {
+                    console.log(result);
+                    if (result.value == true || result.isDismissed == true) {
+                        window.location.href = "/Account/Login";
+                    }
+                });
+            });
+        </script>
+    }
+}

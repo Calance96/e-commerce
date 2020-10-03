@@ -5,6 +5,8 @@ using System.Net;
 using System.Threading.Tasks;
 using ECommerce.DataAccess;
 using ECommerce.Models;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -15,6 +17,7 @@ namespace ECommerce.Api.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class CartsController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -49,7 +52,7 @@ namespace ECommerce.Api.Controllers
         /// </summary>
         /// <param name="userId">User ID</param>
         /// <returns></returns>
-        [HttpGet("count/{userId}")]
+        [HttpGet("Count/{userId}")]
         [SwaggerOperation(OperationId = "GetCount")]
         [ProducesResponseType(typeof(Int32), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(object), StatusCodes.Status500InternalServerError)]
@@ -101,7 +104,7 @@ namespace ECommerce.Api.Controllers
         /// </summary>
         /// <param name="cartId"></param>
         /// <returns></returns>
-        [HttpGet("details/{cartId}")]
+        [HttpGet("Details/{cartId}")]
         [SwaggerOperation(OperationId = "GetCartItemBasedOnCartId")]
         [ProducesResponseType(typeof(CartItem), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(object), StatusCodes.Status404NotFound)]

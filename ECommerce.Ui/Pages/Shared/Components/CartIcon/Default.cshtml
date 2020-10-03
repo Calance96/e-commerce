@@ -1,0 +1,10 @@
+﻿@model int
+
+<a asp-area="Customer" asp-page="/ShoppingCart/Index" class="nav-link">
+    <i class="fas fa-shopping-cart"></i> &nbsp;
+    @if (@Model > 0)
+    {
+        <span>(@Model)</span>
+    }
+
+</a>
