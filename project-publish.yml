@@ -37,6 +37,7 @@ steps:
     projects: |
       **\*Api.csproj
       **\*Ui.csproj
+      **\*IdentityServer.csproj
     arguments: '--configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)'
 
 - task: PublishBuildArtifacts@1
@@ -49,7 +50,7 @@ steps:
   displayName: 'dotnet pack'
   inputs:
     command: 'pack'
-    packagesToPack: '**\*.csproj;!**\*Api.csproj;!**\*Ui.csproj;'
+    packagesToPack: '**\*.csproj;!**\*Api.csproj;!**\*Ui.csproj;!**\*IdentityServer.csproj'
     versioningScheme: 'byBuildNumber'
 
 - task: DotNetCoreCLI@2
