@@ -42,15 +42,15 @@ namespace ECommerce.Api
             {
                 options.Authority = Configuration["IdentityProvider:Authority"];
                 options.RequireHttpsMetadata = true;
-                options.Audience = "main_api";
+                options.Audience = "ecommerce_api";
                 options.SaveToken = true;
                 options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
                 {
                     ValidateIssuer = true,
-                    ValidateAudience = false,
+                    ValidateAudience = true,
                     ValidateIssuerSigningKey = false,
                     ValidIssuer = Configuration["IdentityProvider:Authority"],
-                    ValidAudience = "main_api",
+                    ValidAudience = "ecommerce_api",
                 };
             });
 
