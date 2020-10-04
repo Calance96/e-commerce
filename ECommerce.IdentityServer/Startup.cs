@@ -1,9 +1,4 @@
-﻿// Copyright (c) Brock Allen & Dominick Baier. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See LICENSE in the project root for license information.
-
-
-using IdentityServer4;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
@@ -14,8 +9,9 @@ using Microsoft.EntityFrameworkCore;
 using ECommerce.Models;
 using System;
 using Microsoft.AspNetCore.Http;
-using ECommerce.IdentityServer.Controllers;
-using IdentityServer4.Services;
+using ECommerce.IdentityServer.Services;
+using System.Reflection;
+using ECommerce.IdentityServer.Data;
 
 namespace ECommerce.IdentityServer
 {
@@ -32,10 +28,12 @@ namespace ECommerce.IdentityServer
 
         public void ConfigureServices(IServiceCollection services)
         {
+            var dbConnectionString = Configuration.GetConnectionString("DefaultConnection");
+            var migrationAssembly = typeof(Startup).GetTypeInfo().Assembly.GetName().Name;
+
             services.AddControllersWithViews();
 
-            services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(dbConnectionString));
 
             services.AddIdentity<ApplicationUser, IdentityRole>(configs =>
             {
@@ -45,10 +43,10 @@ namespace ECommerce.IdentityServer
                 configs.Password.RequireUppercase = false;
                 configs.Password.RequireLowercase = false;
             })
-                    .AddEntityFrameworkStores<ApplicationDbContext>()
-                    .AddDefaultTokenProviders();
+            .AddEntityFrameworkStores<ApplicationDbContext>()
+            .AddDefaultTokenProviders();
 
-            var builder = services.AddIdentityServer(options =>
+            services.AddIdentityServer(options =>
             {
                 options.Authentication.CookieLifetime = TimeSpan.FromHours(8);
                 options.Authentication.CookieSlidingExpiration = true;
@@ -61,16 +59,27 @@ namespace ECommerce.IdentityServer
 
                 options.EmitStaticAudienceClaim = true;
             })
-                .AddInMemoryIdentityResources(Config.IdentityResources)
-                .AddInMemoryApiScopes(Config.ApiScopes)
-                .AddInMemoryApiResources(Config.ApiResources)
-                .AddInMemoryClients(Config.Clients)
-                .AddAspNetIdentity<ApplicationUser>()
-                .AddProfileService<ProfileService>()
-                .AddDeveloperSigningCredential();
+            .AddConfigurationStore(options =>
+            {
+                // Identity resources, api scopes, api resources, clients configuration
+                options.ConfigureDbContext = builder => builder.UseSqlServer(dbConnectionString, options => options.MigrationsAssembly(migrationAssembly));
+            })
+            .AddOperationalStore(options =>
+            {
+                options.ConfigureDbContext = builder => builder.UseSqlServer(dbConnectionString, options => options.MigrationsAssembly(migrationAssembly));
+            })
+            //.AddInMemoryIdentityResources(Config.IdentityResources)
+            //.AddInMemoryApiScopes(Config.ApiScopes)
+            //.AddInMemoryApiResources(Config.ApiResources)
+            //.AddInMemoryClients(Config.Clients)
+            .AddAspNetIdentity<ApplicationUser>()
+            .AddProfileService<ProfileService>()
+            .AddDeveloperSigningCredential();
+
+            services.AddScoped<ContextInitializer>();
         }
 
-        public void Configure(IApplicationBuilder app)
+        public void Configure(IApplicationBuilder app, ContextInitializer contextInitializer)
         {
             if (Environment.IsDevelopment())
             {
@@ -83,6 +92,8 @@ namespace ECommerce.IdentityServer
             app.UseRouting();
             app.UseIdentityServer();
             app.UseAuthorization();
+
+            contextInitializer.SeedData();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapDefaultControllerRoute();

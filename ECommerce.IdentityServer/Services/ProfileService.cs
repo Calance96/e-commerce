@@ -12,7 +12,7 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ECommerce.IdentityServer.Controllers
+namespace ECommerce.IdentityServer.Services
 {
     public class ProfileService : IProfileService
     {
