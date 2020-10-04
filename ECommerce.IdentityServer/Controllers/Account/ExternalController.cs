@@ -4,6 +4,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using ECommerce.Models;
+using ECommerce.Utility;
 using IdentityModel;
 using IdentityServer4;
 using IdentityServer4.Events;
@@ -172,6 +173,35 @@ namespace ECommerce.IdentityServer.Controllers
             // find external user
             var user = await _userManager.FindByLoginAsync(provider, providerUserId);
 
+            // try to find user by name and/or email
+            if (user == null)
+            {
+                var name = claims.FirstOrDefault(c => c.Type == JwtClaimTypes.Name || c.Type == ClaimTypes.Name || c.Type == JwtClaimTypes.PreferredUserName)?.Value;
+
+                if (name != null)
+                {
+                    user = await _userManager.FindByNameAsync(name);
+                }
+
+                // Couldn't find any existing user by the name in claims, find by email instead
+                if (user == null)
+                {
+                    var email = claims.FirstOrDefault(c => c.Type == JwtClaimTypes.Email || c.Type == ClaimTypes.Email)?.Value;
+
+                    if (email != null)
+                    {
+                        user = await _userManager.FindByEmailAsync(email);
+                    }
+                }
+
+                // Found existing user 
+                if (user != null)
+                {
+                    var identityResult = await _userManager.AddLoginAsync(user, new UserLoginInfo(provider, providerUserId, provider));
+                    if (!identityResult.Succeeded) throw new Exception(identityResult.Errors.First().Description);
+                }
+            }
+
             return (user, provider, providerUserId, claims);
         }
 
@@ -218,6 +248,7 @@ namespace ECommerce.IdentityServer.Controllers
             var user = new ApplicationUser
             {
                 UserName = Guid.NewGuid().ToString(),
+                Role = SD.ROLE_CUSTOMER
             };
             var identityResult = await _userManager.CreateAsync(user);
             if (!identityResult.Succeeded) throw new Exception(identityResult.Errors.First().Description);

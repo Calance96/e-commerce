@@ -12,54 +12,62 @@ namespace ECommerce.IdentityServer.Data
 {
     public class ContextInitializer
     {
-        private readonly ConfigurationDbContext _context;
+        private readonly ConfigurationDbContext _configurationDbContext;
+        private readonly PersistedGrantDbContext _persistedGrantDbContext;
 
-        public ContextInitializer(ConfigurationDbContext context)
+        public ContextInitializer(ConfigurationDbContext configurationDbContext,
+                                  PersistedGrantDbContext persistedGrantDbContext)
         {
-            _context = context;
+            _configurationDbContext = configurationDbContext;
+            _persistedGrantDbContext = persistedGrantDbContext;
         }
 
         public void SeedData()
         {
-            if (_context.Database.GetPendingMigrations().Count() > 0)
+            if (_configurationDbContext.Database.GetPendingMigrations().Count() > 0)
             {
-                _context.Database.Migrate();
+                _configurationDbContext.Database.Migrate();
             }
 
-            if (!_context.IdentityResources.Any())
+            if (_persistedGrantDbContext.Database.GetPendingMigrations().Count() > 0)
+            {
+                _persistedGrantDbContext.Database.Migrate();
+            }
+
+            if (!_configurationDbContext.IdentityResources.Any())
             {
                 foreach (var identityResource in Config.IdentityResources.ToList())
                 {
-                    _context.IdentityResources.Add(identityResource.ToEntity());
+                    _configurationDbContext.IdentityResources.Add(identityResource.ToEntity());
                 }
-                _context.SaveChanges();
+                _configurationDbContext.SaveChanges();
             }
 
-            if (!_context.ApiScopes.Any())
+            if (!_configurationDbContext.ApiScopes.Any())
             {
                 foreach (var apiScope in Config.ApiScopes.ToList())
                 {
-                    _context.ApiScopes.Add(apiScope.ToEntity());
+                    _configurationDbContext.ApiScopes.Add(apiScope.ToEntity());
                 }
-                _context.SaveChanges();
+                _configurationDbContext.SaveChanges();
             }
 
-            if (!_context.ApiResources.Any())
+            if (!_configurationDbContext.ApiResources.Any())
             {
                 foreach (var apiResource in Config.ApiResources.ToList())
                 {
-                    _context.ApiResources.Add(apiResource.ToEntity());
+                    _configurationDbContext.ApiResources.Add(apiResource.ToEntity());
                 }
-                _context.SaveChanges();
+                _configurationDbContext.SaveChanges();
             }
 
-            if (!_context.Clients.Any())
+            if (!_configurationDbContext.Clients.Any())
             {
                 foreach (var client in Config.Clients.ToList())
                 {
-                    _context.Clients.Add(client.ToEntity());
+                    _configurationDbContext.Clients.Add(client.ToEntity());
                 }
-                _context.SaveChanges();
+                _configurationDbContext.SaveChanges();
             }
         }
     }
