@@ -63,7 +63,7 @@ namespace ECommerce.DataAccess
         {
             using (var transaction = _context.Database.BeginTransaction())
             {
-                _context.Database.ExecuteSqlRaw(@"SET IDENTITY_INSERT ON");
+                _context.Database.ExecuteSqlRaw(@"SET IDENTITY_INSERT [dbo].[OrderActions] ON");
                 _context.OrderActions.Add(new OrderAction
                 {
                     Id = (long)SD.OrderAction.PROCESS,
@@ -90,7 +90,7 @@ namespace ECommerce.DataAccess
                     ActionName = "Complete"
                 });
                 _context.SaveChanges();
-                _context.Database.ExecuteSqlRaw(@"SET IDENTITY_INSERT OFF");
+                _context.Database.ExecuteSqlRaw(@"SET IDENTITY_INSERT [dbo].[OrderActions] OFF");
                 transaction.Commit();
             }
         }
@@ -99,7 +99,7 @@ namespace ECommerce.DataAccess
         {
             using (var transaction = _context.Database.BeginTransaction())
             {
-                _context.Database.ExecuteSqlRaw(@"SET IDENTITY_INSERT ON");
+                _context.Database.ExecuteSqlRaw(@"SET IDENTITY_INSERT [dbo].[EntityActionTypes] ON");
                 _context.EntityActionTypes.Add(new EntityActionType
                 {
                     Id = (long)SD.EntityActionType.Update,
@@ -111,7 +111,7 @@ namespace ECommerce.DataAccess
                     ActionName = "Delete"
                 });
                 _context.SaveChanges();
-                _context.Database.ExecuteSqlRaw(@"SET IDENTITY_INSERT OFF");
+                _context.Database.ExecuteSqlRaw(@"SET IDENTITY_INSERT [dbo].[EntityActionTypes] OFF");
                 transaction.Commit();
             }
         }
