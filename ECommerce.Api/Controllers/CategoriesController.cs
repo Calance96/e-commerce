@@ -18,7 +18,7 @@ namespace ECommerce.Api.Controllers
 {
     [ApiController]
     [Route("/api/[controller]")]
-    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+    [Authorize]
     public class CategoriesController : Controller
     {
         private readonly ApplicationDbContext _context;

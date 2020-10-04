@@ -37,34 +37,29 @@ namespace ECommerce.Api
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddAuthentication(options =>
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            .AddJwtBearer(options =>
+            {
+                options.Authority = Configuration["IdentityProvider:Authority"];
+                options.RequireHttpsMetadata = true;
+                options.Audience = "main_api";
+                options.SaveToken = true;
+                options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
                 {
-                    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-                })
-                .AddJwtBearer(options =>
-                {
-                    options.Authority = Configuration["IdentityProvider:Authority"];
-                    options.RequireHttpsMetadata = true;
-                    options.Audience = "main_api";
-                    options.SaveToken = true;
-                    options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
-                    {
-                        ValidateIssuer = true,
-                        ValidateAudience = false,
-                        ValidateIssuerSigningKey = false,
-                        ValidIssuer = Configuration["IdentityProvider:Authority"],
-                        ValidAudience = "main_api",
-                    };
-                });
-            services.AddAuthorization();
+                    ValidateIssuer = true,
+                    ValidateAudience = false,
+                    ValidateIssuerSigningKey = false,
+                    ValidIssuer = Configuration["IdentityProvider:Authority"],
+                    ValidAudience = "main_api",
+                };
+            });
 
             services.AddDbContext<ApplicationDbContext>(options =>
             {
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
             });
 
-            services.AddIdentity<ApplicationUser, IdentityRole>(configs =>
+            services.AddIdentityCore<ApplicationUser>(configs =>
             {
                 configs.Password.RequiredLength = 6;
                 configs.Password.RequireDigit = false;
@@ -72,8 +67,9 @@ namespace ECommerce.Api
                 configs.Password.RequireUppercase = false;
                 configs.Password.RequireLowercase = false;
             })
-                .AddEntityFrameworkStores<ApplicationDbContext>()
-                .AddDefaultTokenProviders();
+            .AddRoles<IdentityRole>()
+            .AddEntityFrameworkStores<ApplicationDbContext>()
+            .AddDefaultTokenProviders();
 
             services.AddControllers();
 
@@ -90,6 +86,7 @@ namespace ECommerce.Api
                 options.GroupNameFormat = "'v'VVV";
                 options.SubstituteApiVersionInUrl = true;
             });
+
             services.AddSingleton<IConfigureOptions<SwaggerGenOptions>, SwaggerGenConfiguration>();
             services.AddSwaggerGen();
         }
