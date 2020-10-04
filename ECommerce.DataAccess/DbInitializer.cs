@@ -61,47 +61,59 @@ namespace ECommerce.DataAccess
 
         private void AddOrderActions()
         {
-            _context.OrderActions.Add(new OrderAction
+            using (var transaction = _context.Database.BeginTransaction())
             {
-                Id = (long) SD.OrderAction.PROCESS,
-                ActionName = "Process"
-            });
-            _context.OrderActions.Add(new OrderAction
-            {
-                Id = (long)SD.OrderAction.SHIP,
-                ActionName = "Ship"
-            });
-            _context.OrderActions.Add(new OrderAction
-            {
-                Id = (long)SD.OrderAction.CANCEL,
-                ActionName = "Cancel"
-            });
-            _context.OrderActions.Add(new OrderAction
-            {
-                Id = (long)SD.OrderAction.REFUND,
-                ActionName = "Refund"
-            });
-            _context.OrderActions.Add(new OrderAction
-            {
-                Id = (long)SD.OrderAction.COMPLETE,
-                ActionName = "Complete"
-            });
-            _context.SaveChanges();
+                _context.Database.ExecuteSqlRaw(@"SET IDENTITY_INSERT ON");
+                _context.OrderActions.Add(new OrderAction
+                {
+                    Id = (long)SD.OrderAction.PROCESS,
+                    ActionName = "Process"
+                });
+                _context.OrderActions.Add(new OrderAction
+                {
+                    Id = (long)SD.OrderAction.SHIP,
+                    ActionName = "Ship"
+                });
+                _context.OrderActions.Add(new OrderAction
+                {
+                    Id = (long)SD.OrderAction.CANCEL,
+                    ActionName = "Cancel"
+                });
+                _context.OrderActions.Add(new OrderAction
+                {
+                    Id = (long)SD.OrderAction.REFUND,
+                    ActionName = "Refund"
+                });
+                _context.OrderActions.Add(new OrderAction
+                {
+                    Id = (long)SD.OrderAction.COMPLETE,
+                    ActionName = "Complete"
+                });
+                _context.SaveChanges();
+                _context.Database.ExecuteSqlRaw(@"SET IDENTITY_INSERT OFF");
+                transaction.Commit();
+            }
         }
 
         private void AddEntityActionTypes()
         {
-            _context.EntityActionTypes.Add(new EntityActionType
+            using (var transaction = _context.Database.BeginTransaction())
             {
-                Id = (long)SD.EntityActionType.Update,
-                ActionName = "Update"
-            });
-            _context.EntityActionTypes.Add(new EntityActionType
-            {
-                Id = (long)SD.EntityActionType.Delete,
-                ActionName = "Delete"
-            });
-            _context.SaveChanges();
+                _context.Database.ExecuteSqlRaw(@"SET IDENTITY_INSERT ON");
+                _context.EntityActionTypes.Add(new EntityActionType
+                {
+                    Id = (long)SD.EntityActionType.Update,
+                    ActionName = "Update"
+                });
+                _context.EntityActionTypes.Add(new EntityActionType
+                {
+                    Id = (long)SD.EntityActionType.Delete,
+                    ActionName = "Delete"
+                });
+                _context.SaveChanges();
+                _context.Database.ExecuteSqlRaw(@"SET IDENTITY_INSERT OFF");
+                transaction.Commit();
+            }
         }
 
         private void AddRolesAndCreateAdminUser()
