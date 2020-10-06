@@ -40,6 +40,7 @@ namespace ECommerce.Ui
                 configs.IdleTimeout = TimeSpan.FromMinutes(30);
                 configs.Cookie.HttpOnly = true; // Mitigate the risk of client side script accessing the protected cookie 
                 configs.Cookie.IsEssential = true;
+                configs.Cookie.SameSite = SameSiteMode.Lax;
             });
 
             services.AddAuthentication(options =>
@@ -51,8 +52,9 @@ namespace ECommerce.Ui
             {
                 options.AccessDeniedPath = "/AccessDenied";
                 //options.EventsType = typeof(CustomCookieAuthenticationEvents);
-                options.Cookie.SameSite = SameSiteMode.None;
+                options.Cookie.SameSite = SameSiteMode.Lax;
                 options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
+                options.Cookie.HttpOnly = true;
 
                 if (!isIdentityServerEnabled)
                 {
