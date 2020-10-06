@@ -50,7 +50,7 @@ namespace ECommerce.IdentityServer
             {
                 options.Authentication.CookieLifetime = TimeSpan.FromHours(8);
                 options.Authentication.CookieSlidingExpiration = true;
-                options.Authentication.CookieSameSiteMode = SameSiteMode.Strict;
+                options.Authentication.CookieSameSiteMode = SameSiteMode.Lax;
 
                 options.Events.RaiseErrorEvents = true;
                 options.Events.RaiseInformationEvents = true;

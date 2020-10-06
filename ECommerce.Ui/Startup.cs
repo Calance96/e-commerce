@@ -51,7 +51,7 @@ namespace ECommerce.Ui
             {
                 options.AccessDeniedPath = "/AccessDenied";
                 //options.EventsType = typeof(CustomCookieAuthenticationEvents);
-                options.Cookie.SameSite = SameSiteMode.Strict;
+                options.Cookie.SameSite = SameSiteMode.Lax;
 
                 if (!isIdentityServerEnabled)
                 {
