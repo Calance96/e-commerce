@@ -50,7 +50,7 @@ namespace ECommerce.Ui
             .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, options =>
             {
                 options.AccessDeniedPath = "/AccessDenied";
-                options.EventsType = typeof(CustomCookieAuthenticationEvents);
+                //options.EventsType = typeof(CustomCookieAuthenticationEvents);
                 options.Cookie.SameSite = SameSiteMode.Strict;
 
                 if (!isIdentityServerEnabled)

@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using ECommerce.DataAccess;
 using ECommerce.Models;
 using Microsoft.AspNetCore.Builder;
@@ -13,16 +9,11 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Serilog;
-using Microsoft.OpenApi.Models;
-using System.Reflection;
-using System.IO;
 using ECommerce.Api.SwaggerConfigs;
 using Microsoft.Extensions.Options;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Authorization;
-using ECommerce.Api.Authorization;
 
 namespace ECommerce.Api
 {
