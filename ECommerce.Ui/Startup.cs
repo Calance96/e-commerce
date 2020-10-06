@@ -50,6 +50,8 @@ namespace ECommerce.Ui
             .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, options =>
             {
                 options.AccessDeniedPath = "/AccessDenied";
+                options.EventsType = typeof(CustomCookieAuthenticationEvents);
+                options.Cookie.SameSite = SameSiteMode.Strict;
 
                 if (!isIdentityServerEnabled)
                 {
@@ -58,7 +60,6 @@ namespace ECommerce.Ui
                     options.LogoutPath = "/Account/Logout";
                     options.SlidingExpiration = true;
                     options.ExpireTimeSpan = TimeSpan.FromHours(24);
-                    options.EventsType = typeof(CustomCookieAuthenticationEvents);
                 }
             })
             .AddOpenIdConnect(OpenIdConnectDefaults.AuthenticationScheme, options =>
