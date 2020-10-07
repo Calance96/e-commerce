@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Http;
 using ECommerce.IdentityServer.Services;
 using System.Reflection;
 using ECommerce.IdentityServer.Data;
+using ECommerce.IdentityServer.Extensions;
 
 namespace ECommerce.IdentityServer
 {
@@ -77,6 +78,7 @@ namespace ECommerce.IdentityServer
             .AddDeveloperSigningCredential();
 
             services.AddScoped<ContextInitializer>();
+            services.ConfigureNonBreakingSameSiteCookies();
         }
 
         public void Configure(IApplicationBuilder app, ContextInitializer contextInitializer)
@@ -90,6 +92,9 @@ namespace ECommerce.IdentityServer
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            app.UseCookiePolicy();
+
             app.UseIdentityServer();
             app.UseAuthorization();
 

@@ -52,9 +52,10 @@ namespace ECommerce.Ui
             {
                 options.AccessDeniedPath = "/AccessDenied";
                 //options.EventsType = typeof(CustomCookieAuthenticationEvents);
+                options.Cookie.IsEssential = true;
+                options.Cookie.HttpOnly = true;
                 options.Cookie.SameSite = SameSiteMode.Lax;
                 options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
-                options.Cookie.HttpOnly = true;
 
                 if (!isIdentityServerEnabled)
                 {
@@ -109,7 +110,7 @@ namespace ECommerce.Ui
                 options.AddPolicy(SD.Policy.CUSTOMER_ONLY, policy => policy.RequireAuthenticatedUser().RequireRole(SD.ROLE_CUSTOMER));
                 options.AddPolicy(SD.Policy.AUTHENTICATED_ONLY, policy => policy.RequireAuthenticatedUser());
             });
-            services.AddScoped<CustomCookieAuthenticationEvents>();
+            //services.AddScoped<CustomCookieAuthenticationEvents>();
 
             services.AddHttpClient("api", async (serviceProvider, client) =>
             {
