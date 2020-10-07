@@ -47,6 +47,7 @@ namespace ECommerce.IdentityServer.Extensions
             services.Configure<CookiePolicyOptions>(options =>
             {
                 options.MinimumSameSitePolicy = Unspecified;
+                options.Secure = CookieSecurePolicy.Always;
                 options.OnAppendCookie = cookieContext =>
                    CheckSameSite(cookieContext.Context, cookieContext.CookieOptions);
                 options.OnDeleteCookie = cookieContext =>

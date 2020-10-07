@@ -52,6 +52,7 @@ namespace ECommerce.Ui
             {
                 options.AccessDeniedPath = "/AccessDenied";
                 //options.EventsType = typeof(CustomCookieAuthenticationEvents);
+                options.Cookie.Name = "EMall";
                 options.Cookie.IsEssential = true;
                 options.Cookie.HttpOnly = true;
                 options.Cookie.SameSite = SameSiteMode.Lax;
@@ -59,7 +60,6 @@ namespace ECommerce.Ui
 
                 if (!isIdentityServerEnabled)
                 {
-                    options.Cookie.Name = "EMall";
                     options.LoginPath = "/Account/Login";
                     options.LogoutPath = "/Account/Logout";
                     options.SlidingExpiration = true;
