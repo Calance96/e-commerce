@@ -166,7 +166,7 @@ namespace ECommerce.Api.Controllers
                 return BadRequest();
             }
 
-            var productFromDb = await _context.Products.FindAsync(id);
+            var productFromDb = await _context.Products.AsNoTracking().FirstOrDefaultAsync(p => p.Id == id);
 
             if (productFromDb == null)
             {
