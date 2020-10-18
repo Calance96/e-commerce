@@ -39,6 +39,15 @@ namespace ECommerce.Api.SwaggerConfigs
             var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
             var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
             options.IncludeXmlComments(xmlPath);
+
+            // Add the authorize button at top right of swagger document
+            options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+            {
+                Name = "Authorization",
+                In = ParameterLocation.Header,
+                Description = "JWT access token using the bearer scheme",
+                Type = SecuritySchemeType.ApiKey
+            });
         }
     }
 }

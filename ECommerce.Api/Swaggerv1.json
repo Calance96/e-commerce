@@ -188,16 +188,6 @@
               "type": "string",
               "default": "1.0"
             }
-          },
-          {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Access token",
-            "required": true,
-            "schema": {
-              "type": "String",
-              "default": "Bearer "
-            }
           }
         ],
         "requestBody": {
@@ -304,16 +294,6 @@
               "type": "string",
               "default": "1.0"
             }
-          },
-          {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Access token",
-            "required": true,
-            "schema": {
-              "type": "String",
-              "default": "Bearer "
-            }
           }
         ],
         "responses": {
@@ -408,16 +388,6 @@
             "schema": {
               "type": "string",
               "default": "1.0"
-            }
-          },
-          {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Access token",
-            "required": true,
-            "schema": {
-              "type": "String",
-              "default": "Bearer "
             }
           }
         ],
@@ -518,16 +488,6 @@
             "schema": {
               "type": "string",
               "default": "1.0"
-            }
-          },
-          {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Access token",
-            "required": true,
-            "schema": {
-              "type": "String",
-              "default": "Bearer "
             }
           }
         ],
@@ -638,16 +598,6 @@
               "type": "string",
               "default": "1.0"
             }
-          },
-          {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Access token",
-            "required": true,
-            "schema": {
-              "type": "String",
-              "default": "Bearer "
-            }
           }
         ],
         "responses": {
@@ -745,16 +695,6 @@
             "schema": {
               "type": "string",
               "default": "1.0"
-            }
-          },
-          {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Access token",
-            "required": true,
-            "schema": {
-              "type": "String",
-              "default": "Bearer "
             }
           }
         ],
@@ -864,16 +804,6 @@
             "schema": {
               "type": "string",
               "default": "1.0"
-            }
-          },
-          {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Access token",
-            "required": true,
-            "schema": {
-              "type": "String",
-              "default": "Bearer "
             }
           }
         ],
@@ -1004,16 +934,6 @@
             "schema": {
               "type": "string",
               "default": "1.0"
-            }
-          },
-          {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Access token",
-            "required": true,
-            "schema": {
-              "type": "String",
-              "default": "Bearer "
             }
           }
         ],
@@ -1187,16 +1107,6 @@
               "type": "string",
               "default": "1.0"
             }
-          },
-          {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Access token",
-            "required": true,
-            "schema": {
-              "type": "String",
-              "default": "Bearer "
-            }
           }
         ],
         "requestBody": {
@@ -1302,16 +1212,6 @@
             "schema": {
               "type": "string",
               "default": "1.0"
-            }
-          },
-          {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Access token",
-            "required": true,
-            "schema": {
-              "type": "String",
-              "default": "Bearer "
             }
           }
         ],
@@ -1419,16 +1319,6 @@
             "schema": {
               "type": "string",
               "default": "1.0"
-            }
-          },
-          {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Access token",
-            "required": true,
-            "schema": {
-              "type": "String",
-              "default": "Bearer "
             }
           }
         ],
@@ -1570,16 +1460,6 @@
               "type": "string",
               "default": "1.0"
             }
-          },
-          {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Access token",
-            "required": true,
-            "schema": {
-              "type": "String",
-              "default": "Bearer "
-            }
           }
         ],
         "responses": {
@@ -1692,16 +1572,6 @@
               "type": "string",
               "default": "1.0"
             }
-          },
-          {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Access token",
-            "required": true,
-            "schema": {
-              "type": "String",
-              "default": "Bearer "
-            }
           }
         ],
         "responses": {
@@ -1808,16 +1678,6 @@
               "type": "string",
               "default": "1.0"
             }
-          },
-          {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Access token",
-            "required": true,
-            "schema": {
-              "type": "String",
-              "default": "Bearer "
-            }
           }
         ],
         "responses": {
@@ -1912,16 +1772,6 @@
             "schema": {
               "type": "string",
               "default": "1.0"
-            }
-          },
-          {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Access token",
-            "required": true,
-            "schema": {
-              "type": "String",
-              "default": "Bearer "
             }
           }
         ],
@@ -2032,16 +1882,6 @@
               "type": "string",
               "default": "1.0"
             }
-          },
-          {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Access token",
-            "required": true,
-            "schema": {
-              "type": "String",
-              "default": "Bearer "
-            }
           }
         ],
         "responses": {
@@ -2139,16 +1979,6 @@
             "schema": {
               "type": "string",
               "default": "1.0"
-            }
-          },
-          {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Access token",
-            "required": true,
-            "schema": {
-              "type": "String",
-              "default": "Bearer "
             }
           }
         ],
@@ -2255,16 +2085,6 @@
             "schema": {
               "type": "string",
               "default": "1.0"
-            }
-          },
-          {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Access token",
-            "required": true,
-            "schema": {
-              "type": "String",
-              "default": "Bearer "
             }
           }
         ],
@@ -2481,16 +2301,6 @@
               "type": "string",
               "default": "1.0"
             }
-          },
-          {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Access token",
-            "required": true,
-            "schema": {
-              "type": "String",
-              "default": "Bearer "
-            }
           }
         ],
         "requestBody": {
@@ -2696,16 +2506,6 @@
               "type": "string",
               "default": "1.0"
             }
-          },
-          {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Access token",
-            "required": true,
-            "schema": {
-              "type": "String",
-              "default": "Bearer "
-            }
           }
         ],
         "requestBody": {
@@ -2872,16 +2672,6 @@
               "type": "string",
               "default": "1.0"
             }
-          },
-          {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Access token",
-            "required": true,
-            "schema": {
-              "type": "String",
-              "default": "Bearer "
-            }
           }
         ],
         "responses": {
@@ -2994,16 +2784,6 @@
               "type": "string",
               "default": "1.0"
             }
-          },
-          {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Access token",
-            "required": true,
-            "schema": {
-              "type": "String",
-              "default": "Bearer "
-            }
           }
         ],
         "responses": {
@@ -3098,16 +2878,6 @@
             "schema": {
               "type": "string",
               "default": "1.0"
-            }
-          },
-          {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Access token",
-            "required": true,
-            "schema": {
-              "type": "String",
-              "default": "Bearer "
             }
           }
         ],
@@ -3206,16 +2976,6 @@
             "schema": {
               "type": "string",
               "default": "1.0"
-            }
-          },
-          {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Access token",
-            "required": true,
-            "schema": {
-              "type": "String",
-              "default": "Bearer "
             }
           }
         ],
@@ -3823,6 +3583,14 @@
           }
         },
         "additionalProperties": false
+      }
+    },
+    "securitySchemes": {
+      "Bearer": {
+        "type": "apiKey",
+        "description": "JWT access token using the bearer scheme",
+        "name": "Authorization",
+        "in": "header"
       }
     }
   }

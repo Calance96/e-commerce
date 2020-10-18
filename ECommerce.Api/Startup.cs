@@ -45,6 +45,8 @@ namespace ECommerce.Api
                 };
             });
 
+            services.AddCors();
+
             services.AddDbContext<ApplicationDbContext>(options =>
             {
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
@@ -103,6 +105,11 @@ namespace ECommerce.Api
             });
 
             app.UseSerilogRequestLogging(); // Serilog middleware to know what requests the app is handling
+
+            app.UseCors(config => config
+                .AllowAnyOrigin()
+                .AllowAnyHeader()
+                .AllowAnyMethod());
 
             app.UseRouting();
 

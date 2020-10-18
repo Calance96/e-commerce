@@ -70,5 +70,14 @@
       }
     }
   },
-  "components": { }
+  "components": {
+    "securitySchemes": {
+      "Bearer": {
+        "type": "apiKey",
+        "description": "JWT access token using the bearer scheme",
+        "name": "Authorization",
+        "in": "header"
+      }
+    }
+  }
 }
