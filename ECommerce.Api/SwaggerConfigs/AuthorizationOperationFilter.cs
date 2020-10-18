@@ -33,14 +33,15 @@ namespace ECommerce.Api.SwaggerConfigs
                 operation.Responses.Add(StatusCodes.Status401Unauthorized.ToString(), new OpenApiResponse { Description = "Unauthorized" });
                 operation.Responses.Add(StatusCodes.Status403Forbidden.ToString(), new OpenApiResponse { Description = "Forbidden" });
 
-                if (operation.Security == null)
-                    operation.Security = new List<OpenApiSecurityRequirement>();
+                /* This no longer works in latest version of Swashbuckle as Open API specification says that tools should ignore explicit header paraemters named Authorization. The Authorization header should be defined as a security scheme instead. */
+                //if (operation.Parameters == null)
+                //    operation.Parameters = new List<OpenApiParameter>();
 
                 //operation.Parameters.Add(new OpenApiParameter
                 //{
                 //    Name = "Authorization",
                 //    In = ParameterLocation.Header,
-                //    Description = "Access token (Only used for Swagger Codegen to generate the authorization parameter. For testing via Swagger UI, please use authorize button on the top right)",
+                //    Description = "Access token",
                 //    Schema = new OpenApiSchema
                 //    {
                 //        Type = "String",
