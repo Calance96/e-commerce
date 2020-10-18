@@ -114,7 +114,6 @@ namespace ECommerce.Api
                     setupAction.SwaggerEndpoint($"/swagger/{desc.GroupName}/swagger.json", $"E-Mall API {desc.GroupName}");
 
                 setupAction.RoutePrefix = string.Empty;
-                setupAction.OAuthUseBasicAuthenticationWithAccessCodeGrant();
             });
 
             app.UseSerilogRequestLogging(); // Serilog middleware to know what requests the app is handling
