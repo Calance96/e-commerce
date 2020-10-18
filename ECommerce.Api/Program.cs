@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Serilog;
@@ -25,13 +26,15 @@ namespace ECommerce.Api
                                                 "Logs/Log-.json",
                                                 restrictedToMinimumLevel: Serilog.Events.LogEventLevel.Warning,
                                                 rollingInterval: RollingInterval.Day)
-                                .WriteTo.ApplicationInsights(new TraceTelemetryConverter(),
-                                                             restrictedToMinimumLevel: Serilog.Events.LogEventLevel.Information)
                                 .CreateLogger(); // Creates a Serilog logger instance on the static Log.Logger property
 
             try
             {
                 var host = CreateHostBuilder(args).Build();
+
+                var environment = host.Services.GetRequiredService<IHostEnvironment>();
+                SwitchLoggingToAzureApplicationInsightForProduction(environment);
+
                 Log.Information("API Server starting up");
                 await host.RunAsync();
             }
@@ -51,28 +54,21 @@ namespace ECommerce.Api
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
-                })
-                .ConfigureAppConfiguration((hostContext, config) => {
-                    var environment = hostContext.HostingEnvironment;
-                    var logConfiguration = new LoggerConfiguration()
-                                                .Enrich.FromLogContext()
-                                                .MinimumLevel.Override("Microsoft", Serilog.Events.LogEventLevel.Warning);
-
-                    if (environment.IsDevelopment())
-                    {
-                        logConfiguration.WriteTo.Console() // Serilog write logs to the console.
-                                        .WriteTo.File(new JsonFormatter(), // Serilog write logs to the log file
-                                                        "Logs/Log-.json",
-                                                        restrictedToMinimumLevel: Serilog.Events.LogEventLevel.Warning,
-                                                        rollingInterval: RollingInterval.Day);
-                    }
-                    else
-                    {
-                        logConfiguration.WriteTo.ApplicationInsights(new TraceTelemetryConverter(),
-                                                                        restrictedToMinimumLevel: Serilog.Events.LogEventLevel.Information);
-                    }
-
-                    Log.Logger = logConfiguration.CreateLogger();
                 });
+
+        private static void SwitchLoggingToAzureApplicationInsightForProduction(IHostEnvironment environment)
+        {
+            var logConfiguration = new LoggerConfiguration()
+                                        .Enrich.FromLogContext()
+                                        .MinimumLevel.Override("Microsoft", Serilog.Events.LogEventLevel.Warning);
+
+            if (!environment.IsDevelopment())
+            {
+                logConfiguration.WriteTo.ApplicationInsights(new TraceTelemetryConverter(),
+                                                                restrictedToMinimumLevel: Serilog.Events.LogEventLevel.Information);
+            }
+
+            Log.Logger = logConfiguration.CreateLogger();
+        }
     }
 }

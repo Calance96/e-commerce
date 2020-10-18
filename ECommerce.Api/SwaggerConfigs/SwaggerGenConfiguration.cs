@@ -45,7 +45,15 @@ namespace ECommerce.Api.SwaggerConfigs
                 Name = "Authorization",
                 In = ParameterLocation.Header,
                 Description = "JWT access token using the bearer scheme",
-                Type = SecuritySchemeType.ApiKey
+                Type = SecuritySchemeType.ApiKey,
+                Flows = new OpenApiOAuthFlows
+                {
+                    Password = new OpenApiOAuthFlow
+                    {
+                        TokenUrl = new Uri("https://localhost:500001/connect/token"),
+                        AuthorizationUrl = new Uri("https://localhost:500001/connect/authorize")
+                    }
+                }
             });
         }
     }
