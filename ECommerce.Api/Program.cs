@@ -9,27 +9,31 @@ using Microsoft.Extensions.Logging;
 using Serilog;
 using Serilog.Formatting.Compact;
 using Serilog.Formatting.Json;
+using Serilog.Sinks.ApplicationInsights.Sinks.ApplicationInsights.TelemetryConverters;
 
 namespace ECommerce.Api
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
             Log.Logger = new LoggerConfiguration()
-                        .Enrich.FromLogContext()
-                        .MinimumLevel.Override("Microsoft", Serilog.Events.LogEventLevel.Warning)
-                        .WriteTo.Console() // Serilog will write logs to the console.
-                        .WriteTo.File(new JsonFormatter(), // Serilog will write logs to the log file
-                                        "Logs/Log-.json", 
-                                        restrictedToMinimumLevel: Serilog.Events.LogEventLevel.Warning,
-                                        rollingInterval: RollingInterval.Day) 
-                        .CreateLogger(); // Creates a Serilog logger instance on the static Log.Logger property
+                                .Enrich.FromLogContext()
+                                .MinimumLevel.Override("Microsoft", Serilog.Events.LogEventLevel.Warning)
+                                .WriteTo.Console() // Serilog will write logs to the console.
+                                .WriteTo.File(new JsonFormatter(), // Serilog will write logs to the log file
+                                                "Logs/Log-.json",
+                                                restrictedToMinimumLevel: Serilog.Events.LogEventLevel.Warning,
+                                                rollingInterval: RollingInterval.Day)
+                                .WriteTo.ApplicationInsights(new TraceTelemetryConverter(),
+                                                             restrictedToMinimumLevel: Serilog.Events.LogEventLevel.Information)
+                                .CreateLogger(); // Creates a Serilog logger instance on the static Log.Logger property
 
             try
             {
+                var host = CreateHostBuilder(args).Build();
                 Log.Information("API Server starting up");
-                CreateHostBuilder(args).Build().Run();
+                await host.RunAsync();
             }
             catch (Exception ex)
             {
@@ -47,6 +51,28 @@ namespace ECommerce.Api
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
+                })
+                .ConfigureAppConfiguration((hostContext, config) => {
+                    var environment = hostContext.HostingEnvironment;
+                    var logConfiguration = new LoggerConfiguration()
+                                                .Enrich.FromLogContext()
+                                                .MinimumLevel.Override("Microsoft", Serilog.Events.LogEventLevel.Warning);
+
+                    if (environment.IsDevelopment())
+                    {
+                        logConfiguration.WriteTo.Console() // Serilog write logs to the console.
+                                        .WriteTo.File(new JsonFormatter(), // Serilog write logs to the log file
+                                                        "Logs/Log-.json",
+                                                        restrictedToMinimumLevel: Serilog.Events.LogEventLevel.Warning,
+                                                        rollingInterval: RollingInterval.Day);
+                    }
+                    else
+                    {
+                        logConfiguration.WriteTo.ApplicationInsights(new TraceTelemetryConverter(),
+                                                                        restrictedToMinimumLevel: Serilog.Events.LogEventLevel.Information);
+                    }
+
+                    Log.Logger = logConfiguration.CreateLogger();
                 });
     }
 }

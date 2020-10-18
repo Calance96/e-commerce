@@ -14,17 +14,20 @@ using Microsoft.Extensions.Options;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using System;
 
 namespace ECommerce.Api
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public Startup(IConfiguration configuration, IHostEnvironment environment)
         {
             Configuration = configuration;
+            Environment = environment;
         }
 
         public IConfiguration Configuration { get; }
+        public IHostEnvironment Environment { get; }
 
         public void ConfigureServices(IServiceCollection services)
         {
@@ -44,6 +47,16 @@ namespace ECommerce.Api
                     ValidAudience = "ecommerce_api",
                 };
             });
+
+            if (!Environment.IsDevelopment())
+            {
+                var azureInstrumentationKey = Configuration["ApplicationInsights:InstrumentationKey"];
+
+                if (!string.IsNullOrEmpty(azureInstrumentationKey))
+                    services.AddApplicationInsightsTelemetry(configuration => configuration.InstrumentationKey = azureInstrumentationKey);
+                else
+                    throw new Exception("Azure Application Insights Instrumentation Key is missing");
+            }
 
             services.AddCors();
 
